@@ -34,7 +34,7 @@ public class AnswertAnalyzer {
 		//here we check for exact mach with LevenshteinDistance.
 		//we can change the parameters to different LevenshteinDistance!=0
 		for (Answer teachers_ans: verified) {
-			if (LevenshteinDistance.computeLevenshteinDistance(teachers_ans.getContent(), students_ans.getContent())==0) {
+			if (LevenshteinDistance.computeLevenshteinDistance(teachers_ans.getContent(), students_ans.getContent())<ApiHolder.LEVENSHTEIN) {
 				ApiHolder.logger.println("### LEVENSHTEIN SUCSESS!");
 				ApiHolder.logger.println("### teacher: " + teachers_ans.getContent());
 				ApiHolder.logger.println("### student: " + students_ans.getContent());

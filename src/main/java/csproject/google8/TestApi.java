@@ -1,24 +1,13 @@
 package csproject.google8;
 
-/**
- * @author ishay
- * These are the methods that publicly available to users.
- */
 public class TestApi {
 
 	private Test t = null;
 	
-	/**
-	 * @param t
-	 * constructor for the Api. needs Test object that can be retrieved from Teacher Api select function
-	 */
 	public TestApi(Test t) {
 		this.t=t;
 	}
 	
-	/**
-	 * main api function. to be deleted.
-	 */
 	public void main() {
 		String option = "-1";
 		while (true) {
@@ -50,9 +39,6 @@ public class TestApi {
 		}
 	}
 	
-	/**
-	 * creates Question and insert it to database
-	 */
 	public void createQuestion() {
 		System.out.println(">> Enter Question:");
         String question = ApiHolder.scanner.nextLine();
@@ -61,9 +47,6 @@ public class TestApi {
 		System.out.println(">> Done");
 	}
 	
-	/**
-	 * 
-	 */
 	public void showQuestions() {
         int i=1;
         for (Question s : t.getQuestions()) {
@@ -73,9 +56,6 @@ public class TestApi {
         }
 	}
 	
-	/**
-	 * 
-	 */
 	public void selectQuestion() {
 		System.out.println(">> Enter Question id:");
         String id = ApiHolder.scanner.nextLine();
@@ -86,17 +66,11 @@ public class TestApi {
     	qapi.main();
     	return;
 	}
-	
-	/**
-	 * 
-	 */
+
 	public void checkTest() {
 		t.checkTest();
 	}
 	
-	/**
-	 * 
-	 */
 	public void remove() {
 		try {
 			System.out.println(">> Enter Question id:");

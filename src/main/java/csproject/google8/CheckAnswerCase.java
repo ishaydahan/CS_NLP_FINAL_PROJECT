@@ -87,11 +87,11 @@ public class CheckAnswerCase {
 					break;
 				}
 			}
-			if (!found) return Math.max(finishedGrade, 0);
+			if (!found) return Math.max(finishedGrade, ApiHolder.MINGRADE);
 			found=false;
 		}
-		//the grade is maxGrade-mistakes*10
-		return Math.max(finishedGrade, teacher_ans.getGrade()-((teacher_ans.getAnswerWords()-grade)*10));
+		//the grade is maxGrade-mistakes*10(can be changed)
+		return Math.max(finishedGrade, teacher_ans.getGrade()-((teacher_ans.getAnswerWords()-grade)*ApiHolder.REDUCE));
 	}
 	
 	/**
@@ -114,10 +114,10 @@ public class CheckAnswerCase {
 					break;
 				}
 			}
-			if (!found) return Math.max(finishedGrade, 0);
+			if (!found) return Math.max(finishedGrade, ApiHolder.MINGRADE);
 			found=false;
 		}
-		return Math.max(finishedGrade, teacher_ans.getGrade()-((teacher_ans.getAnswerWords()-grade)*10));
+		return Math.max(finishedGrade, teacher_ans.getGrade()-((teacher_ans.getAnswerWords()-grade)*ApiHolder.REDUCE));
 	}
 
 	/**
@@ -135,6 +135,7 @@ public class CheckAnswerCase {
 			ApiHolder.logger.println("ANALYZER :::: equal tokens: " + teacher.getText().getContent() + " + " + student.getText().getContent()); 
 			Token t_father = teacher_ans.getAnalyzed_ans().getTokens(teacher.getDependencyEdge().getHeadTokenIndex());
 			Token s_father = student_ans.getAnalyzed_ans().getTokens(student.getDependencyEdge().getHeadTokenIndex());
+			//if there is no father, the path is equal
 			if (t_father.equals(teacher) || s_father.equals(student)) return true;
 			else return equalNodes(t_father, s_father);
 		}else {
@@ -237,7 +238,7 @@ public class CheckAnswerCase {
 				}
 			}
 			for(Entailment ent : ApiHolder.getEntailmentList(student_ans.getContent())) {
-				if (ent.getMatchedWords().get(0).getToken().equals(student.getText().getContent()) && teacher.getText().getContent().equals(ent.getEntailedWords().get(0))) {	
+				if (ent.getMatchedWords().get(0).getToken().equals(student.getText().getContent()) && teacher.getText().getContent().equals(ent.getEntailedWords().get(0)) && ent.getContextScore()>ApiHolder.MEANING){	
 					String[] new_s = student_ans.getContent().split(" ");
 					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = ent.getEntailedWords().get(0);
 					String new_s1 = StringUtils.join(new_s, " ");

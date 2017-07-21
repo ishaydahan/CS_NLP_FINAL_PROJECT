@@ -25,8 +25,26 @@ import com.textrazor.AnalysisException;
 import com.textrazor.TextRazor;
 import com.textrazor.annotations.Entailment;
 	
+/**
+ * @author ishay
+ * the {@link ApiHolder} class holds all the APIs in static class.
+ * we assume that there is only 0 or 1 instance of this class.
+ * this class holds:
+ * 1. {@link LanguageServiceClient} google syntax analyzer client.
+ * 2. {@link MongoClient} connector + collection getter
+ * 3. {@link Scanner} for user input (to be deleted)
+ * 4. {@link TextRazor} for contextual meaning analyze.
+ * 5. {@link JLanguageTool} for spelling corrections
+ * 6. {@link PrintStream} logger
+ */
 public class ApiHolder {
     
+	protected static int LEVENSHTEIN = 3;//constant for levenshtein calc
+	protected static int MEANING = 0;//constant for textrazor calc
+	protected static int REDUCE = 10;//points for each different
+	protected static int MAXGRADE = 100;//max points per answer
+	protected static int MINGRADE = 0;//min points per answer
+
 	protected static MongoCollection<Document> collection = null;
 	protected static MongoClient client = null;
 	protected static Scanner scanner = null;      
@@ -45,11 +63,14 @@ public class ApiHolder {
 			mongoLogger.setLevel(Level.SEVERE);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 		
+	/**
+	 * @throws Exception
+	 * start google client
+	 */
 	protected static void startGoogle() throws Exception {
 		 try {
 			 langClient = LanguageServiceClient.create();
@@ -60,6 +81,11 @@ public class ApiHolder {
 		}
 	}
 	
+	/**
+	 * @param s - a word
+	 * @return list of spelling suggestion
+	 * we keep all spelling suggestion in hashmap to save time.
+	 */
 	protected static List<String> getSpelling(String s) {
 		if (spellingList.containsKey(s)) {
 			return spellingList.get(s);
@@ -77,6 +103,11 @@ public class ApiHolder {
 		return lst;
 	}
 	
+	/**
+	 * @param s a sentence
+	 * @return list of contextual meanings
+	 * we keep all Entailment in hashmao to save time
+	 */
 	protected static List<Entailment> getEntailmentList(String s) {
 		if (entailmentList.containsKey(s)) {
 			return entailmentList.get(s);
@@ -110,6 +141,10 @@ public class ApiHolder {
 		return lst;
 	}
 
+	/**
+	 * @return test collection
+	 * this function is activated once in a while... please check.
+	 */
 	protected static MongoCollection<Document> getCollection() {
 		try {
 			collection.count();
