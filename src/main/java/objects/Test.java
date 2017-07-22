@@ -35,7 +35,7 @@ public class Test {
 	public Question createQuestion(String q) {
         Question toAdd = new Question(tid, new ObjectId(), q, new ArrayList<Document>());
         if (questions.contains(toAdd)) {
-        	System.err.println("Already has that answer!");
+        	System.err.println("Already has that question!");
         	return null;
         }else {
         	questions.add(toAdd);

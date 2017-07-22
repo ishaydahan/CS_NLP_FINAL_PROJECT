@@ -47,7 +47,6 @@ public class ConsoleTeacherMain {
         String t = ApiHolder.scanner.nextLine();
         
         this.t.createTest(t);
-		System.out.println(">> Done");
 	}
 		
 	protected void showTests() {
@@ -75,6 +74,5 @@ public class ConsoleTeacherMain {
 		System.out.println(">> Enter Test id:");
         String id = ApiHolder.scanner.nextLine();
         t.removeTest(id);
-		System.out.println(">> Done");
 	}	
 }

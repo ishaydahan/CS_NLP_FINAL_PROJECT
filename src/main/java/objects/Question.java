@@ -1,6 +1,7 @@
 package objects;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.bson.Document;
@@ -11,7 +12,7 @@ import syntaxAnalyzer.AnswertAnalyzer;
 
 /**
  * @author ishay
- * class resresenting Teacher question. the class holds {@link Answer}s.
+ * class representing Teacher question. the class holds {@link Answer}s.
  * the class can manipulate answers (create, delete, correct, select..)
  */
 public class Question {
@@ -44,10 +45,11 @@ public class Question {
         	System.err.println("Already has that answer!");
         	return null;
         }else {
-            answers.add(toAdd.build());
+            answers.add(toAdd);
     		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
     				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
     				new Document("$push", new Document().append("questions.$.answers", answerToDoc(toAdd))));	
+    		System.out.println("you may need to recheck test..");
     		return toAdd;
         }
 	}
@@ -77,7 +79,7 @@ public class Question {
     	if (toFix.getWriter().equals("STUDENT")) {
             Answer toAdd = new Answer(new ObjectId(), toFix.getContent(), toFix.getWriter(), grade, new Integer(-1), true, toFix.getLearnable());
             if (answers.contains(toAdd)) {
-            	System.err.println("there is verified ans with same content. fix it first!");
+            	System.err.println("there is verified ans with same content. fix it first! - " + toFix.getContent());
             	return false;
             }
     	}
@@ -90,7 +92,19 @@ public class Question {
 				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 				new Document("$set", new Document().append("questions.$.answers."+answerToInt(toFix), answerToDoc(toFix))));
 		
-		System.err.println("you may need to recheck test.");
+		//do it to all similar answers.
+		answers.stream().filter(x -> x.getWriter().equals("STUDENT") && x.getContent().equals(toFix.getContent()))
+		.collect(Collectors.toList()).forEach((x)->{
+	    	x.setGrade(grade);
+	    	x.setVerified(true);
+	    	x.setLearnable(true);
+		
+			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
+					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
+					new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));
+		});
+
+		System.out.println("you may need to recheck test..");
 		return true;
 	}
 		
@@ -102,7 +116,10 @@ public class Question {
 	public void checkQuestion(List<Answer> toCheck, List<Answer> verified) {
 		//sort the list first from high to low to get the maximum grade in min time
 		verified.sort((x,y) -> y.getGrade()-x.getGrade());
-				
+		
+		//build each verified question.
+		verified.forEach((ans)->ans.build());	
+		
 		for (Answer student_ans: toCheck) {
 			//first build the answer (google api)
 			Integer grade = new AnswertAnalyzer(student_ans.build(), verified).analyze();
@@ -117,14 +134,16 @@ public class Question {
 	}
 	
 	/**
-	 * mark all student answers as true; (will create teacher answer)
+	 * mark all student answers as true;
+	 * will use fix ans to all unique answers.
 	 */
 	public void approveAll() {
+		HashSet<String> differentStudentAns = new HashSet<String>();
 		getStudentAnswers().forEach((ans)->{
-			fixAns(ans.getGrade(), ans);
-			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-					new Document("$set", new Document().append("questions.$.answers."+answerToInt(ans), answerToDoc(ans))));	
+			if (!differentStudentAns.contains(ans.getContent())) {
+				differentStudentAns.add(ans.getContent());
+				fixAns(ans.getGrade(), ans);
+			}
 		});
 	}
 	
@@ -135,6 +154,7 @@ public class Question {
 		answers.remove(toRemove);
 		ApiHolder.getCollection().updateOne(new Document().append("_id", tid).append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 				new Document("$pull", new Document().append("questions.$.answers", answerToDoc(toRemove))));	
+		System.out.println("you may need to recheck test..");
 	}	
 	
 	/**

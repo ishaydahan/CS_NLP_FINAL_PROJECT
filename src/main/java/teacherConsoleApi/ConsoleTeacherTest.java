@@ -48,7 +48,6 @@ public class ConsoleTeacherTest {
         String question = ApiHolder.scanner.nextLine();
 
         t.createQuestion(question);
-		System.out.println(">> Done");
 	}
 	
 	public void showQuestions() {
@@ -81,7 +80,6 @@ public class ConsoleTeacherTest {
 			System.out.println(">> Enter Question id:");
 			String id = ApiHolder.scanner.nextLine();
 			t.removeQuestion(t.getQuestion(id));
-			System.out.println(">> Done");
 		}catch(Exception e) {
 			return;
 		}

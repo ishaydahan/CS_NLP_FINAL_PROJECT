@@ -39,7 +39,7 @@ public class Teacher {
 	public Test createTest(String t) {        
         Test toAdd = new Test(new ObjectId(), t, new ArrayList<Document>());
         if (tests.containsKey(t)) {
-        	System.out.println("Already has that answer!");
+        	System.err.println("Already has that test!");
         	return null;
         }else {
         	tests.put(t, toAdd.getTid().toString());

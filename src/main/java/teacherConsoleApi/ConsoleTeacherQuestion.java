@@ -20,24 +20,23 @@ public class ConsoleTeacherQuestion {
 			System.out.println("\n@@  Question Screen Options  @@");
 			System.out.println("0 - exit");
 			System.out.println("1 - add teacher answer");
-			
-			System.out.println("2 - add student answer");
-			
+			System.out.println();			
 			System.out.println("31 - show teacher answers");
 			System.out.println("32 - show studet answers");
 			System.out.println("33 - show student unverified answers");
 			System.out.println("34 - show verified answers");
 			System.out.println("35 - show ungraded answers");
 			System.out.println("36 - show all answers");
-			
+			System.out.println();			
 			System.out.println("41 - check all questions with verified");
 			System.out.println("42 - check ungraded questions with verified");
-
+			System.out.println();			
 			System.out.println("5 - fix answer");
-			
+			System.out.println();			
 			System.out.println("6 - remove answer");
-
-			System.out.println("7 - approve all answers");
+			System.out.println();			
+			System.out.println("71 - approve all answers");
+			System.out.println("72 - approve answer");
 
 			option = ApiHolder.scanner.nextLine();
 			if (option.equals("0")) {
@@ -45,8 +44,6 @@ public class ConsoleTeacherQuestion {
 				return;
 			}else if(option.equals("1")) {
 				addAns();
-			}else if(option.equals("2")) {
-				addStudentAns();
 			}else if(option.charAt(0)=='3') {
 				showAnswers(Integer.valueOf(""+option.charAt(1)));
 			}else if(option.charAt(0)=='4') {
@@ -55,8 +52,8 @@ public class ConsoleTeacherQuestion {
 				fixAns();
 			}else if(option.equals("6")) {
 				remove();
-			}else if(option.equals("7")) {
-				approveAll();
+			}else if(option.charAt(0)=='7') {
+				approve(Integer.valueOf(""+option.charAt(1)));
 			}else {
 				System.out.println(">> Bad Input");
 			}
@@ -70,18 +67,10 @@ public class ConsoleTeacherQuestion {
 		System.out.println(">> Enter Answer grade:");
         String grade = ApiHolder.scanner.nextLine();
 
-        q.createAns(teacher_ans, Integer.valueOf(grade));
-		System.out.println(">> Done");
+        if (q.createAns(teacher_ans, Integer.valueOf(grade))!=null)
+        	System.out.println("operation OK!");
 	}
-	
-	protected void addStudentAns(){
-		System.out.println(">> Enter Student Answer:");
-        String student_ans = ApiHolder.scanner.nextLine();
-        
-        q.addStudentAns(student_ans);
-		System.out.println(">> Done");
-	}
-	
+		
 	protected void showAnswers (int choice) {
         System.out.println("///////////////////////////////////");
 		List<Answer> filterdList = null;
@@ -110,8 +99,9 @@ public class ConsoleTeacherQuestion {
         String grade = ApiHolder.scanner.nextLine();
 		
         try {
-			q.fixAns(Integer.parseInt(grade), q.getAnswer(id));
-			System.out.println(">> Done");	
+			if (q.fixAns(Integer.parseInt(grade), q.getAnswer(id))) {
+	        	System.out.println("operation OK!");
+			};
 		}catch(Exception e) {
 			return;
 		}
@@ -124,9 +114,9 @@ public class ConsoleTeacherQuestion {
         System.out.println("///////////////////////////////////");
 	}
 	
-	protected void approveAll() {
+	protected void approve(int choice) {
 		q.approveAll();
-		System.out.println(">> Done");	
+    	System.out.println("operation OK!");
 	}
 	
 	protected void remove() {
@@ -134,7 +124,7 @@ public class ConsoleTeacherQuestion {
 			System.out.println(">> Enter Answer id:");
 			String id = ApiHolder.scanner.nextLine();
 			q.removeAnswer(q.getAnswer(id));
-			System.out.println(">> Done");
+        	System.out.println("operation OK!");
 		}catch(Exception e) {
 			return;
 		}

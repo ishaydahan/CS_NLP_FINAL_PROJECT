@@ -1,12 +1,1 @@
 $$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
-ANALYZER :::: Teacher parts: people
-ANALYZER :::: Teacher parts: want
-ANALYZER :::: Teacher parts: to
-ANALYZER :::: Teacher parts: help
-### LEVENSHTEIN SUCSESS!
-### teacher: because people want to help
-### student: because people want to help
-$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
-### LEVENSHTEIN SUCSESS!
-### teacher: because people want to help
-### student: because people want to help
