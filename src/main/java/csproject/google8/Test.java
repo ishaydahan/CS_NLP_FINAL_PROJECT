@@ -3,25 +3,37 @@ import java.util.ArrayList;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+/**
+ * @author ishay
+ * class representing test. contains list of questions.
+ * 
+ */
 public class Test {
 	
-	private String content;
-	private ObjectId tid;
+	private String content;// the test name
+	private ObjectId tid;//test id
 	private ArrayList<Question> questions = new ArrayList<Question>();
 	
 	@SuppressWarnings("unchecked")
 	public Test(ObjectId tid, String content, ArrayList<Document> questions) {
 		this.tid=tid;
 		this.content=content;
+		//in the building process we need to transform DB data to objects
 		for(Document doc : questions) {
 			this.questions.add(new Question(tid, doc.getObjectId("_id"), doc.getString("content"),  (ArrayList<Document>) doc.get("answers")));
 		}	
 	}
 	
+	/**
+	 * @param q - the question string
+	 * @return question object
+	 * creates question object, update database.
+	 * will return null if the database contains same question string.
+	 */
 	public Question createQuestion(String q) {
         Question toAdd = new Question(tid, new ObjectId(), q, new ArrayList<Document>());
         if (questions.contains(toAdd)) {
-        	System.out.println("Already has that answer!");
+        	System.err.println("Already has that answer!");
         	return null;
         }else {
         	questions.add(toAdd);
@@ -35,6 +47,9 @@ public class Test {
         return questions;
 	}
 		
+	/**
+	 * for each question, check all Student questions with teacher answers.
+	 */
 	public void checkTest() {
 		questions.forEach((q)->{
 			q.checkQuestion(q.getStudentAnswers(), q.getTeacherAnswers());
@@ -46,6 +61,10 @@ public class Test {
 		ApiHolder.getCollection().deleteOne(new Document("_id", toRemove.getQid()));
 	}	
 	
+	/**
+	 * @param id - can get it from {@link Question} getQId
+	 * @return
+	 */
 	public Question getQuestion(String id) {
 		for(Question q : questions) {
 			if (q.getQid().toString().equals(id)) {
@@ -55,7 +74,12 @@ public class Test {
 		System.out.println("there is no such question!");
 		return null;
 	}
-
+	
+	/**
+	 * @param a
+	 * @return
+	 * this is private database related function
+	 */
 	private Document questionToDoc(Question a) {
 		return new Document().append("_id", a.getQid()).append("content", a.getContent()).append("answers", a.getAnswers());
 	}

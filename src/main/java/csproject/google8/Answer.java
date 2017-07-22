@@ -21,12 +21,12 @@ import com.google.cloud.language.v1.Token;
 public class Answer {
 	
 	private ObjectId _id ;//answer id
-	private String content;//answer itself
+	private String content;//the answer itself
 	private String writer;//who wrote the answer
 	private Integer grade;//Wasn't graded = -1
-	private Integer answerWords;//num of significant words
+	private Integer answerWords;//num of significant words.
 	private Boolean verified;//if teacher marked true
-	private Boolean learnable;//if teacher marked true || answerWords>= one of verified answerWords
+	private Boolean learnable;//there is enough data to learn from this answer
 	private HashMap<String, Integer> map = new HashMap<String, Integer>();//map to get better runtime. student->grade, relates to this answer
 	private AnalyzeSyntaxResponse Analyzed_ans;//google analyzed syntax
 	
@@ -47,6 +47,7 @@ public class Answer {
 	 * @return same Answer but has called the google api Syntax checker and counted significant words
 	 */
 	protected Answer build() {
+		//google analyzer
 		Document doc = Document.newBuilder()
 	            .setContent(content).setType(Type.PLAIN_TEXT).build();
 		ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content+ " $$ google api");
@@ -64,11 +65,13 @@ public class Answer {
 		return this;
 	}
 	
+	//two answers are the same if they have the same id (wont happen)
+	//or the answer written by teacher and has same content
+	//or the answer is verified and has same content
 	public boolean equals (Object other) {
 		if (other instanceof Answer) {
 			Answer o = (Answer) other;
-			return (this.content.equals(o.content) && this.verified && o.verified && this.writer.equals("TEACHER") && o.writer.equals("TEACHER"))
-					||(this._id.equals(o._id));
+			return this.content.equals(o.content);
 		}
 		return false;
 	}	

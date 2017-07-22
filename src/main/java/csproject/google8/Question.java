@@ -6,26 +6,39 @@ import java.util.stream.Collectors;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+/**
+ * @author ishay
+ * class resresenting Teacher question. the class holds {@link Answer}s.
+ * the class can manipulate answers (create, delete, correct, select..)
+ */
 public class Question {
 	
-	private String content;
-	private ObjectId tid;
-	private ObjectId qid;
-	private ArrayList<Answer> answers = new ArrayList<Answer>();
+	private String content;//the question itself
+	private ObjectId tid;//test id
+	private ObjectId qid;//question id
+	private ArrayList<Answer> answers = new ArrayList<Answer>();//list of all answers
 
 	public Question(ObjectId tid, ObjectId qid, String content, ArrayList<Document> answers) {
 		this.content=content;
 		this.tid=tid;
 		this.qid=qid; 
+		//building the answers from the list got from server
 		for(Document d : answers) {
 			this.answers.add(new Answer(d.getObjectId("_id"), d.getString("content"), d.getString("writer"), d.getInteger("grade"), d.getInteger("answerWords"), d.getBoolean("verified"), d.getBoolean("learnable")));
 		}	
 	}
 	
+	/**
+	 * @param teacher_ans - some string
+	 * @param grade - probably 100
+	 * @return answer object
+	 * the function creates {@link Answer} and put it in the list and on the server.
+	 * if answers already contains this answer will return null
+	 */
 	public Answer createAns(String teacher_ans, int grade) {        
         Answer toAdd = new Answer(new ObjectId(), teacher_ans, "TEACHER", grade, new Integer(-1), true, true);
         if (answers.contains(toAdd)) {
-        	System.out.println("Already has that answer!");
+        	System.err.println("Already has that answer!");
         	return null;
         }else {
             answers.add(toAdd.build());
@@ -36,43 +49,63 @@ public class Question {
         }
 	}
 	
+	/**
+	 * @param student_ans
+	 * @return
+	 * wont check containing answer since each student may write same answer content
+	 */
 	public Answer addStudentAns(String student_ans){
         Answer toAdd = new Answer(new ObjectId(), student_ans, "STUDENT", new Integer(-1), new Integer(-1), false, false);
-        if (answers.contains(toAdd)) {
-        	System.out.println("Already has that answer!");
-        	return null;
-        }else {
-            answers.add(toAdd);
-    		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-    				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-    				new Document("$push", new Document().append("questions.$.answers", answerToDoc(toAdd))));	
-    		return toAdd;
-        }
-	}
-		
-	public boolean fixAns(int grade, Answer toFix){		
-        if(toFix.getWriter().equals("TEACHER")) {
-	        toFix.setGrade(Integer.valueOf(grade));
-        }else if(toFix.getWriter().equals("STUDENT")) {
-        	if(answers.contains(new Answer(new ObjectId(), toFix.getContent(), "TEACHER", toFix.getGrade(), toFix.getAnswerWords(), true, true))) {
-		        System.out.println(">> There is same teacher answer with different grade");
-		        return false;
-        	}
-        }else{
-			toFix.setVerified(true);
-			toFix.setLearnable(true);
-        }
-        
+        answers.add(toAdd);
 		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
 				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-				new Document("$set", new Document().append("questions.$.answers."+answerToInt(toFix), answerToDoc(toFix))));	
+				new Document("$push", new Document().append("questions.$.answers", answerToDoc(toAdd))));	
+		return toAdd;
+	}
+		
+	/**
+	 * @param grade
+	 * @param toFix
+	 * @return
+	 * will return false if there is teacher ans with different grade.
+	 */
+	public boolean fixAns(int grade, Answer toFix){	
+    	if (toFix.getWriter().equals("STUDENT") && createAns(toFix.getContent(), grade)==null) {
+        	System.err.println("there is teacher ans with same content. fix it first!");
+        	return false;
+    	}
+    	
+    	//if it was a teacher ans, fix it first
+    	if (toFix.getWriter().equals("TEACHER")) toFix.setGrade(grade);
+    	
+    	//fix all similar student ans with the new grade
+		answers.stream().filter(x -> x.getWriter().equals("STUDENT") && x.getContent().equals(toFix.getContent()))
+		.collect(Collectors.toList()).forEach((x)->{
+			
+			//if teacher fixes ans, it means its verified and learnable
+	        x.setGrade(grade);
+			x.setVerified(true);
+			x.setLearnable(true);
+		
+			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
+					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
+					new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));	
+		});
+
 		return true;
 	}
 		
+	/**
+	 * @param toCheck - list of answers to check(all student ans.. only ungraded..)
+	 * @param verified - list of verified answers, mostly teacher ans / learnable ans
+	 * this 
+	 */
 	public void checkQuestion(List<Answer> toCheck, List<Answer> verified) {
+		//sort the list first from high to low to get the maximum grade in min time
 		verified.sort((x,y) -> y.getGrade()-x.getGrade());
 				
 		for (Answer student_ans: toCheck) {
+			//first build the answer (google api)
 			Integer grade = new AnswertAnalyzer(student_ans.build(), verified).analyze();
 			if (grade==-2) continue; //error
 			if (grade>-1) {
@@ -84,8 +117,11 @@ public class Question {
 		}
 	}
 	
+	/**
+	 * mark all student answers as true; (will create teacher answer)
+	 */
 	public void approveAll() {
-		answers.forEach((ans)->{
+		getStudentAnswers().forEach((ans)->{
 			fixAns(ans.getGrade(), ans);
 			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
 					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
@@ -93,19 +129,26 @@ public class Question {
 		});
 	}
 	
+	/**
+	 * @param toRemove some answer that you can get from getAnswer
+	 */
 	public void removeAnswer(Answer toRemove) {
 		answers.remove(toRemove);
 		ApiHolder.getCollection().updateOne(new Document().append("_id", tid).append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 				new Document("$pull", new Document().append("questions.$.answers", answerToDoc(toRemove))));	
 	}	
 	
+	/**
+	 * @param id - get it from {@link Answer} get_Id
+	 * @return
+	 */
 	public Answer getAnswer(String id) {
 		for(Answer ans : answers) {
 			if (ans.get_id().toString().equals(id)) {
 				return ans;
 			}
 		}
-		System.out.println("there is no such answer!");
+		System.err.println("there is no such answer!");
 		return null;
 	}
 	
