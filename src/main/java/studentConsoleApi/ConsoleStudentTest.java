@@ -53,6 +53,5 @@ public class ConsoleStudentTest {
         if (q==null) return;
         ConsoleStudentQuestion qapi = new ConsoleStudentQuestion(q);
     	qapi.main();
-    	return;
 	}
 }

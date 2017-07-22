@@ -8,7 +8,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import apiHolder.ApiHolder;
-import syntaxAnalyzer.AnswertAnalyzer;
+import syntaxAnalyzer.AnswerAnalyzer;
 
 /**
  * @author ishay
@@ -28,7 +28,7 @@ public class Question {
 		this.qid=qid; 
 		//building the answers from the list got from server
 		for(Document d : answers) {
-			this.answers.add(new Answer(d.getObjectId("_id"), d.getString("content"), d.getString("writer"), d.getInteger("grade"), d.getInteger("answerWords"), d.getBoolean("verified"), d.getBoolean("learnable")));
+			this.answers.add(new Answer(d.getObjectId("_id"), d.getString("content"), Writer.valueOf((d.getString("writer"))), d.getInteger("grade"), d.getInteger("answerWords"), d.getBoolean("verified"), d.getBoolean("learnable")));
 		}	
 	}
 	
@@ -40,7 +40,7 @@ public class Question {
 	 * if answers already contains this answer will return null
 	 */
 	public Answer createAns(String teacher_ans, int grade) {        
-        Answer toAdd = new Answer(new ObjectId(), teacher_ans, "TEACHER", grade, new Integer(-1), true, true);
+        Answer toAdd = new Answer(new ObjectId(), teacher_ans, Writer.TEACHER, grade, new Integer(-1), true, true);
         if (answers.contains(toAdd)) {
         	System.err.println("Already has that answer!");
         	return null;
@@ -60,7 +60,7 @@ public class Question {
 	 * wont check containing answer since each student may write same answer content
 	 */
 	public Answer addStudentAns(String student_ans){
-        Answer toAdd = new Answer(new ObjectId(), student_ans, "STUDENT", new Integer(-1), new Integer(-1), false, false);
+        Answer toAdd = new Answer(new ObjectId(), student_ans, Writer.STUDENT, new Integer(-1), new Integer(-1), false, false);
         answers.add(toAdd);
 		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
 				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
@@ -76,7 +76,7 @@ public class Question {
 	 * will change verified = true, learnable = true;
 	 */
 	public boolean fixAns(int grade, Answer toFix){	
-    	if (toFix.getWriter().equals("STUDENT")) {
+    	if (!toFix.getVerified()) {
             Answer toAdd = new Answer(new ObjectId(), toFix.getContent(), toFix.getWriter(), grade, new Integer(-1), true, toFix.getLearnable());
             if (answers.contains(toAdd)) {
             	System.err.println("there is verified ans with same content. fix it first! - " + toFix.getContent());
@@ -93,7 +93,7 @@ public class Question {
 				new Document("$set", new Document().append("questions.$.answers."+answerToInt(toFix), answerToDoc(toFix))));
 		
 		//do it to all similar answers.
-		answers.stream().filter(x -> x.getWriter().equals("STUDENT") && x.getContent().equals(toFix.getContent()))
+		answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT) && x.getContent().equals(toFix.getContent()))
 		.collect(Collectors.toList()).forEach((x)->{
 	    	x.setGrade(grade);
 	    	x.setVerified(true);
@@ -122,7 +122,7 @@ public class Question {
 		
 		for (Answer student_ans: toCheck) {
 			//first build the answer (google api)
-			Integer grade = new AnswertAnalyzer(student_ans.build(), verified).analyze();
+			Integer grade = new AnswerAnalyzer(student_ans.build(), verified).analyze();
 			if (grade==-2) continue; //error
 			if (grade>-1) {
 				System.out.println(student_ans);
@@ -145,6 +145,10 @@ public class Question {
 				fixAns(ans.getGrade(), ans);
 			}
 		});
+	}
+	
+	public void approveOne(Answer ans) {
+		fixAns(ans.getGrade(), ans);
 	}
 	
 	/**
@@ -176,23 +180,23 @@ public class Question {
 	}
 	
 	public List<Answer> getTeacherAnswers() {
-		return answers.stream().filter(x -> x.getWriter().equals("TEACHER")).collect(Collectors.toList());
+		return answers.stream().filter(x -> x.getWriter().equals(Writer.TEACHER)).collect(Collectors.toList());
 	}
 	
 	public List<Answer> getStudentAnswers() {
-		return answers.stream().filter(x -> x.getWriter().equals("STUDENT")).collect(Collectors.toList());
+		return answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT)).collect(Collectors.toList());
 	}
 
 	public List<Answer> getUnverifiedStudentAnswers() {
-		return answers.stream().filter(x -> x.getWriter().equals("STUDENT") && x.getVerified()==false).collect(Collectors.toList());
+		return answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT) && x.getVerified()==false).collect(Collectors.toList());
 	}
 
 	public List<Answer> getUngradedStudentAnswers() {
-		return answers.stream().filter(x -> x.getWriter().equals("STUDENT") && x.getGrade()==-1).collect(Collectors.toList());
+		return answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT) && x.getGrade()==-1).collect(Collectors.toList());
 	}
 
 	private Document answerToDoc(Answer a) {
-		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("learnable", a.getLearnable());
+		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter().name()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("learnable", a.getLearnable());
 	}
 	
 	private int answerToInt(Answer ans) {

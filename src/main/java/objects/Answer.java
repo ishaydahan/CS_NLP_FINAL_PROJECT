@@ -12,7 +12,6 @@ import com.google.cloud.language.v1.EncodingType;
 import com.google.cloud.language.v1.PartOfSpeech.Tag;
 
 import apiHolder.ApiHolder;
-import syntaxAnalyzer.AnswertAnalyzer;
 
 import com.google.cloud.language.v1.Token;
 
@@ -26,7 +25,7 @@ public class Answer {
 	
 	private ObjectId _id ;//answer id
 	private String content;//the answer itself
-	private String writer;//who wrote the answer
+	private Writer writer;//who wrote the answer
 	private Integer grade;//Wasn't graded = -1
 	private Integer answerWords;//num of significant words.
 	private Boolean verified;//if teacher marked true
@@ -37,9 +36,9 @@ public class Answer {
 	//Enemas for insignificant parts of sentence
 	private Tag[] del = {Tag.PUNCT, Tag.UNKNOWN, Tag.ADP, Tag.X, Tag.AFFIX, Tag.DET};
 
-	public Answer(ObjectId _id, String content, String writer, Integer grade, Integer answerWords, Boolean verified, Boolean learnable) {
+	public Answer(ObjectId _id, String content, Writer writer, Integer grade, Integer answerWords, Boolean verified, Boolean learnable) {
 		this._id=_id;
-		this.content=content;
+		this.content=content.toLowerCase();
 		this.writer=writer;
 		this.grade=grade;
 		this.answerWords=answerWords;
@@ -54,7 +53,7 @@ public class Answer {
 		//google analyzer
 		Document doc = Document.newBuilder()
 	            .setContent(content).setType(Type.PLAIN_TEXT).build();
-		ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content+ " $$ google api");
+		ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content + " $$ google api");
 		Analyzed_ans = ApiHolder.langClient.analyzeSyntax(doc, EncodingType.UTF8);
 		
 		if (answerWords==-1) {
@@ -62,6 +61,7 @@ public class Answer {
 			for(Token t : Analyzed_ans.getTokensList()) {
 				if (!Arrays.asList(del).contains(t.getPartOfSpeech().getTag())) {
 						ApiHolder.logger.println("ANALYZER :::: Teacher parts: " + t.getText().getContent());
+						ApiHolder.logger.println("ANALYZER :::: Teacher parts: " + t.getPartOfSpeech().getTag());
 						answerWords++;
 				}
 			}
@@ -84,7 +84,7 @@ public class Answer {
 	public String toString() {
 		String s = "";
 		s=s+"Answer: " + content;
-		s=s+", Wrriten by: " + writer;
+		s=s+", Wrriten by: " + writer.name();
 		s=s+", Grade: " + grade;
 		s=s+", Verified by Teacher: " + verified;
 		s=s+", Significant Words: " + answerWords;
@@ -112,7 +112,7 @@ public class Answer {
 		return content;
 	}
 
-	public String getWriter() {
+	public Writer getWriter() {
 		return writer;
 	}
 

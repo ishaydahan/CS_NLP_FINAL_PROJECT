@@ -49,7 +49,11 @@ public class ConsoleStudentMain {
         String id = ApiHolder.scanner.nextLine();
         
         Test t = this.t.getTest(id);
-        ConsoleStudentTest api = new ConsoleStudentTest(t);
+        if (t==null) {
+        	System.err.println("there is no such test!");
+        	return;
+        }
+    	ConsoleStudentTest api = new ConsoleStudentTest(t);
     	api.main();
 	}		
 }

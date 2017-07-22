@@ -21,7 +21,6 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.textrazor.AnalysisException;
 import com.textrazor.TextRazor;
 import com.textrazor.annotations.Entailment;
 	
@@ -40,8 +39,9 @@ import com.textrazor.annotations.Entailment;
 public class ApiHolder {
     
 	public static int LEVENSHTEIN = 3;//constant for levenshtein calc
-	public static int MEANING = 0;//constant for textrazor calc
-	public static int REDUCE = 10;//points for each different
+	public static double MEANING = 0;//constant for textrazor calc
+	public static int REDUCE = 5;//points for each different
+	public static int COMP = 5;//points for each different
 	public static int MAXGRADE = 100;//max points per answer
 	public static int MINGRADE = 0;//min points per answer
 
@@ -106,37 +106,46 @@ public class ApiHolder {
 	/**
 	 * @param s a sentence
 	 * @return list of contextual meanings
-	 * we keep all Entailment in hashmao to save time
+	 * we keep all Entailment in hashmap to save time
 	 */
 	public static List<Entailment> getEntailmentList(String s) {
 		if (entailmentList.containsKey(s)) {
 			return entailmentList.get(s);
 		}
-
+		
 		List<Entailment> lst = new ArrayList<Entailment>();
 		try {
-			TextRazor[] arr = new TextRazor[4];
-//			arr[0] = new TextRazor("9faf2230e35c366e74ea0f1d72cf167697e09ae6488645916d1693ef");//bacoola
-//			arr[0] = new TextRazor("bbd736f436e10ef989bb0bd155f251756220de90b8d6498262ea2661");//ishay
-			arr[0] = new TextRazor("eb5d5e6284d0ed04a6b7beec96d2805a9bc0f4396cb3fe0c219e5374");//ishaydah
-//			arr[0] = new TextRazor("03f996454010ffc4e2696dbc1656e7ff4e105c0e886ad4b4e8d31a89");//cs
-//			arr[0].addExtractor("entailments");
-//			arr[0].addExtractor("entailments");
-			arr[0].addExtractor("entailments");
-//			arr[0].addExtractor("entailments");
-
+			ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ razor api");
+			lst = new TextRazor("9faf2230e35c366e74ea0f1d72cf167697e09ae6488645916d1693ef")
+			.analyze(s).getResponse().getEntailments();
+			entailmentList.put(s, lst);
+			return lst;
+		}catch(Exception e1) {
 			try {
 				ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ razor api");
-				lst = arr[0].analyze(s).getResponse().getEntailments();
-			} catch (AnalysisException e) {
-				e.printStackTrace();
+				lst = new TextRazor("eb5d5e6284d0ed04a6b7beec96d2805a9bc0f4396cb3fe0c219e5374")
+				.analyze(s).getResponse().getEntailments();
+				entailmentList.put(s, lst);
+				return lst;
+			}catch(Exception e2) {
+				try {
+					ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ razor api");
+					lst = new TextRazor("03f996454010ffc4e2696dbc1656e7ff4e105c0e886ad4b4e8d31a89")
+					.analyze(s).getResponse().getEntailments();
+					entailmentList.put(s, lst);
+					return lst;
+				}catch(Exception e3) {
+					try {
+						ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ razor api");
+						lst = new TextRazor("bbd736f436e10ef989bb0bd155f251756220de90b8d6498262ea2661")
+						.analyze(s).getResponse().getEntailments();
+						entailmentList.put(s, lst);
+						return lst;
+					}catch(Exception e4) {
+						
+					}
+				}
 			}
-			entailmentList.put(s, lst);
-			
-			return lst;
-			
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		return lst;
 	}

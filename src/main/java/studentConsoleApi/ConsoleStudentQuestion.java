@@ -32,12 +32,10 @@ public class ConsoleStudentQuestion {
 	}
 		
 	protected void addStudentAns(){
-        System.out.println("///////////////////////////////////");
-		System.out.println(">> Enter Student Answer:");
-        String student_ans = ApiHolder.scanner.nextLine();
-        
-        q.addStudentAns(student_ans);
-		System.out.println(">> Done");
-        System.out.println("///////////////////////////////////");
+		System.out.println(">> Enter Answer:");
+        String teacher_ans = ApiHolder.scanner.nextLine();
+
+        if (q.addStudentAns(teacher_ans)!=null)
+        	System.out.println("operation OK!");
 	}	
 }

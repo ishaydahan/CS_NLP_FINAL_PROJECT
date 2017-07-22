@@ -109,14 +109,23 @@ public class ConsoleTeacherQuestion {
 		
 	protected void checkQuestion(int choice) {
         System.out.println("///////////////////////////////////");
-		if (choice==1) q.checkQuestion(q.getStudentAnswers(), q.getTeacherAnswers());
-		if (choice==1) q.checkQuestion(q.getUngradedStudentAnswers(), q.getTeacherAnswers());
+		if (choice==1) q.checkQuestion(q.getStudentAnswers(), q.getVerifiedAnswers());
+		if (choice==2) q.checkQuestion(q.getUngradedStudentAnswers(), q.getVerifiedAnswers());
         System.out.println("///////////////////////////////////");
 	}
 	
 	protected void approve(int choice) {
-		q.approveAll();
-    	System.out.println("operation OK!");
+		if (choice==1) q.approveAll();
+		if (choice==2) {
+			System.out.println(">> Enter Answer id:");
+			String id = ApiHolder.scanner.nextLine();
+	        try {
+				q.approveOne(q.getAnswer(id));
+		    	System.out.println("operation OK!");
+	        }catch(Exception e) {
+
+	        }
+		}
 	}
 	
 	protected void remove() {

@@ -11,12 +11,12 @@ import objects.Answer;
  * it should call all the analyzing features.
  * at this point we analyze by {@link LevenshteinDistance} or by syntax {@link CheckAnswerCase}
  */
-public class AnswertAnalyzer {
+public class AnswerAnalyzer {
 	
 	private Answer students_ans;
 	private List<Answer> verified;
 
-	public AnswertAnalyzer(Answer students_ans, List<Answer> verified) {
+	public AnswerAnalyzer(Answer students_ans, List<Answer> verified) {
 		this.students_ans = students_ans;
 		this.verified = verified;
 	}
@@ -39,8 +39,8 @@ public class AnswertAnalyzer {
 		for (Answer teachers_ans: verified) {
 			if (LevenshteinDistance.computeLevenshteinDistance(teachers_ans.getContent(), students_ans.getContent())<ApiHolder.LEVENSHTEIN) {
 				ApiHolder.logger.println("### LEVENSHTEIN SUCSESS!");
-				ApiHolder.logger.println("### teacher: " + teachers_ans.getContent());
-				ApiHolder.logger.println("### student: " + students_ans.getContent());
+				ApiHolder.logger.println("### teacher: " + teachers_ans);
+				ApiHolder.logger.println("### student: " + students_ans);
 				students_ans.setGrade(teachers_ans.getGrade());
 				return students_ans.getGrade();
 			}
