@@ -1,12 +1,12 @@
-package consoleApi;
+package teacherConsoleApi;
 
 import objects.Teacher;
 
-public class ConsoleProgram {
+public class ConsoleTeacherProgram {
 	
 	public static void main(String[] args) {	
 		System.out.print("WELCOME TEACHER!");
-		ConsoleTeacherApi api = new ConsoleTeacherApi(new Teacher());
+		ConsoleTeacherMain api = new ConsoleTeacherMain(new Teacher());
 		api.main();		
 	}	
 }

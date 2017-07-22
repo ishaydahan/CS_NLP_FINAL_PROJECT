@@ -1,14 +1,14 @@
-package consoleApi;
+package teacherConsoleApi;
 
 import apiHolder.ApiHolder;
 import objects.Teacher;
 import objects.Test;
 
-public class ConsoleTeacherApi {
+public class ConsoleTeacherMain {
 		
 	private Teacher t = null;
 
-	protected ConsoleTeacherApi(Teacher t) {
+	protected ConsoleTeacherMain(Teacher t) {
 		this.t=t;
 	}
 
@@ -51,10 +51,11 @@ public class ConsoleTeacherApi {
 	}
 		
 	protected void showTests() {
+        System.out.println("///////////////////////////////////");
         t.getTests().forEach((k,v)->{
         	System.out.println("Test: " + k + ", id: " + v);
         });
-
+        System.out.println("///////////////////////////////////");
 	}
 	
 	protected void selectTest() {
@@ -62,7 +63,7 @@ public class ConsoleTeacherApi {
         String id = ApiHolder.scanner.nextLine();
         
         Test t = this.t.getTest(id);
-    	ConsoleTestApi api = new ConsoleTestApi(t);
+    	ConsoleTeacherTest api = new ConsoleTeacherTest(t);
     	api.main();
 	}		
 	

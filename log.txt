@@ -1,0 +1,13 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: help
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ People choose to volunteer to help people. $$ google api
+ANALYZER :::: Teacher parts: People
+ANALYZER :::: Teacher parts: choose
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: volunteer
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: people

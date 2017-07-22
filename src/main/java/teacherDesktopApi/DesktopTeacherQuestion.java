@@ -1,4 +1,4 @@
-package userApi;
+package teacherDesktopApi;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import apiHolder.ApiHolder;
 import objects.Answer;
 import objects.Question;
 
-public class UserQuestionApi {
+public class DesktopTeacherQuestion {
 	
 	protected Question q;
 
-	protected UserQuestionApi(Question q) {
+	protected DesktopTeacherQuestion(Question q) {
 		this.q=q;
 	}
 	

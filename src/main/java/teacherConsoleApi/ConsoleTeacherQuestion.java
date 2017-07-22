@@ -1,4 +1,4 @@
-package consoleApi;
+package teacherConsoleApi;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import apiHolder.ApiHolder;
 import objects.Answer;
 import objects.Question;
 
-public class ConsoleQuestionApi {
+public class ConsoleTeacherQuestion {
 	
 	protected Question q;
 
-	protected ConsoleQuestionApi(Question q) {
+	protected ConsoleTeacherQuestion(Question q) {
 		this.q=q;
 	}
 	
@@ -64,6 +64,7 @@ public class ConsoleQuestionApi {
 	}
 	
 	protected void addAns() {
+        System.out.println("///////////////////////////////////");
 		System.out.println(">> Enter Answer:");
         String teacher_ans = ApiHolder.scanner.nextLine();
 
@@ -72,17 +73,21 @@ public class ConsoleQuestionApi {
 
         q.createAns(teacher_ans, Integer.valueOf(grade));
 		System.out.println(">> Done");
+        System.out.println("///////////////////////////////////");
 	}
 	
 	protected void addStudentAns(){
+        System.out.println("///////////////////////////////////");
 		System.out.println(">> Enter Student Answer:");
         String student_ans = ApiHolder.scanner.nextLine();
         
         q.addStudentAns(student_ans);
 		System.out.println(">> Done");
+        System.out.println("///////////////////////////////////");
 	}
 	
 	protected void showAnswers (int choice) {
+        System.out.println("///////////////////////////////////");
 		List<Answer> filterdList = null;
 		if (choice==1) filterdList = q.getTeacherAnswers();
 		if (choice==2) filterdList = q.getStudentAnswers();
@@ -98,10 +103,11 @@ public class ConsoleQuestionApi {
         	System.out.println(s);
         	i++;
         }      
-
+        System.out.println("///////////////////////////////////");
 	}
 	
 	protected void fixAns(){
+        System.out.println("///////////////////////////////////");
 		System.out.println(">> Enter Answer id:");
 		String id = ApiHolder.scanner.nextLine();
 		
@@ -114,19 +120,25 @@ public class ConsoleQuestionApi {
 		}catch(Exception e) {
 			return;
 		}
+        System.out.println("///////////////////////////////////");
 	}
 		
 	protected void checkQuestion(int choice) {
+        System.out.println("///////////////////////////////////");
 		if (choice==1) q.checkQuestion(q.getStudentAnswers(), q.getTeacherAnswers());
 		if (choice==1) q.checkQuestion(q.getUngradedStudentAnswers(), q.getTeacherAnswers());
+        System.out.println("///////////////////////////////////");
 	}
 	
 	protected void approveAll() {
+        System.out.println("///////////////////////////////////");
 		q.approveAll();
 		System.out.println(">> Done");	
+        System.out.println("///////////////////////////////////");
 	}
 	
 	protected void remove() {
+        System.out.println("///////////////////////////////////");
 		try {
 			System.out.println(">> Enter Answer id:");
 			String id = ApiHolder.scanner.nextLine();
@@ -136,6 +148,7 @@ public class ConsoleQuestionApi {
 			e.printStackTrace();
 			return;
 		}
+        System.out.println("///////////////////////////////////");
 	}	
 	
 }

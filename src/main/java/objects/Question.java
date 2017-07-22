@@ -70,12 +70,16 @@ public class Question {
 	 * @param grade
 	 * @param toFix
 	 * @return
-	 * will return false if there is teacher ans with different grade.
+	 * will return false if there is verified ans with different grade.
+	 * will change verified = true, learnable = true;
 	 */
 	public boolean fixAns(int grade, Answer toFix){	
-    	if (toFix.getWriter().equals("STUDENT") && createAns(toFix.getContent(), grade)==null) {
-        	System.err.println("there is teacher ans with same content. fix it first!");
-        	return false;
+    	if (toFix.getWriter().equals("STUDENT")) {
+            Answer toAdd = new Answer(new ObjectId(), toFix.getContent(), toFix.getWriter(), grade, new Integer(-1), true, toFix.getLearnable());
+            if (answers.contains(toAdd)) {
+            	System.err.println("there is verified ans with same content. fix it first!");
+            	return false;
+            }
     	}
     	
     	//if it was a teacher ans, fix it first
