@@ -81,24 +81,16 @@ public class Question {
             	return false;
             }
     	}
-    	
-    	//if it was a teacher ans, fix it first
-    	if (toFix.getWriter().equals("TEACHER")) toFix.setGrade(grade);
-    	
-    	//fix all similar student ans with the new grade
-		answers.stream().filter(x -> x.getWriter().equals("STUDENT") && x.getContent().equals(toFix.getContent()))
-		.collect(Collectors.toList()).forEach((x)->{
-			
-			//if teacher fixes ans, it means its verified and learnable
-	        x.setGrade(grade);
-			x.setVerified(true);
-			x.setLearnable(true);
+		//if teacher fixes ans, it means its verified and learnable
+    	toFix.setGrade(grade);
+    	toFix.setVerified(true);
+    	toFix.setLearnable(true);
+	
+		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
+				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
+				new Document("$set", new Document().append("questions.$.answers."+answerToInt(toFix), answerToDoc(toFix))));
 		
-			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-					new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));	
-		});
-
+		System.err.println("you may need to recheck test.");
 		return true;
 	}
 		

@@ -73,7 +73,7 @@ public class Test {
 				return q;
 			}
 		}
-		System.out.println("there is no such question!");
+		System.err.println("there is no such question!");
 		return null;
 	}
 	

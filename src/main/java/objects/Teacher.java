@@ -70,14 +70,18 @@ public class Teacher {
 	 * removes all test data!
 	 */
 	public void removeTest(String id) {
-		ApiHolder.getCollection().deleteOne(new Document("_id", new ObjectId(id)));
-		String[] kk = {""};
-		tests.forEach((k,v)->{
-			if(id.equals(v)) {
-				kk[0]=k;
-			}
-		});
-		tests.remove(kk[0]);
+		try {
+			ApiHolder.getCollection().deleteOne(new Document("_id", new ObjectId(id)));
+			String[] kk = {""};
+			tests.forEach((k,v)->{
+				if(id.equals(v)) {
+					kk[0]=k;
+				}
+			});
+			tests.remove(kk[0]);
+		}catch(Exception e) {
+			System.err.println("there is no such test!");
+		}
 	}	
 	
 	/**

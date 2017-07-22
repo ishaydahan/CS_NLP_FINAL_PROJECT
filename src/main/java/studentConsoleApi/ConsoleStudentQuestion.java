@@ -14,7 +14,7 @@ public class ConsoleStudentQuestion {
 	protected void main() {	
 		String option = "-1";
 		while (true) {
-			System.out.println("\n@@  Question Screen Options  @@");
+			System.out.println("\n@@  Student Screen Options  @@");
 			System.out.println("0 - exit");
 			
 			System.out.println("2 - add student answer");
@@ -24,7 +24,7 @@ public class ConsoleStudentQuestion {
 				System.out.println(">> Returning Test Screen");
 				return;
 			}else if(option.equals("2")) {
-				try {addStudentAns();}catch(Exception e) {System.out.println("problem with data");}
+				addStudentAns();
 			}else {
 				System.out.println(">> Bad Input");
 			}

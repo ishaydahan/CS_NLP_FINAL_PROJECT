@@ -15,7 +15,7 @@ public class ConsoleStudentMain {
 	protected void main() {
 		String option = "-1";
 		while (true) {
-			System.out.println("\n@@  Teacher Screen Options  @@");
+			System.out.println("\n@@  Student Screen Options  @@");
 			System.out.println("0 - exit");
 			System.out.println("2 - show tests");
 			System.out.println("3 - select test");
@@ -27,9 +27,9 @@ public class ConsoleStudentMain {
 				ApiHolder.client.close();
 				return;
 			}else if(option.equals("2")) {
-				try {showTests();}catch(Exception e) {System.out.println("problem with data");}
+				showTests();
 			}else if(option.equals("3")) {
-				try {selectTest();}catch(Exception e) {System.out.println("problem with data");}
+				selectTest();
 			}else {
 				System.out.println(">> Bad Input");
 			}

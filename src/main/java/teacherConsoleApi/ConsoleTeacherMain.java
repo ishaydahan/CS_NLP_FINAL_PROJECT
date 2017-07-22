@@ -29,13 +29,13 @@ public class ConsoleTeacherMain {
 				ApiHolder.client.close();
 				return;
 			}else if(option.equals("1")) {
-				try {createTest();}catch(Exception e) {System.out.println("problem with data");}
+				createTest();
 			}else if(option.equals("2")) {
-				try {showTests();}catch(Exception e) {System.out.println("problem with data");}
+				showTests();
 			}else if(option.equals("3")) {
-				try {selectTest();}catch(Exception e) {System.out.println("problem with data");}
+				selectTest();
 			}else if(option.equals("4")) {
-				try {remove();}catch(Exception e) {e.printStackTrace(); System.out.println("problem with data");}
+				remove();
 			}else {
 				System.out.println(">> Bad Input");
 			}
@@ -63,6 +63,10 @@ public class ConsoleTeacherMain {
         String id = ApiHolder.scanner.nextLine();
         
         Test t = this.t.getTest(id);
+        if (t==null) {
+        	System.err.println("there is no such test!");
+        	return;
+        }
     	ConsoleTeacherTest api = new ConsoleTeacherTest(t);
     	api.main();
 	}		
@@ -71,5 +75,6 @@ public class ConsoleTeacherMain {
 		System.out.println(">> Enter Test id:");
         String id = ApiHolder.scanner.nextLine();
         t.removeTest(id);
+		System.out.println(">> Done");
 	}	
 }

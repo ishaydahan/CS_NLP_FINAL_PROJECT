@@ -28,15 +28,15 @@ public class ConsoleTeacherTest {
 				System.out.println(">> Returning Teacher Screen");
 				return;
 			}else if(option.equals("1")) {
-				try {createQuestion();}catch(Exception e) {System.out.println("problem with data");}
+				createQuestion();
 			}else if(option.equals("2")) {
-				try {showQuestions();}catch(Exception e) {System.out.println("problem with data");}
+				showQuestions();
 			}else if(option.equals("3")) {
-				try {selectQuestion();}catch(Exception e) {System.out.println("problem with data");}
+				selectQuestion();
 			}else if(option.equals("4")) {
-				try {checkTest();}catch(Exception e) {System.out.println("problem with data");}
+				checkTest();
 			}else if(option.equals("5")) {
-				try {remove();}catch(Exception e) {System.out.println("problem with data");}
+				remove();
 			}else {
 				System.out.println(">> Bad Input!");
 			}
@@ -70,7 +70,6 @@ public class ConsoleTeacherTest {
         if (q==null) return;
     	ConsoleTeacherQuestion qapi = new ConsoleTeacherQuestion(q);
     	qapi.main();
-    	return;
 	}
 
 	public void checkTest() {
@@ -84,7 +83,6 @@ public class ConsoleTeacherTest {
 			t.removeQuestion(t.getQuestion(id));
 			System.out.println(">> Done");
 		}catch(Exception e) {
-			e.printStackTrace();
 			return;
 		}
 	}

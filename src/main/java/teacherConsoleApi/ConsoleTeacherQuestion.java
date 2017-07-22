@@ -44,19 +44,19 @@ public class ConsoleTeacherQuestion {
 				System.out.println(">> Returning Test Screen");
 				return;
 			}else if(option.equals("1")) {
-				try {addAns();}catch(Exception e) {System.out.println("problem with data");}
+				addAns();
 			}else if(option.equals("2")) {
-				try {addStudentAns();}catch(Exception e) {System.out.println("problem with data");}
+				addStudentAns();
 			}else if(option.charAt(0)=='3') {
-				try {showAnswers(Integer.valueOf(""+option.charAt(1)));}catch(Exception e) {System.out.println("problem with data");}
+				showAnswers(Integer.valueOf(""+option.charAt(1)));
 			}else if(option.charAt(0)=='4') {
-				try {checkQuestion(Integer.valueOf(""+option.charAt(1)));}catch(Exception e) {System.out.println("problem with data");}
+				checkQuestion(Integer.valueOf(""+option.charAt(1)));
 			}else if(option.equals("5")) {
-				try {fixAns();}catch(Exception e) {System.out.println("problem with data");}
+				fixAns();
 			}else if(option.equals("6")) {
-				try {remove();}catch(Exception e) {System.out.println("problem with data");}
+				remove();
 			}else if(option.equals("7")) {
-				try {approveAll();}catch(Exception e) {System.out.println("problem with data");}
+				approveAll();
 			}else {
 				System.out.println(">> Bad Input");
 			}
@@ -64,7 +64,6 @@ public class ConsoleTeacherQuestion {
 	}
 	
 	protected void addAns() {
-        System.out.println("///////////////////////////////////");
 		System.out.println(">> Enter Answer:");
         String teacher_ans = ApiHolder.scanner.nextLine();
 
@@ -73,17 +72,14 @@ public class ConsoleTeacherQuestion {
 
         q.createAns(teacher_ans, Integer.valueOf(grade));
 		System.out.println(">> Done");
-        System.out.println("///////////////////////////////////");
 	}
 	
 	protected void addStudentAns(){
-        System.out.println("///////////////////////////////////");
 		System.out.println(">> Enter Student Answer:");
         String student_ans = ApiHolder.scanner.nextLine();
         
         q.addStudentAns(student_ans);
 		System.out.println(">> Done");
-        System.out.println("///////////////////////////////////");
 	}
 	
 	protected void showAnswers (int choice) {
@@ -107,7 +103,6 @@ public class ConsoleTeacherQuestion {
 	}
 	
 	protected void fixAns(){
-        System.out.println("///////////////////////////////////");
 		System.out.println(">> Enter Answer id:");
 		String id = ApiHolder.scanner.nextLine();
 		
@@ -120,7 +115,6 @@ public class ConsoleTeacherQuestion {
 		}catch(Exception e) {
 			return;
 		}
-        System.out.println("///////////////////////////////////");
 	}
 		
 	protected void checkQuestion(int choice) {
@@ -131,24 +125,19 @@ public class ConsoleTeacherQuestion {
 	}
 	
 	protected void approveAll() {
-        System.out.println("///////////////////////////////////");
 		q.approveAll();
 		System.out.println(">> Done");	
-        System.out.println("///////////////////////////////////");
 	}
 	
 	protected void remove() {
-        System.out.println("///////////////////////////////////");
 		try {
 			System.out.println(">> Enter Answer id:");
 			String id = ApiHolder.scanner.nextLine();
 			q.removeAnswer(q.getAnswer(id));
 			System.out.println(">> Done");
 		}catch(Exception e) {
-			e.printStackTrace();
 			return;
 		}
-        System.out.println("///////////////////////////////////");
 	}	
 	
 }

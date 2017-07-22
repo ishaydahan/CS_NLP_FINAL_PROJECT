@@ -75,7 +75,8 @@ public class Answer {
 	public boolean equals (Object other) {
 		if (other instanceof Answer) {
 			Answer o = (Answer) other;
-			return this.content.equals(o.content) && this.verified && o.verified;
+			return (this._id.equals(o.get_id())) ||
+					(this.content.equals(o.content) && this.verified && o.verified);
 		}
 		return false;
 	}	
