@@ -1,0 +1,1720 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ people choose to volunteer to help people. $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: choose
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: volunteer
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+### LEVENSHTEIN SUCSESS!
+### teacher: Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 4, Machine Learnable: true, aid: null
+### student: Answer: because people want to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people love to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: love
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+GETGRADE :::: TEACHER :Answer: because people love to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+GETGRADE :::: STUDENT :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 4, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: want + love
+ANALYZER :::: spelling fixed: love >> want
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+----starting new check-----
+GETGRADE :::: TEACHER :Answer: because people want to help, Wrriten by: COMPUTER, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: 5973620f86c778227cdf1354
+GETGRADE :::: STUDENT :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 4, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people people
+ANALYZER :::: grade: 1
+ANALYZER :::: checking want people
+ANALYZER :::: checking want want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want want
+ANALYZER :::: grade: 2
+ANALYZER :::: checking to people
+ANALYZER :::: checking to want
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: to to
+ANALYZER :::: grade: 3
+ANALYZER :::: checking help people
+ANALYZER :::: checking help want
+ANALYZER :::: checking help to
+ANALYZER :::: checking help help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: help help
+ANALYZER :::: grade: 4
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people people
+ANALYZER :::: grade: 1
+ANALYZER :::: checking people want
+ANALYZER :::: checking want want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want want
+ANALYZER :::: grade: 2
+ANALYZER :::: checking people to
+ANALYZER :::: checking want to
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: to to
+ANALYZER :::: grade: 3
+ANALYZER :::: checking people help
+ANALYZER :::: checking want help
+ANALYZER :::: checking to help
+ANALYZER :::: checking help help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: help help
+ANALYZER :::: grade: 4
+----finished new check-----
+ANALYZER :::: trick loop: to + love
+ANALYZER :::: trick loop: help + love
+ANALYZER :::: trick try: help + love
+ANALYZER :::: not equal tokens: help + love
+ANALYZER :::: checking people love
+ANALYZER :::: trick loop: want + love
+ANALYZER :::: trick loop: to + love
+ANALYZER :::: trick loop: help + love
+ANALYZER :::: not equal tokens: people + love
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: want + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking people help
+ANALYZER :::: trick loop: want + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: not equal tokens: people + help
+ANALYZER :::: finished path check, BREAK!: people
+ANALYZER :::: grade: 95
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: want + love
+ANALYZER :::: trick loop: to + love
+ANALYZER :::: trick loop: help + love
+ANALYZER :::: trick try: help + love
+ANALYZER :::: not equal tokens: help + love
+ANALYZER :::: checking want people
+ANALYZER :::: trick loop: to + people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: trick try: help + people
+ANALYZER :::: not equal tokens: help + people
+ANALYZER :::: checking to people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: not equal tokens: to + people
+ANALYZER :::: checking help people
+ANALYZER :::: not equal tokens: help + people
+ANALYZER :::: finished path check, BREAK!: people
+ANALYZER :::: grade: 95
+GETGRADE :::: TEACHER :Answer: because people love to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+GETGRADE :::: STUDENT :Answer: people choose to volunteer to help people., Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 7, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: choose + love
+ANALYZER :::: trick loop: to + love
+ANALYZER :::: trick loop: volunteer + love
+ANALYZER :::: trick try: volunteer + love
+ANALYZER :::: trick loop: to + love
+ANALYZER :::: trick loop: help + love
+ANALYZER :::: trick try: help + love
+ANALYZER :::: trick loop: people + love
+ANALYZER :::: trick try: people + love
+ANALYZER :::: trick loop: . + love
+ANALYZER :::: not equal tokens: people + love
+ANALYZER :::: checking people love
+ANALYZER :::: trick loop: choose + love
+ANALYZER :::: trick loop: to + love
+ANALYZER :::: trick loop: volunteer + love
+ANALYZER :::: trick loop: to + love
+ANALYZER :::: trick loop: help + love
+ANALYZER :::: trick loop: people + love
+ANALYZER :::: trick loop: . + love
+ANALYZER :::: not equal tokens: people + love
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: choose + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: volunteer + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick loop: people + to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking people help
+ANALYZER :::: trick loop: choose + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick loop: people + help
+ANALYZER :::: trick loop: . + help
+ANALYZER :::: not equal tokens: people + help
+ANALYZER :::: finished path check, BREAK!: people
+ANALYZER :::: grade: 0
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: choose + love
+ANALYZER :::: trick loop: to + love
+ANALYZER :::: trick loop: volunteer + love
+ANALYZER :::: trick try: volunteer + love
+ANALYZER :::: trick loop: to + love
+ANALYZER :::: trick loop: help + love
+ANALYZER :::: trick try: help + love
+ANALYZER :::: trick loop: people + love
+ANALYZER :::: trick try: people + love
+ANALYZER :::: trick loop: . + love
+ANALYZER :::: not equal tokens: people + love
+ANALYZER :::: checking choose people
+ANALYZER :::: trick loop: to + people
+ANALYZER :::: trick loop: volunteer + people
+ANALYZER :::: trick try: volunteer + people
+ANALYZER :::: trick loop: to + people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: trick try: help + people
+ANALYZER :::: trick loop: people + people
+ANALYZER :::: trick try: people + people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: people + people
+ANALYZER :::: checking to people
+ANALYZER :::: trick loop: volunteer + people
+ANALYZER :::: trick loop: to + people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: trick loop: people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: to + people
+ANALYZER :::: checking volunteer people
+ANALYZER :::: trick loop: to + people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: trick try: help + people
+ANALYZER :::: trick loop: people + people
+ANALYZER :::: trick try: people + people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: people + people
+ANALYZER :::: checking to people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: trick loop: people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: to + people
+ANALYZER :::: checking help people
+ANALYZER :::: trick loop: people + people
+ANALYZER :::: trick try: people + people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: people + people
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: people + people
+ANALYZER :::: finished path check, BREAK!: people
+ANALYZER :::: grade: 0
+### SYNTAX ANALYZER RESULT:
+### student: Answer: because people love to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+### grade: 95
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people choose to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: choose
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+GETGRADE :::: TEACHER :Answer: because people choose to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+GETGRADE :::: STUDENT :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 4, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: want + choose
+ANALYZER :::: trick loop: to + choose
+ANALYZER :::: trick loop: help + choose
+ANALYZER :::: trick try: help + choose
+ANALYZER :::: not equal tokens: help + choose
+ANALYZER :::: checking people choose
+ANALYZER :::: trick loop: want + choose
+ANALYZER :::: trick loop: to + choose
+ANALYZER :::: trick loop: help + choose
+ANALYZER :::: not equal tokens: people + choose
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: want + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking people help
+ANALYZER :::: trick loop: want + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: not equal tokens: people + help
+ANALYZER :::: finished path check, BREAK!: people
+ANALYZER :::: grade: 95
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: want + choose
+ANALYZER :::: trick loop: to + choose
+ANALYZER :::: trick loop: help + choose
+ANALYZER :::: trick try: help + choose
+ANALYZER :::: not equal tokens: help + choose
+ANALYZER :::: checking want people
+ANALYZER :::: trick loop: to + people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: trick try: help + people
+ANALYZER :::: not equal tokens: help + people
+ANALYZER :::: checking to people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: not equal tokens: to + people
+ANALYZER :::: checking help people
+ANALYZER :::: not equal tokens: help + people
+ANALYZER :::: finished path check, BREAK!: people
+ANALYZER :::: grade: 95
+GETGRADE :::: TEACHER :Answer: because people choose to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+GETGRADE :::: STUDENT :Answer: people choose to volunteer to help people., Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 7, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: choose + choose
+ANALYZER :::: passed checkTokens V choose + choose
+ANALYZER :::: passed checkParts V choose + choose
+ANALYZER :::: passed checkRelationToParent V choose + choose
+ANALYZER :::: equal tokens: choose + choose
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people people
+ANALYZER :::: grade: 1
+ANALYZER :::: checking choose people
+ANALYZER :::: checking choose choose
+ANALYZER :::: passed checkTokens V choose + choose
+ANALYZER :::: passed checkParts V choose + choose
+ANALYZER :::: passed checkRelationToParent V choose + choose
+ANALYZER :::: equal tokens: choose + choose
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: choose choose
+ANALYZER :::: grade: 2
+ANALYZER :::: checking to people
+ANALYZER :::: checking to choose
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + choose
+ANALYZER :::: trick loop: to + choose
+ANALYZER :::: trick loop: help + choose
+ANALYZER :::: trick try: help + choose
+ANALYZER :::: trick loop: people + choose
+ANALYZER :::: trick try: people + choose
+ANALYZER :::: trick loop: . + choose
+ANALYZER :::: not equal tokens: people + choose
+ANALYZER :::: checking to help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick loop: people + help
+ANALYZER :::: trick loop: . + help
+ANALYZER :::: not equal tokens: to + help
+ANALYZER :::: finished path check, BREAK!: to
+ANALYZER :::: grade: 0
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: choose + choose
+ANALYZER :::: passed checkTokens V choose + choose
+ANALYZER :::: passed checkParts V choose + choose
+ANALYZER :::: passed checkRelationToParent V choose + choose
+ANALYZER :::: equal tokens: choose + choose
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people people
+ANALYZER :::: grade: 1
+ANALYZER :::: checking people choose
+ANALYZER :::: trick loop: choose + choose
+ANALYZER :::: trick loop: to + choose
+ANALYZER :::: trick loop: volunteer + choose
+ANALYZER :::: trick loop: to + choose
+ANALYZER :::: trick loop: help + choose
+ANALYZER :::: trick loop: people + choose
+ANALYZER :::: trick loop: . + choose
+ANALYZER :::: not equal tokens: people + choose
+ANALYZER :::: checking choose choose
+ANALYZER :::: passed checkTokens V choose + choose
+ANALYZER :::: passed checkParts V choose + choose
+ANALYZER :::: passed checkRelationToParent V choose + choose
+ANALYZER :::: equal tokens: choose + choose
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: choose choose
+ANALYZER :::: grade: 2
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: choose + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: volunteer + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick loop: people + to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking choose to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: volunteer + to
+ANALYZER :::: trick try: volunteer + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick try: help + to
+ANALYZER :::: trick loop: people + to
+ANALYZER :::: trick try: people + to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + choose
+ANALYZER :::: trick loop: to + choose
+ANALYZER :::: trick loop: help + choose
+ANALYZER :::: trick try: help + choose
+ANALYZER :::: trick loop: people + choose
+ANALYZER :::: trick try: people + choose
+ANALYZER :::: trick loop: . + choose
+ANALYZER :::: not equal tokens: people + choose
+ANALYZER :::: checking volunteer to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick try: help + to
+ANALYZER :::: trick loop: people + to
+ANALYZER :::: trick try: people + to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + choose
+ANALYZER :::: trick loop: to + choose
+ANALYZER :::: trick loop: help + choose
+ANALYZER :::: trick try: help + choose
+ANALYZER :::: trick loop: people + choose
+ANALYZER :::: trick try: people + choose
+ANALYZER :::: trick loop: . + choose
+ANALYZER :::: not equal tokens: people + choose
+ANALYZER :::: checking help to
+ANALYZER :::: trick loop: people + to
+ANALYZER :::: trick try: people + to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: finished path check, BREAK!: to
+ANALYZER :::: grade: 0
+### SYNTAX ANALYZER RESULT:
+### student: Answer: because people choose to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+### grade: 95
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to halp $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: halp
+ANALYZER :::: Teacher parts: VERB
+### LEVENSHTEIN SUCSESS!
+### teacher: Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 4, Machine Learnable: true, aid: null
+### student: Answer: because people want to halp, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people wants to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: wants
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+### LEVENSHTEIN SUCSESS!
+### teacher: Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 4, Machine Learnable: true, aid: null
+### student: Answer: because people wants to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ people want to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+GETGRADE :::: TEACHER :Answer: people want to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+GETGRADE :::: STUDENT :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 4, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people people
+ANALYZER :::: grade: 1
+ANALYZER :::: checking want people
+ANALYZER :::: checking want want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want want
+ANALYZER :::: grade: 2
+ANALYZER :::: checking to people
+ANALYZER :::: checking to want
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: to to
+ANALYZER :::: grade: 3
+ANALYZER :::: checking help people
+ANALYZER :::: checking help want
+ANALYZER :::: checking help to
+ANALYZER :::: checking help help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: help help
+ANALYZER :::: grade: 4
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people people
+ANALYZER :::: grade: 1
+ANALYZER :::: checking people want
+ANALYZER :::: trick loop: want + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: not equal tokens: people + want
+ANALYZER :::: checking want want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want want
+ANALYZER :::: grade: 2
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: want + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking want to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick try: help + to
+ANALYZER :::: not equal tokens: help + to
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: to to
+ANALYZER :::: grade: 3
+ANALYZER :::: checking people help
+ANALYZER :::: trick loop: want + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: not equal tokens: people + help
+ANALYZER :::: checking want help
+ANALYZER :::: spelling fixed: help >> want
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ people want to want $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+----starting new check-----
+GETGRADE :::: TEACHER :Answer: people want to want, Wrriten by: COMPUTER, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: 5973621386c778227cdf1355
+GETGRADE :::: STUDENT :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 4, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people people
+ANALYZER :::: grade: 1
+ANALYZER :::: checking want people
+ANALYZER :::: checking want want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want want
+ANALYZER :::: grade: 2
+ANALYZER :::: checking to people
+ANALYZER :::: checking to want
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + want
+ANALYZER :::: not equal tokens: help + want
+ANALYZER :::: checking to want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: not equal tokens: to + want
+ANALYZER :::: finished path check, BREAK!: to
+ANALYZER :::: grade: 0
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people people
+ANALYZER :::: grade: 1
+ANALYZER :::: checking people want
+ANALYZER :::: trick loop: want + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: not equal tokens: people + want
+ANALYZER :::: checking want want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want want
+ANALYZER :::: grade: 2
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: want + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking want to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick try: help + to
+ANALYZER :::: not equal tokens: help + to
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + want
+ANALYZER :::: not equal tokens: help + want
+ANALYZER :::: checking help to
+ANALYZER :::: not equal tokens: help + to
+ANALYZER :::: finished path check, BREAK!: to
+ANALYZER :::: grade: 0
+----finished new check-----
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want help
+ANALYZER :::: grade: 4
+GETGRADE :::: TEACHER :Answer: people want to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+GETGRADE :::: STUDENT :Answer: people choose to volunteer to help people., Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 7, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: choose + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: volunteer + want
+ANALYZER :::: trick try: volunteer + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: trick try: help + want
+ANALYZER :::: spelling fixed: want >> help
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ people help to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+----starting new check-----
+GETGRADE :::: TEACHER :Answer: people help to help, Wrriten by: COMPUTER, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: 5973621486c778227cdf1356
+GETGRADE :::: STUDENT :Answer: people choose to volunteer to help people., Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 7, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: choose + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick try: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people people
+ANALYZER :::: grade: 1
+ANALYZER :::: checking choose people
+ANALYZER :::: checking choose help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick try: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: choose help
+ANALYZER :::: grade: 2
+ANALYZER :::: checking to people
+ANALYZER :::: checking to help
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: to to
+ANALYZER :::: grade: 3
+ANALYZER :::: checking volunteer people
+ANALYZER :::: checking volunteer help
+ANALYZER :::: checking volunteer to
+ANALYZER :::: checking volunteer help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: volunteer help
+ANALYZER :::: grade: 4
+ANALYZER :::: checking to people
+ANALYZER :::: checking to help
+ANALYZER :::: checking to to
+ANALYZER :::: checking to help
+ANALYZER :::: finished path check, BREAK!: to
+ANALYZER :::: grade: 0
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: choose + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick try: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people people
+ANALYZER :::: grade: 1
+ANALYZER :::: checking people help
+ANALYZER :::: checking choose help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick try: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: choose help
+ANALYZER :::: grade: 2
+ANALYZER :::: checking people to
+ANALYZER :::: checking choose to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: volunteer + to
+ANALYZER :::: trick try: volunteer + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick try: help + to
+ANALYZER :::: trick loop: people + to
+ANALYZER :::: trick try: people + to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: to to
+ANALYZER :::: grade: 3
+ANALYZER :::: checking people help
+ANALYZER :::: checking choose help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick try: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: choose help
+ANALYZER :::: grade: 4
+----finished new check-----
+ANALYZER :::: trick loop: people + want
+ANALYZER :::: trick try: people + want
+ANALYZER :::: trick loop: . + want
+ANALYZER :::: not equal tokens: people + want
+ANALYZER :::: checking people want
+ANALYZER :::: trick loop: choose + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: volunteer + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: trick loop: people + want
+ANALYZER :::: trick loop: . + want
+ANALYZER :::: not equal tokens: people + want
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: choose + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: volunteer + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick loop: people + to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking people help
+ANALYZER :::: trick loop: choose + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick loop: people + help
+ANALYZER :::: trick loop: . + help
+ANALYZER :::: not equal tokens: people + help
+ANALYZER :::: finished path check, BREAK!: people
+ANALYZER :::: grade: 80
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: passed checkRelationToParent V people + people
+ANALYZER :::: equal tokens: people + people
+ANALYZER :::: there are fathers: choose + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: volunteer + want
+ANALYZER :::: trick try: volunteer + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: trick try: help + want
+ANALYZER :::: trick loop: people + want
+ANALYZER :::: trick try: people + want
+ANALYZER :::: trick loop: . + want
+ANALYZER :::: not equal tokens: people + want
+ANALYZER :::: checking choose people
+ANALYZER :::: trick loop: to + people
+ANALYZER :::: trick loop: volunteer + people
+ANALYZER :::: trick try: volunteer + people
+ANALYZER :::: trick loop: to + people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: trick try: help + people
+ANALYZER :::: trick loop: people + people
+ANALYZER :::: trick try: people + people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: people + people
+ANALYZER :::: checking to people
+ANALYZER :::: trick loop: volunteer + people
+ANALYZER :::: trick loop: to + people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: trick loop: people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: to + people
+ANALYZER :::: checking volunteer people
+ANALYZER :::: trick loop: to + people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: trick try: help + people
+ANALYZER :::: trick loop: people + people
+ANALYZER :::: trick try: people + people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: people + people
+ANALYZER :::: checking to people
+ANALYZER :::: trick loop: help + people
+ANALYZER :::: trick loop: people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: to + people
+ANALYZER :::: checking help people
+ANALYZER :::: trick loop: people + people
+ANALYZER :::: trick try: people + people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: people + people
+ANALYZER :::: checking people people
+ANALYZER :::: passed checkTokens V people + people
+ANALYZER :::: passed checkParts V people + people
+ANALYZER :::: trick loop: . + people
+ANALYZER :::: not equal tokens: people + people
+ANALYZER :::: finished path check, BREAK!: people
+ANALYZER :::: grade: 80
+### SYNTAX ANALYZER RESULT:
+### student: Answer: people want to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+### grade: 100
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ they want to help $$ google api
+ANALYZER :::: Teacher parts: they
+ANALYZER :::: Teacher parts: PRON
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+GETGRADE :::: TEACHER :Answer: they want to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+GETGRADE :::: STUDENT :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 4, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people they
+ANALYZER :::: special case1 V people + they
+ANALYZER :::: equal tokens: people + they
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people they
+ANALYZER :::: grade: 1
+ANALYZER :::: checking want they
+ANALYZER :::: checking want want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want want
+ANALYZER :::: grade: 2
+ANALYZER :::: checking to they
+ANALYZER :::: checking to want
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: to to
+ANALYZER :::: grade: 3
+ANALYZER :::: checking help they
+ANALYZER :::: checking help want
+ANALYZER :::: checking help to
+ANALYZER :::: checking help help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: help help
+ANALYZER :::: grade: 4
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people they
+ANALYZER :::: special case1 V people + they
+ANALYZER :::: equal tokens: people + they
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people they
+ANALYZER :::: grade: 1
+ANALYZER :::: checking people want
+ANALYZER :::: trick loop: want + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: not equal tokens: people + want
+ANALYZER :::: checking want want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want want
+ANALYZER :::: grade: 2
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: want + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking want to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick try: help + to
+ANALYZER :::: not equal tokens: help + to
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: to to
+ANALYZER :::: grade: 3
+ANALYZER :::: checking people help
+ANALYZER :::: trick loop: want + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: not equal tokens: people + help
+ANALYZER :::: checking want help
+ANALYZER :::: spelling fixed: help >> want
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ they want to want $$ google api
+ANALYZER :::: Teacher parts: they
+ANALYZER :::: Teacher parts: PRON
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+----starting new check-----
+GETGRADE :::: TEACHER :Answer: they want to want, Wrriten by: COMPUTER, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: 5973621786c778227cdf1357
+GETGRADE :::: STUDENT :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 4, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people they
+ANALYZER :::: special case1 V people + they
+ANALYZER :::: equal tokens: people + they
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people they
+ANALYZER :::: grade: 1
+ANALYZER :::: checking want they
+ANALYZER :::: checking want want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want want
+ANALYZER :::: grade: 2
+ANALYZER :::: checking to they
+ANALYZER :::: checking to want
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + want
+ANALYZER :::: not equal tokens: help + want
+ANALYZER :::: checking to want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: not equal tokens: to + want
+ANALYZER :::: finished path check, BREAK!: to
+ANALYZER :::: grade: 0
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people they
+ANALYZER :::: special case1 V people + they
+ANALYZER :::: equal tokens: people + they
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people they
+ANALYZER :::: grade: 1
+ANALYZER :::: checking people want
+ANALYZER :::: trick loop: want + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: not equal tokens: people + want
+ANALYZER :::: checking want want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want want
+ANALYZER :::: grade: 2
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: want + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking want to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick try: help + to
+ANALYZER :::: not equal tokens: help + to
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: help + want
+ANALYZER :::: not equal tokens: help + want
+ANALYZER :::: checking help to
+ANALYZER :::: not equal tokens: help + to
+ANALYZER :::: finished path check, BREAK!: to
+ANALYZER :::: grade: 0
+----finished new check-----
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: want + want
+ANALYZER :::: passed checkTokens V want + want
+ANALYZER :::: passed checkParts V want + want
+ANALYZER :::: passed checkRelationToParent V want + want
+ANALYZER :::: equal tokens: want + want
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: want help
+ANALYZER :::: grade: 4
+GETGRADE :::: TEACHER :Answer: they want to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+GETGRADE :::: STUDENT :Answer: people choose to volunteer to help people., Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 7, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people they
+ANALYZER :::: special case1 V people + they
+ANALYZER :::: equal tokens: people + they
+ANALYZER :::: there are fathers: choose + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: volunteer + want
+ANALYZER :::: trick try: volunteer + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: trick try: help + want
+ANALYZER :::: spelling fixed: want >> help
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ they help to help $$ google api
+ANALYZER :::: Teacher parts: they
+ANALYZER :::: Teacher parts: PRON
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+----starting new check-----
+GETGRADE :::: TEACHER :Answer: they help to help, Wrriten by: COMPUTER, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: 5973621886c778227cdf1358
+GETGRADE :::: STUDENT :Answer: people choose to volunteer to help people., Wrriten by: TEACHER, Grade: 100, Verified by Teacher: true, Significant Words: 7, Machine Learnable: true, aid: null
+ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people they
+ANALYZER :::: special case1 V people + they
+ANALYZER :::: equal tokens: people + they
+ANALYZER :::: there are fathers: choose + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick try: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people they
+ANALYZER :::: grade: 1
+ANALYZER :::: checking choose they
+ANALYZER :::: checking choose help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick try: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: choose help
+ANALYZER :::: grade: 2
+ANALYZER :::: checking to they
+ANALYZER :::: checking to help
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: to to
+ANALYZER :::: grade: 3
+ANALYZER :::: checking volunteer they
+ANALYZER :::: checking volunteer help
+ANALYZER :::: checking volunteer to
+ANALYZER :::: checking volunteer help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: volunteer help
+ANALYZER :::: grade: 4
+ANALYZER :::: checking to they
+ANALYZER :::: checking to help
+ANALYZER :::: checking to to
+ANALYZER :::: checking to help
+ANALYZER :::: finished path check, BREAK!: to
+ANALYZER :::: grade: 0
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people they
+ANALYZER :::: special case1 V people + they
+ANALYZER :::: equal tokens: people + they
+ANALYZER :::: there are fathers: choose + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick try: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: people they
+ANALYZER :::: grade: 1
+ANALYZER :::: checking people help
+ANALYZER :::: trick loop: choose + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick loop: people + help
+ANALYZER :::: trick loop: . + help
+ANALYZER :::: not equal tokens: people + help
+ANALYZER :::: checking choose help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick try: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: choose help
+ANALYZER :::: grade: 2
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: choose + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: volunteer + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick loop: people + to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking choose to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: volunteer + to
+ANALYZER :::: trick try: volunteer + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick try: help + to
+ANALYZER :::: trick loop: people + to
+ANALYZER :::: trick try: people + to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking to to
+ANALYZER :::: passed checkTokens V to + to
+ANALYZER :::: passed checkParts V to + to
+ANALYZER :::: passed checkRelationToParent V to + to
+ANALYZER :::: equal tokens: to + to
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: to to
+ANALYZER :::: grade: 3
+ANALYZER :::: checking people help
+ANALYZER :::: trick loop: choose + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick loop: people + help
+ANALYZER :::: trick loop: . + help
+ANALYZER :::: not equal tokens: people + help
+ANALYZER :::: checking choose help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick try: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: there are fathers: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick try: help + help
+ANALYZER :::: passed checkTokens V help + help
+ANALYZER :::: passed checkParts V help + help
+ANALYZER :::: passed checkRelationToParent V help + help
+ANALYZER :::: equal tokens: help + help
+ANALYZER :::: no father... bye
+ANALYZER :::: finished path check, equal: choose help
+ANALYZER :::: grade: 4
+----finished new check-----
+ANALYZER :::: trick loop: people + want
+ANALYZER :::: trick try: people + want
+ANALYZER :::: trick loop: . + want
+ANALYZER :::: not equal tokens: people + want
+ANALYZER :::: checking people want
+ANALYZER :::: trick loop: choose + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: volunteer + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: trick loop: people + want
+ANALYZER :::: trick loop: . + want
+ANALYZER :::: not equal tokens: people + want
+ANALYZER :::: checking people to
+ANALYZER :::: trick loop: choose + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: volunteer + to
+ANALYZER :::: trick loop: to + to
+ANALYZER :::: trick loop: help + to
+ANALYZER :::: trick loop: people + to
+ANALYZER :::: trick loop: . + to
+ANALYZER :::: not equal tokens: people + to
+ANALYZER :::: checking people help
+ANALYZER :::: trick loop: choose + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: volunteer + help
+ANALYZER :::: trick loop: to + help
+ANALYZER :::: trick loop: help + help
+ANALYZER :::: trick loop: people + help
+ANALYZER :::: trick loop: . + help
+ANALYZER :::: not equal tokens: people + help
+ANALYZER :::: finished path check, BREAK!: people
+ANALYZER :::: grade: 80
+ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!
+ANALYZER :::: checking people they
+ANALYZER :::: special case1 V people + they
+ANALYZER :::: equal tokens: people + they
+ANALYZER :::: there are fathers: choose + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: volunteer + want
+ANALYZER :::: trick try: volunteer + want
+ANALYZER :::: trick loop: to + want
+ANALYZER :::: trick loop: help + want
+ANALYZER :::: trick try: help + want
+ANALYZER :::: trick loop: people + want
+ANALYZER :::: trick try: people + want
+ANALYZER :::: trick loop: . + want
+ANALYZER :::: not equal tokens: people + want
+ANALYZER :::: checking choose they
+ANALYZER :::: trick loop: to + they
+ANALYZER :::: trick loop: volunteer + they
+ANALYZER :::: trick try: volunteer + they
+ANALYZER :::: trick loop: to + they
+ANALYZER :::: trick loop: help + they
+ANALYZER :::: trick try: help + they
+ANALYZER :::: trick loop: people + they
+ANALYZER :::: trick try: people + they
+ANALYZER :::: trick loop: . + they
+ANALYZER :::: not equal tokens: people + they
+ANALYZER :::: checking to they
+ANALYZER :::: trick loop: volunteer + they
+ANALYZER :::: trick loop: to + they
+ANALYZER :::: trick loop: help + they
+ANALYZER :::: trick loop: people + they
+ANALYZER :::: trick loop: . + they
+ANALYZER :::: not equal tokens: to + they
+ANALYZER :::: checking volunteer they
+ANALYZER :::: trick loop: to + they
+ANALYZER :::: trick loop: help + they
+ANALYZER :::: trick try: help + they
+ANALYZER :::: trick loop: people + they
+ANALYZER :::: trick try: people + they
+ANALYZER :::: trick loop: . + they
+ANALYZER :::: not equal tokens: people + they
+ANALYZER :::: checking to they
+ANALYZER :::: trick loop: help + they
+ANALYZER :::: trick loop: people + they
+ANALYZER :::: trick loop: . + they
+ANALYZER :::: not equal tokens: to + they
+ANALYZER :::: checking help they
+ANALYZER :::: trick loop: people + they
+ANALYZER :::: trick try: people + they
+ANALYZER :::: trick loop: . + they
+ANALYZER :::: not equal tokens: people + they
+ANALYZER :::: checking people they
+ANALYZER :::: trick loop: . + they
+ANALYZER :::: not equal tokens: people + they
+ANALYZER :::: finished path check, BREAK!: they
+ANALYZER :::: grade: 80
+### SYNTAX ANALYZER RESULT:
+### student: Answer: they want to help, Wrriten by: STUDENT, Grade: -1, Verified by Teacher: false, Significant Words: 4, Machine Learnable: false, aid: null
+### grade: 100
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because the people want to help $$ google api

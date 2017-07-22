@@ -9,10 +9,10 @@ import syntaxAnalyzer.AnswerAnalyzer;
 public class ConsoleTeacherProgram {
 	
 	public static void main(String[] args) {	
-//		test();
-		System.out.print("WELCOME TEACHER!");
-		ConsoleTeacherMain api = new ConsoleTeacherMain(new Teacher());
-		api.main();	
+		test();
+//		System.out.print("WELCOME TEACHER!");
+//		ConsoleTeacherMain api = new ConsoleTeacherMain(new Teacher());
+//		api.main();	
 	}	
 	
 	public static void test() {		

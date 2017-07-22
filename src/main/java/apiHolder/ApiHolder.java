@@ -21,6 +21,8 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.textrazor.AnalysisException;
+import com.textrazor.NetworkException;
 import com.textrazor.TextRazor;
 import com.textrazor.annotations.Entailment;
 	
@@ -53,7 +55,10 @@ public class ApiHolder {
 	public static HashMap<String, List<Entailment>> entailmentList = new HashMap<String, List<Entailment>>();
 	public static LanguageServiceClient langClient = null;
 	public static PrintStream logger = null;
-
+	public static TextRazor t;
+	public static int i =0;
+	public static TextRazor[] razor = new TextRazor[4];
+	
 	static {
 		try {
 			logger = new PrintStream(new FileOutputStream("log.txt"));
@@ -61,7 +66,15 @@ public class ApiHolder {
 			scanner = new Scanner(System.in);  
 			Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
 			mongoLogger.setLevel(Level.SEVERE);
-			
+			razor[0] = new TextRazor("9faf2230e35c366e74ea0f1d72cf167697e09ae6488645916d1693ef");//bacoola
+			razor[1] = new TextRazor("bbd736f436e10ef989bb0bd155f251756220de90b8d6498262ea2661");//ishay
+			razor[2] = new TextRazor("eb5d5e6284d0ed04a6b7beec96d2805a9bc0f4396cb3fe0c219e5374");//ishaydah
+			razor[3] = new TextRazor("03f996454010ffc4e2696dbc1656e7ff4e105c0e886ad4b4e8d31a89");//cs
+			razor[0].addExtractor("entailments");
+			razor[1].addExtractor("entailments");
+			razor[2].addExtractor("entailments");
+			razor[3].addExtractor("entailments");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -103,50 +116,33 @@ public class ApiHolder {
 		return lst;
 	}
 	
+	public static void switchrazor() {
+		t = razor[i%4];
+		i++;
+	}
 	/**
 	 * @param s a sentence
 	 * @return list of contextual meanings
 	 * we keep all Entailment in hashmap to save time
 	 */
 	public static List<Entailment> getEntailmentList(String s) {
+		
 		if (entailmentList.containsKey(s)) {
 			return entailmentList.get(s);
 		}
-		
 		List<Entailment> lst = new ArrayList<Entailment>();
+
 		try {
-			ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ razor api");
-			lst = new TextRazor("9faf2230e35c366e74ea0f1d72cf167697e09ae6488645916d1693ef")
-			.analyze(s).getResponse().getEntailments();
-			entailmentList.put(s, lst);
-			return lst;
-		}catch(Exception e1) {
+			lst = t.analyze(s).getResponse().getEntailments();
+		} catch (Exception e) {
+			switchrazor();
 			try {
-				ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ razor api");
-				lst = new TextRazor("eb5d5e6284d0ed04a6b7beec96d2805a9bc0f4396cb3fe0c219e5374")
-				.analyze(s).getResponse().getEntailments();
-				entailmentList.put(s, lst);
-				return lst;
-			}catch(Exception e2) {
-				try {
-					ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ razor api");
-					lst = new TextRazor("03f996454010ffc4e2696dbc1656e7ff4e105c0e886ad4b4e8d31a89")
-					.analyze(s).getResponse().getEntailments();
-					entailmentList.put(s, lst);
-					return lst;
-				}catch(Exception e3) {
-					try {
-						ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ razor api");
-						lst = new TextRazor("bbd736f436e10ef989bb0bd155f251756220de90b8d6498262ea2661")
-						.analyze(s).getResponse().getEntailments();
-						entailmentList.put(s, lst);
-						return lst;
-					}catch(Exception e4) {
-						
-					}
-				}
+				lst = t.analyze(s).getResponse().getEntailments();
+			} catch (NetworkException | AnalysisException e1) {
+
 			}
 		}
+		entailmentList.put(s, lst);
 		return lst;
 	}
 
