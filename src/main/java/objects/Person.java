@@ -1,8 +1,6 @@
 package objects;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import com.mongodb.client.FindIterable;
@@ -19,17 +17,27 @@ import apiHolder.ApiHolder;
 public class Person {
 	
 	// test name -> test Id
-	private HashMap<String, String> tests = new HashMap<String, String>();
-
-	public Person() {
-		//when building we need to create list of tests.
-		//will be downloaded from database.
-		FindIterable<Document> list = ApiHolder.getCollection().find();
-		for(Document doc : list) {
-			this.tests.put(doc.getString("content"), doc.getObjectId("_id").toString());
+	private ArrayList<Test> tests = new ArrayList<Test>();
+	
+	public Person load() {
+		tests = new ArrayList<Test>();
+		
+		FindIterable<Document> docTests = ApiHolder.getCollection().find();
+		
+		for(Document d : docTests) {
+			this.tests.add(new Test(d.getObjectId("_id"), d.getString("content")));
 		}
+		return this;
 	}
 	
+	public Person save() {		
+		tests.forEach((t)->{
+			ApiHolder.getCollection().updateOne(new Document().append("_id", t.getTid()),
+					new Document("$set", new Document().append("content", new Document("content", t.getContent()))));	
+		});
+		return this;
+	}
+
 	/**
 	 * @param t - the Test string
 	 * @return Test object
@@ -37,52 +45,42 @@ public class Person {
 	 * will return null if the database contains same Test string.
 	 */
 	public Test createTest(String t) {        
-        Test toAdd = new Test(new ObjectId(), t, new ArrayList<Document>());
-        if (tests.containsKey(t)) {
+        Test toAdd = new Test(new ObjectId(), t);
+        if (tests.contains(toAdd)) {
         	System.err.println("Already has that test!");
         	return null;
         }else {
-        	tests.put(t, toAdd.getTid().toString());
+        	tests.add(toAdd);
     		ApiHolder.getCollection().insertOne(testToDoc(toAdd));
     		return toAdd;
     	}
 	}
-			
+		
+	/**
+	 * @param id - test id
+	 * removes all test data!
+	 * @return 
+	 */
+	public void removeTest(Test toRemove) {
+		tests.remove(toRemove);
+		ApiHolder.getCollection().deleteOne(new Document("_id", toRemove.getTid()));
+	}	
+
 	/**
 	 * @param id - can get it from {@link Test} getTid
 	 * @return test
 	 * creates test object. can take a while... will download all test data from DB.
 	 * will return null if there is no such test.
 	 */
-	@SuppressWarnings("unchecked")
 	public Test getTest(String id) {
-		FindIterable<Document> list = ApiHolder.getCollection().find();
-		for(Document doc : list) {
-			if (id.equals(doc.getObjectId("_id").toString())) {
-				return new Test(doc.getObjectId("_id"), doc.getString("content"), (ArrayList<Document>) doc.get("questions"));
+		for(Test t : tests) {
+			if (id.equals(t.getTid().toString())) {
+				return t;
 			}
 		}
 		return null;
 	}	
 	
-	/**
-	 * @param id - test id
-	 * removes all test data!
-	 */
-	public void removeTest(String id) {
-		try {
-			ApiHolder.getCollection().deleteOne(new Document("_id", new ObjectId(id)));
-			String[] kk = {""};
-			tests.forEach((k,v)->{
-				if(id.equals(v)) {
-					kk[0]=k;
-				}
-			});
-			tests.remove(kk[0]);
-		}catch(Exception e) {
-			System.err.println("there is no such test!");
-		}
-	}	
 	
 	/**
 	 * @param a
@@ -93,7 +91,7 @@ public class Person {
 		return new Document().append("_id", a.getTid()).append("content", a.getContent()).append("questions", a.getQuestions());
 	}
 
-	public HashMap<String, String> getTests() {
+	public ArrayList<Test> getTests() {
 		return tests;
 	}
 

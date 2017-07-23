@@ -22,19 +22,30 @@ public class Question {
 	private ObjectId tid;//test id
 	private ObjectId qid;//question id
 	private ArrayList<Answer> answers = new ArrayList<Answer>();//list of all answers
-	private int minsyntaxable;//determine by the smallest amount of significant words of TEACHER's sentences
 	
-	public Question(ObjectId tid, ObjectId qid, String content, ArrayList<Document> answers) {
+	public Question(ObjectId tid, ObjectId qid, String content) {
 		this.content=content;
 		this.tid=tid;
 		this.qid=qid; 
-		//building the answers from the list got from server
-		for(Document d : answers) {
+	}
+		
+	@SuppressWarnings("unchecked")
+	public Question load() {
+		answers = new ArrayList<Answer>();
+		
+		ArrayList<Document> docAnswers = (ArrayList<Document>) ApiHolder.getCollection().find(new Document().append("_id", tid).append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))))
+		.first().get("questions");
+		docAnswers = (ArrayList<Document>) docAnswers.get(0).get("answers");
+
+		for(Document d : docAnswers) {
 			this.answers.add(new Answer(d.getObjectId("_id"), d.getString("content"), 
 					Writer.valueOf((d.getString("writer"))), d.getInteger("grade"), d.getInteger("answerWords"), 
 					d.getBoolean("verified"), d.getBoolean("syntaxable")));
-		}	
+		}
+		
+		return this;
 	}
+	
 	
 	/**
 	 * @param teacher_ans - some string
@@ -44,7 +55,7 @@ public class Question {
 	 * if answers already contains this answer will return null
 	 */
 	public Answer createAns(String teacher_ans, int grade) {        
-        Answer toAdd = new Answer(new ObjectId(), teacher_ans, Writer.TEACHER, grade, new Integer(-1), true, true);
+        Answer toAdd = ApiHolder.factory.createAnswer(teacher_ans, grade, Writer.TEACHER);
         if (answers.contains(toAdd)) {
         	System.out.println("Already has that answer!" + toAdd.getContent());
         	return null;
@@ -63,7 +74,7 @@ public class Question {
 	 * wont check containing answer since each student may write same answer content
 	 */
 	public Answer addStudentAns(String student_ans){
-        Answer toAdd = new Answer(new ObjectId(), student_ans, Writer.STUDENT, new Integer(-1), new Integer(-1), false, false);
+        Answer toAdd = ApiHolder.factory.createAnswer(student_ans, -1, Writer.STUDENT);
 		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
 				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 				new Document("$push", new Document().append("questions.$.answers", answerToDoc(toAdd))));	
@@ -83,10 +94,9 @@ public class Question {
 		.collect(Collectors.toList()).forEach((x)->{
 	    	x.setGrade(grade);
 	    	x.setVerified(true);
-
-			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-					new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));
+			ApiHolder.getCollection().updateOne(new Document()
+					.append("questions.answers._id", toFix.get_id()),
+					new Document("$set", new Document().append("questions.0.answers.$", answerToDoc(x))));
 		});
 		return true;
 	}
@@ -116,14 +126,14 @@ public class Question {
 
 		
 		//determine min value for syntaxable
-		minsyntaxable = Integer.MAX_VALUE;
-		getTeacherAnswers().forEach((ans)->{
+		int minsyntaxable = Integer.MAX_VALUE;
+		for (Answer ans : getTeacherAnswers()) {
 			if (ans.getWriter().equals(Writer.TEACHER))  minsyntaxable = Math.min(minsyntaxable, ans.getAnswerWords());
-		});
+		}
 		
 		//check
 		for (Answer student_ans: toCheck) {
-			//first build the answer (google api)
+			//first build the answer
 			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans.build());
 			
 			int grade;
@@ -147,10 +157,6 @@ public class Question {
 			//log to file
 			logger.println(student_ans.toString());
 			System.out.println(student_ans);
-			
-			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-					new Document("$set", new Document().append("questions.$.answers."+answerToInt(student_ans), answerToDoc(student_ans))));	
 		}
 	}
 	
@@ -161,10 +167,9 @@ public class Question {
 		answers.stream().filter(x->x.get_id().equals(ans.get_id()))
 		.collect(Collectors.toList()).forEach((x)->{
 	    	x.setVerified(true);
-
-			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-					new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));
+			ApiHolder.getCollection().updateOne(new Document()
+					.append("questions.answers._id", x.get_id()),
+					new Document("$set", new Document().append("questions.0.answers.$", answerToDoc(x))));
 		});
 		return true;
 	}
@@ -176,10 +181,9 @@ public class Question {
 	public boolean approveAll() {
 		answers.forEach((x)->{
 	    	x.setVerified(true);
-
-			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-					new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));
+			ApiHolder.getCollection().updateOne(new Document()
+					.append("questions.answers._id", x.get_id()),
+					new Document("$set", new Document().append("questions.0.answers.$", answerToDoc(x))));
 		});
 		return true;
 	}
@@ -188,7 +192,8 @@ public class Question {
 	 * @param toRemove some answer that you can get from getAnswer
 	 */
 	public void removeAnswer(Answer toRemove) {
-		ApiHolder.getCollection().updateOne(new Document().append("_id", tid).append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
+		ApiHolder.getCollection().updateOne(new Document()
+				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 				new Document("$pull", new Document().append("questions.$.answers", answerToDoc(toRemove))));	
 		answers.remove(toRemove);
 		System.out.println("you may need to recheck test..");
@@ -245,18 +250,7 @@ public class Question {
 	private Document answerToDoc(Answer a) {
 		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter().name()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("syntaxable", a.getsyntaxable());
 	}
-	
-	private int answerToInt(Answer ans) {
-		int i=0;
-		for(Answer a : answers) {
-			if (ans.get_id().equals(a.get_id())) {
-				return i;
-			}
-			i++;
-		}
-		return -1;
-	}
-	
+		
 	public boolean equals (Object other) {
 		if (other instanceof Question) {
 			Question o = (Question) other;
@@ -272,7 +266,7 @@ public class Question {
 
 		return s;
 	}
-
+	
 	public ObjectId getQid() {
 		return qid;
 	}

@@ -36,7 +36,7 @@ public class Answer {
 	//Enemas for insignificant parts of sentence
 	private Tag[] del = {Tag.PUNCT, Tag.UNKNOWN, Tag.ADP, Tag.X, Tag.AFFIX, Tag.DET};
 
-	protected Answer(ObjectId _id, String content, Writer writer, Integer grade, Integer answerWords,Boolean verified, Boolean syntaxable) {
+	public Answer(ObjectId _id, String content, Writer writer, Integer grade, Integer answerWords,Boolean verified, Boolean syntaxable) {
 		this._id=_id;
 		this.content=content.toLowerCase();
 		this.writer=writer;

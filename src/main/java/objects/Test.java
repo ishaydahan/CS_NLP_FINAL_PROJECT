@@ -16,14 +16,37 @@ public class Test {
 	private ObjectId tid;//test id
 	private ArrayList<Question> questions = new ArrayList<Question>();
 	
-	@SuppressWarnings("unchecked")
-	public Test(ObjectId tid, String content, ArrayList<Document> questions) {
+	public Test(ObjectId tid, String content) {
 		this.tid=tid;
 		this.content=content;
-		//in the building process we need to transform DB data to objects
-		for(Document doc : questions) {
-			this.questions.add(new Question(tid, doc.getObjectId("_id"), doc.getString("content"),  (ArrayList<Document>) doc.get("answers")));
-		}	
+	}
+	
+	/**
+	 * @return
+	 */
+	public Test load() {
+		questions = new ArrayList<Question>();
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<Document> docQuestions = (ArrayList<Document>) ApiHolder.getCollection().find(new Document().append("_id", tid))
+			.first().get("questions");
+		
+		for(Document d : docQuestions) {
+			this.questions.add(new Question(tid, d.getObjectId("_id"), d.getString("content")));
+		}		
+		return this;
+	}
+	
+	/**
+	 * @return
+	 */
+	public Test save() {		
+		questions.forEach((q)->{
+			ApiHolder.getCollection().updateOne(new Document().append("_id", tid),
+					new Document("$set", new Document().append("content", content)));	
+		});
+		
+		return this;
 	}
 	
 	/**
@@ -33,7 +56,7 @@ public class Test {
 	 * will return null if the database contains same question string.
 	 */
 	public Question createQuestion(String q) {
-        Question toAdd = new Question(tid, new ObjectId(), q, new ArrayList<Document>());
+        Question toAdd = new Question(tid, new ObjectId(), q);
         if (questions.contains(toAdd)) {
         	System.err.println("Already has that question!");
         	return null;
@@ -45,6 +68,11 @@ public class Test {
         }
 	}
 	
+	public void removeQuestion(Question toRemove) {
+		questions.remove(toRemove);
+		ApiHolder.getCollection().deleteOne(new Document("_id", toRemove.getQid()));
+	}	
+
 	public ArrayList<Question> getQuestions() {
         return questions;
 	}
@@ -58,10 +86,6 @@ public class Test {
 		});
 	}
 	
-	public void removeQuestion(Question toRemove) {
-		questions.remove(toRemove);
-		ApiHolder.getCollection().deleteOne(new Document("_id", toRemove.getQid()));
-	}	
 	
 	/**
 	 * @param id - can get it from {@link Question} getQId

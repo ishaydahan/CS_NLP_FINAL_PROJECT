@@ -22,6 +22,7 @@ public class ConsoleStudentTest {
 
 			option = ApiHolder.scanner.nextLine();
 			if (option.equals("0")) {
+				t.save();
 				System.out.println(">> Returning Teacher Screen");
 				return;
 			}else if(option.equals("2")) {
@@ -51,7 +52,7 @@ public class ConsoleStudentTest {
         
         Question q = t.getQuestion(id);
         if (q==null) return;
-        ConsoleStudentQuestion qapi = new ConsoleStudentQuestion(q);
+        ConsoleStudentQuestion qapi = new ConsoleStudentQuestion(q.load());
     	qapi.main();
 	}
 }

@@ -24,6 +24,8 @@ import com.textrazor.AnalysisException;
 import com.textrazor.NetworkException;
 import com.textrazor.TextRazor;
 import com.textrazor.annotations.Entailment;
+
+import objects.Factory;
 	
 /**
  * @author ishay
@@ -63,6 +65,8 @@ public class ApiHolder {
 	public static TextRazor t;
 	public static int i =0;
 	public static TextRazor[] razor = new TextRazor[4];
+	
+	public static Factory factory = new Factory();
 	
 	static {
 		try {

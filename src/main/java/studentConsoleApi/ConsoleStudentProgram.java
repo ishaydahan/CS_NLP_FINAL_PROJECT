@@ -6,7 +6,7 @@ public class ConsoleStudentProgram {
 	
 	public static void main(String[] args) {	
 		System.out.print("WELCOME STUDENT!");
-		ConsoleStudentMain api = new ConsoleStudentMain(new Person());
+		ConsoleStudentMain api = new ConsoleStudentMain(new Person().load());
 		api.main();		
 	}	
 }

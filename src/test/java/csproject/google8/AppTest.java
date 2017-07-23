@@ -1,12 +1,8 @@
 package csproject.google8;
 
-import java.util.ArrayList;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import objects.Answer;
-import syntaxAnalyzer.AnswerAnalyzer;
 /**
  * Unit test for simple App.
  */
