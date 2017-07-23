@@ -17,7 +17,9 @@ import org.languagetool.rules.RuleMatch;
 
 import com.google.cloud.language.v1.LanguageServiceClient;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import com.textrazor.AnalysisException;
 import com.textrazor.NetworkException;
 import com.textrazor.TextRazor;
@@ -44,10 +46,10 @@ public class ApiHolder {
 	public static int MAXGRADE = 100;//max points per answer
 	public static int MINGRADE = 0;//min points per answer
 
-	public static MongoPing mongo = null;
-	public static MongoCollection<Document> collection = null;
+	public static MongoCollection<Document> collection;
+	public static MongoClient client;
 	
-	public static Scanner scanner = null;     
+	public static Scanner scanner = new Scanner(System.in);     
 	
 	public static HashMap<String, List<String>> spellingList = new HashMap<String, List<String>>();
 	public static JLanguageTool lang = new JLanguageTool(new BritishEnglish());
@@ -66,16 +68,11 @@ public class ApiHolder {
 		try {
 			Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
 			mongoLogger.setLevel(Level.SEVERE);
-			
-			mongo = new MongoPing();
-			collection = mongo.collection;
-			
-			logger = new PrintStream(new FileOutputStream("log.txt"));
+						
+			logger = new PrintStream(new FileOutputStream("analyze_log.txt"));
 			
 			langClient = LanguageServiceClient.create();
-			
-			scanner = new Scanner(System.in);  
-			
+						
 			razor[0] = new TextRazor("9faf2230e35c366e74ea0f1d72cf167697e09ae6488645916d1693ef");//bacoola
 			razor[1] = new TextRazor("bbd736f436e10ef989bb0bd155f251756220de90b8d6498262ea2661");//ishay
 			razor[2] = new TextRazor("eb5d5e6284d0ed04a6b7beec96d2805a9bc0f4396cb3fe0c219e5374");//ishaydah
@@ -151,7 +148,21 @@ public class ApiHolder {
 	 * this function is activated once in a while... please check.
 	 */
 	public static MongoCollection<Document> getCollection() {
-		return collection;
+		try {
+			collection.count();
+			return collection;
+		}catch(Exception e) {
+			System.out.println("\nconnecting to database...");
+
+	        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
+	        client = new MongoClient(uri);
+	        MongoDatabase db = client.getDatabase(uri.getDatabase());
+	        collection = db.getCollection("tests"); 
+	        return collection;
+		} finally {
+//			client.close();
+//			scanner.close();
+		}
 	}
 
 	

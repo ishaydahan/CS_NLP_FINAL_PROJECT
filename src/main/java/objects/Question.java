@@ -4,12 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-
 import apiHolder.ApiHolder;
 import syntaxAnalyzer.AnswerAnalyzer;
 
@@ -24,7 +22,7 @@ public class Question {
 	private ObjectId tid;//test id
 	private ObjectId qid;//question id
 	private ArrayList<Answer> answers = new ArrayList<Answer>();//list of all answers
-	private int minLearnable = Integer.MAX_VALUE;
+	private int minsyntaxable;//determine by the smallest amount of significant words of TEACHER's sentences
 	
 	public Question(ObjectId tid, ObjectId qid, String content, ArrayList<Document> answers) {
 		this.content=content;
@@ -32,8 +30,9 @@ public class Question {
 		this.qid=qid; 
 		//building the answers from the list got from server
 		for(Document d : answers) {
-			this.answers.add(new Answer(d.getObjectId("_id"), d.getString("content"), Writer.valueOf((d.getString("writer"))), d.getInteger("grade"), d.getInteger("answerWords"), d.getBoolean("verified"), d.getBoolean("learnable")));
-			if (d.getString("writer").equals(Writer.TEACHER.name()))  minLearnable = Math.min(minLearnable, d.getInteger("answerWords"));
+			this.answers.add(new Answer(d.getObjectId("_id"), d.getString("content"), 
+					Writer.valueOf((d.getString("writer"))), d.getInteger("grade"), d.getInteger("answerWords"), 
+					d.getBoolean("verified"), d.getBoolean("syntaxable")));
 		}	
 	}
 	
@@ -47,13 +46,12 @@ public class Question {
 	public Answer createAns(String teacher_ans, int grade) {        
         Answer toAdd = new Answer(new ObjectId(), teacher_ans, Writer.TEACHER, grade, new Integer(-1), true, true);
         if (answers.contains(toAdd)) {
-        	System.err.println("Already has that answer!");
+        	System.out.println("Already has that answer!" + toAdd.getContent());
         	return null;
         }else {
     		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
     				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
     				new Document("$push", new Document().append("questions.$.answers", answerToDoc(toAdd))));	
-    		System.out.println("you may need to recheck test..");
             answers.add(toAdd);
     		return toAdd;
         }
@@ -78,89 +76,112 @@ public class Question {
 	 * @param toFix
 	 * @return
 	 * will return false if there is verified ans with different grade.
-	 * will change verified = true, learnable = true;
+	 * will change verified = true, syntaxable = true;
 	 */
 	public boolean fixAns(int grade, Answer toFix){	
-    	if (!toFix.getVerified()) {
-            Answer toAdd = new Answer(new ObjectId(), toFix.getContent(), toFix.getWriter(), grade, new Integer(-1), true, toFix.getLearnable());
-            if (answers.contains(toAdd)) {
-            	System.err.println("there is verified ans with same content. fix it first! - " + toFix.getContent());
-            	return false;
-            }
-    	}
-    	toFix.setGrade(grade);
-    	toFix.setVerified(true);
-    	if(toFix.getAnswerWords()>=minLearnable) toFix.setLearnable(true);
-	
-		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-				new Document("$set", new Document().append("questions.$.answers."+answerToInt(toFix), answerToDoc(toFix))));
-		
-		//do it to all similar answers.
-		answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT) && x.getContent().equals(toFix.getContent()))
+		answers.stream().filter(x -> x.getContent().equals(toFix.getContent()))
 		.collect(Collectors.toList()).forEach((x)->{
 	    	x.setGrade(grade);
 	    	x.setVerified(true);
-	    	if(x.getAnswerWords()>=minLearnable) x.setLearnable(true);
-		
+
 			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
 					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 					new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));
 		});
-
-		System.out.println("you may need to recheck test..");
 		return true;
 	}
 		
 	/**
 	 * @param toCheck - list of answers to check(all student ans.. only ungraded..)
-	 * @param verified - list of verified answers, mostly teacher ans / learnable ans
+	 * @param verified - list of verified answers, mostly teacher ans / syntaxable ans
 	 * this 
 	 */
-	public void checkQuestion(List<Answer> toCheck, List<Answer> verified) {		
+	public void checkQuestion(List<Answer> toCheck, List<Answer> verified, List<Answer> syntaxable) {		
+		//create log file
 		PrintStream logger = null;
 		try {
-			logger = new PrintStream(new FileOutputStream(content + " Grades"));
+			logger = new PrintStream(new FileOutputStream("question output"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		//sort the list first from high to low to get the maximum grade in min time
 		verified.sort((x,y) -> y.getGrade()-x.getGrade());
-		
 		//build each verified question.
 		verified.forEach((ans)->ans.build());	
+		//sort the list first from high to low to get the maximum grade in min time
+		syntaxable.sort((x,y) -> y.getGrade()-x.getGrade());
+		//build each verified question.
+		syntaxable.forEach((ans)->ans.build());	
+
 		
+		//determine min value for syntaxable
+		minsyntaxable = Integer.MAX_VALUE;
+		getTeacherAnswers().forEach((ans)->{
+			if (ans.getWriter().equals(Writer.TEACHER))  minsyntaxable = Math.min(minsyntaxable, ans.getAnswerWords());
+		});
+		
+		//check
 		for (Answer student_ans: toCheck) {
 			//first build the answer (google api)
-			Integer grade = new AnswerAnalyzer(student_ans.build(), verified).analyze();
-			if (grade==-2) continue; //error
-			if (grade>-1) {
-				logger.println(student_ans.toString());
-				System.out.println(student_ans);
-				ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-						.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-						new Document("$set", new Document().append("questions.$.answers."+answerToInt(student_ans), answerToDoc(student_ans))));	
+			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans.build());
+			
+			int grade;
+			if ((grade = analyzer.levenshteinAnalyze(verified))>-1) {
+				
+				student_ans.setGrade(grade);
+				
+			}else if ((grade = analyzer.SyntaxAnalyze(syntaxable))>-2) {//there is no -1 option in last check. must return grade.
+				
+				student_ans.setGrade(grade);
+
+			}else {
+				//error
+				return;
 			}
+			
+			//set syntaxable value
+	    	if(student_ans.getAnswerWords()>=minsyntaxable) student_ans.setsyntaxable(true);
+	    	else student_ans.setsyntaxable(false);
+	    	
+			//log to file
+			logger.println(student_ans.toString());
+			System.out.println(student_ans);
+			
+			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
+					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
+					new Document("$set", new Document().append("questions.$.answers."+answerToInt(student_ans), answerToDoc(student_ans))));	
 		}
 	}
 	
 	/**
+	 * @param ans
+	 */
+	public boolean approveOne(Answer ans) {
+		answers.stream().filter(x->x.get_id().equals(ans.get_id()))
+		.collect(Collectors.toList()).forEach((x)->{
+	    	x.setVerified(true);
+
+			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
+					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
+					new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));
+		});
+		return true;
+	}
+
+	/**
 	 * mark all student answers as true;
 	 * will use fix ans to all unique answers.
 	 */
-	public void approveAll() {
-		HashSet<String> differentStudentAns = new HashSet<String>();
-		getStudentAnswers().forEach((ans)->{
-			if (!differentStudentAns.contains(ans.getContent())) {
-				differentStudentAns.add(ans.getContent());
-				fixAns(ans.getGrade(), ans);
-			}
+	public boolean approveAll() {
+		answers.forEach((x)->{
+	    	x.setVerified(true);
+
+			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
+					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
+					new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));
 		});
-	}
-	
-	public void approveOne(Answer ans) {
-		fixAns(ans.getGrade(), ans);
+		return true;
 	}
 	
 	/**
@@ -173,6 +194,9 @@ public class Question {
 		System.out.println("you may need to recheck test..");
 	}	
 	
+	/**
+	 * 
+	 */
 	public void removeAll() {
 		ApiHolder.getCollection().updateOne(new Document().append("_id", tid).append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 				new Document("$set", new Document().append("questions.$.answers", new ArrayList<>())));	
@@ -192,11 +216,8 @@ public class Question {
 		System.err.println("there is no such answer!");
 		return null;
 	}
-	
-	public List<Answer> getVerifiedAnswers() {
-		return answers.stream().filter(x -> x.getVerified()==true).collect(Collectors.toList());
-	}
-	
+		
+	//answers that teacher wrote
 	public List<Answer> getTeacherAnswers() {
 		return answers.stream().filter(x -> x.getWriter().equals(Writer.TEACHER)).collect(Collectors.toList());
 	}
@@ -205,26 +226,30 @@ public class Question {
 		return answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT)).collect(Collectors.toList());
 	}
 
-	public List<Answer> getUnverifiedStudentAnswers() {
-		return answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT) && x.getVerified()==false).collect(Collectors.toList());
-	}
-
 	public List<Answer> getUngradedStudentAnswers() {
 		return answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT) && x.getGrade()==-1).collect(Collectors.toList());
 	}
 
-	public List<Answer> getLearnableAnswers() {
-		return answers.stream().filter(x -> x.getLearnable()).collect(Collectors.toList());
+	public List<Answer> getVerifiedAnswers() {
+		return answers.stream().filter(x -> x.getVerified()).collect(Collectors.toList());
 	}
 
+	public List<Answer> getVerifiedSyntaxableAnswers() {
+		return answers.stream().filter(x -> x.getVerified() && x.getsyntaxable()).collect(Collectors.toList());
+	}
+
+	public List<Answer> getSyntaxableAnswers() {
+		return answers.stream().filter(x -> x.getsyntaxable()).collect(Collectors.toList());
+	}
+	
 	private Document answerToDoc(Answer a) {
-		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter().name()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("learnable", a.getLearnable());
+		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter().name()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("syntaxable", a.getsyntaxable());
 	}
 	
 	private int answerToInt(Answer ans) {
 		int i=0;
 		for(Answer a : answers) {
-			if (ans.equals(a)) {
+			if (ans.get_id().equals(a.get_id())) {
 				return i;
 			}
 			i++;

@@ -16,12 +16,12 @@ import apiHolder.ApiHolder;
  * in this point teacher will access only test names.
  * test questions and answers will be loaded on building {@link Test} object
  */
-public class Teacher {
+public class Person {
 	
 	// test name -> test Id
 	private HashMap<String, String> tests = new HashMap<String, String>();
 
-	public Teacher() {
+	public Person() {
 		//when building we need to create list of tests.
 		//will be downloaded from database.
 		FindIterable<Document> list = ApiHolder.getCollection().find();

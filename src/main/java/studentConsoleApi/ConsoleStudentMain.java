@@ -1,14 +1,14 @@
 package studentConsoleApi;
 
 import apiHolder.ApiHolder;
-import objects.Teacher;
+import objects.Person;
 import objects.Test;
 
 public class ConsoleStudentMain {
 		
-	private Teacher t = null;
+	private Person t = null;
 
-	protected ConsoleStudentMain(Teacher t) {
+	protected ConsoleStudentMain(Person t) {
 		this.t=t;
 	}
 

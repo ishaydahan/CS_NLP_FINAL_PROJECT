@@ -1,0 +1,9 @@
+### LEVENSHTEIN SUCSESS!
+### teacher: Answer: thats because the people want to help people, Wrriten by: STUDENT, Grade: 100, Significant Words: 6, Teacher verified: true, syntaxable: true, aid: 59746d1486c7780c6c5642c6
+### student: Answer: thats because the people want to help people, Wrriten by: STUDENT, Grade: 100, Significant Words: 6, Teacher verified: true, syntaxable: true, aid: 59746d1486c7780c6c5642c6
+### LEVENSHTEIN SUCSESS!
+### teacher: Answer: because people want to help, Wrriten by: STUDENT, Grade: 98, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: 59746d0586c7780c6c5642c5
+### student: Answer: because people want to help, Wrriten by: STUDENT, Grade: 98, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: 59746d0586c7780c6c5642c5
+### LEVENSHTEIN SUCSESS!
+### teacher: Answer: to help, Wrriten by: STUDENT, Grade: 90, Significant Words: 2, Teacher verified: true, syntaxable: false, aid: 59746d1b86c7780c6c5642c7
+### student: Answer: to help, Wrriten by: STUDENT, Grade: 90, Significant Words: 2, Teacher verified: true, syntaxable: false, aid: 59746d1b86c7780c6c5642c7

@@ -28,33 +28,35 @@ public class Answer {
 	private Writer writer;//who wrote the answer
 	private Integer grade;//Wasn't graded = -1
 	private Integer answerWords;//num of significant words.
-	private Boolean verified;//if teacher marked true
-	private Boolean learnable;//there is enough data to learn from this answer
+	private Boolean verified;//there is enough data to learn from this answer
+	private Boolean syntaxable;//there is enough data to learn from this answer
 	private HashMap<String, Integer> map = new HashMap<String, Integer>();//map to get better runtime. student->grade, relates to this answer
-	private AnalyzeSyntaxResponse Analyzed_ans;//google analyzed syntax
+	private AnalyzeSyntaxResponse Analyzed_ans = null;//google analyzed syntax
 	
 	//Enemas for insignificant parts of sentence
 	private Tag[] del = {Tag.PUNCT, Tag.UNKNOWN, Tag.ADP, Tag.X, Tag.AFFIX, Tag.DET};
 
-	public Answer(ObjectId _id, String content, Writer writer, Integer grade, Integer answerWords, Boolean verified, Boolean learnable) {
+	public Answer(ObjectId _id, String content, Writer writer, Integer grade, Integer answerWords,Boolean verified, Boolean syntaxable) {
 		this._id=_id;
 		this.content=content.toLowerCase();
 		this.writer=writer;
 		this.grade=grade;
 		this.answerWords=answerWords;
-		this.verified=verified;
-		this.learnable=learnable;
+		this.verified = verified;
+		this.syntaxable=syntaxable;
 	}
 	
 	/**
 	 * @return same Answer but has called the google api Syntax checker and counted significant words
 	 */
 	public Answer build() {
-		//google analyzer
-		Document doc = Document.newBuilder()
-	            .setContent(content).setType(Type.PLAIN_TEXT).build();
-		ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content + " $$ google api");
-		Analyzed_ans = ApiHolder.langClient.analyzeSyntax(doc, EncodingType.UTF8);
+		if (Analyzed_ans!=null) {
+			//google analyzer
+			Document doc = Document.newBuilder()
+		            .setContent(content).setType(Type.PLAIN_TEXT).build();
+			ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content + " $$ google api");
+			Analyzed_ans = ApiHolder.langClient.analyzeSyntax(doc, EncodingType.UTF8);
+		}
 		
 		if (answerWords==-1) {
 			answerWords++;
@@ -75,8 +77,10 @@ public class Answer {
 	public boolean equals (Object other) {
 		if (other instanceof Answer) {
 			Answer o = (Answer) other;
-			return (this._id.equals(o.get_id())) ||
-					(this.content.equals(o.content) && this.verified && o.verified);
+			return (this.content.equals(o.content) 
+					&& !this.writer.equals(Writer.STUDENT) 
+					&& !o.writer.equals(Writer.STUDENT)     
+					);
 		}
 		return false;
 	}	
@@ -86,9 +90,9 @@ public class Answer {
 		s=s+"Answer: " + content;
 		s=s+", Wrriten by: " + writer.name();
 		s=s+", Grade: " + grade;
-		s=s+", Verified by Teacher: " + verified;
 		s=s+", Significant Words: " + answerWords;
-		s=s+", Machine Learnable: " + learnable;
+		s=s+", Teacher verified: " + verified;
+		s=s+", syntaxable: " + syntaxable;
 		s=s+", aid: " + _id;
 
 		return s;
@@ -120,20 +124,12 @@ public class Answer {
 		return answerWords;
 	}
 
-	public Boolean getVerified() {
-		return verified;
+	public Boolean getsyntaxable() {
+		return syntaxable;
 	}
 
-	public void setVerified(Boolean verified) {
-		this.verified = verified;
-	}
-
-	public Boolean getLearnable() {
-		return learnable;
-	}
-
-	public void setLearnable(Boolean learnable) {
-		this.learnable = learnable;
+	public void setsyntaxable(Boolean syntaxable) {
+		this.syntaxable = syntaxable;
 	}
 
 	public AnalyzeSyntaxResponse getAnalyzed_ans() {
@@ -142,5 +138,13 @@ public class Answer {
 
 	public HashMap<String, Integer> getMap() {
 		return map;
+	}
+
+	public Boolean getVerified() {
+		return verified;
+	}
+
+	public void setVerified(Boolean verified) {
+		this.verified = verified;
 	}
 }

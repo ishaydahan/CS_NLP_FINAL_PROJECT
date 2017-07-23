@@ -54,7 +54,7 @@ public class Test {
 	 */
 	public void checkTest() {
 		questions.forEach((q)->{
-			q.checkQuestion(q.getStudentAnswers(), q.getTeacherAnswers());
+			q.checkQuestion(q.getStudentAnswers(), q.getVerifiedAnswers(), q.getVerifiedSyntaxableAnswers());
 		});
 	}
 	

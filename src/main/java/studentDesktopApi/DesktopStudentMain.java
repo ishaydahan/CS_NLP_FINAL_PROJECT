@@ -1,14 +1,14 @@
 package studentDesktopApi;
 
 import apiHolder.ApiHolder;
-import objects.Teacher;
+import objects.Person;
 import objects.Test;
 
 public class DesktopStudentMain {
 		
-	private Teacher t = null;
+	private Person t = null;
 
-	protected DesktopStudentMain(Teacher t) {
+	protected DesktopStudentMain(Person t) {
 		this.t=t;
 	}
 
