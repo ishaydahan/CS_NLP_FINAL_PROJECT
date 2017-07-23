@@ -25,8 +25,6 @@ public class ConsoleTeacherMain {
 			option = ApiHolder.scanner.nextLine();
 			if (option.equals("0")) {
 				System.out.println("Bye!");
-				ApiHolder.scanner.close();
-				ApiHolder.client.close();
 				return;
 			}else if(option.equals("1")) {
 				createTest();

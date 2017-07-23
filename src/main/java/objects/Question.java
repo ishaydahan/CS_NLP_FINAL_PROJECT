@@ -1,5 +1,8 @@
 package objects;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +24,8 @@ public class Question {
 	private ObjectId tid;//test id
 	private ObjectId qid;//question id
 	private ArrayList<Answer> answers = new ArrayList<Answer>();//list of all answers
-
+	private int minLearnable = Integer.MAX_VALUE;
+	
 	public Question(ObjectId tid, ObjectId qid, String content, ArrayList<Document> answers) {
 		this.content=content;
 		this.tid=tid;
@@ -29,6 +33,7 @@ public class Question {
 		//building the answers from the list got from server
 		for(Document d : answers) {
 			this.answers.add(new Answer(d.getObjectId("_id"), d.getString("content"), Writer.valueOf((d.getString("writer"))), d.getInteger("grade"), d.getInteger("answerWords"), d.getBoolean("verified"), d.getBoolean("learnable")));
+			if (d.getString("writer").equals(Writer.TEACHER.name()))  minLearnable = Math.min(minLearnable, d.getInteger("answerWords"));
 		}	
 	}
 	
@@ -45,11 +50,11 @@ public class Question {
         	System.err.println("Already has that answer!");
         	return null;
         }else {
-            answers.add(toAdd);
     		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
     				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
     				new Document("$push", new Document().append("questions.$.answers", answerToDoc(toAdd))));	
     		System.out.println("you may need to recheck test..");
+            answers.add(toAdd);
     		return toAdd;
         }
 	}
@@ -61,10 +66,10 @@ public class Question {
 	 */
 	public Answer addStudentAns(String student_ans){
         Answer toAdd = new Answer(new ObjectId(), student_ans, Writer.STUDENT, new Integer(-1), new Integer(-1), false, false);
-        answers.add(toAdd);
 		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
 				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 				new Document("$push", new Document().append("questions.$.answers", answerToDoc(toAdd))));	
+        answers.add(toAdd);
 		return toAdd;
 	}
 		
@@ -83,10 +88,9 @@ public class Question {
             	return false;
             }
     	}
-		//if teacher fixes ans, it means its verified and learnable
     	toFix.setGrade(grade);
     	toFix.setVerified(true);
-    	toFix.setLearnable(true);
+    	if(toFix.getAnswerWords()>=minLearnable) toFix.setLearnable(true);
 	
 		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
 				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
@@ -97,7 +101,7 @@ public class Question {
 		.collect(Collectors.toList()).forEach((x)->{
 	    	x.setGrade(grade);
 	    	x.setVerified(true);
-	    	x.setLearnable(true);
+	    	if(x.getAnswerWords()>=minLearnable) x.setLearnable(true);
 		
 			ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
 					.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
@@ -113,7 +117,14 @@ public class Question {
 	 * @param verified - list of verified answers, mostly teacher ans / learnable ans
 	 * this 
 	 */
-	public void checkQuestion(List<Answer> toCheck, List<Answer> verified) {
+	public void checkQuestion(List<Answer> toCheck, List<Answer> verified) {		
+		PrintStream logger = null;
+		try {
+			logger = new PrintStream(new FileOutputStream(content + " Grades"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
 		//sort the list first from high to low to get the maximum grade in min time
 		verified.sort((x,y) -> y.getGrade()-x.getGrade());
 		
@@ -125,6 +136,7 @@ public class Question {
 			Integer grade = new AnswerAnalyzer(student_ans.build(), verified).analyze();
 			if (grade==-2) continue; //error
 			if (grade>-1) {
+				logger.println(student_ans.toString());
 				System.out.println(student_ans);
 				ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
 						.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
@@ -155,12 +167,18 @@ public class Question {
 	 * @param toRemove some answer that you can get from getAnswer
 	 */
 	public void removeAnswer(Answer toRemove) {
-		answers.remove(toRemove);
 		ApiHolder.getCollection().updateOne(new Document().append("_id", tid).append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 				new Document("$pull", new Document().append("questions.$.answers", answerToDoc(toRemove))));	
+		answers.remove(toRemove);
 		System.out.println("you may need to recheck test..");
 	}	
 	
+	public void removeAll() {
+		ApiHolder.getCollection().updateOne(new Document().append("_id", tid).append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
+				new Document("$set", new Document().append("questions.$.answers", new ArrayList<>())));	
+		answers= new ArrayList<Answer>();
+	}	
+
 	/**
 	 * @param id - get it from {@link Answer} get_Id
 	 * @return
@@ -193,6 +211,10 @@ public class Question {
 
 	public List<Answer> getUngradedStudentAnswers() {
 		return answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT) && x.getGrade()==-1).collect(Collectors.toList());
+	}
+
+	public List<Answer> getLearnableAnswers() {
+		return answers.stream().filter(x -> x.getLearnable()).collect(Collectors.toList());
 	}
 
 	private Document answerToDoc(Answer a) {

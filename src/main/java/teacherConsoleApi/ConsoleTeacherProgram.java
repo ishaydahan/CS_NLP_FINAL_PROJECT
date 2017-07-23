@@ -9,10 +9,10 @@ import syntaxAnalyzer.AnswerAnalyzer;
 public class ConsoleTeacherProgram {
 	
 	public static void main(String[] args) {	
-		test();
-//		System.out.print("WELCOME TEACHER!");
-//		ConsoleTeacherMain api = new ConsoleTeacherMain(new Teacher());
-//		api.main();	
+//		test();
+		System.out.print("WELCOME TEACHER!");
+		ConsoleTeacherMain api = new ConsoleTeacherMain(new Teacher());
+		api.main();	
 	}	
 	
 	public static void test() {		
@@ -42,6 +42,7 @@ public class ConsoleTeacherProgram {
 		tocheck.add(new Answer (null, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Writer.STUDENT, new Integer(-1), new Integer(-1), false, false));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
 		tocheck.add(new Answer (null, "because people need to help", Writer.STUDENT, new Integer(-1), new Integer(-1), false, false));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
 		tocheck.add(new Answer (null, "they love to volunteer", Writer.STUDENT, new Integer(-1), new Integer(-1), false, false));//tricky one
 		tocheck.add(new Answer (null, "because the people want to fly", Writer.STUDENT, new Integer(-1), new Integer(-1), false, false));//bad verb
 		tocheck.add(new Answer (null, "because the people want money", Writer.STUDENT, new Integer(-1), new Integer(-1), false, false));//no verb

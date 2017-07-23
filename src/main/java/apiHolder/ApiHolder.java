@@ -17,10 +17,7 @@ import org.languagetool.rules.RuleMatch;
 
 import com.google.cloud.language.v1.LanguageServiceClient;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.textrazor.AnalysisException;
 import com.textrazor.NetworkException;
 import com.textrazor.TextRazor;
@@ -47,25 +44,38 @@ public class ApiHolder {
 	public static int MAXGRADE = 100;//max points per answer
 	public static int MINGRADE = 0;//min points per answer
 
+	public static MongoPing mongo = null;
 	public static MongoCollection<Document> collection = null;
-	public static MongoClient client = null;
-	public static Scanner scanner = null;      
+	
+	public static Scanner scanner = null;     
+	
 	public static HashMap<String, List<String>> spellingList = new HashMap<String, List<String>>();
 	public static JLanguageTool lang = new JLanguageTool(new BritishEnglish());
+	
 	public static HashMap<String, List<Entailment>> entailmentList = new HashMap<String, List<Entailment>>();
+	
 	public static LanguageServiceClient langClient = null;
+	
 	public static PrintStream logger = null;
+	
 	public static TextRazor t;
 	public static int i =0;
 	public static TextRazor[] razor = new TextRazor[4];
 	
 	static {
 		try {
-			logger = new PrintStream(new FileOutputStream("log.txt"));
-			startGoogle();
-			scanner = new Scanner(System.in);  
 			Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
 			mongoLogger.setLevel(Level.SEVERE);
+			
+			mongo = new MongoPing();
+			collection = mongo.collection;
+			
+			logger = new PrintStream(new FileOutputStream("log.txt"));
+			
+			langClient = LanguageServiceClient.create();
+			
+			scanner = new Scanner(System.in);  
+			
 			razor[0] = new TextRazor("9faf2230e35c366e74ea0f1d72cf167697e09ae6488645916d1693ef");//bacoola
 			razor[1] = new TextRazor("bbd736f436e10ef989bb0bd155f251756220de90b8d6498262ea2661");//ishay
 			razor[2] = new TextRazor("eb5d5e6284d0ed04a6b7beec96d2805a9bc0f4396cb3fe0c219e5374");//ishaydah
@@ -80,19 +90,6 @@ public class ApiHolder {
 		}
 	}
 		
-	/**
-	 * @throws Exception
-	 * start google client
-	 */
-	public static void startGoogle() throws Exception {
-		 try {
-			 langClient = LanguageServiceClient.create();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-//			langClient.close();
-		}
-	}
 	
 	/**
 	 * @param s - a word
@@ -116,6 +113,9 @@ public class ApiHolder {
 		return lst;
 	}
 	
+	/**
+	 * 
+	 */
 	public static void switchrazor() {
 		t = razor[i%4];
 		i++;
@@ -151,26 +151,7 @@ public class ApiHolder {
 	 * this function is activated once in a while... please check.
 	 */
 	public static MongoCollection<Document> getCollection() {
-		try {
-			collection.count();
-			return collection;
-		}catch(Exception e) {
-			System.out.println("\nconnecting to database...");
-
-			MongoClientOptions.Builder options = MongoClientOptions.builder()
-	                .maxConnectionIdleTime(0)
-	                .maxConnectionLifeTime(0)
-	                .socketKeepAlive(true);
-
-	        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject", options); 
-	        client = new MongoClient(uri);
-	        MongoDatabase db = client.getDatabase(uri.getDatabase());
-	        collection = db.getCollection("tests"); 
-	        return collection;
-		} finally {
-//			client.close();
-//			scanner.close();
-		}
+		return collection;
 	}
 
 	

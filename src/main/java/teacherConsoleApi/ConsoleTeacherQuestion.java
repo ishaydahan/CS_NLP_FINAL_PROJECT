@@ -23,35 +23,39 @@ public class ConsoleTeacherQuestion {
 			System.out.println();			
 			System.out.println("31 - show teacher answers");
 			System.out.println("32 - show studet answers");
-			System.out.println("33 - show student unverified answers");
+			System.out.println("33 - show unverified answers");
 			System.out.println("34 - show verified answers");
 			System.out.println("35 - show ungraded answers");
-			System.out.println("36 - show all answers");
+			System.out.println("36 - show learnable answers");
+			System.out.println("37 - show all answers");
 			System.out.println();			
-			System.out.println("41 - check all questions with verified");
-			System.out.println("42 - check ungraded questions with verified");
+			System.out.println("41 - check all questions with learnable answers");
+			System.out.println("42 - check ungraded questions with learnable answers");
+			System.out.println("43 - check all questions with teacher answers");
+			System.out.println("44 - check ungraded questions with teacher answers");
 			System.out.println();			
 			System.out.println("5 - fix answer");
 			System.out.println();			
-			System.out.println("6 - remove answer");
+			System.out.println("61 - remove answer");
+			System.out.println("62 - remove all answers");
 			System.out.println();			
-			System.out.println("71 - approve all answers");
-			System.out.println("72 - approve answer");
+			System.out.println("71 - approve answer");
+			System.out.println("72 - approve all answers");
 
 			option = ApiHolder.scanner.nextLine();
 			if (option.equals("0")) {
 				System.out.println(">> Returning Test Screen");
 				return;
-			}else if(option.equals("1")) {
+			}else if(option.charAt(0)=='1') {
 				addAns();
 			}else if(option.charAt(0)=='3') {
 				showAnswers(Integer.valueOf(""+option.charAt(1)));
 			}else if(option.charAt(0)=='4') {
 				checkQuestion(Integer.valueOf(""+option.charAt(1)));
-			}else if(option.equals("5")) {
+			}else if(option.charAt(0)=='5') {
 				fixAns();
-			}else if(option.equals("6")) {
-				remove();
+			}else if(option.charAt(0)=='6') {
+				remove(Integer.valueOf(""+option.charAt(1)));
 			}else if(option.charAt(0)=='7') {
 				approve(Integer.valueOf(""+option.charAt(1)));
 			}else {
@@ -79,8 +83,9 @@ public class ConsoleTeacherQuestion {
 		if (choice==3) filterdList = q.getUnverifiedStudentAnswers();
 		if (choice==4) filterdList = q.getVerifiedAnswers();
 		if (choice==5) filterdList = q.getUngradedStudentAnswers();
-		if (choice==6) filterdList = q.getAnswers();
-		
+		if (choice==6) filterdList = q.getLearnableAnswers();
+		if (choice==7) filterdList = q.getAnswers();
+
 		filterdList.sort((x,y) -> y.getGrade()-x.getGrade());
         int i=1;
         for (Answer s : filterdList) {
@@ -109,14 +114,16 @@ public class ConsoleTeacherQuestion {
 		
 	protected void checkQuestion(int choice) {
         System.out.println("///////////////////////////////////");
-		if (choice==1) q.checkQuestion(q.getStudentAnswers(), q.getVerifiedAnswers());
-		if (choice==2) q.checkQuestion(q.getUngradedStudentAnswers(), q.getVerifiedAnswers());
+		if (choice==1) q.checkQuestion(q.getStudentAnswers(), q.getLearnableAnswers());
+		if (choice==2) q.checkQuestion(q.getUngradedStudentAnswers(), q.getLearnableAnswers());
+		if (choice==3) q.checkQuestion(q.getStudentAnswers(), q.getTeacherAnswers());
+		if (choice==4) q.checkQuestion(q.getUngradedStudentAnswers(), q.getTeacherAnswers());
         System.out.println("///////////////////////////////////");
 	}
 	
 	protected void approve(int choice) {
-		if (choice==1) q.approveAll();
-		if (choice==2) {
+		if (choice==2) q.approveAll();
+		if (choice==1) {
 			System.out.println(">> Enter Answer id:");
 			String id = ApiHolder.scanner.nextLine();
 	        try {
@@ -128,15 +135,21 @@ public class ConsoleTeacherQuestion {
 		}
 	}
 	
-	protected void remove() {
-		try {
-			System.out.println(">> Enter Answer id:");
-			String id = ApiHolder.scanner.nextLine();
-			q.removeAnswer(q.getAnswer(id));
-        	System.out.println("operation OK!");
-		}catch(Exception e) {
-			return;
+	protected void remove(int choice) {
+		if (choice==2) {
+			q.removeAll();
 		}
-	}	
+		
+		if (choice==1) {
+			try {
+				System.out.println(">> Enter Answer id:");
+				String id = ApiHolder.scanner.nextLine();
+				q.removeAnswer(q.getAnswer(id));
+	        	System.out.println("operation OK!");
+			}catch(Exception e) {
+				return;
+			}
+		}	
+	}
 	
 }
