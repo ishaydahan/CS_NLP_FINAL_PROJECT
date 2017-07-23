@@ -16,7 +16,7 @@ public class ConsoleTeacherTest {
 		String option = "-1";
 		while (true) {
 			System.out.println("\n@@  Test Screen Options  @@");
-			System.out.println("0 - save and exit");
+			System.out.println("0 - exit");
 			System.out.println("1 - create question");
 			System.out.println("2 - show questions");
 			System.out.println("3 - select question");
@@ -25,7 +25,6 @@ public class ConsoleTeacherTest {
 
 			option = ApiHolder.scanner.nextLine();
 			if (option.equals("0")) {
-				t.save();
 				System.out.println(">> Returning Teacher Screen");
 				return;
 			}else if(option.equals("1")) {

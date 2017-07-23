@@ -1,4 +1,4 @@
-package syntaxAnalyzer;
+package analyzer;
 
 import java.util.List;
 
@@ -70,4 +70,29 @@ public class AnswerAnalyzer {
 		ApiHolder.logger.println("### grade: " + maxGrade);
 		return maxGrade;		
 	}
+	
+//	/**
+//	 * @param TODO
+//	 * @return
+//	 */
+//	public Integer MachineLearningAnalyze(List<Answer> learnable) {
+//		//TODO
+//		
+//		if (learnable.isEmpty()) {
+//			System.out.println("There are no teacher's learnable answers at database at all");
+//			return -2;
+//		}
+//				
+//		Integer maxGrade=ApiHolder.MINGRADE;		
+//		for (Answer teachers_ans: learnable) {
+//			DataLearner master = new DataLearner();
+//			maxGrade= Math.max(maxGrade, master.getGrade());
+//			if (maxGrade.equals(ApiHolder.MAXGRADE)) break;
+//		}
+//		ApiHolder.logger.println("### Machine Learning RESULT:");
+//		ApiHolder.logger.println("### student: " + students_ans);
+//		ApiHolder.logger.println("### grade: " + maxGrade);
+//		return maxGrade;		
+//	}
+
 }

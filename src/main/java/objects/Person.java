@@ -30,14 +30,6 @@ public class Person {
 		return this;
 	}
 	
-	public Person save() {		
-		tests.forEach((t)->{
-			ApiHolder.getCollection().updateOne(new Document().append("_id", t.getTid()),
-					new Document("$set", new Document().append("content", new Document("content", t.getContent()))));	
-		});
-		return this;
-	}
-
 	/**
 	 * @param t - the Test string
 	 * @return Test object
@@ -73,14 +65,8 @@ public class Person {
 	 * will return null if there is no such test.
 	 */
 	public Test getTest(String id) {
-		for(Test t : tests) {
-			if (id.equals(t.getTid().toString())) {
-				return t;
-			}
-		}
-		return null;
+		return tests.stream().filter(x->x.getTid().toString().equals(id)).findFirst().orElse(null);
 	}	
-	
 	
 	/**
 	 * @param a

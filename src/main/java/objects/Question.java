@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+
+import analyzer.AnswerAnalyzer;
 import apiHolder.ApiHolder;
-import syntaxAnalyzer.AnswerAnalyzer;
 
 /**
  * @author ishay
@@ -19,13 +20,11 @@ import syntaxAnalyzer.AnswerAnalyzer;
 public class Question {
 	
 	private String content;//the question itself
-	private ObjectId tid;//test id
 	private ObjectId qid;//question id
 	private ArrayList<Answer> answers = new ArrayList<Answer>();//list of all answers
 	
-	public Question(ObjectId tid, ObjectId qid, String content) {
+	public Question(ObjectId qid, String content) {
 		this.content=content;
-		this.tid=tid;
 		this.qid=qid; 
 	}
 		
@@ -33,7 +32,7 @@ public class Question {
 	public Question load() {
 		answers = new ArrayList<Answer>();
 		
-		ArrayList<Document> docAnswers = (ArrayList<Document>) ApiHolder.getCollection().find(new Document().append("_id", tid).append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))))
+		ArrayList<Document> docAnswers = (ArrayList<Document>) ApiHolder.getCollection().find(new Document().append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))))
 		.first().get("questions");
 		docAnswers = (ArrayList<Document>) docAnswers.get(0).get("answers");
 
@@ -60,9 +59,7 @@ public class Question {
         	System.out.println("Already has that answer!" + toAdd.getContent());
         	return null;
         }else {
-    		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-    				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-    				new Document("$push", new Document().append("questions.$.answers", answerToDoc(toAdd))));	
+            DBcreateAnswer(toAdd);
             answers.add(toAdd);
     		return toAdd;
         }
@@ -75,9 +72,7 @@ public class Question {
 	 */
 	public Answer addStudentAns(String student_ans){
         Answer toAdd = ApiHolder.factory.createAnswer(student_ans, -1, Writer.STUDENT);
-		ApiHolder.getCollection().updateOne(new Document().append("_id", tid)
-				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-				new Document("$push", new Document().append("questions.$.answers", answerToDoc(toAdd))));	
+        DBcreateAnswer(toAdd);
         answers.add(toAdd);
 		return toAdd;
 	}
@@ -90,13 +85,11 @@ public class Question {
 	 * will change verified = true, syntaxable = true;
 	 */
 	public boolean fixAns(int grade, Answer toFix){	
-		answers.stream().filter(x -> x.getContent().equals(toFix.getContent()))
+		answers.stream().filter(ans -> ans.getContent().equals(toFix.getContent()))
 		.collect(Collectors.toList()).forEach((x)->{
 	    	x.setGrade(grade);
 	    	x.setVerified(true);
-			ApiHolder.getCollection().updateOne(new Document()
-					.append("questions.answers._id", toFix.get_id()),
-					new Document("$set", new Document().append("questions.0.answers.$", answerToDoc(x))));
+			DBeditAnswer(x);
 		});
 		return true;
 	}
@@ -157,6 +150,8 @@ public class Question {
 			//log to file
 			logger.println(student_ans.toString());
 			System.out.println(student_ans);
+			
+			DBeditAnswer(student_ans);
 		}
 	}
 	
@@ -167,9 +162,7 @@ public class Question {
 		answers.stream().filter(x->x.get_id().equals(ans.get_id()))
 		.collect(Collectors.toList()).forEach((x)->{
 	    	x.setVerified(true);
-			ApiHolder.getCollection().updateOne(new Document()
-					.append("questions.answers._id", x.get_id()),
-					new Document("$set", new Document().append("questions.0.answers.$", answerToDoc(x))));
+	    	DBeditAnswer(x);
 		});
 		return true;
 	}
@@ -181,9 +174,7 @@ public class Question {
 	public boolean approveAll() {
 		answers.forEach((x)->{
 	    	x.setVerified(true);
-			ApiHolder.getCollection().updateOne(new Document()
-					.append("questions.answers._id", x.get_id()),
-					new Document("$set", new Document().append("questions.0.answers.$", answerToDoc(x))));
+	    	DBeditAnswer(x);
 		});
 		return true;
 	}
@@ -191,21 +182,20 @@ public class Question {
 	/**
 	 * @param toRemove some answer that you can get from getAnswer
 	 */
-	public void removeAnswer(Answer toRemove) {
-		ApiHolder.getCollection().updateOne(new Document()
-				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-				new Document("$pull", new Document().append("questions.$.answers", answerToDoc(toRemove))));	
+	public boolean removeAnswer(Answer toRemove) {
+		DBremoveAnswer(toRemove);
 		answers.remove(toRemove);
-		System.out.println("you may need to recheck test..");
+		return true;
 	}	
 	
 	/**
 	 * 
 	 */
-	public void removeAll() {
-		ApiHolder.getCollection().updateOne(new Document().append("_id", tid).append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
-				new Document("$set", new Document().append("questions.$.answers", new ArrayList<>())));	
-		answers= new ArrayList<Answer>();
+	public boolean removeAll() {
+		answers.forEach(ans->{
+			removeAnswer(ans);
+		});
+		return true;
 	}	
 
 	/**
@@ -213,15 +203,30 @@ public class Question {
 	 * @return
 	 */
 	public Answer getAnswer(String id) {
-		for(Answer ans : answers) {
-			if (ans.get_id().toString().equals(id)) {
-				return ans;
-			}
-		}
-		System.err.println("there is no such answer!");
-		return null;
+		return answers.stream().filter(x->x.get_id().toString().equals(id)).findFirst().orElse(null);
 	}
-		
+	
+	public boolean DBeditAnswer(Answer x) {
+		ApiHolder.getCollection().updateOne(new Document()
+				.append("questions.answers._id", x.get_id()),
+				new Document("$set", new Document().append("questions.0.answers.$", answerToDoc(x))));
+		return true;
+	}
+	
+	public boolean DBremoveAnswer(Answer x) {
+		ApiHolder.getCollection().updateOne(new Document()
+				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
+				new Document("$pull", new Document().append("questions.$.answers", answerToDoc(x))));	
+		return true;
+	}
+
+	public boolean DBcreateAnswer(Answer x) {
+		ApiHolder.getCollection().updateOne(new Document()
+				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
+				new Document("$push", new Document().append("questions.$.answers", answerToDoc(x))));	
+		return true;
+	}
+
 	//answers that teacher wrote
 	public List<Answer> getTeacherAnswers() {
 		return answers.stream().filter(x -> x.getWriter().equals(Writer.TEACHER)).collect(Collectors.toList());

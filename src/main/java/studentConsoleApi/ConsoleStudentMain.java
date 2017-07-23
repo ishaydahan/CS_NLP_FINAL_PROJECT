@@ -6,23 +6,22 @@ import objects.Test;
 
 public class ConsoleStudentMain {
 		
-	private Person t = null;
+	private Person p = null;
 
-	protected ConsoleStudentMain(Person t) {
-		this.t=t;
+	protected ConsoleStudentMain(Person p) {
+		this.p=p;
 	}
 
 	protected void main() {
 		String option = "-1";
 		while (true) {
 			System.out.println("\n@@  Student Screen Options  @@");
-			System.out.println("0 - save and exit");
+			System.out.println("0 - exit");
 			System.out.println("2 - show tests");
 			System.out.println("3 - select test");
 
 			option = ApiHolder.scanner.nextLine();
 			if (option.equals("0")) {
-				t.save();
 				System.out.println("Bye!");
 				return;
 			}else if(option.equals("2")) {
@@ -37,7 +36,7 @@ public class ConsoleStudentMain {
 	
 	protected void showTests() {
         System.out.println("///////////////////////////////////");
-        t.getTests().forEach((t)->{
+        p.getTests().forEach((t)->{
         	System.out.println("Test: " + t);
         });
         System.out.println("///////////////////////////////////");
@@ -47,7 +46,7 @@ public class ConsoleStudentMain {
 		System.out.println(">> Enter Test id:");
         String id = ApiHolder.scanner.nextLine();
         
-        Test t = this.t.getTest(id);
+        Test t = this.p.getTest(id);
         if (t==null) {
         	System.err.println("there is no such test!");
         	return;

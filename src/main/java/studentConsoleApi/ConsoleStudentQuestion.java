@@ -15,8 +15,7 @@ public class ConsoleStudentQuestion {
 		String option = "-1";
 		while (true) {
 			System.out.println("\n@@  Student Screen Options  @@");
-			System.out.println("0 - save and exit");
-			
+			System.out.println("0 - exit");
 			System.out.println("2 - add student answer");
 
 			option = ApiHolder.scanner.nextLine();

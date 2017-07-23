@@ -2,11 +2,11 @@ package teacherConsoleApi;
 
 import java.util.ArrayList;
 
+import analyzer.AnswerAnalyzer;
 import apiHolder.ApiHolder;
 import objects.Answer;
 import objects.Person;
 import objects.Writer;
-import syntaxAnalyzer.AnswerAnalyzer;
 
 public class ConsoleTeacherProgram {
 	

@@ -32,23 +32,11 @@ public class Test {
 			.first().get("questions");
 		
 		for(Document d : docQuestions) {
-			this.questions.add(new Question(tid, d.getObjectId("_id"), d.getString("content")));
+			this.questions.add(new Question(d.getObjectId("_id"), d.getString("content")));
 		}		
 		return this;
 	}
-	
-	/**
-	 * @return
-	 */
-	public Test save() {		
-		questions.forEach((q)->{
-			ApiHolder.getCollection().updateOne(new Document().append("_id", tid),
-					new Document("$set", new Document().append("content", content)));	
-		});
 		
-		return this;
-	}
-	
 	/**
 	 * @param q - the question string
 	 * @return question object
@@ -56,7 +44,7 @@ public class Test {
 	 * will return null if the database contains same question string.
 	 */
 	public Question createQuestion(String q) {
-        Question toAdd = new Question(tid, new ObjectId(), q);
+        Question toAdd = new Question(new ObjectId(), q);
         if (questions.contains(toAdd)) {
         	System.err.println("Already has that question!");
         	return null;
@@ -92,13 +80,7 @@ public class Test {
 	 * @return
 	 */
 	public Question getQuestion(String id) {
-		for(Question q : questions) {
-			if (q.getQid().toString().equals(id)) {
-				return q;
-			}
-		}
-		System.err.println("there is no such question!");
-		return null;
+		return questions.stream().filter(x->x.getQid().toString().equals(id)).findFirst().orElse(null);
 	}
 	
 	/**

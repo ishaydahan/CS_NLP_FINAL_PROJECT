@@ -22,7 +22,6 @@ public class ConsoleStudentTest {
 
 			option = ApiHolder.scanner.nextLine();
 			if (option.equals("0")) {
-				t.save();
 				System.out.println(">> Returning Teacher Screen");
 				return;
 			}else if(option.equals("2")) {
