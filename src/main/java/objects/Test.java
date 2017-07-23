@@ -56,15 +56,12 @@ public class Test {
         }
 	}
 	
-	public void removeQuestion(Question toRemove) {
+	public boolean removeQuestion(Question toRemove) {
 		questions.remove(toRemove);
 		ApiHolder.getCollection().deleteOne(new Document("_id", toRemove.getQid()));
+		return true;
 	}	
 
-	public ArrayList<Question> getQuestions() {
-        return questions;
-	}
-		
 	/**
 	 * for each question, check all Student questions with teacher answers.
 	 */
@@ -74,7 +71,6 @@ public class Test {
 		});
 	}
 	
-	
 	/**
 	 * @param id - can get it from {@link Question} getQId
 	 * @return
@@ -82,30 +78,9 @@ public class Test {
 	public Question getQuestion(String id) {
 		return questions.stream().filter(x->x.getQid().toString().equals(id)).findFirst().orElse(null);
 	}
-	
-	/**
-	 * @param a
-	 * @return
-	 * this is private database related function
-	 */
-	private Document questionToDoc(Question a) {
-		return new Document().append("_id", a.getQid()).append("content", a.getContent()).append("answers", a.getAnswers());
-	}
 
-	public boolean equals (Object other) {
-		if (other instanceof Test) {
-			Test o = (Test) other;
-			return this.tid.equals(o.tid); 
-		}
-		return false;
-	}	
-	
-	public String toString() {
-		String s = "";
-		s=s+"Test: " + content;
-		s=s+", tid: " + tid;
-
-		return s;
+	public ArrayList<Question> getQuestions() {
+	    return questions;
 	}
 
 	public ObjectId getTid() {
@@ -114,6 +89,31 @@ public class Test {
 
 	public String getContent() {
 		return content;
+	}
+
+	public boolean equals (Object other) {
+		if (other instanceof Test) {
+			Test o = (Test) other;
+			return this.tid.equals(o.tid); 
+		}
+		return false;
+	}
+
+	public String toString() {
+		String s = "";
+		s=s+"Test: " + content;
+		s=s+", tid: " + tid;
+	
+		return s;
+	}
+
+	/**
+	 * @param a
+	 * @return
+	 * this is private database related function
+	 */
+	private Document questionToDoc(Question a) {
+		return new Document().append("_id", a.getQid()).append("content", a.getContent()).append("answers", a.getAnswers());
 	}
 
 }

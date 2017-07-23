@@ -20,6 +20,7 @@ public class AnswerAnalyzer {
 	}
 		
 	/**
+	 * @param
 	 * @return maximum grade of the analyzing process.
 	 * <pre>
 	 * there must be at least one answer approved by teacher
@@ -46,6 +47,7 @@ public class AnswerAnalyzer {
 	}
 
 	/**
+	 * @param
 	 * @return maximum grade of the analyzing process.
 	 * <pre>
 	 * there must be at least one answer approved by teacher

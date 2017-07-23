@@ -71,34 +71,6 @@ public class Answer {
 		return this;
 	}
 	
-	//two answers are the same if they have the same id (wont happen)
-	//or the answer written by teacher and has same content
-	//or the answer is verified and has same content
-	public boolean equals (Object other) {
-		if (other instanceof Answer) {
-			Answer o = (Answer) other;
-			return (this.content.equals(o.content) 
-					&& !this.writer.equals(Writer.STUDENT) 
-					&& !o.writer.equals(Writer.STUDENT)     
-					);
-		}
-		return false;
-	}	
-	
-	public String toString() {
-		String s = "";
-		s=s+"Answer: " + content;
-		s=s+", Wrriten by: " + writer.name();
-		s=s+", Grade: " + grade;
-		s=s+", Significant Words: " + answerWords;
-		s=s+", Teacher verified: " + verified;
-		s=s+", syntaxable: " + syntaxable;
-		s=s+", aid: " + _id;
-
-		return s;
-	}
-
-	
 	public Integer getGrade() {
 		return grade;
 	}
@@ -146,5 +118,32 @@ public class Answer {
 
 	public void setVerified(Boolean verified) {
 		this.verified = verified;
+	}
+
+	//two answers are the same if they have the same id (wont happen)
+	//or the answer written by teacher and has same content
+	//or the answer is verified and has same content
+	public boolean equals (Object other) {
+		if (other instanceof Answer) {
+			Answer o = (Answer) other;
+			return (this.content.equals(o.content) 
+					&& !this.writer.equals(Writer.STUDENT) 
+					&& !o.writer.equals(Writer.STUDENT)     
+					);
+		}
+		return false;
+	}
+
+	public String toString() {
+		String s = "";
+		s=s+"Answer: " + content;
+		s=s+", Wrriten by: " + writer.name();
+		s=s+", Grade: " + grade;
+		s=s+", Significant Words: " + answerWords;
+		s=s+", Teacher verified: " + verified;
+		s=s+", syntaxable: " + syntaxable;
+		s=s+", aid: " + _id;
+	
+		return s;
 	}
 }

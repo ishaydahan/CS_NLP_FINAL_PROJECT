@@ -23,7 +23,7 @@ public class Question {
 	private ObjectId qid;//question id
 	private ArrayList<Answer> answers = new ArrayList<Answer>();//list of all answers
 	
-	public Question(ObjectId qid, String content) {
+	protected Question(ObjectId qid, String content) {
 		this.content=content;
 		this.qid=qid; 
 	}
@@ -53,7 +53,7 @@ public class Question {
 	 * the function creates {@link Answer} and put it in the list and on the server.
 	 * if answers already contains this answer will return null
 	 */
-	public Answer createAns(String teacher_ans, int grade) {        
+	public Answer addTeacherAns(String teacher_ans, int grade) {        
         Answer toAdd = ApiHolder.factory.createAnswer(teacher_ans, grade, Writer.TEACHER);
         if (answers.contains(toAdd)) {
         	System.out.println("Already has that answer!" + toAdd.getContent());
@@ -95,70 +95,9 @@ public class Question {
 	}
 		
 	/**
-	 * @param toCheck - list of answers to check(all student ans.. only ungraded..)
-	 * @param verified - list of verified answers, mostly teacher ans / syntaxable ans
-	 * this 
-	 */
-	public void checkQuestion(List<Answer> toCheck, List<Answer> verified, List<Answer> syntaxable) {		
-		//create log file
-		PrintStream logger = null;
-		try {
-			logger = new PrintStream(new FileOutputStream("question output"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		//sort the list first from high to low to get the maximum grade in min time
-		verified.sort((x,y) -> y.getGrade()-x.getGrade());
-		//build each verified question.
-		verified.forEach((ans)->ans.build());	
-		//sort the list first from high to low to get the maximum grade in min time
-		syntaxable.sort((x,y) -> y.getGrade()-x.getGrade());
-		//build each verified question.
-		syntaxable.forEach((ans)->ans.build());	
-
-		
-		//determine min value for syntaxable
-		int minsyntaxable = Integer.MAX_VALUE;
-		for (Answer ans : getTeacherAnswers()) {
-			if (ans.getWriter().equals(Writer.TEACHER))  minsyntaxable = Math.min(minsyntaxable, ans.getAnswerWords());
-		}
-		
-		//check
-		for (Answer student_ans: toCheck) {
-			//first build the answer
-			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans.build());
-			
-			int grade;
-			if ((grade = analyzer.levenshteinAnalyze(verified))>-1) {
-				
-				student_ans.setGrade(grade);
-				
-			}else if ((grade = analyzer.SyntaxAnalyze(syntaxable))>-2) {//there is no -1 option in last check. must return grade.
-				
-				student_ans.setGrade(grade);
-
-			}else {
-				//error
-				return;
-			}
-			
-			//set syntaxable value
-	    	if(student_ans.getAnswerWords()>=minsyntaxable) student_ans.setsyntaxable(true);
-	    	else student_ans.setsyntaxable(false);
-	    	
-			//log to file
-			logger.println(student_ans.toString());
-			System.out.println(student_ans);
-			
-			DBeditAnswer(student_ans);
-		}
-	}
-	
-	/**
 	 * @param ans
 	 */
-	public boolean approveOne(Answer ans) {
+	public boolean approveAnswer(Answer ans) {
 		answers.stream().filter(x->x.get_id().equals(ans.get_id()))
 		.collect(Collectors.toList()).forEach((x)->{
 	    	x.setVerified(true);
@@ -171,7 +110,7 @@ public class Question {
 	 * mark all student answers as true;
 	 * will use fix ans to all unique answers.
 	 */
-	public boolean approveAll() {
+	public boolean approveAll() {		
 		answers.forEach((x)->{
 	    	x.setVerified(true);
 	    	DBeditAnswer(x);
@@ -197,6 +136,67 @@ public class Question {
 		});
 		return true;
 	}	
+
+	/**
+	 * @param toCheck - list of answers to check(all student ans.. only ungraded..)
+	 * @param verified - list of verified answers, mostly teacher ans / syntaxable ans
+	 * this 
+	 */
+	public void checkQuestion(List<Answer> toCheck, List<Answer> verified, List<Answer> syntaxable) {		
+		//create log file
+		PrintStream logger = null;
+		try {
+			logger = new PrintStream(new FileOutputStream("question output"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	
+		//sort the list first from high to low to get the maximum grade in min time
+		verified.sort((x,y) -> y.getGrade()-x.getGrade());
+		//build each verified question.
+		verified.forEach((ans)->ans.build());	
+		//sort the list first from high to low to get the maximum grade in min time
+		syntaxable.sort((x,y) -> y.getGrade()-x.getGrade());
+		//build each verified question.
+		syntaxable.forEach((ans)->ans.build());	
+	
+		
+		//determine min value for syntaxable
+		int minsyntaxable = Integer.MAX_VALUE;
+		for (Answer ans : getTeacherAnswers()) {
+			if (ans.getWriter().equals(Writer.TEACHER))  minsyntaxable = Math.min(minsyntaxable, ans.getAnswerWords());
+		}
+		
+		//check
+		for (Answer student_ans: toCheck) {
+			//first build the answer
+			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans.build());
+			
+			int grade;
+			if ((grade = analyzer.levenshteinAnalyze(verified))>-1) {
+				
+				student_ans.setGrade(grade);
+				
+			}else if ((grade = analyzer.SyntaxAnalyze(syntaxable))>-2) {//there is no -1 option in last check. must return grade.
+				
+				student_ans.setGrade(grade);
+	
+			}else {
+				//error
+				return;
+			}
+			
+			//set syntaxable value
+	    	if(student_ans.getAnswerWords()>=minsyntaxable) student_ans.setsyntaxable(true);
+	    	else student_ans.setsyntaxable(false);
+	    	
+			//log to file
+			logger.println(student_ans.toString());
+			System.out.println(student_ans);
+			
+			DBeditAnswer(student_ans);
+		}
+	}
 
 	/**
 	 * @param id - get it from {@link Answer} get_Id
@@ -227,6 +227,10 @@ public class Question {
 		return true;
 	}
 
+	public ArrayList<Answer> getAnswers() {
+		return answers;
+	}
+
 	//answers that teacher wrote
 	public List<Answer> getTeacherAnswers() {
 		return answers.stream().filter(x -> x.getWriter().equals(Writer.TEACHER)).collect(Collectors.toList());
@@ -252,26 +256,6 @@ public class Question {
 		return answers.stream().filter(x -> x.getsyntaxable()).collect(Collectors.toList());
 	}
 	
-	private Document answerToDoc(Answer a) {
-		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter().name()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("syntaxable", a.getsyntaxable());
-	}
-		
-	public boolean equals (Object other) {
-		if (other instanceof Question) {
-			Question o = (Question) other;
-			return this.content.equals(o.content); 
-		}
-		return false;
-	}	
-	
-	public String toString() {
-		String s = "";
-		s=s+"Question: " + content;
-		s=s+", qid: " + qid;
-
-		return s;
-	}
-	
 	public ObjectId getQid() {
 		return qid;
 	}
@@ -280,8 +264,24 @@ public class Question {
 		return content;
 	}
 
-	public ArrayList<Answer> getAnswers() {
-		return answers;
+	public String toString() {
+		String s = "";
+		s=s+"Question: " + content;
+		s=s+", qid: " + qid;
+	
+		return s;
+	}
+
+	public boolean equals (Object other) {
+		if (other instanceof Question) {
+			Question o = (Question) other;
+			return this.content.equals(o.content); 
+		}
+		return false;
+	}
+
+	private Document answerToDoc(Answer a) {
+		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter().name()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("syntaxable", a.getsyntaxable());
 	}
 
 }

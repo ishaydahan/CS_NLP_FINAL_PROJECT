@@ -69,7 +69,7 @@ public class ConsoleTeacherQuestion {
 		System.out.println(">> Enter Answer grade:");
         String grade = ApiHolder.scanner.nextLine();
 
-        if (q.createAns(teacher_ans, Integer.valueOf(grade))!=null)
+        if (q.addTeacherAns(teacher_ans, Integer.valueOf(grade))!=null)
         	System.out.println("operation OK!");
 	}
 		
@@ -126,7 +126,7 @@ public class ConsoleTeacherQuestion {
 			System.out.println(">> Enter Answer id:");
 			String id = ApiHolder.scanner.nextLine();
 	        try {
-				q.approveOne(q.getAnswer(id));
+				q.approveAnswer(q.getAnswer(id));
 		    	System.out.println("operation OK!");
 	        }catch(Exception e) {
 

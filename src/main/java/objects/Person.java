@@ -16,8 +16,9 @@ import apiHolder.ApiHolder;
  */
 public class Person {
 	
-	// test name -> test Id
 	private ArrayList<Test> tests = new ArrayList<Test>();
+	
+	protected void Preson() {}
 	
 	public Person load() {
 		tests = new ArrayList<Test>();
@@ -53,9 +54,10 @@ public class Person {
 	 * removes all test data!
 	 * @return 
 	 */
-	public void removeTest(Test toRemove) {
+	public boolean removeTest(Test toRemove) {
 		tests.remove(toRemove);
 		ApiHolder.getCollection().deleteOne(new Document("_id", toRemove.getTid()));
+		return true;
 	}	
 
 	/**
@@ -68,6 +70,10 @@ public class Person {
 		return tests.stream().filter(x->x.getTid().toString().equals(id)).findFirst().orElse(null);
 	}	
 	
+	public ArrayList<Test> getTests() {
+		return tests;
+	}
+
 	/**
 	 * @param a
 	 * @return
@@ -75,10 +81,6 @@ public class Person {
 	 */
 	private Document testToDoc(Test a) {
 		return new Document().append("_id", a.getTid()).append("content", a.getContent()).append("questions", a.getQuestions());
-	}
-
-	public ArrayList<Test> getTests() {
-		return tests;
 	}
 
 }
