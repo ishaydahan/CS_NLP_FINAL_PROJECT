@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import org.apache.commons.lang3.StringUtils;
-import org.bson.types.ObjectId;
 
 import com.google.cloud.language.v1.DependencyEdge.Label;
 import com.google.cloud.language.v1.PartOfSpeech.Case;
@@ -15,6 +14,7 @@ import com.textrazor.annotations.Entailment;
 
 import apiHolder.ApiHolder;
 import objects.Answer;
+import objects.QuestionFactory;
 import objects.Writer;
 
 /**
@@ -135,7 +135,7 @@ public class CheckAnswerCase {
 				
 				ApiHolder.logger.println("ANALYZER :::: checking " + teacher.getText().getContent() + " " + student.getText().getContent());
 				if (!set.contains(teacher) && equalNodes(teacher, student)) {
-					set.add(student);
+					set.add(teacher);
 					found=true;
 					grade++;
 					ApiHolder.logger.println("ANALYZER :::: finished path check, equal: " + teacher.getText().getContent() + " " + student.getText().getContent());
@@ -291,7 +291,7 @@ public class CheckAnswerCase {
 					//this map helps to avoid infinite loop.
 					if (!teacher_ans.getMap().containsKey(new_s1)) {
 						ApiHolder.logger.println("ANALYZER :::: spelling fixed: " + student.getText().getContent() + " >> " + sgg);
-						CheckAnswerCase newCheck = new CheckAnswerCase(new Answer(new ObjectId(), new_s1, Writer.COMPUTER, new Integer(-1), new Integer(-1), false, false).build(), teacher_ans);
+						CheckAnswerCase newCheck = new CheckAnswerCase(new QuestionFactory().create(new_s1, 0, Writer.COMPUTER).build(), teacher_ans);
 						ApiHolder.logger.println("----starting new check-----");
 						finishedGrade = newCheck.getGrade();
 						ApiHolder.logger.println("----finished new check-----");
@@ -306,7 +306,7 @@ public class CheckAnswerCase {
 					
 					if (!teacher_ans.getMap().containsKey(new_s1)) {
 						ApiHolder.logger.println("ANALYZER :::: spelling fixed: " + student.getText().getContent() + " >> " + ent.getEntailedWords().get(0));
-						CheckAnswerCase newCheck = new CheckAnswerCase(new Answer(new ObjectId(), new_s1, Writer.COMPUTER, new Integer(-1), new Integer(-1), false, false).build(), teacher_ans);
+						CheckAnswerCase newCheck = new CheckAnswerCase(new QuestionFactory().create(new_s1, 0, Writer.COMPUTER).build().build(), teacher_ans);
 						ApiHolder.logger.println("----starting new check-----");
 						finishedGrade = newCheck.getGrade();
 						ApiHolder.logger.println("----finished new check-----");

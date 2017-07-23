@@ -36,7 +36,7 @@ public class Answer {
 	//Enemas for insignificant parts of sentence
 	private Tag[] del = {Tag.PUNCT, Tag.UNKNOWN, Tag.ADP, Tag.X, Tag.AFFIX, Tag.DET};
 
-	public Answer(ObjectId _id, String content, Writer writer, Integer grade, Integer answerWords,Boolean verified, Boolean syntaxable) {
+	protected Answer(ObjectId _id, String content, Writer writer, Integer grade, Integer answerWords,Boolean verified, Boolean syntaxable) {
 		this._id=_id;
 		this.content=content.toLowerCase();
 		this.writer=writer;
@@ -50,7 +50,7 @@ public class Answer {
 	 * @return same Answer but has called the google api Syntax checker and counted significant words
 	 */
 	public Answer build() {
-		if (Analyzed_ans!=null) {
+		if (Analyzed_ans==null) {
 			//google analyzer
 			Document doc = Document.newBuilder()
 		            .setContent(content).setType(Type.PLAIN_TEXT).build();
