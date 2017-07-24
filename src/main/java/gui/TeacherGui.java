@@ -75,8 +75,5 @@ public class TeacherGui {
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(32, 61, 411, 102);
 		frame.getContentPane().add(scrollPane);
-		
-		
-		//scrollPane.setColumnHeaderView(table);
 	}
 }

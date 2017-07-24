@@ -102,7 +102,7 @@ public class CSGui {
 							t.TeacherScreen(userName , p);
 						} 
 	//					else {
-	//						Student s = new Student();
+	//						Student s = new Student(p);
 	//						s.setVisible(true);
 	//					}
 	//				} else{
