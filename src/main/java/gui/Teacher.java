@@ -68,8 +68,8 @@ public class Teacher {
 		JLabel lblHelloTeacher = new JLabel("Hello," + user);
 		lblHelloTeacher.setBounds(20, 11, 314, 29);
 		frame.getContentPane().add(lblHelloTeacher);
-		String col[] = {"ID","Subject"};		
-		Object[][] objs = p.testsToArr(p.getTests());
+		String col[] = {"ID","Subject"};
+		Object[][] objs = { {"hey","bye"},{"hey","bye"},{"hey","bye"},{"hey","bye"} };//p.testsToArr(p.getTests());
 		table = new JTable(objs, col);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(32, 61, 411, 102);
