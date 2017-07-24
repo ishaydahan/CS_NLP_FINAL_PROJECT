@@ -3,8 +3,8 @@ package objects;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -21,7 +21,7 @@ public class Question {
 	
 	private String content;//the question itself
 	private ObjectId qid;//question id
-	private ArrayList<Answer> answers = new ArrayList<Answer>();//list of all answers
+	private List<Answer> answers = new ArrayList<Answer>();//list of all answers
 	
 	protected Question(ObjectId qid, String content) {
 		this.content=content;
@@ -32,9 +32,9 @@ public class Question {
 	public Question load() {
 		answers = new ArrayList<Answer>();
 		
-		ArrayList<Document> docAnswers = (ArrayList<Document>) ApiHolder.getInstance().getCollection().find(new Document().append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))))
+		List<Document> docAnswers = (List<Document>) ApiHolder.getInstance().getCollection().find(new Document().append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))))
 		.first().get("questions");
-		docAnswers = (ArrayList<Document>) docAnswers.get(0).get("answers");
+		docAnswers = (List<Document>) docAnswers.get(0).get("answers");
 
 		for(Document d : docAnswers) {
 			this.answers.add(new Answer(d.getObjectId("_id"), d.getString("content"), 
@@ -100,7 +100,12 @@ public class Question {
 		});
 		return true;
 	}
-		
+	
+	public boolean renameAns(String content, Answer toFix) {
+		toFix.setContent(content);
+		DBeditAnswer(toFix);
+		return true;
+	}
 	/**
 	 * @param ans
 	 */
@@ -234,7 +239,7 @@ public class Question {
 		return true;
 	}
 
-	public ArrayList<Answer> getAnswers() {
+	public List<Answer> getAnswers() {
 		return answers;
 	}
 
@@ -291,7 +296,7 @@ public class Question {
 		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter().name()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("syntaxable", a.getsyntaxable());
 	}
 	
-	public Object[][] AnswersToArr(ArrayList<Answer> lst){
+	public Object[][] AnswersToArr(List<Answer> lst){
 		Object[][] arr = new Object[lst.size()][3];
 		for(int i=0; i<lst.size(); i++) {
 			arr[i][0] = lst.get(i).getContent();
