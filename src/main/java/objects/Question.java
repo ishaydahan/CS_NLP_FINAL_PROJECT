@@ -106,6 +106,7 @@ public class Question {
 		DBeditAnswer(toFix);
 		return true;
 	}
+	
 	/**
 	 * @param ans
 	 */
@@ -300,8 +301,8 @@ public class Question {
 		Object[][] arr = new Object[lst.size()][3];
 		for(int i=0; i<lst.size(); i++) {
 			arr[i][0] = lst.get(i).getContent();
-			arr[i][2] = lst.get(i).getGrade();
-			arr[i][1] = lst.get(i).get_id().toString();
+			arr[i][1] = lst.get(i).getGrade();
+			arr[i][2] = lst.get(i).get_id().toString();
 		}
 		return arr;
 	}
