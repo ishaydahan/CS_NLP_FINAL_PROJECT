@@ -35,6 +35,7 @@ public class ShowQuestionOption extends JFrame {
 	 * Create the frame.
 	 */
 	public ShowQuestionOption() {
+		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 218);
 		contentPane = new JPanel();

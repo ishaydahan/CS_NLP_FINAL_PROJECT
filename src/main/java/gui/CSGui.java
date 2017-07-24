@@ -56,7 +56,7 @@ public class CSGui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Exams Checker");
 		frame.setBounds(100, 100, 350, 198);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -95,7 +95,6 @@ public class CSGui {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 					String userName = textFieldUser.getText();
 					String password = passwordField.getText();
 					
@@ -116,7 +115,8 @@ public class CSGui {
 			}	else {					
 				JOptionPane.showMessageDialog(null, "Login failed, check you user name and password and try again");
 			}
-		}
+				frame.dispose();
+			}
 		});
 	}
 }

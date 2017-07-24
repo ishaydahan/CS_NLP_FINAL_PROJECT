@@ -41,6 +41,7 @@ public class ShowSanswers extends JFrame {
 	 * Create the frame.
 	 */
 	public ShowSanswers() {
+		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -52,13 +53,6 @@ public class ShowSanswers extends JFrame {
 		Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getStudentAnswers()); 
 //		Object[][] objs = {{"design mode","m","m"}}; // for design		
 		table = new JTable(objs, col);
-		table.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				int i = table.getSelectedRow();
-				if(i != -1)
-					System.out.println(table.getValueAt(i, 0));
-			}
-		});
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(50, 37, 346, 170);
 		contentPane.add(scrollPane);

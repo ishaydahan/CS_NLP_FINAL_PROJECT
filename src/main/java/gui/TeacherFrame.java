@@ -40,6 +40,7 @@ public class TeacherFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public TeacherFrame() {
+		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -72,14 +73,12 @@ public class TeacherFrame extends JFrame {
 		JButton btnCreateTest = new JButton("Create Test");
 		btnCreateTest.setBounds(178, 226, 89, 23);
 		contentPane.add(btnCreateTest);
-		
 		JLabel lblHello = new JLabel("Hello , " + CSGui.p.getName());
-		lblHello.setBounds(10, 11, 46, 14);
+		lblHello.setBounds(10, 11, 103, 14);
 		contentPane.add(lblHello);
 		
 		btnCreateTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("creating a NEW test");
 				CreateTestGui ct = new CreateTestGui();
 				ct.createTest();
 			}

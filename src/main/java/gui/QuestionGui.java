@@ -42,6 +42,7 @@ public class QuestionGui extends JFrame {
 	 * Create the frame.
 	 */
 	public QuestionGui() {
+		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 445, 293);
 		contentPane = new JPanel();
