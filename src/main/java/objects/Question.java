@@ -287,9 +287,9 @@ public class Question {
 	public Object[][] AnswersToArr(ArrayList<Answer> lst){
 		Object[][] arr = new Object[lst.size()][3];
 		for(int i=0; i<lst.size(); i++) {
-			arr[i][0] = lst.get(i).get_id();
-			arr[i][1] = lst.get(i).getContent();
+			arr[i][0] = lst.get(i).getContent();
 			arr[i][2] = lst.get(i).getGrade();
+			arr[i][1] = lst.get(i).get_id().toString();
 		}
 		return arr;
 	}

@@ -124,8 +124,8 @@ public class Test {
 	public Object[][] questionsToArr(ArrayList<Question> lst){
 		Object[][] arr = new Object[lst.size()][2];
 		for(int i=0; i<lst.size(); i++) {
-			arr[i][0] = lst.get(i).getQid();
-			arr[i][1] = lst.get(i).getContent();
+			arr[i][0] = lst.get(i).getContent();
+			arr[i][1] = lst.get(i).getQid().toString();
 		}
 		return arr;
 	}
