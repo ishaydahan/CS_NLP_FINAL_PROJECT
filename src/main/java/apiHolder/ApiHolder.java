@@ -62,6 +62,11 @@ public class ApiHolder {
 			razor[2].addExtractor("entailments");
 			razor[3].addExtractor("entailments");
 
+			System.out.println("**   connecting to database...   **");
+	        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
+	        client = new MongoClient(uri);
+	        db = client.getDatabase(uri.getDatabase());
+	        
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -82,6 +87,7 @@ public class ApiHolder {
 	public MongoCollection<Document> collection;
 	public MongoCollection<Document> users;
 	public MongoClient client;
+	public MongoDatabase db;
 	
 	public Scanner scanner = new Scanner(System.in);     
 	
@@ -159,22 +165,41 @@ public class ApiHolder {
 	 * @return test collection
 	 * this function is activated once in a while... please check.
 	 */
+	public void connect() {
+		System.out.println("**   connecting to database...   **");
+        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
+        client = new MongoClient(uri);
+        db = client.getDatabase(uri.getDatabase());
+		users = db.getCollection("users"); 
+		collection = db.getCollection("tests"); 
+	}
+
+	
+	/**
+	 * @return test collection
+	 * this function is activated once in a while... please check.
+	 */
+	public MongoCollection<Document> getUsers() {
+		try {
+			users.count();
+			return users;
+		}catch(Exception e) {
+			users = db.getCollection("users"); 
+	        return users;
+		}
+	}
+
+	/**
+	 * @return test collection
+	 * this function is activated once in a while... please check.
+	 */
 	public MongoCollection<Document> getCollection() {
 		try {
 			collection.count();
 			return collection;
 		}catch(Exception e) {
-			System.out.println("\nconnecting to database...");
-
-	        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
-	        client = new MongoClient(uri);
-	        MongoDatabase db = client.getDatabase(uri.getDatabase());
-	        collection = db.getCollection("tests"); 
-	        users = db.getCollection("users"); 
+			collection = db.getCollection("tests"); 
 	        return collection;
-		} finally {
-//			client.close();
-//			scanner.close();
 		}
 	}
 
