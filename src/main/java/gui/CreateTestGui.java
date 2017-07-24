@@ -7,6 +7,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
+import objects.Person;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -40,6 +42,7 @@ public class CreateTestGui {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private int i;
+	private Person person;
 	
 	/**
 	 * Launch the application.
@@ -59,6 +62,7 @@ public class CreateTestGui {
 
 	/**
 	 * Create the application.
+	 * @param p 
 	 */
 	public CreateTestGui() {
 		initialize();
@@ -88,7 +92,7 @@ public class CreateTestGui {
 		btnGenerateTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//adding the details to the test
-				System.out.println("adding the test to the db");
+				person.createTest(textField.getText());
 			}
 		});
 		

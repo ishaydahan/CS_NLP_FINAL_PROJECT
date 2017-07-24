@@ -13,14 +13,20 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import objects.Answer;
 import objects.Person;
+import objects.Question;
+import objects.Test;
 
 public class CSGui {
 
 	private JFrame frame;
 	private JTextField textFieldUser;
 	private JPasswordField passwordField;
-
+	static Person p;
+	static Test t;
+	static Question q;
+	static Answer a;
 	/**
 	 * Launch the application.
 	 */
@@ -93,13 +99,13 @@ public class CSGui {
 					String userName = textFieldUser.getText();
 					String password = passwordField.getText();
 					
-					Person p = new Person().load();
+					p = new Person().load();
 //					boolean login = p.checkUser(mode,userName,password);
 	
 //				if(login){
 						if (mode == 1){
-							TeacherGui t = new TeacherGui(p);
-							t.TeacherScreen(userName , p);
+							TeacherGui t = new TeacherGui();
+							t.TeacherScreen(userName);
 						} 
 	//					else {
 	//						Student s = new Student(p);
