@@ -25,7 +25,7 @@ public class Person {
 	
 	public boolean login(String username, String password) {
 		ApiHolder.getInstance().getCollection();
-		long users = ApiHolder.getInstance().users.count(
+		long users = ApiHolder.getInstance().getUsers().count(
 				new Document().append("username", username).append("password", password));
 		
 		if (users>0) {
@@ -114,7 +114,6 @@ public class Person {
 			arr[i][0] = lst.get(i).getContent();
 			arr[i][1] = lst.get(i).getTid().toString();
 		}
-		System.out.println(arr);
 		return arr;
 	}
 

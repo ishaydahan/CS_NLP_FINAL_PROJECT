@@ -1,6 +1,15 @@
 package teacherConsoleApi;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 import analyzer.AnswerAnalyzer;
 import apiHolder.ApiHolder;
@@ -8,24 +17,71 @@ import objects.Answer;
 import objects.Person;
 import objects.Writer;
 
+//class Connector implements Callable<Boolean> {
+//    public Boolean call() throws Exception {
+//    	Thread.sleep(3000);
+//		System.out.println("**   connecting to database...   **");
+//        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
+//        ConsoleProgram.holder.client = new MongoClient(uri);
+//        ConsoleProgram.holder.db = ConsoleProgram.holder.client.getDatabase(uri.getDatabase());
+//        return true;
+//    }
+//}
+//   
+//class login implements Callable<Person> {
+//    public Person call() throws Exception {
+//		System.out.print("Enter Username:");
+//		String user = ConsoleProgram.holder.scanner.nextLine();
+//		
+//		System.out.print("Enter Password:");
+//		String pass = ConsoleProgram.holder.scanner.nextLine();
+//		
+//		Person p = new Person();
+//		return Person;
+//
+//    }
+//}
+
 public class ConsoleProgram {
 	
+//	public static ApiHolder holder = ApiHolder.getInstance();
+
 	public static void main(String[] args) {	
 //		test();
-		ApiHolder a = ApiHolder.getInstance();
 		
-		System.out.print("Enter Username:");
-		String user = a.scanner.nextLine();
-		
-		System.out.print("Enter Password:");
-		String pass = ApiHolder.getInstance().scanner.nextLine();
+//        //Get ExecutorService from Executors utility class, thread pool size is 10
+//        ExecutorService executor = Executors.newFixedThreadPool(1);
+//        //Create MyCallable instance
+//        Callable<Boolean> Connector = new Connector();
+//        Callable<Boolean> login = new login();
+//
+//        
+//            //submit Callable tasks to be executed by thread pool
+//            Future<Boolean> future = executor.submit(callable);
+//
+//            try {
+//                //print the return value of Future, notice the output delay in console
+//                // because Future.get() waits for task to get completed
+//                System.out.println(new Date()+ "::"+future.get());
+//            } catch (InterruptedException | ExecutionException e) {
+//                e.printStackTrace();
+//            }
+//            
+//            System.out.println("aaa");
+//
+//    		while (!p.login(user, pass)) {
+//    			System.out.println("wrong user/pass");
+//    			System.out.print("Enter Username:");
+//    			user = holder.scanner.nextLine();
+//    			
+//    			System.out.print("Enter Password:");
+//    			pass = holder.scanner.nextLine();
+//    		}
+//    		
+//    		System.out.print("WELCOME " + p.getName());
 		
 		Person p = new Person();
-		
-		while (!p.login(user, pass)) 
-			System.out.println("wrong user/pass");
-		
-		System.out.print("WELCOME " + p.getName());
+
 		ConsolePerson api = new ConsolePerson(p.load());
 		api.main();	
 
