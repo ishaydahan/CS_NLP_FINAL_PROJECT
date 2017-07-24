@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class ShowTest extends JFrame {
+public class ShowTestGui extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -20,7 +20,7 @@ public class ShowTest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ShowTest frame = new ShowTest();
+					ShowTestGui frame = new ShowTestGui();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +32,7 @@ public class ShowTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ShowTest() {
+	public ShowTestGui() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

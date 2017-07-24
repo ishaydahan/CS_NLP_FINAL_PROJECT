@@ -15,7 +15,7 @@ import javax.swing.border.TitledBorder;
 
 import objects.Person;
 
-public class CSGuiClass {
+public class CSGui {
 
 	private JFrame frame;
 	private JTextField textFieldUser;
@@ -28,7 +28,7 @@ public class CSGuiClass {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CSGuiClass window = new CSGuiClass();
+					CSGui window = new CSGui();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class CSGuiClass {
 	/**
 	 * Create the application.
 	 */
-	public CSGuiClass() {
+	public CSGui() {
 		initialize();
 	}
 
@@ -98,8 +98,8 @@ public class CSGuiClass {
 	
 //				if(login){
 						if (mode == 1){
-							Teacher t = new Teacher(p);
-							t.TeacherScreen(userName);
+							TeacherGui t = new TeacherGui(p);
+							t.TeacherScreen(userName , p);
 						} 
 	//					else {
 	//						Student s = new Student();
