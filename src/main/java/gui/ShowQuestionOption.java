@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 public class ShowQuestionOption extends JFrame {
 
 	private JPanel contentPane;
-
+	private int point;
 	/**
 	 * Launch the application.
 	 */
@@ -66,8 +66,16 @@ public class ShowQuestionOption extends JFrame {
 		btnCreateAnswers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String answer= JOptionPane.showInputDialog("Please write your Answer: ");
-				
-				//CSGui.q.createQuestion(answer);
+				while(true) {
+					try {
+					String grade= JOptionPane.showInputDialog("Please write the answer Grade: ");
+					point = Integer.parseInt(grade);
+					break;
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(null, "Please enter a valid number of points");
+					}
+				}
+				CSGui.q.addTeacherAns(answer, point);
 
 			}
 		});
