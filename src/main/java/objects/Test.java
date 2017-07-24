@@ -1,5 +1,7 @@
 package objects;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -14,7 +16,7 @@ public class Test {
 	
 	private String content;// the test name
 	private ObjectId tid;//test id
-	private ArrayList<Question> questions = new ArrayList<Question>();
+	private List<Question> questions = new ArrayList<Question>();
 	
 	public Test(ObjectId tid, String content) {
 		this.tid=tid;
@@ -28,7 +30,7 @@ public class Test {
 		questions = new ArrayList<Question>();
 		
 		@SuppressWarnings("unchecked")
-		ArrayList<Document> docQuestions = (ArrayList<Document>) ApiHolder.getInstance().getCollection().find(new Document().append("_id", tid))
+		List<Document> docQuestions = (List<Document>) ApiHolder.getInstance().getCollection().find(new Document().append("_id", tid))
 			.first().get("questions");
 		
 		for(Document d : docQuestions) {
@@ -91,7 +93,7 @@ public class Test {
 	/**
 	 * @return list of questions
 	 */
-	public ArrayList<Question> getQuestions() {
+	public List<Question> getQuestions() {
 	    return questions;
 	}
 
@@ -128,7 +130,7 @@ public class Test {
 		return new Document().append("_id", a.getQid()).append("content", a.getContent()).append("answers", a.getAnswers());
 	}
 	
-	public Object[][] questionsToArr(ArrayList<Question> lst){
+	public Object[][] questionsToArr(List<Question> lst){
 		Object[][] arr = new Object[lst.size()][2];
 		for(int i=0; i<lst.size(); i++) {
 			arr[i][0] = lst.get(i).getContent();

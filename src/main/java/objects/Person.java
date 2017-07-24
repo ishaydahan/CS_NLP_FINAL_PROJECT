@@ -1,6 +1,7 @@
 package objects;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import com.mongodb.client.FindIterable;
@@ -17,7 +18,7 @@ import apiHolder.ApiHolder;
 public class Person {
 	
 	private String name;
-	private ArrayList<Test> tests = new ArrayList<Test>();
+	private List<Test> tests = new ArrayList<Test>();
 	
 	public Person() {
 	}
@@ -94,7 +95,7 @@ public class Person {
 		return tests.stream().filter(x->x.getTid().toString().equals(id)).findFirst().orElse(null);
 	}	
 	
-	public ArrayList<Test> getTests() {
+	public List<Test> getTests() {
 		return tests;
 	}
 
@@ -107,7 +108,7 @@ public class Person {
 		return new Document().append("_id", a.getTid()).append("content", a.getContent()).append("questions", a.getQuestions());
 	}
 	
-	public Object[][] testsToArr(ArrayList<Test> lst){
+	public Object[][] testsToArr(List<Test> lst){
 		Object[][] arr = new Object[lst.size()][2];
 		for(int i=0; i<lst.size(); i++) {
 			arr[i][0] = lst.get(i).getContent();
