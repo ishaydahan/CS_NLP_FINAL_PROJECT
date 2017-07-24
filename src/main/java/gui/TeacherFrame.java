@@ -66,12 +66,13 @@ public class TeacherFrame extends JFrame {
 				CSGui.t = CSGui.p.getTest(ID).load(); //init the static test of GUI 
 				ShowTestGui s = new ShowTestGui();
 				s.setVisible(true);
+				dispose();
 				}
 			}
 		});
 		
-		JButton btnCreateTest = new JButton("Create Test");
-		btnCreateTest.setBounds(178, 226, 89, 23);
+		JButton btnCreateTest = new JButton("Create new test");
+		btnCreateTest.setBounds(152, 226, 139, 23);
 		contentPane.add(btnCreateTest);
 		JLabel lblHello = new JLabel("Hello , " + CSGui.p.getName());
 		lblHello.setBounds(10, 11, 103, 14);
@@ -81,6 +82,7 @@ public class TeacherFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CreateTestGui ct = new CreateTestGui();
 				ct.createTest();
+				dispose();
 			}
 		});
 	}

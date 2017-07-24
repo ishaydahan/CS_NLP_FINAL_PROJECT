@@ -39,10 +39,7 @@ public class CreateTestGui {
 
 	private JFrame frame;
 	private JTextField textField;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private int i;
-	private Person person;
+
 	
 	/**
 	 * Launch the application.
@@ -92,7 +89,10 @@ public class CreateTestGui {
 		btnGenerateTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//adding the details to the test
-				person.createTest(textField.getText());
+				CSGui.p.createTest(textField.getText());
+				TeacherFrame t = new TeacherFrame();
+				t.setVisible(true);
+				frame.dispose();
 			}
 		});
 		

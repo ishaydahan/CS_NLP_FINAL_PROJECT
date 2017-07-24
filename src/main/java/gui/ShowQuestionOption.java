@@ -48,6 +48,7 @@ public class ShowQuestionOption extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ShowTanswers t = new ShowTanswers();
 				t.setVisible(true);
+				dispose();
 			}
 		});
 		btnShowTeacherAnswers.setBounds(25, 25, 183, 23);
@@ -58,6 +59,7 @@ public class ShowQuestionOption extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ShowSanswers s = new ShowSanswers();
 				s.setVisible(true);
+				dispose();
 			}
 		});
 		btnShowStudentsAnswers.setBounds(25, 63, 183, 23);
@@ -77,7 +79,9 @@ public class ShowQuestionOption extends JFrame {
 					}
 				}
 				CSGui.q.addTeacherAns(answer, point);
-
+				dispose();
+				ShowTestGui s = new ShowTestGui();
+				s.setVisible(true);
 			}
 		});
 		btnCreateAnswers.setBounds(239, 25, 154, 23);
@@ -95,7 +99,10 @@ public class ShowQuestionOption extends JFrame {
 		JButton btnDeleteQuestion = new JButton("Delete question");
 		btnDeleteQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			CSGui.t.removeQuestion(CSGui.q);
+				CSGui.t.removeQuestion(CSGui.q);
+				ShowTestGui s = new ShowTestGui();
+				s.setVisible(true);
+				dispose();
 			}
 		});
 		btnDeleteQuestion.setBounds(25, 133, 183, 23);

@@ -97,10 +97,8 @@ public class CSGui {
 			public void actionPerformed(ActionEvent e) {
 					String userName = textFieldUser.getText();
 					String password = passwordField.getText();
-					
 					p = new Person();
 					boolean login = p.login(userName, password);
-	
 				if(login){
 					p.load();
 						if (ApiHolder.getInstance().teacher){
@@ -112,10 +110,11 @@ public class CSGui {
 	//						s.setVisible(true);
 	//					}
 	//				} 
+						frame.dispose();
+;
 			}	else {					
 				JOptionPane.showMessageDialog(null, "Login failed, check you user name and password and try again");
 			}
-				frame.dispose();
 			}
 		});
 	}

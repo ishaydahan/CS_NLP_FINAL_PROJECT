@@ -53,13 +53,6 @@ public class ShowTestGui extends JFrame {
 		Object[][] objs = CSGui.t.questionsToArr(CSGui.t.getQuestions());
 		//Object[][] objs = {{"design mode"}}; // for design		
 		table = new JTable(objs, col);
-		table.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				int i = table.getSelectedRow();
-				if(i != -1)
-					System.out.println(table.getValueAt(i, 0));
-			}
-		});
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(50, 37, 346, 170);
 		contentPane.add(scrollPane);
@@ -67,10 +60,11 @@ public class ShowTestGui extends JFrame {
 		JButton btnNewButton = new JButton("Add question");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				String test1= JOptionPane.showInputDialog("Please write your Question: ");
-				System.out.println(test1);
 				CSGui.t.createQuestion(test1);
-				CSGui.t.load();
+				ShowTestGui s = new ShowTestGui();
+				s.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(32, 227, 123, 23);
@@ -79,7 +73,11 @@ public class ShowTestGui extends JFrame {
 		JButton btnCheckTest = new JButton("Check test");
 		btnCheckTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				CSGui.t.checkTest();
+				JOptionPane.showMessageDialog(null, "Test was checked");
+				TeacherFrame t = new TeacherFrame();
+				t.setVisible(true);
 			}
 		});
 		btnCheckTest.setBounds(165, 227, 115, 23);
@@ -88,7 +86,10 @@ public class ShowTestGui extends JFrame {
 		JButton btnDeleteTest = new JButton("Delete test");
 		btnDeleteTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				CSGui.p.removeTest(CSGui.t);
+				TeacherFrame t = new TeacherFrame();
+				t.setVisible(true);
 			}
 		});
 		btnDeleteTest.setBounds(290, 227, 117, 23);
@@ -99,10 +100,12 @@ public class ShowTestGui extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int i = table.getSelectedRow();
 				if(i != -1) {
-				String ID = (String) objs[i][1]; //ID of question
-				CSGui.q = CSGui.t.getQuestion(ID).load();
-				ShowQuestionOption sq = new ShowQuestionOption();
-				sq.setVisible(true);
+					String ID = (String) objs[i][1]; //ID of question
+					CSGui.q = CSGui.t.getQuestion(ID).load();
+					System.out.println(ID);
+					ShowQuestionOption sq = new ShowQuestionOption();
+					sq.setVisible(true);
+					dispose();
 				}
 			}
 		});

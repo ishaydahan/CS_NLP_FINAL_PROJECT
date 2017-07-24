@@ -52,7 +52,7 @@ public class SAnswerOption extends JFrame {
 				CSGui.q.approveAnswer(CSGui.a);
 			}
 		});
-		btnApproveAnswer.setBounds(45, 140, 134, 23);
+		btnApproveAnswer.setBounds(61, 138, 134, 23);
 		contentPane.add(btnApproveAnswer);
 		
 		JButton btnFixPoints = new JButton("Fix");
@@ -75,7 +75,7 @@ public class SAnswerOption extends JFrame {
 		textField.setColumns(10);
 		
 		JLabel lblChangePoints = new JLabel("Change points:");
-		lblChangePoints.setBounds(45, 90, 118, 14);
+		lblChangePoints.setBounds(61, 90, 118, 14);
 		contentPane.add(lblChangePoints);
 	}
 }
