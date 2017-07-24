@@ -22,13 +22,13 @@ public class Test {
 	}
 	
 	/**
-	 * @return
+	 * @return test object with loaded data from DB
 	 */
 	public Test load() {
 		questions = new ArrayList<Question>();
 		
 		@SuppressWarnings("unchecked")
-		ArrayList<Document> docQuestions = (ArrayList<Document>) ApiHolder.getCollection().find(new Document().append("_id", tid))
+		ArrayList<Document> docQuestions = (ArrayList<Document>) ApiHolder.getInstance().getCollection().find(new Document().append("_id", tid))
 			.first().get("questions");
 		
 		for(Document d : docQuestions) {
@@ -39,9 +39,7 @@ public class Test {
 		
 	/**
 	 * @param q - the question string
-	 * @return question object
-	 * creates question object, update database.
-	 * will return null if the database contains same question string.
+	 * @return Question object. null if the database contains same question string.
 	 */
 	public Question createQuestion(String q) {
         Question toAdd = new Question(new ObjectId(), q);
@@ -50,15 +48,19 @@ public class Test {
         	return null;
         }else {
         	questions.add(toAdd);
-    		ApiHolder.getCollection().updateOne(new Document().append("_id", tid),
+    		ApiHolder.getInstance().getCollection().updateOne(new Document().append("_id", tid),
     				new Document("$push", new Document().append("questions", questionToDoc(toAdd))));	
     		return toAdd;
         }
 	}
 	
+	/**
+	 * @param toRemove - some question
+	 * @return boolean success
+	 */
 	public boolean removeQuestion(Question toRemove) {
 		questions.remove(toRemove);
-		ApiHolder.getCollection().deleteOne(new Document("_id", toRemove.getQid()));
+		ApiHolder.getInstance().getCollection().deleteOne(new Document("_id", toRemove.getQid()));
 		return true;
 	}	
 
@@ -73,12 +75,15 @@ public class Test {
 	
 	/**
 	 * @param id - can get it from {@link Question} getQId
-	 * @return
+	 * @return boolean success
 	 */
 	public Question getQuestion(String id) {
 		return questions.stream().filter(x->x.getQid().toString().equals(id)).findFirst().orElse(null);
 	}
 
+	/**
+	 * @return list of questions
+	 */
 	public ArrayList<Question> getQuestions() {
 	    return questions;
 	}
@@ -108,12 +113,22 @@ public class Test {
 	}
 
 	/**
-	 * @param a
-	 * @return
+	 * @param a question
+	 * @return doc object that can be used in mongodb
 	 * this is private database related function
 	 */
 	private Document questionToDoc(Question a) {
 		return new Document().append("_id", a.getQid()).append("content", a.getContent()).append("answers", a.getAnswers());
 	}
+	
+	public Object[][] questionsToArr(ArrayList<Question> lst){
+		Object[][] arr = new Object[lst.size()][2];
+		for(int i=0; i<lst.size(); i++) {
+			arr[i][0] = lst.get(i).getQid();
+			arr[i][1] = lst.get(i).getContent();
+		}
+		return arr;
+	}
+
 
 }

@@ -32,7 +32,7 @@ public class Question {
 	public Question load() {
 		answers = new ArrayList<Answer>();
 		
-		ArrayList<Document> docAnswers = (ArrayList<Document>) ApiHolder.getCollection().find(new Document().append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))))
+		ArrayList<Document> docAnswers = (ArrayList<Document>) ApiHolder.getInstance().getCollection().find(new Document().append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))))
 		.first().get("questions");
 		docAnswers = (ArrayList<Document>) docAnswers.get(0).get("answers");
 
@@ -54,7 +54,7 @@ public class Question {
 	 * if answers already contains this answer will return null
 	 */
 	public Answer addTeacherAns(String teacher_ans, int grade) {        
-        Answer toAdd = ApiHolder.factory.createAnswer(teacher_ans, grade, Writer.TEACHER);
+        Answer toAdd = ApiHolder.getInstance().factory.createAnswer(teacher_ans, grade, Writer.TEACHER);
         if (answers.contains(toAdd)) {
         	System.out.println("Already has that answer!" + toAdd.getContent());
         	return null;
@@ -71,7 +71,7 @@ public class Question {
 	 * wont check containing answer since each student may write same answer content
 	 */
 	public Answer addStudentAns(String student_ans){
-        Answer toAdd = ApiHolder.factory.createAnswer(student_ans, -1, Writer.STUDENT);
+        Answer toAdd = ApiHolder.getInstance().factory.createAnswer(student_ans, -1, Writer.STUDENT);
         DBcreateAnswer(toAdd);
         answers.add(toAdd);
 		return toAdd;
@@ -207,21 +207,21 @@ public class Question {
 	}
 	
 	public boolean DBeditAnswer(Answer x) {
-		ApiHolder.getCollection().updateOne(new Document()
+		ApiHolder.getInstance().getCollection().updateOne(new Document()
 				.append("questions.answers._id", x.get_id()),
 				new Document("$set", new Document().append("questions.0.answers.$", answerToDoc(x))));
 		return true;
 	}
 	
 	public boolean DBremoveAnswer(Answer x) {
-		ApiHolder.getCollection().updateOne(new Document()
+		ApiHolder.getInstance().getCollection().updateOne(new Document()
 				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 				new Document("$pull", new Document().append("questions.$.answers", answerToDoc(x))));	
 		return true;
 	}
 
 	public boolean DBcreateAnswer(Answer x) {
-		ApiHolder.getCollection().updateOne(new Document()
+		ApiHolder.getInstance().getCollection().updateOne(new Document()
 				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),
 				new Document("$push", new Document().append("questions.$.answers", answerToDoc(x))));	
 		return true;
@@ -283,5 +283,17 @@ public class Question {
 	private Document answerToDoc(Answer a) {
 		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter().name()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("syntaxable", a.getsyntaxable());
 	}
+	
+	public Object[][] AnswersToArr(ArrayList<Answer> lst){
+		Object[][] arr = new Object[lst.size()][3];
+		for(int i=0; i<lst.size(); i++) {
+			arr[i][0] = lst.get(i).get_id();
+			arr[i][1] = lst.get(i).getContent();
+			arr[i][2] = lst.get(i).getGrade();
+		}
+		return arr;
+	}
+
+
 
 }

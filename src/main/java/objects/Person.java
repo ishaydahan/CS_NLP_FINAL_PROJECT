@@ -23,7 +23,7 @@ public class Person {
 	public Person load() {
 		tests = new ArrayList<Test>();
 		
-		FindIterable<Document> docTests = ApiHolder.getCollection().find();
+		FindIterable<Document> docTests = ApiHolder.getInstance().getCollection().find();
 		
 		for(Document d : docTests) {
 			this.tests.add(new Test(d.getObjectId("_id"), d.getString("content")));
@@ -44,7 +44,7 @@ public class Person {
         	return null;
         }else {
         	tests.add(toAdd);
-    		ApiHolder.getCollection().insertOne(testToDoc(toAdd));
+    		ApiHolder.getInstance().getCollection().insertOne(testToDoc(toAdd));
     		return toAdd;
     	}
 	}
@@ -56,7 +56,7 @@ public class Person {
 	 */
 	public boolean removeTest(Test toRemove) {
 		tests.remove(toRemove);
-		ApiHolder.getCollection().deleteOne(new Document("_id", toRemove.getTid()));
+		ApiHolder.getInstance().getCollection().deleteOne(new Document("_id", toRemove.getTid()));
 		return true;
 	}	
 
@@ -81,6 +81,15 @@ public class Person {
 	 */
 	private Document testToDoc(Test a) {
 		return new Document().append("_id", a.getTid()).append("content", a.getContent()).append("questions", a.getQuestions());
+	}
+	
+	public Object[][] testsToArr(ArrayList<Test> lst){
+		Object[][] arr = new Object[lst.size()][2];
+		for(int i=0; i<lst.size(); i++) {
+			arr[i][0] = lst.get(i).getTid();
+			arr[i][1] = lst.get(i).getContent();
+		}
+		return arr;
 	}
 
 }

@@ -4,11 +4,11 @@ import apiHolder.ApiHolder;
 import objects.Person;
 import objects.Test;
 
-public class ConsoleTeacherMain {
+public class ConsolePerson {
 		
 	private Person p = null;
 
-	protected ConsoleTeacherMain(Person p) {
+	protected ConsolePerson(Person p) {
 		this.p=p;
 	}
 
@@ -22,7 +22,7 @@ public class ConsoleTeacherMain {
 			System.out.println("3 - select test");
 			System.out.println("4 - remove test");
 
-			option = ApiHolder.scanner.nextLine();
+			option = ApiHolder.getInstance().scanner.nextLine();
 			if (option.equals("0")) {
 				System.out.println("Bye!");
 				return;
@@ -42,7 +42,7 @@ public class ConsoleTeacherMain {
 	
 	protected void createTest() {
 		System.out.println(">> Enter Test:");
-        String t = ApiHolder.scanner.nextLine();
+        String t = ApiHolder.getInstance().scanner.nextLine();
         
         this.p.createTest(t);
 	}
@@ -57,20 +57,20 @@ public class ConsoleTeacherMain {
 	
 	protected void selectTest() {
 		System.out.println(">> Enter Test id:");
-        String id = ApiHolder.scanner.nextLine();
+        String id = ApiHolder.getInstance().scanner.nextLine();
         
         Test t = this.p.getTest(id);
         if (t==null) {
         	System.err.println("there is no such test!");
         	return;
         }
-    	ConsoleTeacherTest api = new ConsoleTeacherTest(t.load());
+    	ConsoleTest api = new ConsoleTest(t.load());
     	api.main();
 	}		
 	
 	protected void remove() {
 		System.out.println(">> Enter Test id:");
-        String id = ApiHolder.scanner.nextLine();
+        String id = ApiHolder.getInstance().scanner.nextLine();
         
         Test t = this.p.getTest(id);
         if (t==null) {

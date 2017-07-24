@@ -40,35 +40,11 @@ import objects.Factory;
  * 6. {@link PrintStream} logger
  */
 public class ApiHolder {
-    
-	public static int LEVENSHTEIN = 3;//constant for levenshtein calc
-	public static double MEANING = 0;//constant for textrazor calc
-	public static int REDUCE = 5;//points for each different
-	public static int COMP = 5;//points for each different
-	public static int MAXGRADE = 100;//max points per answer
-	public static int MINGRADE = 0;//min points per answer
-
-	public static MongoCollection<Document> collection;
-	public static MongoClient client;
 	
-	public static Scanner scanner = new Scanner(System.in);     
+	private final static ApiHolder INSTANCE = new ApiHolder();
 	
-	public static HashMap<String, List<String>> spellingList = new HashMap<String, List<String>>();
-	public static JLanguageTool lang = new JLanguageTool(new BritishEnglish());
-	
-	public static HashMap<String, List<Entailment>> entailmentList = new HashMap<String, List<Entailment>>();
-	
-	public static LanguageServiceClient langClient = null;
-	
-	public static PrintStream logger = null;
-	
-	public static TextRazor t;
-	public static int i =0;
-	public static TextRazor[] razor = new TextRazor[4];
-	
-	public static Factory factory = new Factory();
-	
-	static {
+	// Private constructor suppresses generation of a (public) default constructor
+	private ApiHolder() {
 		try {
 			Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
 			mongoLogger.setLevel(Level.SEVERE);
@@ -90,14 +66,45 @@ public class ApiHolder {
 			e.printStackTrace();
 		}
 	}
-		
+	 
+	public static ApiHolder getInstance() {
+		return INSTANCE;
+	}
+
+	public int LEVENSHTEIN = 3;//constant for levenshtein calc
+	public double MEANING = 0;//constant for textrazor calc
+	public int REDUCE = 5;//points for each different
+	public int COMP = 5;//points for each spelling or meaning correct
+	public int MAXGRADE = 100;//max points per answer
+	public int MINGRADE = 0;//min points per answer
+	public boolean teacher = false ;//user logged in
+
+	public MongoCollection<Document> collection;
+	public MongoClient client;
+	
+	public Scanner scanner = new Scanner(System.in);     
+	
+	public HashMap<String, List<String>> spellingList = new HashMap<String, List<String>>();
+	public JLanguageTool lang = new JLanguageTool(new BritishEnglish());
+	
+	public HashMap<String, List<Entailment>> entailmentList = new HashMap<String, List<Entailment>>();
+	
+	public LanguageServiceClient langClient = null;
+	
+	public PrintStream logger = null;
+	
+	public TextRazor t;
+	public int i =0;
+	public TextRazor[] razor = new TextRazor[4];
+	
+	public Factory factory = new Factory();
 	
 	/**
 	 * @param s - a word
 	 * @return list of spelling suggestion
 	 * we keep all spelling suggestion in hashmap to save time.
 	 */
-	public static List<String> getSpelling(String s) {
+	public List<String> getSpelling(String s) {
 		if (spellingList.containsKey(s)) {
 			return spellingList.get(s);
 		}
@@ -117,7 +124,7 @@ public class ApiHolder {
 	/**
 	 * 
 	 */
-	public static void switchrazor() {
+	public void switchrazor() {
 		t = razor[i%4];
 		i++;
 	}
@@ -126,7 +133,7 @@ public class ApiHolder {
 	 * @return list of contextual meanings
 	 * we keep all Entailment in hashmap to save time
 	 */
-	public static List<Entailment> getEntailmentList(String s) {
+	public List<Entailment> getEntailmentList(String s) {
 		
 		if (entailmentList.containsKey(s)) {
 			return entailmentList.get(s);
@@ -151,7 +158,7 @@ public class ApiHolder {
 	 * @return test collection
 	 * this function is activated once in a while... please check.
 	 */
-	public static MongoCollection<Document> getCollection() {
+	public MongoCollection<Document> getCollection() {
 		try {
 			collection.count();
 			return collection;

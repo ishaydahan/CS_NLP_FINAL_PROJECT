@@ -54,16 +54,16 @@ public class Answer {
 			//google analyzer
 			Document doc = Document.newBuilder()
 		            .setContent(content).setType(Type.PLAIN_TEXT).build();
-			ApiHolder.logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content + " $$ google api");
-			Analyzed_ans = ApiHolder.langClient.analyzeSyntax(doc, EncodingType.UTF8);
+			ApiHolder.getInstance().logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content + " $$ google api");
+			Analyzed_ans = ApiHolder.getInstance().langClient.analyzeSyntax(doc, EncodingType.UTF8);
 		}
 		
 		if (answerWords==-1) {
 			answerWords++;
 			for(Token t : Analyzed_ans.getTokensList()) {
 				if (!Arrays.asList(del).contains(t.getPartOfSpeech().getTag())) {
-						ApiHolder.logger.println("ANALYZER :::: Teacher parts: " + t.getText().getContent());
-						ApiHolder.logger.println("ANALYZER :::: Teacher parts: " + t.getPartOfSpeech().getTag());
+						ApiHolder.getInstance().logger.println("ANALYZER :::: Teacher parts: " + t.getText().getContent());
+						ApiHolder.getInstance().logger.println("ANALYZER :::: Teacher parts: " + t.getPartOfSpeech().getTag());
 						answerWords++;
 				}
 			}

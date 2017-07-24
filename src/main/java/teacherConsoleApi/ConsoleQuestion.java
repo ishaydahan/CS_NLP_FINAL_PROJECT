@@ -6,11 +6,11 @@ import apiHolder.ApiHolder;
 import objects.Answer;
 import objects.Question;
 
-public class ConsoleTeacherQuestion {
+public class ConsoleQuestion {
 	
 	protected Question q;
 
-	protected ConsoleTeacherQuestion(Question q) {
+	protected ConsoleQuestion(Question q) {
 		this.q=q;
 	}
 	
@@ -20,6 +20,7 @@ public class ConsoleTeacherQuestion {
 			System.out.println("\n@@  Question Screen Options  @@");
 			System.out.println("0 - exit");
 			System.out.println("1 - add teacher answer");
+			System.out.println("2 - add student answer");
 			System.out.println();			
 			System.out.println("31 - show TEACHER answers");
 			System.out.println("32 - show STUDENT answers");
@@ -40,12 +41,14 @@ public class ConsoleTeacherQuestion {
 			System.out.println("71 - approve answer");
 			System.out.println("72 - approve all answers");
 
-			option = ApiHolder.scanner.nextLine();
+			option = ApiHolder.getInstance().scanner.nextLine();
 			if (option.equals("0")) {
 				System.out.println(">> Returning Test Screen");
 				return;
 			}else if(option.length()>0 && option.charAt(0)=='1') {
-				addAns();
+				addTeacherAns();
+			}else if(option.length()>0 && option.charAt(0)=='2') {
+				addStudentAns();
 			}else if(option.length()>0 && option.charAt(0)=='3') {
 				showAnswers(Integer.valueOf(""+option.charAt(1)));
 			}else if(option.length()>0 && option.charAt(0)=='4') {
@@ -62,17 +65,25 @@ public class ConsoleTeacherQuestion {
 		}
 	}
 	
-	protected void addAns() {
+	protected void addTeacherAns() {
 		System.out.println(">> Enter Answer:");
-        String teacher_ans = ApiHolder.scanner.nextLine();
+        String ans = ApiHolder.getInstance().scanner.nextLine();
 
 		System.out.println(">> Enter Answer grade:");
-        String grade = ApiHolder.scanner.nextLine();
+        String grade = ApiHolder.getInstance().scanner.nextLine();
 
-        if (q.addTeacherAns(teacher_ans, Integer.valueOf(grade))!=null)
+        if (q.addTeacherAns(ans, Integer.valueOf(grade))!=null)
         	System.out.println("operation OK!");
 	}
 		
+	protected void addStudentAns() {
+		System.out.println(">> Enter Answer:");
+        String ans = ApiHolder.getInstance().scanner.nextLine();
+
+        if (q.addStudentAns(ans)!=null)
+        	System.out.println("operation OK!");
+	}
+
 	protected void showAnswers (int choice) {
         System.out.println("///////////////////////////////////");
 		List<Answer> filterdList = null;
@@ -96,18 +107,13 @@ public class ConsoleTeacherQuestion {
 	
 	protected void fixAns(){
 		System.out.println(">> Enter Answer id:");
-		String id = ApiHolder.scanner.nextLine();
+		String id = ApiHolder.getInstance().scanner.nextLine();
 		
 		System.out.println(">> Enter Answer grade:");
-        String grade = ApiHolder.scanner.nextLine();
+        String grade = ApiHolder.getInstance().scanner.nextLine();
 		
-        try {
-			if (q.fixAns(Integer.parseInt(grade), q.getAnswer(id))) {
-	        	System.out.println("operation OK!");
-			};
-		}catch(Exception e) {
-			return;
-		}
+		if (q.fixAns(Integer.parseInt(grade), q.getAnswer(id)))
+        	System.out.println("operation OK!");
 	}
 		
 	protected void checkQuestion(int choice) {
@@ -119,34 +125,32 @@ public class ConsoleTeacherQuestion {
 	
 	protected void approve(int choice) {
 		if (choice==2) {
-			q.approveAll();
+			if (q.approveAll()) {
+	        	System.out.println("operation OK!");
+			}
 		}
 		
 		if (choice==1) {
 			System.out.println(">> Enter Answer id:");
-			String id = ApiHolder.scanner.nextLine();
-	        try {
-				q.approveAnswer(q.getAnswer(id));
+			String id = ApiHolder.getInstance().scanner.nextLine();
+			if (q.approveAnswer(q.getAnswer(id))){
 		    	System.out.println("operation OK!");
-	        }catch(Exception e) {
-
-	        }
+			}
 		}
 	}
 	
 	protected void remove(int choice) {
 		if (choice==2) {
-			q.removeAll();
+			if(q.removeAll()) {
+	        	System.out.println("operation OK!");
+			}
 		}
 		
 		if (choice==1) {
-			try {
-				System.out.println(">> Enter Answer id:");
-				String id = ApiHolder.scanner.nextLine();
-				q.removeAnswer(q.getAnswer(id));
+			System.out.println(">> Enter Answer id:");
+			String id = ApiHolder.getInstance().scanner.nextLine();
+			if(q.removeAnswer(q.getAnswer(id))) {
 	        	System.out.println("operation OK!");
-			}catch(Exception e) {
-				return;
 			}
 		}	
 	}
