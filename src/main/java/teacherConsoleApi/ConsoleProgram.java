@@ -12,10 +12,10 @@ public class ConsoleProgram {
 	
 	public static void main(String[] args) {	
 //		test();
-		ApiHolder a = new ApiHolder();
+		ApiHolder a = ApiHolder.getInstance();
 		
 		System.out.print("Enter Username:");
-		String user = a.getInstance().scanner.nextLine();
+		String user = a.scanner.nextLine();
 		
 		System.out.print("Enter Password:");
 		String pass = ApiHolder.getInstance().scanner.nextLine();
