@@ -98,7 +98,7 @@ public class CSGuiClass {
 	
 //				if(login){
 						if (mode == 1){
-							Teacher t = new Teacher();
+							Teacher t = new Teacher(p);
 							t.TeacherScreen(userName);
 						} 
 	//					else {

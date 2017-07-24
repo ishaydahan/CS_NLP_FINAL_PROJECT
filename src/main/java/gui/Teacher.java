@@ -9,11 +9,14 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import objects.Person;
+
 public class Teacher {
 
 	private JFrame frame;
 	private static String user;
 	private JTable table;
+	private Person p;
 	
 	/**
 	 * Launch the application.
@@ -24,7 +27,7 @@ public class Teacher {
 			public void run() {
 				try {
 					user = userName;
-					Teacher window = new Teacher();
+					Teacher window = new Teacher(new Person().load());
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,9 +38,11 @@ public class Teacher {
 
 	/**
 	 * Create the application.
+	 * @param p 
 	 */
-	public Teacher() {
+	public Teacher(Person person) {
 		initialize();
+		p = person;
 	}
 
 	/**
@@ -64,13 +69,7 @@ public class Teacher {
 		lblHelloTeacher.setBounds(20, 11, 314, 29);
 		frame.getContentPane().add(lblHelloTeacher);
 		String col[] = {"ID","Subject"};		
-		Object[][] objs = {
-			
-			{"1/1/58", "first a"},
-			
-			{"22/10/61", "second a"}
-			
-			};
+		Object[][] objs = p.testsToArr(p.getTests());
 		table = new JTable(objs, col);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(32, 61, 411, 102);
