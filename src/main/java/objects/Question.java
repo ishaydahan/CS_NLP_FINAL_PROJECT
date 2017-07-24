@@ -45,7 +45,14 @@ public class Question {
 		return this;
 	}
 	
-	
+	public boolean renameQuestion(String content){
+		this.content = content;
+		ApiHolder.getInstance().getCollection().updateOne(new Document()
+				.append("questions._id", qid),
+				new Document("$set", new Document().append("questions.0.content", content)));
+		return true;
+	}
+
 	/**
 	 * @param teacher_ans - some string
 	 * @param grade - probably 100
@@ -146,7 +153,7 @@ public class Question {
 		//create log file
 		PrintStream logger = null;
 		try {
-			logger = new PrintStream(new FileOutputStream("question output"));
+			logger = new PrintStream(new FileOutputStream("logs/question output.txt"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

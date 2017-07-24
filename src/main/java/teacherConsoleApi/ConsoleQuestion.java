@@ -59,6 +59,8 @@ public class ConsoleQuestion {
 				remove(Integer.valueOf(""+option.charAt(1)));
 			}else if(option.length()>0 && option.charAt(0)=='7') {
 				approve(Integer.valueOf(""+option.charAt(1)));
+			}else if(option.equals("9")) {
+				q.renameQuestion("ss");
 			}else {
 				System.out.println(">> Bad Input");
 			}

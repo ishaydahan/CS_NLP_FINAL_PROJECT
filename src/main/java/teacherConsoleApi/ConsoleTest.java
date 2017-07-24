@@ -37,6 +37,8 @@ public class ConsoleTest {
 				checkTest();
 			}else if(option.equals("5")) {
 				remove();
+			}else if(option.equals("6")) {
+				t.renameTest("ss");
 			}else {
 				System.out.println(">> Bad Input!");
 			}

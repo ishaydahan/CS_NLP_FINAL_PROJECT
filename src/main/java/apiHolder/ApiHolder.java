@@ -49,7 +49,7 @@ public class ApiHolder {
 			Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
 			mongoLogger.setLevel(Level.SEVERE);
 						
-			logger = new PrintStream(new FileOutputStream("analyze_log.txt"));
+			logger = new PrintStream(new FileOutputStream("logs/analyze_log.txt"));
 			
 			langClient = LanguageServiceClient.create();
 						
@@ -80,6 +80,7 @@ public class ApiHolder {
 	public boolean teacher = false ;//user logged in
 
 	public MongoCollection<Document> collection;
+	public MongoCollection<Document> users;
 	public MongoClient client;
 	
 	public Scanner scanner = new Scanner(System.in);     
@@ -169,6 +170,7 @@ public class ApiHolder {
 	        client = new MongoClient(uri);
 	        MongoDatabase db = client.getDatabase(uri.getDatabase());
 	        collection = db.getCollection("tests"); 
+	        users = db.getCollection("users"); 
 	        return collection;
 		} finally {
 //			client.close();

@@ -12,9 +12,21 @@ public class ConsoleProgram {
 	
 	public static void main(String[] args) {	
 //		test();
-		System.out.print("Student or Teacher?");
-		ConsolePerson api = new ConsolePerson(new Person().load());
+		System.out.print("Enter Username:");
+		String user = ApiHolder.getInstance().scanner.nextLine();
+		
+		System.out.print("Enter Password:");
+		String pass = ApiHolder.getInstance().scanner.nextLine();
+		
+		Person p = new Person();
+		
+		while (!p.login(user, pass)) 
+			System.out.println("wrong user/pass");
+		
+		System.out.print("WELCOME " + p.getName());
+		ConsolePerson api = new ConsolePerson(p.load());
 		api.main();	
+
 	}	
 	
 	public static void test() {		

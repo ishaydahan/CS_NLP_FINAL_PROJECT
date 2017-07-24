@@ -37,6 +37,13 @@ public class Test {
 		return this;
 	}
 		
+	public boolean renameTest(String content){
+		this.content = content;
+		ApiHolder.getInstance().getCollection().updateOne(new Document().append("_id", tid),
+				new Document("$set", new Document().append("content", content)));	
+		return true;
+	}
+
 	/**
 	 * @param q - the question string
 	 * @return Question object. null if the database contains same question string.

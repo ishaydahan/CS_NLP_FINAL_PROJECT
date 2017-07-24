@@ -16,9 +16,31 @@ import apiHolder.ApiHolder;
  */
 public class Person {
 	
+	private String name;
 	private ArrayList<Test> tests = new ArrayList<Test>();
 	
-	protected void Preson() {}
+	public Person() {
+	}
+	
+	public boolean login(String username, String password) {
+		ApiHolder.getInstance().getCollection();
+		long users = ApiHolder.getInstance().users.count(
+				new Document().append("username", username).append("password", password));
+		
+		if (users>0) {
+			String name = ApiHolder.getInstance().users.find(
+					new Document().append("username", username).append("password", password)).first().getString("name");
+			String mode = ApiHolder.getInstance().users.find(
+					new Document().append("username", username).append("password", password)).first().getString("mode");
+			
+			this.name = name;
+			
+			if (mode.equals("TEACHER")) ApiHolder.getInstance().teacher = true;
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 	public Person load() {
 		tests = new ArrayList<Test>();
@@ -93,6 +115,10 @@ public class Person {
 		}
 		System.out.println(arr);
 		return arr;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }
