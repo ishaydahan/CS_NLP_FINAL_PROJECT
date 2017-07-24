@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
-public class Question extends JFrame {
+public class QuestionGui extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -29,7 +29,7 @@ public class Question extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Question frame = new Question();
+					QuestionGui frame = new QuestionGui();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +41,7 @@ public class Question extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Question() {
+	public QuestionGui() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 445, 293);
 		contentPane = new JPanel();

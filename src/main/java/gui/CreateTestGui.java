@@ -33,7 +33,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Panel;
 
-public class CreateTest {
+public class CreateTestGui {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -48,7 +48,7 @@ public class CreateTest {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateTest window = new CreateTest();
+					CreateTestGui window = new CreateTestGui();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,7 +60,7 @@ public class CreateTest {
 	/**
 	 * Create the application.
 	 */
-	public CreateTest() {
+	public CreateTestGui() {
 		initialize();
 	}
 
