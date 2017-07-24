@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-analyzer\DataLearner.class
-objects\Person.class
-teacherConsoleApi\ConsoleTest.class
-analyzer\CheckAnswerCase.class
-teacherConsoleApi\ConsoleProgram.class
-teacherDesktopApi\DesktopTeacherMain.class
-objects\Question.class
-apiHolder\ApiHolder.class
-teacherDesktopApi\DesktopTeacherTest.class
-teacherConsoleApi\ConsolePerson.class
-=======
 gui\Question$3.class
 objects\Person.class
 analyzer\CheckAnswerCase.class
@@ -20,18 +8,11 @@ gui\Teacher.class
 gui\CreateTest$1.class
 gui\CreateTest.class
 apiHolder\ApiHolder.class
->>>>>>> f1e5afecbb130cfff560474aa051126216539920
 objects\Test.class
 analyzer\AnswerAnalyzer.class
 objects\Factory.class
 teacherDesktopApi\DesktopTeacherQuestion.class
 analyzer\LevenshteinDistance.class
-<<<<<<< HEAD
-objects\Answer.class
-objects\Writer.class
-teacherConsoleApi\ConsoleQuestion.class
-teacherDesktopApi\DesktopTeacherProgram.class
-=======
 gui\Teacher$1.class
 objects\Writer.class
 teacherConsoleApi\ConsoleQuestion.class
@@ -54,4 +35,3 @@ teacherConsoleApi\ConsolePerson.class
 gui\CSGuiClass.class
 gui\CreateTest$2.class
 objects\Answer.class
->>>>>>> f1e5afecbb130cfff560474aa051126216539920

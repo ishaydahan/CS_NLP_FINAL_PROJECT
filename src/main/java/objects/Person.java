@@ -86,9 +86,10 @@ public class Person {
 	public Object[][] testsToArr(ArrayList<Test> lst){
 		Object[][] arr = new Object[lst.size()][2];
 		for(int i=0; i<lst.size(); i++) {
-			arr[i][0] = lst.get(i).getTid();
+			arr[i][0] = lst.get(i).getTid().toString();
 			arr[i][1] = lst.get(i).getContent();
 		}
+		System.out.println(arr);
 		return arr;
 	}
 
