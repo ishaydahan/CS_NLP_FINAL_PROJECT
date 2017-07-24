@@ -13,10 +13,12 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import apiHolder.ApiHolder;
 import objects.Answer;
 import objects.Person;
 import objects.Question;
 import objects.Test;
+import javax.swing.JProgressBar;
 
 public class CSGui {
 
@@ -82,11 +84,10 @@ public class CSGui {
 		passwordField.setBounds(82, 45, 174, 23);
 		panel.add(passwordField);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(82, 79, 174, 20);
-		panel.add(comboBox);
-		comboBox.addItem("Student");
-		comboBox.addItem("Teacher");
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(58, 81, 146, 14);
+		panel.add(progressBar);
+		//TODO progress bar when click ok
 		
 		JButton btnLogin = new JButton("ok");
 		btnLogin.setBounds(124, 125, 89, 23);
@@ -95,27 +96,27 @@ public class CSGui {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-					int mode = comboBox.getSelectedIndex(); //0 - student , 1 - teacher
 					String userName = textFieldUser.getText();
 					String password = passwordField.getText();
 					
-					p = new Person().load();
-//					boolean login = p.checkUser(mode,userName,password);
+					p = new Person();
+					boolean login = p.login(userName, password);
 	
-//				if(login){
-						if (mode == 1){
-							TeacherGui t = new TeacherGui();
-							t.TeacherScreen(userName);
+				if(login){
+					p.load();
+						if (ApiHolder.getInstance().teacher){
+							TeacherFrame t = new TeacherFrame();
+							t.setVisible(true);;
 						} 
 	//					else {
 	//						Student s = new Student(p);
 	//						s.setVisible(true);
 	//					}
-	//				} else{
-	//					JOptionPane.showMessageDialog(null, "Login failed, check you user name and password and try again");
-	//				}
+	//				} 
+			}	else {					
+				JOptionPane.showMessageDialog(null, "Login failed, check you user name and password and try again");
 			}
+		}
 		});
-
 	}
 }
