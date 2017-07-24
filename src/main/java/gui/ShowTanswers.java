@@ -49,8 +49,8 @@ public class ShowTanswers extends JFrame {
 		contentPane.setLayout(null);
 
 		String col[] = {"Answer","Points"};
-//		Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getTeacherAnswers());
-		Object[][] objs = {{"design mode","5"}}; // for design		
+		Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getTeacherAnswers());
+//		Object[][] objs = {{"design mode","5"}}; // for design		
 		table = new JTable(objs, col);
 		table.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -68,10 +68,10 @@ public class ShowTanswers extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int i = table.getSelectedRow();
 				if(i != -1) {
-				String ID = (String) objs[i][1]; //ID of question
-				CSGui.q = CSGui.t.getQuestion(ID).load();
-				ShowQuestionOption sq = new ShowQuestionOption();
-				sq.setVisible(true);
+				String ID = (String) objs[i][2]; //ID of answer
+				CSGui.a = CSGui.q.getAnswer(ID);
+				TAnswerOption sa = new TAnswerOption();
+				sa.setVisible(true);
 				}
 			}
 		});
