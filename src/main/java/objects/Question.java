@@ -32,16 +32,14 @@ public class Question {
 	public Question load() {
 		answers = new ArrayList<Answer>();
 		
-		List<Document> docAnswers = (List<Document>) ApiHolder.getInstance().getCollection().find(new Document().append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))))
-		.first().get("questions");
-		docAnswers = (List<Document>) docAnswers.get(0).get("answers");
+		List<Document> docque = (List<Document>) ApiHolder.getInstance().getCollection().find(new Document().append("questions._id" , qid)).first().get("questions");
+		List<Document> docAnswers = (List<Document>) docque.stream().filter((d)->d.getObjectId("_id").equals(qid)).findFirst().orElse(null).get("answers");
 
 		for(Document d : docAnswers) {
 			this.answers.add(new Answer(d.getObjectId("_id"), d.getString("content"), 
 					Writer.valueOf((d.getString("writer"))), d.getInteger("grade"), d.getInteger("answerWords"), 
 					d.getBoolean("verified"), d.getBoolean("syntaxable")));
 		}
-		
 		return this;
 	}
 	

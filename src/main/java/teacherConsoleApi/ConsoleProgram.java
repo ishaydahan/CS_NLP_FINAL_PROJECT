@@ -1,7 +1,6 @@
 package teacherConsoleApi;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -17,73 +16,68 @@ import objects.Answer;
 import objects.Person;
 import objects.Writer;
 
-//class Connector implements Callable<Boolean> {
-//    public Boolean call() throws Exception {
-//    	Thread.sleep(3000);
-//		System.out.println("**   connecting to database...   **");
-//        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
-//        ConsoleProgram.holder.client = new MongoClient(uri);
-//        ConsoleProgram.holder.db = ConsoleProgram.holder.client.getDatabase(uri.getDatabase());
-//        return true;
-//    }
-//}
-//   
-//class login implements Callable<Person> {
-//    public Person call() throws Exception {
-//		System.out.print("Enter Username:");
-//		String user = ConsoleProgram.holder.scanner.nextLine();
-//		
-//		System.out.print("Enter Password:");
-//		String pass = ConsoleProgram.holder.scanner.nextLine();
-//		
-//		Person p = new Person();
-//		return Person;
-//
-//    }
-//}
+class Connector implements Callable<Boolean> {
+    public Boolean call() throws Exception {
+        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
+        ConsoleProgram.holder.client = new MongoClient(uri);
+        ConsoleProgram.holder.db = ConsoleProgram.holder.client.getDatabase(uri.getDatabase());
+        ConsoleProgram.holder.collection = ConsoleProgram.holder.db.getCollection("tests"); 
+        ConsoleProgram.holder.users = ConsoleProgram.holder.db.getCollection("users"); 
+        return true;
+    }
+}
+   
+class login implements Callable<Boolean> {
+    public Boolean call() throws Exception {
+		System.out.print("Enter Username:");
+		ConsoleProgram.user = ConsoleProgram.holder.scanner.nextLine();
+		
+		System.out.print("Enter Password:");
+		ConsoleProgram.pass = ConsoleProgram.holder.scanner.nextLine();
+
+		return true;
+    }
+}
 
 public class ConsoleProgram {
 	
-//	public static ApiHolder holder = ApiHolder.getInstance();
-
+	public static ApiHolder holder = ApiHolder.getInstance();
+	public static String user;
+	public static String pass;
+	
 	public static void main(String[] args) {	
-//		test();
+		test();
 		
 //        //Get ExecutorService from Executors utility class, thread pool size is 10
-//        ExecutorService executor = Executors.newFixedThreadPool(1);
+//        ExecutorService executor = Executors.newFixedThreadPool(2);
 //        //Create MyCallable instance
 //        Callable<Boolean> Connector = new Connector();
 //        Callable<Boolean> login = new login();
+//        //submit Callable tasks to be executed by thread pool
+//        Future<Boolean> future1 = executor.submit(Connector);
+//        Future<Boolean> future2 = executor.submit(login);
 //
+//        try {
+//			future1.get();
+//			future2.get();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		} catch (ExecutionException e) {
+//			e.printStackTrace();
+//		}
 //        
-//            //submit Callable tasks to be executed by thread pool
-//            Future<Boolean> future = executor.submit(callable);
+//        Person p = new Person();
+//		while (!p.login(user, pass)) {
+//			System.out.print("Enter Username:");
+//			ConsoleProgram.user = ConsoleProgram.holder.scanner.nextLine();
+//			
+//			System.out.print("Enter Password:");
+//			ConsoleProgram.pass = ConsoleProgram.holder.scanner.nextLine();
+//		}
+//		System.out.print("WELCOME " + p.getName());
 //
-//            try {
-//                //print the return value of Future, notice the output delay in console
-//                // because Future.get() waits for task to get completed
-//                System.out.println(new Date()+ "::"+future.get());
-//            } catch (InterruptedException | ExecutionException e) {
-//                e.printStackTrace();
-//            }
-//            
-//            System.out.println("aaa");
-//
-//    		while (!p.login(user, pass)) {
-//    			System.out.println("wrong user/pass");
-//    			System.out.print("Enter Username:");
-//    			user = holder.scanner.nextLine();
-//    			
-//    			System.out.print("Enter Password:");
-//    			pass = holder.scanner.nextLine();
-//    		}
-//    		
-//    		System.out.print("WELCOME " + p.getName());
-		
-		Person p = new Person();
-
-		ConsolePerson api = new ConsolePerson(p.load());
-		api.main();	
+//		ConsolePerson api = new ConsolePerson(p.load());
+//		api.main();	
 
 	}	
 	

@@ -35,6 +35,8 @@ public class CheckAnswerCase {
 	private Answer teacher_ans;
 	private Integer finishedGrade = 0;//max grade
 	private HashSet <Token> set = new HashSet <Token>();//set to remember already visited nodes
+	private HashSet <EqualTokens> equalSet = new HashSet <EqualTokens>();//set to remember equalnodes
+
 
 	//Enemas for insignificant parts of sentence
 	private Tag[] del = {Tag.PUNCT, Tag.UNKNOWN, Tag.ADP, Tag.X, Tag.AFFIX, Tag.DET};
@@ -165,9 +167,20 @@ public class CheckAnswerCase {
 	 * 4. equal relation to parent(recursively)
 	 */
 	private boolean equalNodes (Token teacher, Token student) {
-		if (Arrays.asList(del).contains(teacher.getPartOfSpeech().getTag())) return true;
-		if (Arrays.asList(del).contains(student.getPartOfSpeech().getTag())) return true;
-
+		if (Arrays.asList(del).contains(teacher.getPartOfSpeech().getTag())) {
+			equalSet.add(new EqualTokens(teacher, student));
+			return true;
+		}
+		if (Arrays.asList(del).contains(student.getPartOfSpeech().getTag())) {
+			equalSet.add(new EqualTokens(teacher, student));
+			return true;
+		}
+		
+		if(equalSet.contains(new EqualTokens(teacher, student))) {
+			System.out.println("kkkkkkkkk");
+			return true;
+		}
+		
 		if (compare(teacher, student)) {
 			ApiHolder.getInstance().logger.println("equalNodes :::: equal tokens: " + teacher.getText().getContent() + " + " + student.getText().getContent()); 
 			Token t_father = teacher_ans.getAnalyzed_ans().getTokens(teacher.getDependencyEdge().getHeadTokenIndex());
@@ -175,6 +188,7 @@ public class CheckAnswerCase {
 			//if there is no father, the path is equal
 			if (t_father.equals(teacher) || s_father.equals(student)) {
 				ApiHolder.getInstance().logger.println("equalNodes :::: no father... returning true. bye"); 
+				equalSet.add(new EqualTokens(teacher, student));
 				return true;
 			}
 			else{

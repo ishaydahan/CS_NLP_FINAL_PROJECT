@@ -61,11 +61,6 @@ public class ApiHolder {
 			razor[1].addExtractor("entailments");
 			razor[2].addExtractor("entailments");
 			razor[3].addExtractor("entailments");
-
-			System.out.println("**   connecting to database...   **");
-	        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
-	        client = new MongoClient(uri);
-	        db = client.getDatabase(uri.getDatabase());
 	        
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -181,10 +176,10 @@ public class ApiHolder {
 	 */
 	public MongoCollection<Document> getUsers() {
 		try {
-			users.count();
+//			users.count();
 			return users;
 		}catch(Exception e) {
-			users = db.getCollection("users"); 
+//			users = db.getCollection("users"); 
 	        return users;
 		}
 	}
@@ -195,10 +190,10 @@ public class ApiHolder {
 	 */
 	public MongoCollection<Document> getCollection() {
 		try {
-			collection.count();
+//			collection.count();
 			return collection;
 		}catch(Exception e) {
-			collection = db.getCollection("tests"); 
+//			collection = db.getCollection("tests"); 
 	        return collection;
 		}
 	}
