@@ -100,7 +100,12 @@ public class Question {
 		});
 		return true;
 	}
-		
+	
+	public boolean renameAns(String content, Answer toFix) {
+		toFix.setContent(content);
+		DBeditAnswer(toFix);
+		return true;
+	}
 	/**
 	 * @param ans
 	 */

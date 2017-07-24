@@ -146,4 +146,8 @@ public class Answer {
 	
 		return s;
 	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 }
