@@ -16,7 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
-public class ShowTestGui extends JFrame {
+public class ShowTanswers extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -40,7 +40,7 @@ public class ShowTestGui extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ShowTestGui() {
+	public ShowTanswers() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -48,9 +48,9 @@ public class ShowTestGui extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		String col[] = {"Question"};
-		Object[][] objs = CSGui.t.questionsToArr(CSGui.t.getQuestions());
-		//Object[][] objs = {{"design mode"}}; // for design		
+		String col[] = {"Answer","Points"};
+//		Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getTeacherAnswers());
+		Object[][] objs = {{"design mode","5"}}; // for design		
 		table = new JTable(objs, col);
 		table.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -62,36 +62,6 @@ public class ShowTestGui extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(50, 37, 346, 170);
 		contentPane.add(scrollPane);
-		
-		JButton btnNewButton = new JButton("Add question");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String test1= JOptionPane.showInputDialog("Please write your Question: ");
-				System.out.println(test1);
-				CSGui.t.createQuestion(test1);
-				CSGui.t.load();
-			}
-		});
-		btnNewButton.setBounds(32, 227, 123, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnCheckTest = new JButton("Check test");
-		btnCheckTest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CSGui.t.checkTest();
-			}
-		});
-		btnCheckTest.setBounds(165, 227, 115, 23);
-		contentPane.add(btnCheckTest);
-		
-		JButton btnDeleteTest = new JButton("Delete test");
-		btnDeleteTest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CSGui.p.removeTest(CSGui.t);
-			}
-		});
-		btnDeleteTest.setBounds(290, 227, 117, 23);
-		contentPane.add(btnDeleteTest);
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
