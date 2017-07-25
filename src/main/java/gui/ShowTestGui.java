@@ -61,8 +61,8 @@ public class ShowTestGui extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				String test1= JOptionPane.showInputDialog("Please write your Question: ");
-				CSGui.t.createQuestion(test1);
+				String question= JOptionPane.showInputDialog("Please write your Question: ");
+				CSGui.t.createQuestion(question);
 				ShowTestGui s = new ShowTestGui();
 				s.setVisible(true);
 			}
@@ -76,8 +76,8 @@ public class ShowTestGui extends JFrame {
 				dispose();
 				CSGui.t.checkTest();
 				JOptionPane.showMessageDialog(null, "Test was checked");
-				TeacherFrame t = new TeacherFrame();
-				t.setVisible(true);
+				ShowTestGui s = new ShowTestGui();
+				s.setVisible(true);
 			}
 		});
 		btnCheckTest.setBounds(165, 227, 115, 23);

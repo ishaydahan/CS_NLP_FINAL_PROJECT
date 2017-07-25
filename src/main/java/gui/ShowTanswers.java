@@ -51,7 +51,7 @@ public class ShowTanswers extends JFrame {
 
 		String col[] = {"Answer","Points"};
 		Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getTeacherAnswers());
-//		Object[][] objs = {{"design mode","5"}}; // for design		
+		//Object[][] objs = {{"design mode","5"}}; // for design		
 		table = new JTable(objs, col);
 
 		JScrollPane scrollPane = new JScrollPane(table);

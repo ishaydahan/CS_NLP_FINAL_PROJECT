@@ -4,6 +4,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,18 +18,44 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+
 import apiHolder.ApiHolder;
 import objects.Answer;
 import objects.Person;
 import objects.Question;
 import objects.Test;
+import teacherConsoleApi.ConsoleProgram;
+
 import javax.swing.JProgressBar;
+
+class Connector implements Callable<Boolean> {
+    public Boolean call() throws Exception {
+        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
+        ConsoleProgram.holder.client = new MongoClient(uri);
+        ConsoleProgram.holder.db = ConsoleProgram.holder.client.getDatabase(uri.getDatabase());
+        ConsoleProgram.holder.collection = ConsoleProgram.holder.db.getCollection("tests"); 
+        ConsoleProgram.holder.users = ConsoleProgram.holder.db.getCollection("users"); 
+        return true;
+    }
+}
+   
+class login implements Callable<Boolean> {
+    public Boolean call() throws Exception {
+    	CSGui.userName = CSGui.textFieldUser.getText();
+		CSGui.password = CSGui.passwordField.getText();
+		return true;
+    }
+}
 
 public class CSGui {
 
 	private JFrame frame;
-	private JTextField textFieldUser;
-	private JPasswordField passwordField;
+	static JTextField textFieldUser;
+	static JPasswordField passwordField;
+	static String userName;
+	static String password;
 	static Person p;
 	static Test t;
 	static Question q;
@@ -95,11 +126,29 @@ public class CSGui {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					String userName = textFieldUser.getText();
-					String password = passwordField.getText();
-					p = new Person();
-					boolean login = p.login(userName, password);
-				if(login){
+				
+		        //Get ExecutorService from Executors utility class, thread pool size is 10
+		        ExecutorService executor = Executors.newFixedThreadPool(2);
+		        //Create MyCallable instance
+		        Callable<Boolean> Connector = new Connector();
+		        Callable<Boolean> login = new login();
+		        //submit Callable tasks to be executed by thread pool
+		        Future<Boolean> future1 = executor.submit(Connector);
+		        Future<Boolean> future2 = executor.submit(login);
+		
+		        try {
+					future1.get();
+					future2.get();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				} catch (ExecutionException e2) {
+					e2.printStackTrace();
+				}
+
+				p = new Person();
+				boolean userLogin = p.login(userName, password);		
+					
+				if(userLogin){
 					p.load();
 						if (ApiHolder.getInstance().teacher){
 							TeacherFrame t = new TeacherFrame();
