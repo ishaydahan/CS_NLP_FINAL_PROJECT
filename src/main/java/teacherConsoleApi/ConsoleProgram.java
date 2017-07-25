@@ -46,38 +46,38 @@ public class ConsoleProgram {
 	public static String pass;
 	
 	public static void main(String[] args) {	
-		test();
+//		test();
 		
-//        //Get ExecutorService from Executors utility class, thread pool size is 10
-//        ExecutorService executor = Executors.newFixedThreadPool(2);
-//        //Create MyCallable instance
-//        Callable<Boolean> Connector = new Connector();
-//        Callable<Boolean> login = new login();
-//        //submit Callable tasks to be executed by thread pool
-//        Future<Boolean> future1 = executor.submit(Connector);
-//        Future<Boolean> future2 = executor.submit(login);
-//
-//        try {
-//			future1.get();
-//			future2.get();
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		} catch (ExecutionException e) {
-//			e.printStackTrace();
-//		}
-//        
-//        Person p = new Person();
-//		while (!p.login(user, pass)) {
-//			System.out.print("Enter Username:");
-//			ConsoleProgram.user = ConsoleProgram.holder.scanner.nextLine();
-//			
-//			System.out.print("Enter Password:");
-//			ConsoleProgram.pass = ConsoleProgram.holder.scanner.nextLine();
-//		}
-//		System.out.print("WELCOME " + p.getName());
-//
-//		ConsolePerson api = new ConsolePerson(p.load());
-//		api.main();	
+        //Get ExecutorService from Executors utility class, thread pool size is 10
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+        //Create MyCallable instance
+        Callable<Boolean> Connector = new Connector();
+        Callable<Boolean> login = new login();
+        //submit Callable tasks to be executed by thread pool
+        Future<Boolean> future1 = executor.submit(Connector);
+        Future<Boolean> future2 = executor.submit(login);
+
+        try {
+			future1.get();
+			future2.get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+        
+        Person p = new Person();
+		while (!p.login(user, pass)) {
+			System.out.print("Enter Username:");
+			ConsoleProgram.user = ConsoleProgram.holder.scanner.nextLine();
+			
+			System.out.print("Enter Password:");
+			ConsoleProgram.pass = ConsoleProgram.holder.scanner.nextLine();
+		}
+		System.out.print("WELCOME " + p.getName());
+
+		ConsolePerson api = new ConsolePerson(p.load());
+		api.main();	
 
 	}	
 	
@@ -85,8 +85,8 @@ public class ConsoleProgram {
 		ArrayList<Answer> ver = new ArrayList<Answer>();
 		ArrayList<Answer> tocheck = new ArrayList<Answer>();
 		ver.add(ApiHolder.getInstance().factory.createAnswer("because people want to help" ,100, Writer.TEACHER).build());
-		ver.add(ApiHolder.getInstance().factory.createAnswer("they volunteer to help" ,100, Writer.TEACHER).build());
-		
+		ver.add(ApiHolder.getInstance().factory.createAnswer("people choose to volunteer to help people" ,100, Writer.TEACHER).build());
+
 		tocheck.add(ApiHolder.getInstance().factory.createAnswer("because people want to help", 0, Writer.STUDENT));// exact match
 		tocheck.add(ApiHolder.getInstance().factory.createAnswer("because people love to help", 0, Writer.STUDENT));// close meaning1
 		tocheck.add(ApiHolder.getInstance().factory.createAnswer("because people choose to help", 0, Writer.STUDENT));// close meaning2
@@ -101,9 +101,9 @@ public class ConsoleProgram {
 		tocheck.add(ApiHolder.getInstance().factory.createAnswer("to help people", 0, Writer.STUDENT));//60
 		tocheck.add(ApiHolder.getInstance().factory.createAnswer("People choose to volunteer because they want to help.", 0, Writer.STUDENT));//because in the middle
 		tocheck.add(ApiHolder.getInstance().factory.createAnswer("they choose to volunteer to help.", 0, Writer.STUDENT));
-		tocheck.add(ApiHolder.getInstance().factory.createAnswer("they volunteer to help", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		tocheck.add(ApiHolder.getInstance().factory.createAnswer("People volunteer to help.", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		
+		tocheck.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		tocheck.add(ApiHolder.getInstance().factory.createAnswer("they volunteer to help.", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 		tocheck.add(ApiHolder.getInstance().factory.createAnswer("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
 		tocheck.add(ApiHolder.getInstance().factory.createAnswer("because people need to help", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
