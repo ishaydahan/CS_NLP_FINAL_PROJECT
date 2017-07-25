@@ -7,8 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import objects.Answer;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -93,11 +97,10 @@ public class ShowQuestionOption extends JFrame {
 		btnCheckQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				System.out.println(CSGui.q.getQid());
-				System.out.println(CSGui.q.getStudentAnswers());;
-				System.out.println(CSGui.q.getVerifiedAnswers());;
-				System.out.println(CSGui.q.getVerifiedSyntaxableAnswers());;
-//				CSGui.q.checkQuestion(, , );
+				List<Answer> sAnswers = CSGui.q.getStudentAnswers();
+				List<Answer> vAnswers = CSGui.q.getVerifiedAnswers();
+				List<Answer> vSntaxAnswers = CSGui.q.getVerifiedSyntaxableAnswers();
+				CSGui.q.checkQuestion(null, null,null );
 				System.out.println("check2");
 				JOptionPane.showMessageDialog(null, "Question was checked");
 				ShowQuestionOption s = new ShowQuestionOption();
