@@ -50,8 +50,8 @@ public class ShowSanswers extends JFrame {
 		contentPane.setLayout(null);
 
 		String col[] = {"Answer","Owner","Points"};
-		//		Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getStudentAnswers()); 
-		Object[][] objs = {{"design mode","m","m"}}; // for design		
+		Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getStudentAnswers()); 
+		//Object[][] objs = {{"design mode","m","m"}}; // for design		
 		table = new JTable(objs, col);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(50, 37, 346, 170);

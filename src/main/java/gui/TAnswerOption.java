@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -45,7 +46,8 @@ public class TAnswerOption extends JFrame {
 		JButton btnEditAnswer = new JButton("Edit answer");
 		btnEditAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String newAnswer = JOptionPane.showInputDialog("Please write your new Answer: ");
+				CSGui.a.setContent(newAnswer);
 			}
 		});
 		btnEditAnswer.setBounds(44, 36, 136, 23);
@@ -55,6 +57,8 @@ public class TAnswerOption extends JFrame {
 		btnDeleteAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CSGui.q.removeAnswer(CSGui.a);
+				ShowTanswers s = new ShowTanswers();
+				s.setVisible(true);
 			}
 		});
 		btnDeleteAnswer.setBounds(44, 87, 136, 23);

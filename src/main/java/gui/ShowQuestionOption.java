@@ -90,7 +90,11 @@ public class ShowQuestionOption extends JFrame {
 		JButton btnCheckQuestion = new JButton("Check question");
 		btnCheckQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				CSGui.q.checkQuestion(CSGui.q.getStudentAnswers(), CSGui.q.getVerifiedAnswers(), CSGui.q.getVerifiedSyntaxableAnswers());
+				JOptionPane.showMessageDialog(null, "Question was checked");
+				ShowQuestionOption s = new ShowQuestionOption();
+				s.setVisible(true);
 			}
 		});
 		btnCheckQuestion.setBounds(25, 99, 183, 23);

@@ -58,12 +58,15 @@ public class SAnswerOption extends JFrame {
 		JButton btnFixPoints = new JButton("Fix");
 		btnFixPoints.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				while(true) {
 				try {
 					 point = Integer.parseInt(textField.getText());
+					 break;
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Please enter a valid number of points");
 				}
 				CSGui.q.fixAns(point, CSGui.a);
+				}
 			}
 		});
 		btnFixPoints.setBounds(243, 86, 134, 23);
