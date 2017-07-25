@@ -31,8 +31,8 @@ ANALYZER :::: Teacher parts: to
 ANALYZER :::: Teacher parts: PRT
 ANALYZER :::: Teacher parts: help
 ANALYZER :::: Teacher parts: VERB
-getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: 597783086b09923ab476a189
-getGrade :::: STUDENT :Answer: because people want to help, Wrriten by: STUDENT, Grade: -1, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: 5977830c6b09923ab476a18b
+getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: 597790e46b09923308466c7e
+getGrade :::: STUDENT :Answer: because people want to help, Wrriten by: STUDENT, Grade: -1, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: 597790e86b09923308466c80
 ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
 equalSentences1 :::: checking people people
 compare :::: passed checkTokens V people + people
@@ -98,7 +98,7 @@ equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: help help
 equalSentences1 :::: TEHERE IS GRADE!!!!!!!!!!!!!!!!!!*********: because people want to help because people want to help 4
 ### SYNTAX ANALYZER RESULT:
-### student: Answer: because people want to help, Wrriten by: STUDENT, Grade: -1, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: 5977830c6b09923ab476a18b
+### student: Answer: because people want to help, Wrriten by: STUDENT, Grade: -1, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: 597790e86b09923308466c80
 ### grade: 100
 $$$$$$$$$$$$$$$$$$$$$$$$$$$ because people love to help $$ google api
 ANALYZER :::: Teacher parts: people
@@ -109,8 +109,8 @@ ANALYZER :::: Teacher parts: to
 ANALYZER :::: Teacher parts: PRT
 ANALYZER :::: Teacher parts: help
 ANALYZER :::: Teacher parts: VERB
-getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: 597783086b09923ab476a189
-getGrade :::: STUDENT :Answer: because people love to help, Wrriten by: STUDENT, Grade: -1, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: 5977830c6b09923ab476a18c
+getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: 597790e46b09923308466c7e
+getGrade :::: STUDENT :Answer: because people love to help, Wrriten by: STUDENT, Grade: -1, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: 597790e86b09923308466c81
 ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!
 equalSentences1 :::: checking people people
 compare :::: passed checkTokens V people + people

@@ -74,6 +74,12 @@ public class ShowSanswers extends JFrame {
 		
 		ImageIcon back = new ImageIcon("IMG/back.png");	
 		button_1 = new JButton(back);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShowQuestionOption s = new ShowQuestionOption();
+				s.setVisible(true);
+			}
+		});
 		button_1.setBounds(58, 218, 46, 46);
 		contentPane.add(button_1);
 		

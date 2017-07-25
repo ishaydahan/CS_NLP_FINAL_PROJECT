@@ -24,6 +24,17 @@
       <scope>test</scope>
     </dependency>
     
+    <dependency>
+  <groupId>org.languagetool</groupId>
+  <artifactId>language-en</artifactId>
+  <version>3.8</version>
+       <exclusions>
+     <exclusion>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+     </exclusion>
+   </exclusions>
+</dependency>
     
     
     	<dependency>
@@ -37,20 +48,6 @@
     <groupId>org.mongodb</groupId>
     <artifactId>mongo-java-driver</artifactId>
     <version>3.4.2</version>
-</dependency>
-    
-    
-    <dependency>
-  <groupId>org.languagetool</groupId>
-  <artifactId>language-en</artifactId>
-  <version>3.8</version>
-     <exclusions>
-     <exclusion>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-     </exclusion>
-   </exclusions>
-  
 </dependency>
     
         <dependency>

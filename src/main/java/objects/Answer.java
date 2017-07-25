@@ -56,10 +56,7 @@ public class Answer {
 		            .setContent(content).setType(Type.PLAIN_TEXT).build();
 
 			ApiHolder.getInstance().logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content + " $$ google api");
-			System.out.println(ApiHolder.getInstance().langClient == null);
 			Analyzed_ans = ApiHolder.getInstance().langClient.analyzeSyntax(doc, EncodingType.UTF8);
-			System.out.println("d");
-
 		}
 		
 		if (answerWords==-1) {
