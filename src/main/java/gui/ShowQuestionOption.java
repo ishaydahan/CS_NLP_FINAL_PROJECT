@@ -100,7 +100,7 @@ public class ShowQuestionOption extends JFrame {
 				List<Answer> sAnswers = CSGui.q.getStudentAnswers();
 				List<Answer> vAnswers = CSGui.q.getVerifiedAnswers();
 				List<Answer> vSntaxAnswers = CSGui.q.getVerifiedSyntaxableAnswers();
-				CSGui.q.checkQuestion(null, null,null );
+				CSGui.q.checkQuestion(sAnswers, vAnswers,vSntaxAnswers );
 				System.out.println("check2");
 				JOptionPane.showMessageDialog(null, "Question was checked");
 				ShowQuestionOption s = new ShowQuestionOption();
