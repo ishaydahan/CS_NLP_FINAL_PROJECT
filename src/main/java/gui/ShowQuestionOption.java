@@ -94,7 +94,10 @@ public class ShowQuestionOption extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				System.out.println(CSGui.q.getQid());
-				CSGui.q.checkQuestion(CSGui.q.getStudentAnswers(), CSGui.q.getVerifiedAnswers(), CSGui.q.getVerifiedSyntaxableAnswers());
+				System.out.println(CSGui.q.getStudentAnswers());;
+				System.out.println(CSGui.q.getVerifiedAnswers());;
+				System.out.println(CSGui.q.getVerifiedSyntaxableAnswers());;
+//				CSGui.q.checkQuestion(, , );
 				System.out.println("check2");
 				JOptionPane.showMessageDialog(null, "Question was checked");
 				ShowQuestionOption s = new ShowQuestionOption();
@@ -130,6 +133,8 @@ public class ShowQuestionOption extends JFrame {
 		JButton button_1 = new JButton(home);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				CSGui.main(null);
 			}
 		});
 		button_1.setBounds(0, 133, 46, 46);
@@ -137,6 +142,12 @@ public class ShowQuestionOption extends JFrame {
 		ImageIcon back = new ImageIcon("IMG/back.png");	
 
 		JButton button_2 = new JButton(back);
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShowTestGui s = new ShowTestGui();
+				s.setVisible(true);
+			}
+		});
 		button_2.setBounds(58, 133, 46, 46);
 		contentPane.add(button_2);
 	}

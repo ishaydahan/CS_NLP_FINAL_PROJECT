@@ -94,6 +94,8 @@ public class CreateTestGui {
 		JButton button = new JButton(home);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				CSGui.main(null);
 			}
 		});
 		button.setBounds(0, 65, 46, 46);
@@ -101,6 +103,13 @@ public class CreateTestGui {
 		
 		ImageIcon back = new ImageIcon("IMG/back.png");	
 		JButton button_1 = new JButton(back);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				TeacherFrame t = new TeacherFrame();
+				t.setVisible(true);
+			}
+		});
 		button_1.setBounds(58, 65, 46, 46);
 		frame.getContentPane().add(button_1);
 		btnGenerateTest.addActionListener(new ActionListener() {

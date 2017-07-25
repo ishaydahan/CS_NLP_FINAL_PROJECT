@@ -70,6 +70,8 @@ public class TAnswerOption extends JFrame {
 		JButton button = new JButton(home);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				CSGui.main(null);
 			}
 		});
 		button.setBounds(0, 113, 46, 46);
