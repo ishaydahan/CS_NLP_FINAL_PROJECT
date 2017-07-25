@@ -64,7 +64,7 @@ public class Question {
         	System.out.println("Already has that answer!" + toAdd.getContent());
         	return null;
         }else {
-            DBcreateAnswer(toAdd);
+            DBcreateAnswer(toAdd.build());
             answers.add(toAdd);
     		return toAdd;
         }
@@ -178,10 +178,13 @@ public class Question {
 			if (ans.getWriter().equals(Writer.TEACHER))  minsyntaxable = Math.min(minsyntaxable, ans.getAnswerWords());
 		}
 		
+		//reload before execution.
+		load();
+		
 		//check
 		for (Answer student_ans: toCheck) {
 			//first build the answer
-			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans.build());
+			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans);
 			
 			int grade;
 			if ((grade = analyzer.levenshteinAnalyze(verified))>-1) {
@@ -218,7 +221,6 @@ public class Question {
 	}
 	
 	public boolean DBeditAnswer(Answer x) {		
-		load();
 		ApiHolder.getInstance().getCollection().updateOne(new Document()
 			.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),				
 			new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));
