@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class ShowTestGui extends JFrame {
 
@@ -43,7 +45,7 @@ public class ShowTestGui extends JFrame {
 	public ShowTestGui() {
 		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 452, 314);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -54,7 +56,7 @@ public class ShowTestGui extends JFrame {
 		//Object[][] objs = {{"design mode"}}; // for design		
 		table = new JTable(objs, col);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(50, 37, 346, 170);
+		scrollPane.setBounds(48, 38, 346, 154);
 		contentPane.add(scrollPane);
 		
 		JButton btnNewButton = new JButton("Add question");
@@ -67,7 +69,7 @@ public class ShowTestGui extends JFrame {
 				s.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(32, 227, 123, 23);
+		btnNewButton.setBounds(30, 203, 123, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnCheckTest = new JButton("Check test");
@@ -80,7 +82,7 @@ public class ShowTestGui extends JFrame {
 				s.setVisible(true);
 			}
 		});
-		btnCheckTest.setBounds(165, 227, 115, 23);
+		btnCheckTest.setBounds(163, 203, 115, 23);
 		contentPane.add(btnCheckTest);
 		
 		JButton btnDeleteTest = new JButton("Delete test");
@@ -92,8 +94,22 @@ public class ShowTestGui extends JFrame {
 				t.setVisible(true);
 			}
 		});
-		btnDeleteTest.setBounds(290, 227, 117, 23);
+		btnDeleteTest.setBounds(288, 203, 117, 23);
 		contentPane.add(btnDeleteTest);
+		
+		ImageIcon home = new ImageIcon("IMG/back.png");	
+		JButton button = new JButton(home);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(0, 229, 46, 46);
+		contentPane.add(button);
+		
+		ImageIcon back = new ImageIcon("IMG/back.png");	
+		JButton button_1 = new JButton(back);
+		button_1.setBounds(58, 229, 46, 46);
+		contentPane.add(button_1);
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override

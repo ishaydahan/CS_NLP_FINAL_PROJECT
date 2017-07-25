@@ -15,11 +15,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class ShowSanswers extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private JButton button;
+	private JButton button_1;
 
 	/**
 	 * Launch the application.
@@ -56,6 +60,20 @@ public class ShowSanswers extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(50, 37, 346, 170);
 		contentPane.add(scrollPane);
+		
+		ImageIcon home = new ImageIcon("IMG/home.png");	
+		button = new JButton(home);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(0, 218, 46, 46);
+		contentPane.add(button);
+		
+		ImageIcon back = new ImageIcon("IMG/back.png");	
+		button_1 = new JButton(back);
+		button_1.setBounds(58, 218, 46, 46);
+		contentPane.add(button_1);
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override

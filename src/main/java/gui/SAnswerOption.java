@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class SAnswerOption extends JFrame {
 
@@ -40,7 +42,7 @@ public class SAnswerOption extends JFrame {
 	public SAnswerOption() {
 		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 395, 202);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,7 +54,7 @@ public class SAnswerOption extends JFrame {
 				CSGui.q.approveAnswer(CSGui.a);
 			}
 		});
-		btnApproveAnswer.setBounds(61, 138, 134, 23);
+		btnApproveAnswer.setBounds(103, 82, 134, 23);
 		contentPane.add(btnApproveAnswer);
 		
 		JButton btnFixPoints = new JButton("Fix");
@@ -69,16 +71,30 @@ public class SAnswerOption extends JFrame {
 				}
 			}
 		});
-		btnFixPoints.setBounds(243, 86, 134, 23);
+		btnFixPoints.setBounds(218, 48, 134, 23);
 		contentPane.add(btnFixPoints);
 		
 		textField = new JTextField();
-		textField.setBounds(147, 87, 86, 22);
+		textField.setBounds(122, 49, 86, 22);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblChangePoints = new JLabel("Change points:");
-		lblChangePoints.setBounds(61, 90, 118, 14);
+		lblChangePoints.setBounds(36, 52, 118, 14);
 		contentPane.add(lblChangePoints);
+		ImageIcon home = new ImageIcon("IMG/home.png");	
+
+		JButton button = new JButton(home);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(0, 117, 46, 46);
+		contentPane.add(button);
+		ImageIcon back = new ImageIcon("IMG/back.png");	
+
+		JButton button_1 = new JButton(back);
+		button_1.setBounds(58, 117, 46, 46);
+		contentPane.add(button_1);
 	}
 }
