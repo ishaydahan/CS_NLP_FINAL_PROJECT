@@ -87,6 +87,9 @@ public class TeacherFrame extends JFrame {
 		JButton btnNewButton = new JButton(back);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				CSGui c = new CSGui();
+				c.main(null);
 			}
 		});
 		btnNewButton.setBounds(58, 215, 46, 46);
