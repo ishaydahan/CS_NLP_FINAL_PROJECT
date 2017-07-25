@@ -52,8 +52,8 @@ public class CheckAnswerCase {
 	 * the function calls the equalSentences function two times - first we compare teacher to student and then student to teacher.
 	 */
 	protected Integer getGrade() {
-		ApiHolder.getInstance().logger.println("getGrade :::: TEACHER :" + student_ans);
-		ApiHolder.getInstance().logger.println("getGrade :::: STUDENT :" + teacher_ans);
+		ApiHolder.getInstance().logger.println("getGrade :::: TEACHER :" + teacher_ans);
+		ApiHolder.getInstance().logger.println("getGrade :::: STUDENT :" + student_ans);
 		
 		//Obvious case
 		if (teacher_ans.getAnswerWords()==0) return 0;
@@ -65,8 +65,9 @@ public class CheckAnswerCase {
 		}
 		//put the student answer to ensure we will check it one time only!
 		teacher_ans.getMap().put(student_ans.getContent(), new Integer(0));
-		Integer firstGrade = this.equalSentences1();
 		
+		Integer firstGrade = this.equalSentences1();
+
 		//try to get max grade with teacher path only.
 		if (firstGrade==teacher_ans.getGrade()) {
 			teacher_ans.getMap().put(student_ans.getContent(), firstGrade);
@@ -85,24 +86,25 @@ public class CheckAnswerCase {
 	 * the different between number of equal significant words will be reduced from grade.
 	 */
 	private Integer equalSentences1() {
-		set = new HashSet <Token>();
 		ApiHolder.getInstance().logger.println("ANALYZER :::: TEACHER SIDE!!!!!!!!!!!!!!!!!");
-		//teacher side
+		
 		boolean found = false;
-		int grade = 0;
+		equalSet=new HashSet<EqualTokens>();
+		set = new HashSet <Token>();
+
 		for(Token teacher : teacher_ans.getAnalyzed_ans().getTokensList()) {
 			//pass insignificant words
 			if (Arrays.asList(del).contains(teacher.getPartOfSpeech().getTag())) continue;
+			
 			for(Token student : student_ans.getAnalyzed_ans().getTokensList()) {
 				if (Arrays.asList(del).contains(student.getPartOfSpeech().getTag())) continue;
 				
 				ApiHolder.getInstance().logger.println("equalSentences1 :::: checking " + teacher.getText().getContent() + " " + student.getText().getContent());
-				if (!set.contains(student) &&equalNodes(teacher, student)) {
+				if (!set.contains(student) && equalNodes(teacher, student)) {
+					//found a path that is equal
 					set.add(student);
 					found=true;
-					grade++;
 					ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check, equal: " + teacher.getText().getContent() + " " + student.getText().getContent());
-					ApiHolder.getInstance().logger.println("equalSentences1 :::: grade: " + grade);
 					break;
 				}
 			}
@@ -114,7 +116,8 @@ public class CheckAnswerCase {
 			found=false;
 		}
 		//the grade is maxGrade-mistakes*10(can be changed)
-		int finalGrade = Math.max(finishedGrade, teacher_ans.getGrade()-(Math.abs(teacher_ans.getAnswerWords()-grade)*ApiHolder.getInstance().REDUCE));
+		ApiHolder.getInstance().logger.println("equalSentences1 :::: TEHERE IS GRADE!!!!!!!!!!!!!!!!!!*********: " + teacher_ans.getContent() + " " + student_ans.getContent() + " " + equalSet.size());
+		int finalGrade = Math.max(finishedGrade, teacher_ans.getGrade()-(Math.abs(teacher_ans.getAnswerWords()-equalSet.size())*ApiHolder.getInstance().REDUCE));
 		if (student_ans.getWriter().equals(Writer.COMPUTER)) return finalGrade-ApiHolder.getInstance().COMP;
 		else return finalGrade;
 	}
@@ -124,34 +127,38 @@ public class CheckAnswerCase {
 	 * same as before just starting from student
 	 */
 	private Integer equalSentences2() {
+		ApiHolder.getInstance().logger.println("ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!");
+		
+		boolean found = false;
+		equalSet=new HashSet<EqualTokens>();
 		set = new HashSet <Token>();
-		ApiHolder.getInstance().logger.println("equalSentences2 :::: STUDENT SIDE!!!!!!!!!!!!!!!!!");
-		//student side
-		boolean found=false;
-		int grade = 0;
+
 		for(Token student : student_ans.getAnalyzed_ans().getTokensList()) {
+			//pass insignificant words
 			if (Arrays.asList(del).contains(student.getPartOfSpeech().getTag())) continue;
+			
 			for(Token teacher : teacher_ans.getAnalyzed_ans().getTokensList()) {
 				if (Arrays.asList(del).contains(teacher.getPartOfSpeech().getTag())) continue;
 				
-				ApiHolder.getInstance().logger.println("equalSentences2 :::: checking " + teacher.getText().getContent() + " " + student.getText().getContent());
-				if (!set.contains(teacher) && equalNodes(teacher, student)) {
+				ApiHolder.getInstance().logger.println("equalSentences1 :::: checking " + teacher.getText().getContent() + " " + student.getText().getContent());
+				if (!set.contains(teacher) &&  equalNodes(teacher, student)) {
+					//found a path that is equal
 					set.add(teacher);
 					found=true;
-					grade++;
-					ApiHolder.getInstance().logger.println("equalSentences2 :::: finished path check, equal: " + teacher.getText().getContent() + " " + student.getText().getContent());
-					ApiHolder.getInstance().logger.println("equalSentences2 :::: grade: " + grade);
+					ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check, equal: " + teacher.getText().getContent() + " " + student.getText().getContent());
 					break;
 				}
 			}
 			if (!found) {
-				ApiHolder.getInstance().logger.println("equalSentences2 :::: finished path check, BREAK!: " + student.getText().getContent());
-				ApiHolder.getInstance().logger.println("equalSentences2 :::: grade: " + Math.max(finishedGrade, ApiHolder.getInstance().MINGRADE));
+				ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check, BREAK!: " + student.getText().getContent());
+				ApiHolder.getInstance().logger.println("equalSentences1 :::: grade: " + Math.max(finishedGrade, ApiHolder.getInstance().MINGRADE));
 				return Math.max(finishedGrade, ApiHolder.getInstance().MINGRADE);
 			}
 			found=false;
 		}
-		int finalGrade = Math.max(finishedGrade, teacher_ans.getGrade()-(Math.abs(teacher_ans.getAnswerWords()-grade)*ApiHolder.getInstance().REDUCE));
+		//the grade is maxGrade-mistakes*10(can be changed)
+		ApiHolder.getInstance().logger.println("equalSentences1 :::: TEHERE IS GRADE!!!!!!!!!!!!!!!!!!*********: " + teacher_ans.getContent() + " " + student_ans.getContent() + " " + equalSet.size());
+		int finalGrade = Math.max(finishedGrade, teacher_ans.getGrade()-(Math.abs(teacher_ans.getAnswerWords()-equalSet.size())*ApiHolder.getInstance().REDUCE));
 		if (student_ans.getWriter().equals(Writer.COMPUTER)) return finalGrade-ApiHolder.getInstance().COMP;
 		else return finalGrade;
 	}
@@ -167,28 +174,21 @@ public class CheckAnswerCase {
 	 * 4. equal relation to parent(recursively)
 	 */
 	private boolean equalNodes (Token teacher, Token student) {
-		if (Arrays.asList(del).contains(teacher.getPartOfSpeech().getTag())) {
-			equalSet.add(new EqualTokens(teacher, student));
-			return true;
+		if (Arrays.asList(del).contains(teacher.getPartOfSpeech().getTag()) || Arrays.asList(del).contains(student.getPartOfSpeech().getTag())) {
+			ApiHolder.getInstance().logger.println("equalNodes :::: not intresting: " + teacher.getText().getContent() + " + " + student.getText().getContent()); 
+			return false;
 		}
-		if (Arrays.asList(del).contains(student.getPartOfSpeech().getTag())) {
-			equalSet.add(new EqualTokens(teacher, student));
-			return true;
-		}
-		
-		if(equalSet.contains(new EqualTokens(teacher, student))) {
-			System.out.println("kkkkkkkkk");
-			return true;
-		}
-		
+
 		if (compare(teacher, student)) {
 			ApiHolder.getInstance().logger.println("equalNodes :::: equal tokens: " + teacher.getText().getContent() + " + " + student.getText().getContent()); 
+			equalSet.add(new EqualTokens(teacher, student));
+			ApiHolder.getInstance().logger.println(equalSet);
 			Token t_father = teacher_ans.getAnalyzed_ans().getTokens(teacher.getDependencyEdge().getHeadTokenIndex());
 			Token s_father = student_ans.getAnalyzed_ans().getTokens(student.getDependencyEdge().getHeadTokenIndex());
+
 			//if there is no father, the path is equal
 			if (t_father.equals(teacher) || s_father.equals(student)) {
 				ApiHolder.getInstance().logger.println("equalNodes :::: no father... returning true. bye"); 
-				equalSet.add(new EqualTokens(teacher, student));
 				return true;
 			}
 			else{
@@ -196,6 +196,8 @@ public class CheckAnswerCase {
 				return equalNodes(t_father, s_father);
 			}
 		}else {
+			
+			
 			//this is a little trick to pass extra information that inserted inside sentence and has relation to significant words.
 			//pay intention we do it only to teacher side. doing this to student side causes unexpected result.
 			int index1 = teacher_ans.getAnalyzed_ans().getTokensList().indexOf(teacher);
@@ -206,9 +208,24 @@ public class CheckAnswerCase {
 				ApiHolder.getInstance().logger.println("equalNodes :::: trick loop: " + trick.getText().getContent() + " + " + student.getText().getContent()); 
 				if(trick.getDependencyEdge().getHeadTokenIndex()==index1 && trick.getDependencyEdge().getLabel()!=Label.ROOT) {
 					ApiHolder.getInstance().logger.println("equalNodes :::: trick try: " + trick.getText().getContent() + " + " + student.getText().getContent()); 
-					return equalNodes(trick, student);
+					if (equalNodes(trick, student)) return true;
 				}
 			}
+			
+//			//this is a little trick to pass extra information that inserted inside sentence and has relation to significant words.
+//			//pay intention we do it only to teacher side. doing this to student side causes unexpected result.
+//			int index2 = student_ans.getAnalyzed_ans().getTokensList().indexOf(student);
+//			int j=0;
+//			for(Token trick : student_ans.getAnalyzed_ans().getTokensList()) {
+//				j++;
+//				if (j-2<index2) continue;
+//				ApiHolder.getInstance().logger.println("equalNodes :::: trick loop: " + teacher.getText().getContent() + " + " + trick.getText().getContent()); 
+//				if(trick.getDependencyEdge().getHeadTokenIndex()==index2 && trick.getDependencyEdge().getLabel()!=Label.ROOT) {
+//					ApiHolder.getInstance().logger.println("equalNodes :::: trick try: " + teacher.getText().getContent() + " + " + trick.getText().getContent()); 
+//					if (equalNodes(teacher, trick)) return true;
+//				}
+//			}
+
 			ApiHolder.getInstance().logger.println("equalNodes :::: not equal tokens: " + teacher.getText().getContent() + " + " + student.getText().getContent()); 
 			return false;
 		}
@@ -306,9 +323,9 @@ public class CheckAnswerCase {
 						ApiHolder.getInstance().logger.println("checkTokens :::: spelling fixed: " + student.getText().getContent() + " >> " + sgg);
 						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, Writer.COMPUTER).build(), teacher_ans);
 						ApiHolder.getInstance().logger.println("----starting new check-----");
-						finishedGrade = newCheck.getGrade();
+						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");
-					}else finishedGrade = teacher_ans.getMap().get(new_s1);// we already computed this sentence
+					}else finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
 				}
 			}
 			for(Entailment ent : ApiHolder.getInstance().getEntailmentList(student_ans.getContent())) {
@@ -318,12 +335,12 @@ public class CheckAnswerCase {
 					String new_s1 = StringUtils.join(new_s, " ");
 					
 					if (!teacher_ans.getMap().containsKey(new_s1)) {
-						ApiHolder.getInstance().logger.println("checkTokens :::: spelling fixed: " + student.getText().getContent() + " >> " + ent.getEntailedWords().get(0));
+						ApiHolder.getInstance().logger.println("checkTokens :::: meaning fixed: " + student.getText().getContent() + " >> " + ent.getEntailedWords().get(0));
 						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, Writer.COMPUTER).build().build(), teacher_ans);
 						ApiHolder.getInstance().logger.println("----starting new check-----");
-						finishedGrade = newCheck.getGrade();
+						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");
-					}else finishedGrade = teacher_ans.getMap().get(new_s1);
+					}else finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;
 				}
 			}
 		}
