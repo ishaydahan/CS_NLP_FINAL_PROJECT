@@ -97,10 +97,12 @@ public class ShowTestGui extends JFrame {
 		btnDeleteTest.setBounds(288, 203, 117, 23);
 		contentPane.add(btnDeleteTest);
 		
-		ImageIcon home = new ImageIcon("IMG/back.png");	
+		ImageIcon home = new ImageIcon("IMG/home.png");	
 		JButton button = new JButton(home);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				CSGui.main(null);
 			}
 		});
 		button.setBounds(0, 229, 46, 46);
@@ -108,6 +110,13 @@ public class ShowTestGui extends JFrame {
 		
 		ImageIcon back = new ImageIcon("IMG/back.png");	
 		JButton button_1 = new JButton(back);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TeacherFrame t = new TeacherFrame();
+				t.setVisible(true);
+			}
+		});
 		button_1.setBounds(58, 229, 46, 46);
 		contentPane.add(button_1);
 		

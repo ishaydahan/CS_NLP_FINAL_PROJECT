@@ -66,6 +66,8 @@ public class ShowTanswers extends JFrame {
 		button = new JButton(home);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				CSGui.main(null);
 			}
 		});
 		button.setBounds(0, 215, 46, 46);

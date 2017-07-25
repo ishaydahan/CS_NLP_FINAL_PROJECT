@@ -1,0 +1,13 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ kjkjjkj $$ google api
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ kjkj $$ google api
+getGrade :::: TEACHER :Answer: kjkjjkj, Wrriten by: TEACHER, Grade: 78, Significant Words: 0, Teacher verified: true, syntaxable: true, aid: 597765eb86c7780d14d6abec
+getGrade :::: STUDENT :Answer: kjkj, Wrriten by: STUDENT, Grade: -1, Significant Words: 0, Teacher verified: false, syntaxable: false, aid: 5977660986c7780d14d6abed
+### SYNTAX ANALYZER RESULT:
+### student: Answer: kjkj, Wrriten by: STUDENT, Grade: -1, Significant Words: 0, Teacher verified: false, syntaxable: false, aid: 5977660986c7780d14d6abed
+### grade: 0
+>>>>>>> 48510dd0c51b9daaa1a456868d9826a2cf5f06ef
+>>>>>>> 22409c1e9c2f78ef0cb0ee2e414e20a776c07265

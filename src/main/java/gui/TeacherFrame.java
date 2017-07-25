@@ -88,8 +88,7 @@ public class TeacherFrame extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui c = new CSGui();
-				c.main(null);
+				CSGui.main(null);
 			}
 		});
 		btnNewButton.setBounds(58, 215, 46, 46);
@@ -99,6 +98,8 @@ public class TeacherFrame extends JFrame {
 		JButton button = new JButton(home);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				CSGui.main(null);
 			}
 		});
 		button.setBounds(0, 215, 46, 46);
