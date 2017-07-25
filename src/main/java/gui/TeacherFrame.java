@@ -2,18 +2,23 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.Icon;
 
 public class TeacherFrame extends JFrame {
 
@@ -77,6 +82,29 @@ public class TeacherFrame extends JFrame {
 		JLabel lblHello = new JLabel("Hello , " + CSGui.p.getName());
 		lblHello.setBounds(10, 11, 103, 14);
 		contentPane.add(lblHello);
+		
+		ImageIcon back = new ImageIcon("IMG/back.png");	
+		JButton btnNewButton = new JButton(back);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				CSGui c = new CSGui();
+				c.main(null);
+			}
+		});
+		btnNewButton.setBounds(58, 215, 46, 46);
+		contentPane.add(btnNewButton);
+		
+		ImageIcon home = new ImageIcon("IMG/home.png");	
+		JButton button = new JButton(home);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(0, 215, 46, 46);
+		contentPane.add(button);
+				
+
 		
 		btnCreateTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class ShowQuestionOption extends JFrame {
 
@@ -62,7 +64,7 @@ public class ShowQuestionOption extends JFrame {
 				dispose();
 			}
 		});
-		btnShowStudentsAnswers.setBounds(25, 63, 183, 23);
+		btnShowStudentsAnswers.setBounds(223, 26, 183, 23);
 		contentPane.add(btnShowStudentsAnswers);
 		
 		JButton btnCreateAnswers = new JButton("Add answer");
@@ -84,14 +86,16 @@ public class ShowQuestionOption extends JFrame {
 				s.setVisible(true);
 			}
 		});
-		btnCreateAnswers.setBounds(239, 25, 154, 23);
+		btnCreateAnswers.setBounds(25, 62, 181, 23);
 		contentPane.add(btnCreateAnswers);
 		
 		JButton btnCheckQuestion = new JButton("Check question");
 		btnCheckQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				System.out.println(CSGui.q.getQid());
 				CSGui.q.checkQuestion(CSGui.q.getStudentAnswers(), CSGui.q.getVerifiedAnswers(), CSGui.q.getVerifiedSyntaxableAnswers());
+				System.out.println("check2");
 				JOptionPane.showMessageDialog(null, "Question was checked");
 				ShowQuestionOption s = new ShowQuestionOption();
 				s.setVisible(true);
@@ -109,8 +113,32 @@ public class ShowQuestionOption extends JFrame {
 				dispose();
 			}
 		});
-		btnDeleteQuestion.setBounds(25, 133, 183, 23);
+		btnDeleteQuestion.setBounds(222, 100, 183, 23);
 		contentPane.add(btnDeleteQuestion);
+		
+		JButton button = new JButton("Edit question");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String content= JOptionPane.showInputDialog("Please write the new Question: ");
+				CSGui.q.renameQuestion(content);
+			}
+		});
+		button.setBounds(221, 62, 183, 23);
+		contentPane.add(button);
+		
+		ImageIcon home = new ImageIcon("IMG/home.png");	
+		JButton button_1 = new JButton(home);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_1.setBounds(0, 133, 46, 46);
+		contentPane.add(button_1);
+		ImageIcon back = new ImageIcon("IMG/back.png");	
+
+		JButton button_2 = new JButton(back);
+		button_2.setBounds(58, 133, 46, 46);
+		contentPane.add(button_2);
 	}
 
 }

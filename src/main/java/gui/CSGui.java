@@ -33,10 +33,10 @@ import javax.swing.JProgressBar;
 class Connector implements Callable<Boolean> {
     public Boolean call() throws Exception {
         MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
-        ConsoleProgram.holder.client = new MongoClient(uri);
-        ConsoleProgram.holder.db = ConsoleProgram.holder.client.getDatabase(uri.getDatabase());
-        ConsoleProgram.holder.collection = ConsoleProgram.holder.db.getCollection("tests"); 
-        ConsoleProgram.holder.users = ConsoleProgram.holder.db.getCollection("users"); 
+        ApiHolder.getInstance() .client = new MongoClient(uri);
+        ApiHolder.getInstance().db = ConsoleProgram.holder.client.getDatabase(uri.getDatabase());
+        ApiHolder.getInstance().collection = ConsoleProgram.holder.db.getCollection("tests"); 
+        ApiHolder.getInstance().users = ConsoleProgram.holder.db.getCollection("users"); 
         return true;
     }
 }

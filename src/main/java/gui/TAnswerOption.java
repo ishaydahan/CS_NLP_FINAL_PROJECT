@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class TAnswerOption extends JFrame {
 
@@ -37,7 +39,7 @@ public class TAnswerOption extends JFrame {
 	public TAnswerOption() {
 		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 198);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -50,7 +52,7 @@ public class TAnswerOption extends JFrame {
 				CSGui.a.setContent(newAnswer);
 			}
 		});
-		btnEditAnswer.setBounds(44, 36, 136, 23);
+		btnEditAnswer.setBounds(59, 67, 136, 23);
 		contentPane.add(btnEditAnswer);
 		
 		JButton btnDeleteAnswer = new JButton("Delete answer");
@@ -61,7 +63,21 @@ public class TAnswerOption extends JFrame {
 				s.setVisible(true);
 			}
 		});
-		btnDeleteAnswer.setBounds(44, 87, 136, 23);
+		btnDeleteAnswer.setBounds(218, 67, 136, 23);
 		contentPane.add(btnDeleteAnswer);
+		
+		ImageIcon home = new ImageIcon("IMG/home.png");	
+		JButton button = new JButton(home);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(0, 113, 46, 46);
+		contentPane.add(button);
+		
+		ImageIcon back = new ImageIcon("IMG/back.png");	
+		JButton button_1 = new JButton(back);
+		button_1.setBounds(58, 113, 46, 46);
+		contentPane.add(button_1);
 	}
 }

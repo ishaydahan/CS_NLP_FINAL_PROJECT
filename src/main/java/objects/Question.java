@@ -217,13 +217,25 @@ public class Question {
 		return answers.stream().filter(x->x.get_id().toString().equals(id)).findFirst().orElse(null);
 	}
 	
-	public boolean DBeditAnswer(Answer x) {
+	public boolean DBeditAnswer(Answer x) {		
+		load();
 		ApiHolder.getInstance().getCollection().updateOne(new Document()
-				.append("questions.answers._id", x.get_id()),
-				new Document("$set", new Document().append("questions.0.answers.$", answerToDoc(x))));
+			.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),				
+			new Document("$set", new Document().append("questions.$.answers."+answerToInt(x), answerToDoc(x))));
 		return true;
 	}
 	
+	private int answerToInt(Answer ans) {
+	 	int i=0;
+			for(Answer a : answers) {
+			if (ans.get_id().equals(a.get_id())) {
+				return i;
+			}
+				i++;
+		}
+		return -1;
+	}
+
 	public boolean DBremoveAnswer(Answer x) {
 		ApiHolder.getInstance().getCollection().updateOne(new Document()
 				.append("questions", new Document().append("$elemMatch", new Document().append("_id", qid))),

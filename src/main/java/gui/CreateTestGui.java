@@ -34,6 +34,8 @@ import javax.swing.JTextPane;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Panel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class CreateTestGui {
 
@@ -86,6 +88,21 @@ public class CreateTestGui {
 		textField.setBounds(86, 31, 288, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+		
+		ImageIcon home = new ImageIcon("IMG/home.png");	
+
+		JButton button = new JButton(home);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(0, 65, 46, 46);
+		frame.getContentPane().add(button);
+		
+		ImageIcon back = new ImageIcon("IMG/back.png");	
+		JButton button_1 = new JButton(back);
+		button_1.setBounds(58, 65, 46, 46);
+		frame.getContentPane().add(button_1);
 		btnGenerateTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//adding the details to the test
