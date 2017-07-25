@@ -183,7 +183,7 @@ public class Question {
 		//check
 		for (Answer student_ans: toCheck) {
 			//first build the answer
-			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans);
+			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans.build());
 			
 			int grade;
 			if ((grade = analyzer.levenshteinAnalyze(verified))>-1) {

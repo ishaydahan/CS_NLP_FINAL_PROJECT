@@ -76,7 +76,7 @@ public class ShowTestGui extends JFrame {
 		btnCheckTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.t.checkTest();
+				CSGui.t.load().checkTest();
 				JOptionPane.showMessageDialog(null, "Test was checked");
 				ShowTestGui s = new ShowTestGui();
 				s.setVisible(true);
