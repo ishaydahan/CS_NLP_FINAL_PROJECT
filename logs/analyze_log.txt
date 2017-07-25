@@ -1,1 +1,30 @@
+<<<<<<< HEAD
 $$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
+=======
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ beacuse people want to help $$ google api
+ANALYZER :::: Teacher parts: beacuse
+ANALYZER :::: Teacher parts: ADJ
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+### LEVENSHTEIN SUCSESS!
+### teacher: Answer: beacuse people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 5, Teacher verified: true, syntaxable: true, aid: 5977612c0635f50fb4849886
+### student: Answer: because people want to help, Wrriten by: STUDENT, Grade: -1, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: 597761b986c77818507cb499
+### LEVENSHTEIN SUCSESS!
+### teacher: Answer: beacuse people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 5, Teacher verified: true, syntaxable: true, aid: 5977612c0635f50fb4849886
+### student: Answer: because people want to help, Wrriten by: STUDENT, Grade: 100, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: 597761b986c77818507cb499
+>>>>>>> 3491462eaddadd5c88ce8399367d8259a22777bb
