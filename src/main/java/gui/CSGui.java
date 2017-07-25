@@ -18,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import com.google.common.util.concurrent.ExecutionError;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
@@ -126,7 +127,7 @@ public class CSGui {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				ApiHolder holder = ApiHolder.getInstance(); 
 		        //Get ExecutorService from Executors utility class, thread pool size is 10
 		        ExecutorService executor = Executors.newFixedThreadPool(2);
 		        //Create MyCallable instance

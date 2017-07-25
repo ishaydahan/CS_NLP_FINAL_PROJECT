@@ -161,7 +161,7 @@ public class Question {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	
+
 		//sort the list first from high to low to get the maximum grade in min time
 		verified.sort((x,y) -> y.getGrade()-x.getGrade());
 		//build each verified question.
@@ -171,7 +171,6 @@ public class Question {
 		//build each verified question.
 		syntaxable.forEach((ans)->ans.build());	
 	
-		
 		//determine min value for syntaxable
 		int minsyntaxable = Integer.MAX_VALUE;
 		for (Answer ans : getTeacherAnswers()) {
