@@ -30,6 +30,7 @@ import objects.Test;
 import teacherConsoleApi.ConsoleProgram;
 
 import javax.swing.JProgressBar;
+import java.awt.Font;
 
 class Connector implements Callable<Boolean> {
     public Boolean call() throws Exception {
@@ -94,6 +95,7 @@ public class CSGui {
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		panel.setBorder(new TitledBorder(null, "Login", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(42, 11, 262, 106);
 		frame.getContentPane().add(panel);
@@ -127,6 +129,8 @@ public class CSGui {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				progressBar.setIndeterminate(true);
+
 				ApiHolder holder = ApiHolder.getInstance(); 
 		        //Get ExecutorService from Executors utility class, thread pool size is 10
 		        ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -136,7 +140,7 @@ public class CSGui {
 		        //submit Callable tasks to be executed by thread pool
 		        Future<Boolean> future1 = executor.submit(Connector);
 		        Future<Boolean> future2 = executor.submit(login);
-		
+
 		        try {
 					future1.get();
 					future2.get();
@@ -155,11 +159,10 @@ public class CSGui {
 							TeacherFrame t = new TeacherFrame();
 							t.setVisible(true);;
 						} 
-	//					else {
-	//						Student s = new Student(p);
-	//						s.setVisible(true);
-	//					}
-	//				} 
+						else {
+							StudentFrame s = new StudentFrame();
+							s.setVisible(true);
+						}
 						frame.dispose();
 ;
 			}	else {					

@@ -153,7 +153,7 @@ public class Question {
 	 * @param verified - list of verified answers, mostly teacher ans / syntaxable ans
 	 * this 
 	 */
-	public void checkQuestion(List<Answer> toCheck, List<Answer> verified, List<Answer> syntaxable) {		
+	public void checkQuestion(List<Answer> toCheck, List<Answer> verified, List<Answer> syntaxable) {
 		//create log file
 		PrintStream logger = null;
 		try {

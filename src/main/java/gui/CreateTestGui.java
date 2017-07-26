@@ -36,6 +36,7 @@ import java.awt.event.KeyEvent;
 import java.awt.Panel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class CreateTestGui {
 
@@ -81,11 +82,11 @@ public class CreateTestGui {
 		frame.getContentPane().add(btnGenerateTest);
 		
 		JLabel lblSubject = new JLabel("Subject:");
-		lblSubject.setBounds(10, 34, 66, 14);
+		lblSubject.setBounds(10, 39, 66, 14);
 		frame.getContentPane().add(lblSubject);
 		
 		textField = new JTextField();
-		textField.setBounds(86, 31, 288, 20);
+		textField.setBounds(86, 36, 288, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
@@ -112,6 +113,11 @@ public class CreateTestGui {
 		});
 		button_1.setBounds(58, 65, 46, 46);
 		frame.getContentPane().add(button_1);
+		
+		JLabel lblPleaseNameYour = new JLabel("Please name your test:");
+		lblPleaseNameYour.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPleaseNameYour.setBounds(86, 11, 253, 14);
+		frame.getContentPane().add(lblPleaseNameYour);
 		btnGenerateTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//adding the details to the test

@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class TAnswerOption extends JFrame {
 
@@ -81,5 +83,10 @@ public class TAnswerOption extends JFrame {
 		JButton button_1 = new JButton(back);
 		button_1.setBounds(58, 113, 46, 46);
 		contentPane.add(button_1);
+		
+		JLabel label = new JLabel("This is your options:");
+		label.setFont(new Font("Tahoma", Font.BOLD, 13));
+		label.setBounds(59, 25, 348, 14);
+		contentPane.add(label);
 	}
 }

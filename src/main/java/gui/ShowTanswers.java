@@ -17,6 +17,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class ShowTanswers extends JFrame {
 
@@ -24,6 +26,7 @@ public class ShowTanswers extends JFrame {
 	private JTable table;
 	private JButton button;
 	private JButton button_1;
+	private JLabel lblPleaseChooseAn;
 
 	/**
 	 * Launch the application.
@@ -32,7 +35,7 @@ public class ShowTanswers extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ShowTestGui frame = new ShowTestGui();
+					TeacherTest frame = new TeacherTest();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -77,12 +80,18 @@ public class ShowTanswers extends JFrame {
 		button_1 = new JButton(back);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				ShowQuestionOption s = new ShowQuestionOption();
 				s.setVisible(true);
 			}
 		});
 		button_1.setBounds(58, 215, 46, 46);
 		contentPane.add(button_1);
+		
+		lblPleaseChooseAn = new JLabel("Please choose an answer:");
+		lblPleaseChooseAn.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPleaseChooseAn.setBounds(48, 11, 348, 14);
+		contentPane.add(lblPleaseChooseAn);
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
