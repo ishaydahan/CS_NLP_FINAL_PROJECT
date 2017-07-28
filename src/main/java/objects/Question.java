@@ -153,7 +153,7 @@ public class Question {
 	 * @param verified - list of verified answers, mostly teacher ans / syntaxable ans
 	 * this 
 	 */
-	public void checkQuestion(List<Answer> toCheck, List<Answer> verified, List<Answer> syntaxable) {		
+	public void checkQuestion(List<Answer> toCheck, List<Answer> verified, List<Answer> syntaxable) {
 		//create log file
 		PrintStream logger = null;
 		try {
@@ -161,7 +161,7 @@ public class Question {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	
+
 		//sort the list first from high to low to get the maximum grade in min time
 		verified.sort((x,y) -> y.getGrade()-x.getGrade());
 		//build each verified question.
@@ -171,7 +171,6 @@ public class Question {
 		//build each verified question.
 		syntaxable.forEach((ans)->ans.build());	
 	
-		
 		//determine min value for syntaxable
 		int minsyntaxable = Integer.MAX_VALUE;
 		for (Answer ans : getTeacherAnswers()) {
@@ -184,7 +183,7 @@ public class Question {
 		//check
 		for (Answer student_ans: toCheck) {
 			//first build the answer
-			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans);
+			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans.build());
 			
 			int grade;
 			if ((grade = analyzer.levenshteinAnalyze(verified))>-1) {

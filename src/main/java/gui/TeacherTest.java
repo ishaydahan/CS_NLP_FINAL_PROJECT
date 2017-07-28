@@ -17,11 +17,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.awt.Font;
 
-public class ShowTestGui extends JFrame {
+public class TeacherTest extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -30,7 +31,7 @@ public class ShowTestGui extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ShowTestGui frame = new ShowTestGui();
+					TeacherTest frame = new TeacherTest();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +43,7 @@ public class ShowTestGui extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ShowTestGui() {
+	public TeacherTest() {
 		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 452, 314);
@@ -52,9 +53,9 @@ public class ShowTestGui extends JFrame {
 		contentPane.setLayout(null);
 
 		String col[] = {"Question"};
-		Object[][] objs = CSGui.t.questionsToArr(CSGui.t.getQuestions());
-		//Object[][] objs = {{"design mode"}}; // for design		
-		table = new JTable(objs, col);
+		//Object[][] objs = CSGui.t.questionsToArr(CSGui.t.getQuestions());
+		Object[][] objs = {{"design mode"}}; // for design		
+		JTable table = new JTable(objs, col);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(48, 38, 346, 154);
 		contentPane.add(scrollPane);
@@ -65,7 +66,7 @@ public class ShowTestGui extends JFrame {
 				dispose();
 				String question= JOptionPane.showInputDialog("Please write your Question: ");
 				CSGui.t.createQuestion(question);
-				ShowTestGui s = new ShowTestGui();
+				TeacherTest s = new TeacherTest();
 				s.setVisible(true);
 			}
 		});
@@ -76,9 +77,9 @@ public class ShowTestGui extends JFrame {
 		btnCheckTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.t.checkTest();
+				CSGui.t.load().checkTest();
 				JOptionPane.showMessageDialog(null, "Test was checked");
-				ShowTestGui s = new ShowTestGui();
+				TeacherTest s = new TeacherTest();
 				s.setVisible(true);
 			}
 		});
@@ -120,6 +121,16 @@ public class ShowTestGui extends JFrame {
 		button_1.setBounds(58, 229, 46, 46);
 		contentPane.add(button_1);
 		
+		JLabel lblPleaseChooseA = new JLabel("Please choose a question:");
+		lblPleaseChooseA.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPleaseChooseA.setBounds(120, 13, 354, 14);
+		contentPane.add(lblPleaseChooseA);
+		
+		JLabel lblNewLabel = new JLabel(CSGui.t.getContent() + "-");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lblNewLabel.setBounds(48, 14, 46, 14);
+		contentPane.add(lblNewLabel);
+		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -127,7 +138,6 @@ public class ShowTestGui extends JFrame {
 				if(i != -1) {
 					String ID = (String) objs[i][1]; //ID of question
 					CSGui.q = CSGui.t.getQuestion(ID).load();
-					System.out.println(ID);
 					ShowQuestionOption sq = new ShowQuestionOption();
 					sq.setVisible(true);
 					dispose();

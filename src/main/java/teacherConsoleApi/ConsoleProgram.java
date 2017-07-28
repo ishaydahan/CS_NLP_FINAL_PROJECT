@@ -46,7 +46,11 @@ public class ConsoleProgram {
 	public static String pass;
 	
 	public static void main(String[] args) {	
+<<<<<<< HEAD
 		test();
+=======
+		//test();
+>>>>>>> 05a0eb0d91f9d42668df5b6de504a7af88382fdf
 		
 //        //Get ExecutorService from Executors utility class, thread pool size is 10
 //        ExecutorService executor = Executors.newFixedThreadPool(2);

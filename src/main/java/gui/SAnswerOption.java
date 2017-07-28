@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class SAnswerOption extends JFrame {
 
@@ -52,12 +53,15 @@ public class SAnswerOption extends JFrame {
 		btnApproveAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CSGui.q.approveAnswer(CSGui.a);
+				dispose();
+				AllStudentsAnswers sa = new AllStudentsAnswers();
+				sa.setVisible(true);
 			}
 		});
 		btnApproveAnswer.setBounds(103, 82, 134, 23);
 		contentPane.add(btnApproveAnswer);
 		
-		JButton btnFixPoints = new JButton("Fix");
+		JButton btnFixPoints = new JButton("Fix points");
 		btnFixPoints.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				while(true) {
@@ -67,19 +71,22 @@ public class SAnswerOption extends JFrame {
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Please enter a valid number of points");
 				}
-				CSGui.q.fixAns(point, CSGui.a);
 				}
-			}
+				CSGui.q.fixAns(point, CSGui.a);
+				dispose();
+				AllStudentsAnswers sa = new AllStudentsAnswers();
+				sa.setVisible(true);
+				}
 		});
 		btnFixPoints.setBounds(218, 48, 134, 23);
 		contentPane.add(btnFixPoints);
 		
 		textField = new JTextField();
-		textField.setBounds(122, 49, 86, 22);
+		textField.setBounds(147, 48, 60, 22);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblChangePoints = new JLabel("Change points:");
+		JLabel lblChangePoints = new JLabel("Change points to:");
 		lblChangePoints.setBounds(36, 52, 118, 14);
 		contentPane.add(lblChangePoints);
 		ImageIcon home = new ImageIcon("IMG/home.png");	
@@ -96,7 +103,19 @@ public class SAnswerOption extends JFrame {
 		ImageIcon back = new ImageIcon("IMG/back.png");	
 
 		JButton button_1 = new JButton(back);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				AllStudentsAnswers s = new AllStudentsAnswers();
+				s.setVisible(true);
+			}
+		});
 		button_1.setBounds(58, 117, 46, 46);
 		contentPane.add(button_1);
+		
+		JLabel label = new JLabel("This is your options:");
+		label.setFont(new Font("Tahoma", Font.BOLD, 13));
+		label.setBounds(36, 23, 348, 14);
+		contentPane.add(label);
 	}
 }

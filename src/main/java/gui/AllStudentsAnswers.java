@@ -17,13 +17,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.awt.Font;
 
-public class ShowSanswers extends JFrame {
+public class AllStudentsAnswers extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JButton button;
 	private JButton button_1;
+	private JLabel lblPleaseChooseAn;
 
 	/**
 	 * Launch the application.
@@ -32,7 +35,7 @@ public class ShowSanswers extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ShowTestGui frame = new ShowTestGui();
+					TeacherTest frame = new TeacherTest();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +47,7 @@ public class ShowSanswers extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ShowSanswers() {
+	public AllStudentsAnswers() {
 		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -53,9 +56,9 @@ public class ShowSanswers extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		String col[] = {"Answer","Owner","Points"};
-		Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getStudentAnswers()); 
-		//Object[][] objs = {{"design mode","m","m"}}; // for design		
+		String col[] = {"Answer","Points"};
+		//Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getStudentAnswers()); 
+		Object[][] objs = {{"design mode","m","m"}}; // for design		
 		table = new JTable(objs, col);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(50, 37, 346, 170);
@@ -69,23 +72,36 @@ public class ShowSanswers extends JFrame {
 				CSGui.main(null);
 			}
 		});
-		button.setBounds(0, 218, 46, 46);
+		button.setBounds(0, 215, 46, 46);
 		contentPane.add(button);
 		
 		ImageIcon back = new ImageIcon("IMG/back.png");	
 		button_1 = new JButton(back);
-		button_1.setBounds(58, 218, 46, 46);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ShowQuestionOption s = new ShowQuestionOption();
+				s.setVisible(true);
+			}
+		});
+		button_1.setBounds(58, 215, 46, 46);
 		contentPane.add(button_1);
+		
+		lblPleaseChooseAn = new JLabel("Please choose an answer:");
+		lblPleaseChooseAn.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPleaseChooseAn.setBounds(50, 12, 348, 14);
+		contentPane.add(lblPleaseChooseAn);
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i = table.getSelectedRow();
 				if(i != -1) {
-				String ID = (String) objs[i][1]; //ID of question
-				CSGui.q = CSGui.t.getQuestion(ID).load();
-				ShowQuestionOption sq = new ShowQuestionOption();
-				sq.setVisible(true);
+				String ID = (String) objs[i][2]; //ID of answer
+				CSGui.a = CSGui.q.getAnswer(ID);
+				dispose();
+				SAnswerOption sa = new SAnswerOption();
+				sa.setVisible(true);
 				}
 			}
 		});

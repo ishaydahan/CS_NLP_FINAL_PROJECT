@@ -54,6 +54,7 @@ public class Answer {
 			//google analyzer
 			Document doc = Document.newBuilder()
 		            .setContent(content).setType(Type.PLAIN_TEXT).build();
+
 			ApiHolder.getInstance().logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content + " $$ google api");
 			Analyzed_ans = ApiHolder.getInstance().langClient.analyzeSyntax(doc, EncodingType.UTF8);
 		}
