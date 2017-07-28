@@ -38,7 +38,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 
-public class CreateTestGui {
+public class CreateTest {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -51,7 +51,7 @@ public class CreateTestGui {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateTestGui window = new CreateTestGui();
+					CreateTest window = new CreateTest();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +64,7 @@ public class CreateTestGui {
 	 * Create the application.
 	 * @param p 
 	 */
-	public CreateTestGui() {
+	public CreateTest() {
 		initialize();
 	}
 
@@ -96,7 +96,7 @@ public class CreateTestGui {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button.setBounds(0, 65, 46, 46);
@@ -121,7 +121,7 @@ public class CreateTestGui {
 		btnGenerateTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//adding the details to the test
-				CSGui.p.createTest(textField.getText());
+				CSMain.p.createTest(textField.getText());
 				TeacherFrame t = new TeacherFrame();
 				t.setVisible(true);
 				frame.dispose();

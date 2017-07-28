@@ -53,7 +53,7 @@ public class StudentFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label = new JLabel("Hello , " + CSGui.p.getName());
+		JLabel label = new JLabel("Hello , " + CSMain.p.getName());
 		label.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		label.setBounds(10, 11, 103, 14);
 		contentPane.add(label);
@@ -64,7 +64,7 @@ public class StudentFrame extends JFrame {
 		contentPane.add(label_1);
 		
 		String col[] = {"Tests"};
-		Object[][] objs = CSGui.p.testsToArr(CSGui.p.getTests());
+		Object[][] objs = CSMain.p.testsToArr(CSMain.p.getTests());
 		//Object[][] objs = {{"design mode"}}; //only for design
 		
 		JTable table = new JTable(objs,col);
@@ -78,8 +78,8 @@ public class StudentFrame extends JFrame {
 				int i = table.getSelectedRow();
 				if(i != -1) {
 				String ID = (String) objs[i][1]; //ID of test
-				CSGui.t = CSGui.p.getTest(ID).load(); //init the static test of GUI 
-				StudentTest s = new StudentTest();
+				CSMain.t = CSMain.p.getTest(ID).load(); //init the static test of GUI 
+				StudentScreenTest s = new StudentScreenTest();
 				s.setVisible(true);
 				dispose();
 				}
@@ -91,7 +91,7 @@ public class StudentFrame extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button.setBounds(0, 215, 46, 46);
@@ -102,7 +102,7 @@ public class StudentFrame extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button_1.setBounds(58, 215, 46, 46);

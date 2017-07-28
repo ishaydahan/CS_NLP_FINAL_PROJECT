@@ -55,7 +55,7 @@ public class TeacherFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		String col[] = {"Tests"};
-		Object[][] objs = CSGui.p.testsToArr(CSGui.p.getTests());
+		Object[][] objs = CSMain.p.testsToArr(CSMain.p.getTests());
 		//Object[][] objs = {{"design mode"}}; //only for design
 		
 		JTable table = new JTable(objs,col);
@@ -69,8 +69,8 @@ public class TeacherFrame extends JFrame {
 				int i = table.getSelectedRow();
 				if(i != -1) {
 				String ID = (String) objs[i][1]; //ID of test
-				CSGui.t = CSGui.p.getTest(ID).load(); //init the static test of GUI 
-				TeacherTest s = new TeacherTest();
+				CSMain.t = CSMain.p.getTest(ID).load(); //init the static test of GUI 
+				TeacherScreenTest s = new TeacherScreenTest();
 				s.setVisible(true);
 				dispose();
 				}
@@ -80,7 +80,7 @@ public class TeacherFrame extends JFrame {
 		JButton btnCreateTest = new JButton("Create new test");
 		btnCreateTest.setBounds(152, 226, 139, 23);
 		contentPane.add(btnCreateTest);
-		JLabel lblHello = new JLabel("Hello , " + CSGui.p.getName());
+		JLabel lblHello = new JLabel("Hello , " + CSMain.p.getName());
 		lblHello.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		lblHello.setBounds(10, 11, 103, 14);
 		contentPane.add(lblHello);
@@ -90,7 +90,7 @@ public class TeacherFrame extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		btnNewButton.setBounds(58, 215, 46, 46);
@@ -101,7 +101,7 @@ public class TeacherFrame extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button.setBounds(0, 215, 46, 46);
@@ -116,7 +116,7 @@ public class TeacherFrame extends JFrame {
 		
 		btnCreateTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CreateTestGui ct = new CreateTestGui();
+				CreateTest ct = new CreateTest();
 				ct.createTest();
 				dispose();
 			}

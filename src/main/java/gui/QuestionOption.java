@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class ShowQuestionOption extends JFrame {
+public class QuestionOption extends JFrame {
 
 	private JPanel contentPane;
 
@@ -30,7 +30,7 @@ public class ShowQuestionOption extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ShowQuestionOption frame = new ShowQuestionOption();
+					QuestionOption frame = new QuestionOption();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class ShowQuestionOption extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ShowQuestionOption() {
+	public QuestionOption() {
 		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 242);
@@ -54,7 +54,7 @@ public class ShowQuestionOption extends JFrame {
 		JButton btnShowTeacherAnswers = new JButton("Show teacher answers");
 		btnShowTeacherAnswers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ShowTanswers t = new ShowTanswers();
+				TeacherAnswers t = new TeacherAnswers();
 				t.setVisible(true);
 				dispose();
 			}
@@ -80,7 +80,7 @@ public class ShowQuestionOption extends JFrame {
 					if(answer != null) {
 						String grade= JOptionPane.showInputDialog("Please write the answer Grade: ");
 						int point = Integer.parseInt(grade);
-						CSGui.q.addTeacherAns(answer, point);
+						CSMain.q.addTeacherAns(answer, point);
 					}
 			}
 		});
@@ -91,12 +91,12 @@ public class ShowQuestionOption extends JFrame {
 		btnCheckQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				List<Answer> sAnswers = CSGui.q.getStudentAnswers();
-				List<Answer> vAnswers = CSGui.q.getVerifiedAnswers();
-				List<Answer> vSntaxAnswers = CSGui.q.getVerifiedSyntaxableAnswers();
-				CSGui.q.checkQuestion(sAnswers, vAnswers,vSntaxAnswers );
+				List<Answer> sAnswers = CSMain.q.getStudentAnswers();
+				List<Answer> vAnswers = CSMain.q.getVerifiedAnswers();
+				List<Answer> vSntaxAnswers = CSMain.q.getVerifiedSyntaxableAnswers();
+				CSMain.q.checkQuestion(sAnswers, vAnswers,vSntaxAnswers );
 				JOptionPane.showMessageDialog(null, "Question was checked");
-				ShowQuestionOption s = new ShowQuestionOption();
+				QuestionOption s = new QuestionOption();
 				s.setVisible(true);
 			}
 		});
@@ -106,8 +106,8 @@ public class ShowQuestionOption extends JFrame {
 		JButton btnDeleteQuestion = new JButton("Delete question");
 		btnDeleteQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CSGui.t.removeQuestion(CSGui.q);
-				TeacherTest s = new TeacherTest();
+				CSMain.t.removeQuestion(CSMain.q);
+				TeacherScreenTest s = new TeacherScreenTest();
 				s.setVisible(true);
 				dispose();
 			}
@@ -120,7 +120,7 @@ public class ShowQuestionOption extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String content= JOptionPane.showInputDialog("Please write the new Question: ");
 				if(content != null)
-					CSGui.q.renameQuestion(content);
+					CSMain.q.renameQuestion(content);
 			}
 		});
 		button.setBounds(221, 85, 183, 23);
@@ -131,7 +131,7 @@ public class ShowQuestionOption extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button_1.setBounds(0, 157, 46, 46);
@@ -142,7 +142,7 @@ public class ShowQuestionOption extends JFrame {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				TeacherTest s = new TeacherTest();
+				TeacherScreenTest s = new TeacherScreenTest();
 				s.setVisible(true);
 			}
 		});
@@ -154,7 +154,7 @@ public class ShowQuestionOption extends JFrame {
 		lblThatWhatYou.setBounds(25, 23, 160, 14);
 		contentPane.add(lblThatWhatYou);
 		
-		JLabel lblNewLabel = new JLabel(CSGui.q.getContent());
+		JLabel lblNewLabel = new JLabel(CSMain.q.getContent());
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		lblNewLabel.setBounds(204, 24, 46, 14);
 		contentPane.add(lblNewLabel);

@@ -45,13 +45,13 @@ class Connector implements Callable<Boolean> {
    
 class login implements Callable<Boolean> {
     public Boolean call() throws Exception {
-    	CSGui.userName = CSGui.textFieldUser.getText();
-		CSGui.password = CSGui.passwordField.getText();
+    	CSMain.userName = CSMain.textFieldUser.getText();
+		CSMain.password = CSMain.passwordField.getText();
 		return true;
     }
 }
 
-public class CSGui {
+public class CSMain {
 
 	private JFrame frame;
 	static JTextField textFieldUser;
@@ -69,7 +69,7 @@ public class CSGui {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CSGui window = new CSGui();
+					CSMain window = new CSMain();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -81,7 +81,7 @@ public class CSGui {
 	/**
 	 * Create the application.
 	 */
-	public CSGui() {
+	public CSMain() {
 		initialize();
 	}
 

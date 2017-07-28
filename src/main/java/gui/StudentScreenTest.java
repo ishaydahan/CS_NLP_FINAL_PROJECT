@@ -21,7 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
-public class StudentTest extends JFrame {
+public class StudentScreenTest extends JFrame {
 
 	private JPanel contentPane;
 
@@ -32,7 +32,7 @@ public class StudentTest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StudentTest frame = new StudentTest();
+					StudentScreenTest frame = new StudentScreenTest();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class StudentTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public StudentTest() {
+	public StudentScreenTest() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -52,7 +52,7 @@ public class StudentTest extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label = new JLabel(CSGui.t.getContent() + "-");
+		JLabel label = new JLabel(CSMain.t.getContent() + "-");
 		label.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		label.setBounds(48, 1, 46, 14);
 		contentPane.add(label);
@@ -63,8 +63,8 @@ public class StudentTest extends JFrame {
 		contentPane.add(label_1);
 		
 		String col[] = {"Question"};
-		//Object[][] objs = CSGui.t.questionsToArr(CSGui.t.getQuestions());
-		Object[][] objs = {{"design mode"}}; // for design		
+		Object[][] objs = CSMain.t.questionsToArr(CSMain.t.getQuestions());
+		//Object[][] objs = {{"design mode"}}; // for design		
 		JTable table = new JTable(objs, col);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(48, 35, 346, 141);
@@ -76,7 +76,7 @@ public class StudentTest extends JFrame {
 				int i = table.getSelectedRow();
 				if(i != -1) {
 					String ID = (String) objs[i][1]; //ID of question
-					CSGui.q = CSGui.t.getQuestion(ID).load();
+					CSMain.q = CSMain.t.getQuestion(ID).load();
 					StudentAnswer sa = new StudentAnswer();
 					sa.setVisible(true);
 					dispose();
@@ -101,13 +101,13 @@ public class StudentTest extends JFrame {
 		button_home.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button_home.setBounds(0, 216, 46, 46);
 		contentPane.add(button_home);
 		
-		JLabel lblYourGradeIs = new JLabel("Your grade is:");
+		JLabel lblYourGradeIs = new JLabel("Your grade is:" + CSMain.t.getMyTestGrade());
 		lblYourGradeIs.setBounds(147, 187, 140, 14);
 		contentPane.add(lblYourGradeIs);
 		

@@ -35,7 +35,7 @@ public class AllStudentsAnswers extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TeacherTest frame = new TeacherTest();
+					TeacherScreenTest frame = new TeacherScreenTest();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,8 +57,9 @@ public class AllStudentsAnswers extends JFrame {
 		contentPane.setLayout(null);
 
 		String col[] = {"Answer","Points"};
-		//Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getStudentAnswers()); 
-		Object[][] objs = {{"design mode","m","m"}}; // for design		
+		System.out.println(CSMain.q.getStudentAnswers());
+		Object[][] objs = CSMain.q.AnswersToArr(CSMain.q.getStudentAnswers()); 
+		//Object[][] objs = {{"design mode","m","m"}}; // for design		
 		table = new JTable(objs, col);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(50, 37, 346, 170);
@@ -69,7 +70,7 @@ public class AllStudentsAnswers extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button.setBounds(0, 215, 46, 46);
@@ -80,7 +81,7 @@ public class AllStudentsAnswers extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ShowQuestionOption s = new ShowQuestionOption();
+				QuestionOption s = new QuestionOption();
 				s.setVisible(true);
 			}
 		});
@@ -98,7 +99,7 @@ public class AllStudentsAnswers extends JFrame {
 				int i = table.getSelectedRow();
 				if(i != -1) {
 				String ID = (String) objs[i][2]; //ID of answer
-				CSGui.a = CSGui.q.getAnswer(ID);
+				CSMain.a = CSMain.q.getAnswer(ID);
 				dispose();
 				SAnswerOption sa = new SAnswerOption();
 				sa.setVisible(true);

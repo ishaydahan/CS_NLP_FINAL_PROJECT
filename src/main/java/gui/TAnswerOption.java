@@ -51,7 +51,7 @@ public class TAnswerOption extends JFrame {
 		btnEditAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String newAnswer = JOptionPane.showInputDialog("Please write your new Answer: ");
-				CSGui.a.setContent(newAnswer);
+				CSMain.a.setContent(newAnswer);
 			}
 		});
 		btnEditAnswer.setBounds(59, 67, 136, 23);
@@ -60,8 +60,8 @@ public class TAnswerOption extends JFrame {
 		JButton btnDeleteAnswer = new JButton("Delete answer");
 		btnDeleteAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CSGui.q.removeAnswer(CSGui.a);
-				ShowTanswers s = new ShowTanswers();
+				CSMain.q.removeAnswer(CSMain.a);
+				TeacherAnswers s = new TeacherAnswers();
 				s.setVisible(true);
 			}
 		});
@@ -73,7 +73,7 @@ public class TAnswerOption extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button.setBounds(0, 113, 46, 46);

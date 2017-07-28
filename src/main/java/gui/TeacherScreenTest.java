@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JProgressBar;
 
-public class TeacherTest extends JFrame {
+public class TeacherScreenTest extends JFrame {
 
 	private JPanel contentPane;
 	private JProgressBar progressBar;
@@ -33,7 +33,7 @@ public class TeacherTest extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TeacherTest frame = new TeacherTest();
+					TeacherScreenTest frame = new TeacherScreenTest();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class TeacherTest extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TeacherTest() {
+	public TeacherScreenTest() {
 		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 452, 314);
@@ -55,8 +55,8 @@ public class TeacherTest extends JFrame {
 		contentPane.setLayout(null);
 
 		String col[] = {"Question"};
-		//Object[][] objs = CSGui.t.questionsToArr(CSGui.t.getQuestions());
-		Object[][] objs = {{"design mode"}}; // for design		
+		Object[][] objs = CSMain.t.questionsToArr(CSMain.t.getQuestions());
+		//Object[][] objs = {{"design mode"}}; // for design		
 		JTable table = new JTable(objs, col);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(48, 38, 346, 154);
@@ -67,8 +67,8 @@ public class TeacherTest extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				String question= JOptionPane.showInputDialog("Please write your Question: ");
-				CSGui.t.createQuestion(question);
-				TeacherTest s = new TeacherTest();
+				CSMain.t.createQuestion(question);
+				TeacherScreenTest s = new TeacherScreenTest();
 				s.setVisible(true);
 			}
 		});
@@ -78,7 +78,7 @@ public class TeacherTest extends JFrame {
 		JButton btnCheckTest = new JButton("Check test");
 		btnCheckTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CSGui.t.load().checkTest();
+				CSMain.t.load().checkTest();
 				JOptionPane.showMessageDialog(null, "Test was checked");
 			}
 		});
@@ -89,7 +89,7 @@ public class TeacherTest extends JFrame {
 		btnDeleteTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.p.removeTest(CSGui.t);
+				CSMain.p.removeTest(CSMain.t);
 				TeacherFrame t = new TeacherFrame();
 				t.setVisible(true);
 			}
@@ -102,7 +102,7 @@ public class TeacherTest extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button.setBounds(0, 229, 46, 46);
@@ -125,7 +125,7 @@ public class TeacherTest extends JFrame {
 		lblPleaseChooseA.setBounds(120, 13, 354, 14);
 		contentPane.add(lblPleaseChooseA);
 		
-		JLabel lblNewLabel = new JLabel(CSGui.t.getContent() + "-");
+		JLabel lblNewLabel = new JLabel(CSMain.t.getContent() + "-");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		lblNewLabel.setBounds(48, 14, 46, 14);
 		contentPane.add(lblNewLabel);
@@ -140,8 +140,8 @@ public class TeacherTest extends JFrame {
 				int i = table.getSelectedRow();
 				if(i != -1) {
 					String ID = (String) objs[i][1]; //ID of question
-					CSGui.q = CSGui.t.getQuestion(ID).load();
-					ShowQuestionOption sq = new ShowQuestionOption();
+					CSMain.q = CSMain.t.getQuestion(ID).load();
+					QuestionOption sq = new QuestionOption();
 					sq.setVisible(true);
 					dispose();
 				}

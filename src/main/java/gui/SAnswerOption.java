@@ -52,7 +52,7 @@ public class SAnswerOption extends JFrame {
 		JButton btnApproveAnswer = new JButton("Approve answer");
 		btnApproveAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CSGui.q.approveAnswer(CSGui.a);
+				CSMain.q.approveAnswer(CSMain.a);
 				dispose();
 				AllStudentsAnswers sa = new AllStudentsAnswers();
 				sa.setVisible(true);
@@ -72,7 +72,7 @@ public class SAnswerOption extends JFrame {
 					JOptionPane.showMessageDialog(null, "Please enter a valid number of points");
 				}
 				}
-				CSGui.q.fixAns(point, CSGui.a);
+				CSMain.q.fixAns(point, CSMain.a);
 				dispose();
 				AllStudentsAnswers sa = new AllStudentsAnswers();
 				sa.setVisible(true);
@@ -95,7 +95,7 @@ public class SAnswerOption extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button.setBounds(0, 117, 46, 46);

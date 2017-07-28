@@ -56,12 +56,13 @@ public class StudentAnswer extends JFrame {
 		JTextArea textArea = new JTextArea();
 		textArea.setBorder(new LineBorder(new Color(0, 0, 0)));
 		textArea.setBounds(114, 47, 310, 58);
+		textArea.setText(CSMain.q.getThisStudentAns().get(0).getContent());
 		//TODO fill in the area with the student answer
 		contentPane.add(textArea);
 		
+		System.out.println(CSMain.q.getThisStudentAns().get(0));
 		JLabel lblYourGrade = new JLabel("Your grade:");
-		lblYourGrade.setBounds(27, 121, 77, 14);
-		//TODO add the f grade
+		lblYourGrade.setBounds(27, 121, 224, 14);
 		contentPane.add(lblYourGrade);
 		
 		ImageIcon home = new ImageIcon("IMG/home.png");	
@@ -69,7 +70,7 @@ public class StudentAnswer extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button.setBounds(0, 159, 46, 46);
@@ -80,15 +81,25 @@ public class StudentAnswer extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				StudentTest st = new StudentTest();
+				StudentScreenTest st = new StudentScreenTest();
 				st.setVisible(true);
 			}
 		});
 		button_1.setBounds(58, 159, 46, 46);
 		contentPane.add(button_1);
 		
-		JLabel lblNewLabel = new JLabel("Question:");
-		lblNewLabel.setBounds(27, 11, 77, 14);
+		JLabel lblNewLabel = new JLabel("Question:" + CSMain.q.getContent());
+		lblNewLabel.setBounds(27, 11, 397, 14);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnSaveAnswer = new JButton("Save answer");
+		btnSaveAnswer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String answer = textArea.getText();
+				CSMain.q.addStudentAns(answer);
+			}
+		});
+		btnSaveAnswer.setBounds(10, 71, 100, 23);
+		contentPane.add(btnSaveAnswer);
 	}
 }

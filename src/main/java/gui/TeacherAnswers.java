@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class ShowTanswers extends JFrame {
+public class TeacherAnswers extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -35,7 +35,7 @@ public class ShowTanswers extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TeacherTest frame = new TeacherTest();
+					TeacherScreenTest frame = new TeacherScreenTest();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +47,7 @@ public class ShowTanswers extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ShowTanswers() {
+	public TeacherAnswers() {
 		super("Exams Checker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -57,7 +57,7 @@ public class ShowTanswers extends JFrame {
 		contentPane.setLayout(null);
 
 		String col[] = {"Answer","Points"};
-		Object[][] objs = CSGui.q.AnswersToArr(CSGui.q.getTeacherAnswers());
+		Object[][] objs = CSMain.q.AnswersToArr(CSMain.q.getTeacherAnswers());
 		//Object[][] objs = {{"design mode","5"}}; // for design		
 		table = new JTable(objs, col);
 
@@ -70,7 +70,7 @@ public class ShowTanswers extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				CSGui.main(null);
+				CSMain.main(null);
 			}
 		});
 		button.setBounds(0, 215, 46, 46);
@@ -81,7 +81,7 @@ public class ShowTanswers extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ShowQuestionOption s = new ShowQuestionOption();
+				QuestionOption s = new QuestionOption();
 				s.setVisible(true);
 			}
 		});
@@ -99,7 +99,7 @@ public class ShowTanswers extends JFrame {
 				int i = table.getSelectedRow();
 				if(i != -1) {
 				String ID = (String) objs[i][2]; //ID of answer
-				CSGui.a = CSGui.q.getAnswer(ID);
+				CSMain.a = CSMain.q.getAnswer(ID);
 				TAnswerOption sa = new TAnswerOption();
 				sa.setVisible(true);
 				}
