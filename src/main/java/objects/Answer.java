@@ -26,6 +26,7 @@ public class Answer {
 	private ObjectId _id ;//answer id
 	private String content;//the answer itself
 	private Writer writer;//who wrote the answer
+	private ObjectId writerId ;//writer id
 	private Integer grade;//Wasn't graded = -1
 	private Integer answerWords;//num of significant words.
 	private Boolean verified;//there is enough data to learn from this answer
@@ -36,10 +37,11 @@ public class Answer {
 	//Enemas for insignificant parts of sentence
 	private Tag[] del = {Tag.PUNCT, Tag.UNKNOWN, Tag.ADP, Tag.X, Tag.AFFIX, Tag.DET};
 
-	public Answer(ObjectId _id, String content, Writer writer, Integer grade, Integer answerWords,Boolean verified, Boolean syntaxable) {
+	public Answer(ObjectId _id, String content, Writer writer, ObjectId writerId, Integer grade, Integer answerWords,Boolean verified, Boolean syntaxable) {
 		this._id=_id;
 		this.content=content.toLowerCase();
 		this.writer=writer;
+		this.writerId = writerId;
 		this.grade=grade;
 		this.answerWords=answerWords;
 		this.verified = verified;
@@ -151,4 +153,13 @@ public class Answer {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public ObjectId getWriterId() {
+		return writerId;
+	}
+
+	public void setWriterId(ObjectId writerId) {
+		this.writerId = writerId;
+	}
+
 }

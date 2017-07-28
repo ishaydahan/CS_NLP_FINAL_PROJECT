@@ -34,7 +34,7 @@ public class Question {
 
 		for(Document d : docAnswers) {
 			this.answers.add(new Answer(d.getObjectId("_id"), d.getString("content"), 
-					Writer.valueOf((d.getString("writer"))), d.getInteger("grade"), d.getInteger("answerWords"), 
+					Writer.valueOf((d.getString("writer"))), d.getObjectId("writer_id"), d.getInteger("grade"), d.getInteger("answerWords"), 
 					d.getBoolean("verified"), d.getBoolean("syntaxable")));
 		}
 		return this;
@@ -73,10 +73,17 @@ public class Question {
 	 * wont check containing answer since each student may write same answer content
 	 */
 	public Answer addStudentAns(String student_ans){
-        Answer toAdd = ApiHolder.getInstance().factory.createAnswer(student_ans, -1, Writer.STUDENT);
-        DBcreateAnswer(toAdd);
-        answers.add(toAdd);
-		return toAdd;
+		Answer studentAns = answers.stream().filter((x)->x.getWriterId().equals(ApiHolder.getInstance().userId)).findFirst().orElse(null);
+		if(studentAns!=null) {
+			studentAns.setContent(student_ans);
+			DBeditAnswer(studentAns);
+			return studentAns;
+		}else {
+	        Answer toAdd = ApiHolder.getInstance().factory.createAnswer(student_ans, -1, Writer.STUDENT);
+	        DBcreateAnswer(toAdd);
+	        answers.add(toAdd);        		
+			return toAdd;
+		}
 	}
 		
 	/**
@@ -293,7 +300,7 @@ public class Question {
 	}
 
 	private Document answerToDoc(Answer a) {
-		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter().name()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("syntaxable", a.getsyntaxable());
+		return new Document().append("_id", a.get_id()).append("content", a.getContent()).append("writer", a.getWriter().name()).append("writer_id", a.getWriterId()).append("grade", a.getGrade()).append("answerWords", a.getAnswerWords()).append("verified", a.getVerified()).append("syntaxable", a.getsyntaxable());
 	}
 	
 	public Object[][] AnswersToArr(List<Answer> lst){
