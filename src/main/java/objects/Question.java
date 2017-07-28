@@ -1,8 +1,5 @@
 package objects;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -64,7 +61,7 @@ public class Question {
         	System.out.println("Already has that answer!" + toAdd.getContent());
         	return null;
         }else {
-            DBcreateAnswer(toAdd.build());
+            DBcreateAnswer(toAdd);
             answers.add(toAdd);
     		return toAdd;
         }
@@ -100,6 +97,7 @@ public class Question {
 	}
 	
 	public boolean renameAns(String content, Answer toFix) {
+		load();
 		toFix.setContent(content);
 		DBeditAnswer(toFix);
 		return true;
@@ -154,14 +152,9 @@ public class Question {
 	 * this 
 	 */
 	public void checkQuestion(List<Answer> toCheck, List<Answer> verified, List<Answer> syntaxable) {
-		//create log file
-		PrintStream logger = null;
-		try {
-			logger = new PrintStream(new FileOutputStream("logs/question output.txt"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
+		//reload before execution.
+		load();
+		
 		//sort the list first from high to low to get the maximum grade in min time
 		verified.sort((x,y) -> y.getGrade()-x.getGrade());
 		//build each verified question.
@@ -176,9 +169,6 @@ public class Question {
 		for (Answer ans : getTeacherAnswers()) {
 			if (ans.getWriter().equals(Writer.TEACHER))  minsyntaxable = Math.min(minsyntaxable, ans.getAnswerWords());
 		}
-		
-		//reload before execution.
-		load();
 		
 		//check
 		for (Answer student_ans: toCheck) {
@@ -203,8 +193,6 @@ public class Question {
 	    	if(student_ans.getAnswerWords()>=minsyntaxable) student_ans.setsyntaxable(true);
 	    	else student_ans.setsyntaxable(false);
 	    	
-			//log to file
-			logger.println(student_ans.toString());
 			System.out.println(student_ans);
 			
 			DBeditAnswer(student_ans);

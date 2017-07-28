@@ -33,10 +33,7 @@ public class CheckAnswerCase {
 	
 	private Answer teacher_ans;
 	private Answer student_ans;
-//	private Token teacher;
-//	private Token student;
-
-	private Integer finishedGrade = 0;//max grade
+	private int finishedGrade = 0;//max grade
 	
 	private HashSet <Token> set = new HashSet <Token>();//set to remember already visited nodes
 	private HashSet <EqualTokens> equalSet = new HashSet <EqualTokens>();//set to remember equalnodes
@@ -54,7 +51,7 @@ public class CheckAnswerCase {
 	 * this is the only function that the user allowed to call.
 	 * the function calls the equalSentences function two times - first we compare teacher to student and then student to teacher.
 	 */
-	protected Integer getGrade() {
+	protected int getGrade() {
 //		ApiHolder.getInstance().logger.println("getGrade :::: TEACHER :" + teacher_ans);
 //		ApiHolder.getInstance().logger.println("getGrade :::: STUDENT :" + student_ans);
 		
@@ -69,10 +66,10 @@ public class CheckAnswerCase {
 		}
 		
 		//put the student answer to ensure we will check it one time only!
-		teacher_ans.getMap().put(student_ans.getContent(), new Integer(0));
+		teacher_ans.getMap().put(student_ans.getContent(), 0);
 		
 		//start calculating comparing student to teacher
-		Integer firstGrade = this.equalSentences(teacher_ans, student_ans, false);
+		int firstGrade = this.equalSentences(teacher_ans, student_ans, false);
 
 		//try to get max grade with teacher path only.
 		if (firstGrade==teacher_ans.getGrade()) {
@@ -82,8 +79,8 @@ public class CheckAnswerCase {
 			return firstGrade;
 		}
 		
-		Integer secondGrade = this.equalSentences(student_ans, teacher_ans, true);
-		Integer grade = Math.max(firstGrade, secondGrade);
+		int secondGrade = this.equalSentences(student_ans, teacher_ans, true);
+		int grade = Math.max(firstGrade, secondGrade);
 //		ApiHolder.getInstance().logger.println("finished grading: " + student_ans.getContent());
 //		ApiHolder.getInstance().logger.println("grade: " + grade);
 		teacher_ans.getMap().put(student_ans.getContent(), grade);
@@ -96,7 +93,7 @@ public class CheckAnswerCase {
 	 * if there is no match in one node at least(found boolean), the grade will be 0.
 	 * the different between number of equal significant words will be reduced from grade.
 	 */
-	private Integer equalSentences(Answer constant, Answer compareTo, boolean OppMode) {
+	private int equalSentences(Answer constant, Answer compareTo, boolean OppMode) {
 //		if(OppMode) ApiHolder.getInstance().logger.println("ANALYZER :::: COMPARING TEACHER TO STUDENT");
 //		else ApiHolder.getInstance().logger.println("ANALYZER :::: COMPARING STUDENT TO TEACHER");
 		
@@ -155,47 +152,6 @@ public class CheckAnswerCase {
 		else return finalGrade;
 	}
 	
-//	/**
-//	 * @return mid grade
-//	 * same as before just starting from student
-//	 */
-//	private Integer equalSentences2() {
-//		ApiHolder.getInstance().logger.println("ANALYZER :::: STUDENT SIDE!!!!!!!!!!!!!!!!!");
-//		
-//		boolean found = false;
-//		equalSet=new HashSet<EqualTokens>();
-//		set = new HashSet <Token>();
-//
-//		for(Token student : student_ans.getAnalyzed_ans().getTokensList()) {
-//			//pass insignificant words
-//			if (Arrays.asList(del).contains(student.getPartOfSpeech().getTag())) continue;
-//			
-//			for(Token teacher : teacher_ans.getAnalyzed_ans().getTokensList()) {
-//				if (Arrays.asList(del).contains(teacher.getPartOfSpeech().getTag())) continue;
-//				
-//				ApiHolder.getInstance().logger.println("equalSentences1 :::: checking " + teacher.getText().getContent() + " " + student.getText().getContent());
-//				if (!set.contains(teacher) &&  equalNodes(teacher, student)) {
-//					//found a path that is equal
-//					set.add(teacher);
-//					found=true;
-//					ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check, equal: " + teacher.getText().getContent() + " " + student.getText().getContent());
-//					break;
-//				}
-//			}
-//			if (!found) {
-//				ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check, BREAK!: " + student.getText().getContent());
-//				ApiHolder.getInstance().logger.println("equalSentences1 :::: grade: " + Math.max(finishedGrade, ApiHolder.getInstance().MINGRADE));
-//				return Math.max(finishedGrade, ApiHolder.getInstance().MINGRADE);
-//			}
-//			found=false;
-//		}
-//		//the grade is maxGrade-mistakes*10(can be changed)
-//		ApiHolder.getInstance().logger.println("equalSentences1 :::: TEHERE IS GRADE!!!!!!!!!!!!!!!!!!*********: " + teacher_ans.getContent() + " " + student_ans.getContent() + " " + equalSet.size());
-//		int finalGrade = Math.max(finishedGrade, teacher_ans.getGrade()-(Math.abs(teacher_ans.getAnswerWords()-equalSet.size())*ApiHolder.getInstance().REDUCE));
-//		if (student_ans.getWriter().equals(Writer.COMPUTER)) return finalGrade-ApiHolder.getInstance().COMP;
-//		else return finalGrade;
-//	}
-
 	/**
 	 * @param teacher word token
 	 * @param student word token

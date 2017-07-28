@@ -78,7 +78,7 @@ public class Test {
 	 */
 	public void checkTest() {
 		questions.forEach((q)->{
-			q.checkQuestion(q.getStudentAnswers(), q.getVerifiedAnswers(), q.getVerifiedSyntaxableAnswers());
+			q.load().checkQuestion(q.getStudentAnswers(), q.getVerifiedAnswers(), q.getVerifiedSyntaxableAnswers());
 		});
 	}
 	
