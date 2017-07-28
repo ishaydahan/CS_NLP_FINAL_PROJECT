@@ -37,6 +37,8 @@ public class Person {
 			this.name = name;
 			
 			if (mode.equals("TEACHER")) ApiHolder.getInstance().teacher = true;
+			ApiHolder.getInstance().userId = ApiHolder.getInstance().users.find(
+					new Document().append("username", username).append("password", password)).first().getObjectId("_id");
 			return true;
 		}else {
 			return false;

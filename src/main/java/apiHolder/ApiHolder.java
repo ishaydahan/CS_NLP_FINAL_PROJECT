@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.languagetool.JLanguageTool;
 import org.languagetool.language.BritishEnglish;
 import org.languagetool.rules.RuleMatch;
@@ -46,8 +47,6 @@ public class ApiHolder {
 	// Private constructor suppresses generation of a (public) default constructor
 	private ApiHolder() {
 		try {
-			Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
-			mongoLogger.setLevel(Level.SEVERE);
 						
 			logger = new PrintStream(new FileOutputStream("logs/analyze_log.txt"));
 			
@@ -77,7 +76,9 @@ public class ApiHolder {
 	public int COMP = 5;//points for each spelling or meaning correct
 	public int MAXGRADE = 100;//max points per answer
 	public int MINGRADE = 0;//min points per answer
+	
 	public boolean teacher = false ;//user logged in
+	public ObjectId userId ;//user logged in
 
 	public MongoCollection<Document> collection;
 	public MongoCollection<Document> users;
