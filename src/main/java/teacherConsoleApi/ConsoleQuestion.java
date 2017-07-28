@@ -20,7 +20,7 @@ public class ConsoleQuestion {
 			System.out.println("\n@@  Question Screen Options  @@");
 			System.out.println("0 - exit");
 			System.out.println("1 - add teacher answer");
-			System.out.println("2 - add student answer");
+			System.out.println("2 - *add student answer");
 			System.out.println();			
 			System.out.println("31 - show TEACHER answers");
 			System.out.println("32 - show STUDENT answers");
@@ -32,6 +32,9 @@ public class ConsoleQuestion {
 			System.out.println();			
 			System.out.println("41 - check all questions(32) with verified by teacher syntax and levenshtein(34,35)");
 			System.out.println("42 - check ungraded questions(33) with verified by teacher syntax and levenshtein(34,35)");
+			System.out.println("43 - *check this student answers");
+			System.out.println("44 - *get this student grade for answer");
+
 			System.out.println();			
 			System.out.println("5 - fix answer");
 			System.out.println();			
@@ -122,6 +125,11 @@ public class ConsoleQuestion {
         System.out.println("///////////////////////////////////");
 		if (choice==1) q.checkQuestion(q.getStudentAnswers(), q.getVerifiedAnswers(), q.getVerifiedSyntaxableAnswers());
 		if (choice==2) q.checkQuestion(q.getUngradedStudentAnswers(), q.getVerifiedAnswers(), q.getVerifiedSyntaxableAnswers());
+		if (choice==3) q.checkQuestion(q.getThisStudentAns(), q.getVerifiedAnswers(), q.getVerifiedSyntaxableAnswers());
+		if (choice==4) {
+			if (q.studentAnswerdQuestion() && q.questionWasChecked()) System.out.println(q.getThisStudentAns().get(0).getGrade());
+			else System.out.println("problem");
+		}
         System.out.println("///////////////////////////////////");
 	}
 	

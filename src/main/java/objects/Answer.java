@@ -27,7 +27,7 @@ public class Answer {
 	private String content;//the answer itself
 	private Writer writer;//who wrote the answer
 	private ObjectId writerId ;//writer id
-	private Integer grade;//Wasn't graded = -1
+	private Integer grade;//submitted, Wasn't graded = -1 //not submitted, Wasn't graded = -2 //submitted, graded >-1
 	private Integer answerWords;//num of significant words.
 	private Boolean verified;//there is enough data to learn from this answer
 	private Boolean syntaxable;//there is enough data to learn from this answer

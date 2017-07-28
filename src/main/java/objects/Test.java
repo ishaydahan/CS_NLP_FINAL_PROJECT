@@ -138,6 +138,31 @@ public class Test {
 		}
 		return arr;
 	}
+	
+	public Double getMyTestGrade() {
+		Double i=(double) 0;
+		
+		for(Question q : questions) {
+			q.load();
+			if (q.getThisStudentAns().isEmpty() || q.getThisStudentAns().get(0).getGrade()<0) {
+				return null;
+			}else {
+				i=i+q.getThisStudentAns().get(0).getGrade();
+			}
+		}
+		return i/questions.size();
+	}
 
+	public boolean submitTest() {
+		for(Question q : questions) {
+			q.load();
+			if (q.getThisStudentAns().isEmpty() || q.getThisStudentAns().get(0).getGrade()>-2) {
+				return false;
+			}else {
+				q.submitAnswer(q.getThisStudentAns().get(0));
+			}
+		}
+		return true;
+	}
 
 }

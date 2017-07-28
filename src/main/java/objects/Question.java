@@ -103,8 +103,13 @@ public class Question {
 		return true;
 	}
 	
+	public boolean submitAnswer(Answer ans) {
+		ans.setGrade(-1);
+		DBeditAnswer(ans);
+		return true;
+	}
+	
 	public boolean renameAns(String content, Answer toFix) {
-		load();
 		toFix.setContent(content);
 		DBeditAnswer(toFix);
 		return true;
@@ -158,10 +163,7 @@ public class Question {
 	 * @param verified - list of verified answers, mostly teacher ans / syntaxable ans
 	 * this 
 	 */
-	public void checkQuestion(List<Answer> toCheck, List<Answer> verified, List<Answer> syntaxable) {
-		//reload before execution.
-		load();
-		
+	public void checkQuestion(List<Answer> toCheck, List<Answer> verified, List<Answer> syntaxable) {		
 		//sort the list first from high to low to get the maximum grade in min time
 		verified.sort((x,y) -> y.getGrade()-x.getGrade());
 		//build each verified question.
@@ -256,7 +258,7 @@ public class Question {
 	}
 	
 	public List<Answer> getStudentAnswers() {
-		return answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT)).collect(Collectors.toList());
+		return answers.stream().filter(x -> x.getWriter().equals(Writer.STUDENT) && x.getGrade()>-2).collect(Collectors.toList());
 	}
 
 	public List<Answer> getUngradedStudentAnswers() {
@@ -275,6 +277,10 @@ public class Question {
 		return answers.stream().filter(x -> x.getsyntaxable()).collect(Collectors.toList());
 	}
 	
+	public List<Answer> getThisStudentAns() {
+		return answers.stream().filter(x -> x.getWriterId().equals(ApiHolder.getInstance().userId)).collect(Collectors.toList());
+	}
+
 	public ObjectId getQid() {
 		return qid;
 	}
@@ -311,6 +317,15 @@ public class Question {
 			arr[i][2] = lst.get(i).get_id().toString();
 		}
 		return arr;
+	}
+	
+	public boolean studentAnswerdQuestion() {
+		return this.getThisStudentAns().isEmpty();
+	}
+	
+	public boolean questionWasChecked() {
+		if (!studentAnswerdQuestion()) return false;
+		return this.getThisStudentAns().get(0).getGrade()>-1;
 	}
 
 

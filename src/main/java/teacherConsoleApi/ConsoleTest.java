@@ -22,6 +22,8 @@ public class ConsoleTest {
 			System.out.println("3 - select question");
 			System.out.println("4 - check test");
 			System.out.println("5 - remove question");
+			System.out.println("6 - get my test grade");
+			System.out.println("7 - submitTest");
 
 			option = ApiHolder.getInstance().scanner.nextLine();
 			if (option.equals("0")) {
@@ -38,7 +40,9 @@ public class ConsoleTest {
 			}else if(option.equals("5")) {
 				remove();
 			}else if(option.equals("6")) {
-				t.renameTest("ss");
+				getMyTestGrade();
+			}else if(option.equals("7")) {
+				submitTest();
 			}else {
 				System.out.println(">> Bad Input!");
 			}
@@ -86,4 +90,15 @@ public class ConsoleTest {
 			return;
 		}
 	}
+	
+	public void getMyTestGrade() {
+		Double grade = t.getMyTestGrade();
+		if (grade!=null) System.out.println(grade);
+		else System.out.println("didnt answered all questions / test wasent checked yet / teacher's answers wasnet submited to some questions in this test");
+	}
+	
+	public void submitTest() {
+		if (!t.submitTest()) System.out.println("already submitted / didnt answerd all questions");
+	}
+
 }
