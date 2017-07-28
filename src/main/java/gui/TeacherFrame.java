@@ -55,8 +55,8 @@ public class TeacherFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		String col[] = {"Tests"};
-		//Object[][] objs = CSGui.p.testsToArr(CSGui.p.getTests());
-		Object[][] objs = {{"design mode"}}; //only for design
+		Object[][] objs = CSGui.p.testsToArr(CSGui.p.getTests());
+		//Object[][] objs = {{"design mode"}}; //only for design
 		
 		JTable table = new JTable(objs,col);
 		JScrollPane scrollPane = new JScrollPane(table);

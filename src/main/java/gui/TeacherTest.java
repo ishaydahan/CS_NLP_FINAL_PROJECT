@@ -19,10 +19,12 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JProgressBar;
 
 public class TeacherTest extends JFrame {
 
 	private JPanel contentPane;
+	private JProgressBar progressBar;
 
 	/**
 	 * Launch the application.
@@ -76,11 +78,8 @@ public class TeacherTest extends JFrame {
 		JButton btnCheckTest = new JButton("Check test");
 		btnCheckTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
 				CSGui.t.load().checkTest();
 				JOptionPane.showMessageDialog(null, "Test was checked");
-				TeacherTest s = new TeacherTest();
-				s.setVisible(true);
 			}
 		});
 		btnCheckTest.setBounds(163, 203, 115, 23);
@@ -130,6 +129,10 @@ public class TeacherTest extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		lblNewLabel.setBounds(48, 14, 46, 14);
 		contentPane.add(lblNewLabel);
+		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(147, 237, 146, 14);
+		contentPane.add(progressBar);
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override

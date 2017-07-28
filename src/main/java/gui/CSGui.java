@@ -129,7 +129,7 @@ public class CSGui {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				progressBar.setIndeterminate(true);
+				//progressBar.setIndeterminate(true);
 
 				ApiHolder holder = ApiHolder.getInstance(); 
 		        //Get ExecutorService from Executors utility class, thread pool size is 10
