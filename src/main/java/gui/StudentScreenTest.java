@@ -115,6 +115,7 @@ public class StudentScreenTest extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//submit the test to the DB
+				CSMain.t.submitTest();
 			}
 		});
 		btnNewButton.setBounds(48, 180, 89, 23);

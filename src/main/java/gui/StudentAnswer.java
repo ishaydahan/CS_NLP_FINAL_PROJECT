@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+
+import objects.Answer;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.Icon;
@@ -60,8 +63,7 @@ public class StudentAnswer extends JFrame {
 		//TODO fill in the area with the student answer
 		contentPane.add(textArea);
 		
-		System.out.println(CSMain.q.getThisStudentAns().get(0));
-		JLabel lblYourGrade = new JLabel("Your grade:");
+		JLabel lblYourGrade = new JLabel("Your grade:" + CSMain.q.getThisStudentAns().get(0).getGrade());
 		lblYourGrade.setBounds(27, 121, 224, 14);
 		contentPane.add(lblYourGrade);
 		
