@@ -32,25 +32,6 @@ import objects.Test;
 import javax.swing.JProgressBar;
 import java.awt.Font;
 
-class Connector implements Callable<Boolean> {
-    public Boolean call() throws Exception {
-        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
-        ApiHolder.getInstance() .client = new MongoClient(uri);
-        ApiHolder.getInstance().db = ApiHolder.getInstance().client.getDatabase(uri.getDatabase());
-        ApiHolder.getInstance().collection = ApiHolder.getInstance().db.getCollection("tests"); 
-        ApiHolder.getInstance().users = ApiHolder.getInstance().db.getCollection("users"); 
-        return true;
-    }
-}
-   
-class login implements Callable<Boolean> {
-    public Boolean call() throws Exception {
-    	CSMain.userName = CSMain.textFieldUser.getText();
-		CSMain.password = CSMain.passwordField.getText();
-		return true;
-    }
-}
-
 public class CSMain {
 
 	private JFrame frame;
@@ -62,6 +43,8 @@ public class CSMain {
 	static Test t;
 	static Question q;
 	static Answer a;
+	static JProgressBar progressBar;
+	static boolean conected = false;
 	/**
 	 * Launch the application.
 	 */
@@ -76,6 +59,20 @@ public class CSMain {
 				}
 			}
 		});
+		
+		ApiHolder.getInstance(); 
+		progressBar.setValue((100/6)*1);
+        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
+		progressBar.setValue((100/6)*2);
+        ApiHolder.getInstance() .client = new MongoClient(uri);
+		progressBar.setValue((100/6)*3);
+        ApiHolder.getInstance().db = ApiHolder.getInstance().client.getDatabase(uri.getDatabase());
+		progressBar.setValue((100/6)*4);
+        ApiHolder.getInstance().collection = ApiHolder.getInstance().db.getCollection("tests"); 
+		progressBar.setValue((100/6)*5);
+        ApiHolder.getInstance().users = ApiHolder.getInstance().db.getCollection("users"); 
+		progressBar.setValue(100);
+		conected=true;
 	}
 
 	/**
@@ -118,38 +115,24 @@ public class CSMain {
 		passwordField.setBounds(82, 45, 174, 23);
 		panel.add(passwordField);
 		
-		JProgressBar progressBar = new JProgressBar();
+		progressBar = new JProgressBar();
 		progressBar.setBounds(58, 81, 146, 14);
-		panel.add(progressBar);
-		//TODO progress bar when click ok
-		
+		progressBar.setMaximum(100);
+		progressBar.setMinimum(0);
+		progressBar.setValue(0);
+		progressBar.setVisible(true);
+		panel.add(progressBar);	
+		        
 		JButton btnLogin = new JButton("ok");
 		btnLogin.setBounds(124, 125, 89, 23);
 		frame.getContentPane().add(btnLogin);
-		
+
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//progressBar.setIndeterminate(true);
 
-				ApiHolder.getInstance(); 
-		        //Get ExecutorService from Executors utility class, thread pool size is 10
-		        ExecutorService executor = Executors.newFixedThreadPool(2);
-		        //Create MyCallable instance
-		        Callable<Boolean> Connector = new Connector();
-		        Callable<Boolean> login = new login();
-		        //submit Callable tasks to be executed by thread pool
-		        Future<Boolean> future1 = executor.submit(Connector);
-		        Future<Boolean> future2 = executor.submit(login);
-
-		        try {
-					future1.get();
-					future2.get();
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				} catch (ExecutionException e2) {
-					e2.printStackTrace();
-				}
-
+		    	CSMain.userName = CSMain.textFieldUser.getText();
+				CSMain.password = CSMain.passwordField.getText();
+				
 				p = new Person();
 				boolean userLogin = p.login(userName, password);		
 					
@@ -164,7 +147,7 @@ public class CSMain {
 							s.setVisible(true);
 						}
 						frame.dispose();
-;
+
 			}	else {					
 				JOptionPane.showMessageDialog(null, "Login failed, check you user name and password and try again");
 			}
