@@ -1,13 +1,12 @@
-package teacherConsoleApi;
+package consoleApi;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -21,10 +20,10 @@ import objects.Writer;
 class Connector implements Callable<Boolean> {
     public Boolean call() throws Exception {
         MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
-        ConsoleProgram.holder.client = new MongoClient(uri);
-        ConsoleProgram.holder.db = ConsoleProgram.holder.client.getDatabase(uri.getDatabase());
-        ConsoleProgram.holder.collection = ConsoleProgram.holder.db.getCollection("tests"); 
-        ConsoleProgram.holder.users = ConsoleProgram.holder.db.getCollection("users"); 
+        ApiHolder.getInstance().client = new MongoClient(uri);
+        ApiHolder.getInstance().db = ApiHolder.getInstance().client.getDatabase(uri.getDatabase());
+        ApiHolder.getInstance().collection = ApiHolder.getInstance().db.getCollection("tests"); 
+        ApiHolder.getInstance().users = ApiHolder.getInstance().db.getCollection("users"); 
         return true;
     }
 }
@@ -32,10 +31,10 @@ class Connector implements Callable<Boolean> {
 class login implements Callable<Boolean> {
     public Boolean call() throws Exception {
 		System.out.print("Enter Username:");
-		ConsoleProgram.user = ConsoleProgram.holder.scanner.nextLine();
+		ConsoleProgram.user = ConsoleProgram.scanner.nextLine();
 		
 		System.out.print("Enter Password:");
-		ConsoleProgram.pass = ConsoleProgram.holder.scanner.nextLine();
+		ConsoleProgram.pass = ConsoleProgram.scanner.nextLine();
 
 		return true;
     }
@@ -43,15 +42,13 @@ class login implements Callable<Boolean> {
 
 public class ConsoleProgram {
 	
-	public static ApiHolder holder = ApiHolder.getInstance();
 	public static String user;
 	public static String pass;
-	
+	public static Scanner scanner = new Scanner(System.in);     
+
 	public static void main(String[] args) {	
 //		test();
-		
-		Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
-		mongoLogger.setLevel(Level.SEVERE);
+		ApiHolder.getInstance();
 
         //Get ExecutorService from Executors utility class, thread pool size is 10
         ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -74,10 +71,10 @@ public class ConsoleProgram {
         Person p = new Person();
 		while (!p.login(user, pass)) {
 			System.out.print("Enter Username:");
-			ConsoleProgram.user = ConsoleProgram.holder.scanner.nextLine();
+			ConsoleProgram.user = ConsoleProgram.scanner.nextLine();
 			
 			System.out.print("Enter Password:");
-			ConsoleProgram.pass = ConsoleProgram.holder.scanner.nextLine();
+			ConsoleProgram.pass = ConsoleProgram.scanner.nextLine();
 		}
 		System.out.print("WELCOME " + p.getName());
 		executor.shutdown();

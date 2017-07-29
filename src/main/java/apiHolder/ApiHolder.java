@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -45,7 +47,9 @@ public class ApiHolder {
 	// Private constructor suppresses generation of a (public) default constructor
 	private ApiHolder() {
 		try {
-						
+			Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
+			mongoLogger.setLevel(Level.SEVERE);
+	
 			logger = new PrintStream(new FileOutputStream("logs/analyze_log.txt"));
 			
 			langClient = LanguageServiceClient.create();
@@ -82,8 +86,6 @@ public class ApiHolder {
 	public MongoCollection<Document> users;
 	public MongoClient client;
 	public MongoDatabase db;
-	
-	public Scanner scanner = new Scanner(System.in);     
 	
 	public HashMap<String, List<String>> spellingList = new HashMap<String, List<String>>();
 	public JLanguageTool lang = new JLanguageTool(new BritishEnglish());
@@ -126,8 +128,8 @@ public class ApiHolder {
 	 * 
 	 */
 	public void switchrazor() {
-		t = razor[i%4];
 		i++;
+		t = razor[i%4];
 	}
 	/**
 	 * @param s a sentence

@@ -23,11 +23,11 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 import apiHolder.ApiHolder;
+import consoleApi.ConsoleProgram;
 import objects.Answer;
 import objects.Person;
 import objects.Question;
 import objects.Test;
-import teacherConsoleApi.ConsoleProgram;
 
 import javax.swing.JProgressBar;
 import java.awt.Font;
@@ -36,9 +36,9 @@ class Connector implements Callable<Boolean> {
     public Boolean call() throws Exception {
         MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
         ApiHolder.getInstance() .client = new MongoClient(uri);
-        ApiHolder.getInstance().db = ConsoleProgram.holder.client.getDatabase(uri.getDatabase());
-        ApiHolder.getInstance().collection = ConsoleProgram.holder.db.getCollection("tests"); 
-        ApiHolder.getInstance().users = ConsoleProgram.holder.db.getCollection("users"); 
+        ApiHolder.getInstance().db = ApiHolder.getInstance().client.getDatabase(uri.getDatabase());
+        ApiHolder.getInstance().collection = ApiHolder.getInstance().db.getCollection("tests"); 
+        ApiHolder.getInstance().users = ApiHolder.getInstance().db.getCollection("users"); 
         return true;
     }
 }
@@ -131,7 +131,7 @@ public class CSMain {
 			public void actionPerformed(ActionEvent e) {
 				//progressBar.setIndeterminate(true);
 
-				ApiHolder holder = ApiHolder.getInstance(); 
+				ApiHolder.getInstance(); 
 		        //Get ExecutorService from Executors utility class, thread pool size is 10
 		        ExecutorService executor = Executors.newFixedThreadPool(2);
 		        //Create MyCallable instance
