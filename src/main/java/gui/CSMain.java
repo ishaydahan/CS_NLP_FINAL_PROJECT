@@ -23,11 +23,11 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 import apiHolder.ApiHolder;
+import consoleApi.ConsoleProgram;
 import objects.Answer;
 import objects.Person;
 import objects.Question;
 import objects.Test;
-import teacherConsoleApi.ConsoleProgram;
 
 import javax.swing.JProgressBar;
 import java.awt.Font;

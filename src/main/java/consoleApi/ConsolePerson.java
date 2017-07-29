@@ -1,4 +1,4 @@
-package teacherConsoleApi;
+package consoleApi;
 
 import apiHolder.ApiHolder;
 import objects.Person;

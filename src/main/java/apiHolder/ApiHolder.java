@@ -126,8 +126,8 @@ public class ApiHolder {
 	 * 
 	 */
 	public void switchrazor() {
-		t = razor[i%4];
 		i++;
+		t = razor[i%4];
 	}
 	/**
 	 * @param s a sentence

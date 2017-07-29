@@ -1,4 +1,4 @@
-package teacherConsoleApi;
+package consoleApi;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
