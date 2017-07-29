@@ -2,7 +2,6 @@ package consoleApi;
 
 import java.util.List;
 
-import apiHolder.ApiHolder;
 import objects.Answer;
 import objects.Question;
 
@@ -20,7 +19,7 @@ public class ConsoleQuestion {
 			System.out.println("\n@@  Question Screen Options  @@");
 			System.out.println("0 - exit");
 			System.out.println("1 - add teacher answer");
-			System.out.println("2 - *add student answer");
+			System.out.println("2 - (STUDENT) add student answer");
 			System.out.println();			
 			System.out.println("31 - show TEACHER answers");
 			System.out.println("32 - show STUDENT answers");
@@ -32,8 +31,8 @@ public class ConsoleQuestion {
 			System.out.println();			
 			System.out.println("41 - check all questions(32) with verified by teacher syntax and levenshtein(34,35)");
 			System.out.println("42 - check ungraded questions(33) with verified by teacher syntax and levenshtein(34,35)");
-			System.out.println("43 - *check this student answers");
-			System.out.println("44 - *get this student grade for answer");
+			System.out.println("43 - (STUDENT) check this student answers");
+			System.out.println("44 - (STUDENT) get this student grade for answer");
 
 			System.out.println();			
 			System.out.println("5 - fix answer");
@@ -44,7 +43,7 @@ public class ConsoleQuestion {
 			System.out.println("71 - approve answer");
 			System.out.println("72 - approve all answers");
 
-			option = ApiHolder.getInstance().scanner.nextLine();
+			option = ConsoleProgram.scanner.nextLine();
 			if (option.equals("0")) {
 				System.out.println(">> Returning Test Screen");
 				return;
@@ -72,10 +71,10 @@ public class ConsoleQuestion {
 	
 	protected void addTeacherAns() {
 		System.out.println(">> Enter Answer:");
-        String ans = ApiHolder.getInstance().scanner.nextLine();
+        String ans = ConsoleProgram.scanner.nextLine();
 
 		System.out.println(">> Enter Answer grade:");
-        String grade = ApiHolder.getInstance().scanner.nextLine();
+        String grade = ConsoleProgram.scanner.nextLine();
 
         if (q.addTeacherAns(ans, Integer.valueOf(grade))!=null)
         	System.out.println("operation OK!");
@@ -83,7 +82,7 @@ public class ConsoleQuestion {
 		
 	protected void addStudentAns() {
 		System.out.println(">> Enter Answer:");
-        String ans = ApiHolder.getInstance().scanner.nextLine();
+        String ans = ConsoleProgram.scanner.nextLine();
 
         if (q.addStudentAns(ans)!=null)
         	System.out.println("operation OK!");
@@ -112,10 +111,10 @@ public class ConsoleQuestion {
 	
 	protected void fixAns(){
 		System.out.println(">> Enter Answer id:");
-		String id = ApiHolder.getInstance().scanner.nextLine();
+		String id = ConsoleProgram.scanner.nextLine();
 		
 		System.out.println(">> Enter Answer grade:");
-        String grade = ApiHolder.getInstance().scanner.nextLine();
+        String grade = ConsoleProgram.scanner.nextLine();
 		
 		if (q.fixAns(Integer.parseInt(grade), q.getAnswer(id)))
         	System.out.println("operation OK!");
@@ -142,7 +141,7 @@ public class ConsoleQuestion {
 		
 		if (choice==1) {
 			System.out.println(">> Enter Answer id:");
-			String id = ApiHolder.getInstance().scanner.nextLine();
+			String id = ConsoleProgram.scanner.nextLine();
 			if (q.approveAnswer(q.getAnswer(id))){
 		    	System.out.println("operation OK!");
 			}
@@ -158,7 +157,7 @@ public class ConsoleQuestion {
 		
 		if (choice==1) {
 			System.out.println(">> Enter Answer id:");
-			String id = ApiHolder.getInstance().scanner.nextLine();
+			String id = ConsoleProgram.scanner.nextLine();
 			if(q.removeAnswer(q.getAnswer(id))) {
 	        	System.out.println("operation OK!");
 			}

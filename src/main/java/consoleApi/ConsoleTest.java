@@ -1,6 +1,5 @@
 package consoleApi;
 
-import apiHolder.ApiHolder;
 import objects.Question;
 import objects.Test;
 
@@ -22,10 +21,10 @@ public class ConsoleTest {
 			System.out.println("3 - select question");
 			System.out.println("4 - check test");
 			System.out.println("5 - remove question");
-			System.out.println("6 - get my test grade");
-			System.out.println("7 - submitTest");
+			System.out.println("6 - (STUDENT) get my test grade");
+			System.out.println("7 - (STUDENT) submitTest");
 
-			option = ApiHolder.getInstance().scanner.nextLine();
+			option = ConsoleProgram.scanner.nextLine();
 			if (option.equals("0")) {
 				System.out.println(">> Returning Teacher Screen");
 				return;
@@ -51,7 +50,7 @@ public class ConsoleTest {
 	
 	public void createQuestion() {
 		System.out.println(">> Enter Question:");
-        String question = ApiHolder.getInstance().scanner.nextLine();
+        String question = ConsoleProgram.scanner.nextLine();
 
         t.createQuestion(question);
 	}
@@ -69,7 +68,7 @@ public class ConsoleTest {
 	
 	public void selectQuestion() {
 		System.out.println(">> Enter Question id:");
-        String id = ApiHolder.getInstance().scanner.nextLine();
+        String id = ConsoleProgram.scanner.nextLine();
         
         Question q = t.getQuestion(id);
         if (q==null) return;
@@ -84,7 +83,7 @@ public class ConsoleTest {
 	public void remove() {
 		try {
 			System.out.println(">> Enter Question id:");
-			String id = ApiHolder.getInstance().scanner.nextLine();
+			String id = ConsoleProgram.scanner.nextLine();
 			t.removeQuestion(t.getQuestion(id));
 		}catch(Exception e) {
 			return;

@@ -1,6 +1,5 @@
 package consoleApi;
 
-import apiHolder.ApiHolder;
 import objects.Person;
 import objects.Test;
 
@@ -22,7 +21,7 @@ public class ConsolePerson {
 			System.out.println("3 - select test");
 			System.out.println("4 - remove test");
 
-			option = ApiHolder.getInstance().scanner.nextLine();
+			option = ConsoleProgram.scanner.nextLine();
 			if (option.equals("0")) {
 				System.out.println("Bye!");
 				return;
@@ -42,7 +41,7 @@ public class ConsolePerson {
 	
 	protected void createTest() {
 		System.out.println(">> Enter Test:");
-        String t = ApiHolder.getInstance().scanner.nextLine();
+        String t = ConsoleProgram.scanner.nextLine();
         
         this.p.createTest(t);
 	}
@@ -57,7 +56,7 @@ public class ConsolePerson {
 	
 	protected void selectTest() {
 		System.out.println(">> Enter Test id:");
-        String id = ApiHolder.getInstance().scanner.nextLine();
+        String id = ConsoleProgram.scanner.nextLine();
         
         Test t = this.p.getTest(id);
         if (t==null) {
@@ -70,7 +69,7 @@ public class ConsolePerson {
 	
 	protected void remove() {
 		System.out.println(">> Enter Test id:");
-        String id = ApiHolder.getInstance().scanner.nextLine();
+        String id = ConsoleProgram.scanner.nextLine();
         
         Test t = this.p.getTest(id);
         if (t==null) {
