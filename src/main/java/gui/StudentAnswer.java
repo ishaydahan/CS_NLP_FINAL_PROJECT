@@ -59,13 +59,16 @@ public class StudentAnswer extends JFrame {
 		JTextArea textArea = new JTextArea();
 		textArea.setBorder(new LineBorder(new Color(0, 0, 0)));
 		textArea.setBounds(114, 47, 310, 58);
-		textArea.setText(CSMain.q.getThisStudentAns().get(0).getContent());
-		//TODO fill in the area with the student answer
+		if(CSMain.q.getThisStudentAns().size() != 0) {
+			textArea.setText(CSMain.q.getThisStudentAns().get(0).getContent());			
+		}
 		contentPane.add(textArea);
-		
-		JLabel lblYourGrade = new JLabel("Your grade:" + CSMain.q.getThisStudentAns().get(0).getGrade());
+
+		if(CSMain.q.getThisStudentAns().size() != 0) {
+			JLabel lblYourGrade = new JLabel("Your grade:" + CSMain.q.getThisStudentAns().get(0).getGrade());
 		lblYourGrade.setBounds(27, 121, 224, 14);
 		contentPane.add(lblYourGrade);
+		}
 		
 		ImageIcon home = new ImageIcon("IMG/home.png");	
 		JButton button = new JButton(home);
