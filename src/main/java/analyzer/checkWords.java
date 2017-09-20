@@ -3,6 +3,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import apiHolder.ApiHolder;
+
 import objects.Writer;
 
 public class checkWords {
@@ -35,56 +36,30 @@ public class checkWords {
 		System.out.println("wrong words - " + wrong);
 		System.out.println("good words - " + good);
 	}
-	 
+	
 	public static void check(String st, boolean grade) {
-		StringM string = new StringM(st);
-		while(string.underlyingString.length() != 0 ) {
-			int i = string.underlyingString.indexOf(" ");
-			if(i != -1) {
-				String t = string.underlyingString.substring(0, i);
-				StringM temp = new StringM(t);
-				String s = string.underlyingString.substring(i+1);
-				string = new StringM(s);
-				if(grade) {
-					boolean one = wrong.contains(temp);
-					if(one) {
-						deletedWrong.add(temp);
-						wrong.remove(temp);
-					} else if(deletedWrong.contains(temp)) {
+			StringM string = new StringM(st);
+			String[] arr = string.underlyingString.split(" ");    
+			 for ( String ss : arr) {
+				 StringM mm = new StringM(ss);
+					if(grade) {
+						changeList(wrong, deletedWrong, good, mm);
 					} else {
-						good.add(temp);						
+						changeList(good, deletedGood, wrong, mm);
 					}
-				} else {
-					if(good.contains(temp)) {
-						deletedGood.add(temp);
-						good.remove(temp);
-					} else if(deletedGood.contains(temp)) {
-					} else {
-						wrong.add(temp);						
-					}
-				}
-			} else {
-				if(grade) {
-					if(wrong.contains(string)) {
-						deletedWrong.add(string);
-						wrong.remove(string);
-					} else if(deletedWrong.contains(string)) {
-					} else {
-						good.add(string);						
-					}
-				} else {
-					if(good.contains(string)) {
-						deletedGood.add(string);
-						good.remove(string);
-					} else if(deletedGood.contains(string)) {
-					} else {
-						wrong.add(string);						
-					}
-				} break;
 			}
 		}
-	}
 
+private static void changeList(HashSet<StringM> arg1, HashSet<StringM> arg2, HashSet<StringM> arg3,
+			StringM mm) {
+	if(arg1.contains(mm)) {
+		arg2.add(mm);
+		arg1.remove(mm);
+	} else if(arg2.contains(mm)) {
+	} else {
+		arg3.add(mm);						
+	}
+}
 
 public static Boolean checkWord(String string) {
 	Iterator<StringM> itr_good = good.iterator();
