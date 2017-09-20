@@ -36,7 +36,7 @@ public class checkWords {
 		System.out.println("wrong words - " + wrong);
 		System.out.println("good words - " + good);
 	}
-	
+	 
 	public static void check(String st, boolean grade) {
 		StringM string = new StringM(st);
 		while(string.underlyingString.length() != 0 ) {
