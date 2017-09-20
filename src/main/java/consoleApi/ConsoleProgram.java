@@ -47,39 +47,39 @@ public class ConsoleProgram {
 	public static Scanner scanner = new Scanner(System.in);     
 
 	public static void main(String[] args) {	
-//		test();
-		ApiHolder.getInstance();
-
-        //Get ExecutorService from Executors utility class, thread pool size is 10
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-        //Create MyCallable instance
-        Callable<Boolean> Connector = new Connector();
-        Callable<Boolean> login = new login();
-        //submit Callable tasks to be executed by thread pool
-        Future<Boolean> future1 = executor.submit(Connector);
-        Future<Boolean> future2 = executor.submit(login);
-
-        try {
-			future1.get();
-			future2.get();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-        
-        Person p = new Person();
-		while (!p.login(user, pass)) {
-			System.out.print("Enter Username:");
-			ConsoleProgram.user = ConsoleProgram.scanner.nextLine();
-			
-			System.out.print("Enter Password:");
-			ConsoleProgram.pass = ConsoleProgram.scanner.nextLine();
-		}
-		System.out.print("WELCOME " + p.getName());
-		executor.shutdown();
-		ConsolePerson api = new ConsolePerson(p.load());
-		api.main();	
+		test();
+//		ApiHolder.getInstance();
+//
+//        //Get ExecutorService from Executors utility class, thread pool size is 10
+//        ExecutorService executor = Executors.newFixedThreadPool(2);
+//        //Create MyCallable instance
+//        Callable<Boolean> Connector = new Connector();
+//        Callable<Boolean> login = new login();
+//        //submit Callable tasks to be executed by thread pool
+//        Future<Boolean> future1 = executor.submit(Connector);
+//        Future<Boolean> future2 = executor.submit(login);
+//
+//        try {
+//			future1.get();
+//			future2.get();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		} catch (ExecutionException e) {
+//			e.printStackTrace();
+//		}
+//        
+//        Person p = new Person();
+//		while (!p.login(user, pass)) {
+//			System.out.print("Enter Username:");
+//			ConsoleProgram.user = ConsoleProgram.scanner.nextLine();
+//			
+//			System.out.print("Enter Password:");
+//			ConsoleProgram.pass = ConsoleProgram.scanner.nextLine();
+//		}
+//		System.out.print("WELCOME " + p.getName());
+//		executor.shutdown();
+//		ConsolePerson api = new ConsolePerson(p.load());
+//		api.main();	
 
 	}	
 	
