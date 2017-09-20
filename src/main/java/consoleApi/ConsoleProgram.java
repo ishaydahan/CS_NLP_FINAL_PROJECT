@@ -47,6 +47,9 @@ public class ConsoleProgram {
 	public static Scanner scanner = new Scanner(System.in);     
 
 	public static void main(String[] args) {	
+<<<<<<< HEAD
+		test();
+=======
 //		test();
 		test2();
 //		test3();
@@ -57,6 +60,7 @@ public class ConsoleProgram {
 
 		
 		
+>>>>>>> 7783e3272999fbea5fa37b98ddcc3f8fce8a0b08
 //		ApiHolder.getInstance();
 //
 //        //Get ExecutorService from Executors utility class, thread pool size is 10

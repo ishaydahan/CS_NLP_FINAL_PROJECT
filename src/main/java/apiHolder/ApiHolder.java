@@ -67,7 +67,7 @@ public class ApiHolder {
 			e.printStackTrace();
 		}
 	}
-	 
+	
 	public static ApiHolder getInstance() {
 		return INSTANCE;
 	}
