@@ -5,7 +5,7 @@ public class LevenshteinDistance {
         return Math.min(Math.min(a, b), c);                                      
     }                                                                            
                                                                                  
-    protected static int computeLevenshteinDistance(CharSequence lhs, CharSequence rhs) {      
+    public static int computeLevenshteinDistance(CharSequence lhs, CharSequence rhs) {      
         int[][] distance = new int[lhs.length() + 1][rhs.length() + 1];        
                                                                                  
         for (int i = 0; i <= lhs.length(); i++)                                 

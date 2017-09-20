@@ -48,12 +48,12 @@ public class ConsoleProgram {
 
 	public static void main(String[] args) {	
 //		test();
-//		test2();
+		test2();
 //		test3();
 //		test4();
 //		test5();
 //		test6();
-		test7();
+//		test7();
 
 		
 		
@@ -145,7 +145,7 @@ public class ConsoleProgram {
 		public static void test2() {		
 			ArrayList<Answer> ver = new ArrayList<Answer>();
 			ArrayList<Answer> tocheck = new ArrayList<Answer>();
-			ver.add(ApiHolder.getInstance().factory.createAnswer("It is one of the best in the world" ,100, Writer.TEACHER).build());
+			ver.add(ApiHolder.getInstance().factory.createAnswer("the British postal system is one of the best in the world" ,100, Writer.TEACHER).build());
 
 			tocheck.add(ApiHolder.getInstance().factory.createAnswer("It is one of the best in the world", 0, Writer.STUDENT));
 			tocheck.add(ApiHolder.getInstance().factory.createAnswer("the British postal system is the best in the world", 0, Writer.STUDENT));
@@ -208,6 +208,7 @@ public class ConsoleProgram {
 			ArrayList<Answer> tocheck = new ArrayList<Answer>();
 			ver.add(ApiHolder.getInstance().factory.createAnswer("Because she used to fight too" ,100, Writer.TEACHER).build());
 
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because she used to fight too", 0, Writer.STUDENT));
 			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because she is regular to fight", 0, Writer.STUDENT));
 			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because she is regular to fight also", 0, Writer.STUDENT));
 			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because she is also fighting", 0, Writer.STUDENT));

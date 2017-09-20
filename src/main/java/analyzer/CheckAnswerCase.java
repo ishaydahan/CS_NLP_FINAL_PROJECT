@@ -165,7 +165,7 @@ public class CheckAnswerCase {
 	private boolean equalNodes (Answer constant, Answer compareTo, Token teacher, Token student, boolean OppMode) {
 		if (Arrays.asList(del).contains(teacher.getPartOfSpeech().getTag()) || Arrays.asList(del).contains(student.getPartOfSpeech().getTag())) {
 //			ApiHolder.getInstance().logger.println("equalNodes :::: not intresting: " + teacher.getText().getContent() + " + " + student.getText().getContent()); 
-			return false;
+			return true;
 		}
 
 		if (compare(teacher, student)) {

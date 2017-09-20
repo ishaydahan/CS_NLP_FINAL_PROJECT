@@ -37,7 +37,7 @@ public class CSMain {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					CSMain window = new CSMain();
@@ -47,19 +47,16 @@ public class CSMain {
 				}
 			}
 		});
-		
+		*/
+		CSMain window = new CSMain();
+		window.frame.setVisible(true);
 		ApiHolder.getInstance(); 
-		progressBar.setValue((100/6)*1);
+		
         MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
-		progressBar.setValue((100/6)*2);
         ApiHolder.getInstance() .client = new MongoClient(uri);
-		progressBar.setValue((100/6)*3);
         ApiHolder.getInstance().db = ApiHolder.getInstance().client.getDatabase(uri.getDatabase());
-		progressBar.setValue((100/6)*4);
         ApiHolder.getInstance().collection = ApiHolder.getInstance().db.getCollection("tests"); 
-		progressBar.setValue((100/6)*5);
         ApiHolder.getInstance().users = ApiHolder.getInstance().db.getCollection("users"); 
-		progressBar.setValue(100);
 		conected=true;
 	}
 
@@ -123,8 +120,13 @@ public class CSMain {
 				
 				p = new Person();
 				System.out.println(userName + password);
+				progressBar.setValue((100/6)*1);
+				progressBar.setValue((100/6)*2);
+				progressBar.setValue((100/6)*3);
+				progressBar.setValue((100/6)*4);
+				progressBar.setValue((100/6)*5);
 				boolean userLogin = p.login(userName, password);		
-					
+				progressBar.setValue(100);					
 				if(userLogin){
 					p.load();
 						if (ApiHolder.getInstance().teacher){
