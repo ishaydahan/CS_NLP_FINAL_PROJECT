@@ -61,22 +61,12 @@ public class ConsoleProgram {
 	public static String pass;
 	public static Scanner scanner = new Scanner(System.in);     
 
-<<<<<<< HEAD
 	public static void main(String[] args) {
 		ApiHolder.getInstance();
 
 //		test1();
 //		test2();
 		test3();
-=======
-	public static void main(String[] args) {	
-<<<<<<< HEAD
-		test();
-=======
-//		test();
-		test2();
-//		test3();
->>>>>>> 74ee32370d46661bd24f6417b950b6d9b6b824d7
 //		test4();
 //		test5();
 //		test6();
@@ -218,15 +208,10 @@ public class ConsoleProgram {
 //	}
 		public static void test3() {		
 			ArrayList<Answer> ver = new ArrayList<Answer>();
-<<<<<<< HEAD
 			ArrayList<Answer> goodToCheck = new ArrayList<Answer>();
 			ArrayList<Answer> badToCheck = new ArrayList<Answer>();
 			
 			ver.add(ApiHolder.getInstance().factory.createAnswer("The counselor Helps solve problems between students" ,100, Writer.TEACHER).build());
-=======
-			ArrayList<Answer> tocheck = new ArrayList<Answer>();
-			ver.add(ApiHolder.getInstance().factory.createAnswer("the British postal system is one of the best in the world" ,100, Writer.TEACHER).build());
->>>>>>> 74ee32370d46661bd24f6417b950b6d9b6b824d7
 
 			goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("The counselor Helps solve problems between students", 0, Writer.STUDENT));
 			goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("The councilor Helps solve problems between students", 0, Writer.STUDENT));
