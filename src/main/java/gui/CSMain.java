@@ -1,34 +1,22 @@
 package gui;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
-import com.google.common.util.concurrent.ExecutionError;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-
 import apiHolder.ApiHolder;
-import consoleApi.ConsoleProgram;
 import objects.Answer;
 import objects.Person;
 import objects.Question;
 import objects.Test;
-
 import javax.swing.JProgressBar;
 import java.awt.Font;
 
@@ -134,6 +122,7 @@ public class CSMain {
 				CSMain.password = CSMain.passwordField.getText();
 				
 				p = new Person();
+				System.out.println(userName + password);
 				boolean userLogin = p.login(userName, password);		
 					
 				if(userLogin){

@@ -47,7 +47,20 @@ public class ConsoleProgram {
 	public static Scanner scanner = new Scanner(System.in);     
 
 	public static void main(String[] args) {	
+<<<<<<< HEAD
 		test();
+=======
+//		test();
+//		test2();
+//		test3();
+//		test4();
+//		test5();
+//		test6();
+		test7();
+
+		
+		
+>>>>>>> 7783e3272999fbea5fa37b98ddcc3f8fce8a0b08
 //		ApiHolder.getInstance();
 //
 //        //Get ExecutorService from Executors utility class, thread pool size is 10
@@ -132,6 +145,184 @@ public class ConsoleProgram {
 				System.out.println(grade + " " + student_ans.getContent());
 			}
 		}
+	}
+		public static void test2() {		
+			ArrayList<Answer> ver = new ArrayList<Answer>();
+			ArrayList<Answer> tocheck = new ArrayList<Answer>();
+			ver.add(ApiHolder.getInstance().factory.createAnswer("It is one of the best in the world" ,100, Writer.TEACHER).build());
+
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("It is one of the best in the world", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("the British postal system is the best in the world", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("they are the best", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("they are the best in the world", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("the British postal system is one of the best in the world", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("they are very good", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("it is very good", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("It is not good", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("the British postal system has bad service", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("They have only one store", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("It is slow", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("It is one of the worst in the world", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("This is a bad company", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("They are slow and bad", 0, Writer.STUDENT));
+
+			
+			for (Answer student_ans: tocheck) {
+				Integer grade = new AnswerAnalyzer(student_ans.build()).SyntaxAnalyze(ver);
+				if (grade==-2) return; //error
+				if (grade>-1) {
+					System.out.println(grade + " " + student_ans.getContent());
+				}
+			}
+	}
+		public static void test3() {		
+			ArrayList<Answer> ver = new ArrayList<Answer>();
+			ArrayList<Answer> tocheck = new ArrayList<Answer>();
+			ver.add(ApiHolder.getInstance().factory.createAnswer("Helps solve problems between students" ,100, Writer.TEACHER).build());
+
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Helps solve problems between students", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("He is helping the students", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("He helps the students", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("He halp the students", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("He is solving problms for students", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("He is solving problems between students ", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("The councilor helps solving problems between students", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("He helps solving problems between students", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("The councilor deal with conflicts between students", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("He listens to students", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("He solves math problems", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("He seats in his office", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("He helps students with homework", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("the councilor does nothing", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("the councilor works for school", 0, Writer.STUDENT));
+
+			
+			for (Answer student_ans: tocheck) {
+				Integer grade = new AnswerAnalyzer(student_ans.build()).SyntaxAnalyze(ver);
+				if (grade==-2) return; //error
+				if (grade>-1) {
+					System.out.println(grade + " " + student_ans.getContent());
+				}
+			}
+	}
+		public static void test4() {		
+			ArrayList<Answer> ver = new ArrayList<Answer>();
+			ArrayList<Answer> tocheck = new ArrayList<Answer>();
+			ver.add(ApiHolder.getInstance().factory.createAnswer("Because she used to fight too" ,100, Writer.TEACHER).build());
+
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because she is regular to fight", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because she is regular to fight also", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because she is also fighting", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Her story is different because she is fighting too", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Her story is different because she is used to fight", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("It is different because she is also a fighter", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because she is good at fighting", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because she likes fighting", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because she is strong", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Her story is different because she is older", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("It is different because she is like parting", 0, Writer.STUDENT));
+			
+			for (Answer student_ans: tocheck) {
+				Integer grade = new AnswerAnalyzer(student_ans.build()).SyntaxAnalyze(ver);
+				if (grade==-2) return; //error
+				if (grade>-1) {
+					System.out.println(grade + " " + student_ans.getContent());
+				}
+			}
+	}
+		public static void test5() {		
+			ArrayList<Answer> ver = new ArrayList<Answer>();
+			ArrayList<Answer> tocheck = new ArrayList<Answer>();
+			ver.add(ApiHolder.getInstance().factory.createAnswer("To control her anger" ,100, Writer.TEACHER).build());
+
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Controlling anger", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("To control the anger", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("How to relax", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("How to not get angry", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Her first lesson was to control her anger", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("To cntrl her angar", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She learned how to not be angry", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("To control her dragons", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Her first lesson was math", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("How to be angry", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("To listen to other people", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("His first lesson was history", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("to keep her anger", 0, Writer.STUDENT));
+
+			for (Answer student_ans: tocheck) {
+				Integer grade = new AnswerAnalyzer(student_ans.build()).SyntaxAnalyze(ver);
+				if (grade==-2) return; //error
+				if (grade>-1) {
+					System.out.println(grade + " " + student_ans.getContent());
+				}
+			}
+	}
+		public static void test6() {		
+			ArrayList<Answer> ver = new ArrayList<Answer>();
+			ArrayList<Answer> tocheck = new ArrayList<Answer>();
+			ver.add(ApiHolder.getInstance().factory.createAnswer("She sleeps late" ,100, Writer.TEACHER).build());
+			ver.add(ApiHolder.getInstance().factory.createAnswer("she goes to the park" ,100, Writer.TEACHER).build());
+
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She goes to sleep late", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She hangs out in the park", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She like to go to the park", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She likes going to sleep late", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She is going to sleep late", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She is going to the park with her family", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She takes her dog to the park", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She sleep late", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She stays up until late", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Anat is going to the park on the weekend", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Anat is going to sleep late on the weekend", 0, Writer.STUDENT));	
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She goes to football match", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She sleeps early", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She is going to sleep early", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("She doesn’t like sleeping late", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Anat does nothing on the weekend", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Anat is doing homework", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Anat see television", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("she goes to the stadium", 0, Writer.STUDENT));
+
+			for (Answer student_ans: tocheck) {
+				Integer grade = new AnswerAnalyzer(student_ans.build()).SyntaxAnalyze(ver);
+				if (grade==-2) return; //error
+				if (grade>-1) {
+					System.out.println(grade + " " + student_ans.getContent());
+				}
+			}
+	}
+		public static void test7() {		
+			ArrayList<Answer> ver = new ArrayList<Answer>();
+			ArrayList<Answer> tocheck = new ArrayList<Answer>();
+			ver.add(ApiHolder.getInstance().factory.createAnswer("They were free" ,100, Writer.TEACHER).build());
+			ver.add(ApiHolder.getInstance().factory.createAnswer("they didn’t have to pay" ,100, Writer.TEACHER).build());
+
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because it was free", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because they didn’t have to pay", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because it was a gift", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Fred and Jenny were surprised because they didn’t have to pay", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because it didn’t cost them money", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because the chips was free", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because they didn’t has to pay ", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("They were surprised because they got bad chips", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because the chips were stolen", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Because the chips are not for them", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("They was surprised because they got a god", 0, Writer.STUDENT));
+			tocheck.add(ApiHolder.getInstance().factory.createAnswer("Fred and Jenny were surprised because they didn’t have any chips", 0, Writer.STUDENT));
+
+			for (Answer student_ans: tocheck) {
+				Integer grade = new AnswerAnalyzer(student_ans.build()).SyntaxAnalyze(ver);
+				if (grade==-2) return; //error
+				if (grade>-1) {
+					System.out.println(grade + " " + student_ans.getContent());
+				}
+			}
 	}
 
 }
