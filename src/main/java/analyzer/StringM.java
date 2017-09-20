@@ -1,8 +1,6 @@
-package gui;
+package analyzer;
 
 import java.util.Objects;
-
-import analyzer.LevenshteinDistance;
 
 public final class StringM {
 	    public final String underlyingString;

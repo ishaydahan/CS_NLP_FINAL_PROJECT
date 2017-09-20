@@ -3,7 +3,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import apiHolder.ApiHolder;
-import gui.StringM;
 import objects.Writer;
 
 public class checkWords {
