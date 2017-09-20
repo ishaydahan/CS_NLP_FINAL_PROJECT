@@ -1,9 +1,9 @@
-package gui;
+package analyzer;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import analyzer.LevenshteinDistance;
 import apiHolder.ApiHolder;
+import gui.StringM;
 import objects.Writer;
 
 public class checkWords {
