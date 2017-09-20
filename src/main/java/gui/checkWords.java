@@ -32,6 +32,7 @@ public class checkWords {
 		check("the councilor does nothing", false);
 		check("the councilor works for school", false);
 
+		System.out.println(checkWord("He solves math problems"));
 		System.out.println("wrong words - " + wrong);
 		System.out.println("good words - " + good);
 	}
