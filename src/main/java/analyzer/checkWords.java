@@ -2,13 +2,10 @@ package analyzer;
 import java.util.HashSet;
 import java.util.Iterator;
 
-<<<<<<< HEAD
-=======
 import apiHolder.ApiHolder;
 
 import objects.Writer;
 
->>>>>>> 44265a1ae2e98363adc8f11d61cfe4a465511d86
 public class checkWords {
 	
 	static HashSet<StringM> wrong = new HashSet<StringM>();
