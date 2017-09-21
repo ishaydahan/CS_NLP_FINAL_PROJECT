@@ -1,22 +1,25 @@
 package analyzer;
 
-import java.util.Objects;
-
+/**
+ * @author Moshiko
+ * class that override the String class
+ */
 public final class StringM {
 	    public final String underlyingString;
 
 	    public StringM(String underlyingString) {
 	        this.underlyingString = underlyingString;
 	    }
+	    
 	    public String toString() {
 	        return underlyingString;
 	    }
-	    // Overriding equals() to compare two Complex objects
 	    
 	    public int hashCode() {
 	    	return 8;
 	    }
-
+	    
+	    // Overriding equals() to compare two Complex objects	    
 	    public boolean equals(Object o) {
 	    	if (this == o) {
 	            return true;
