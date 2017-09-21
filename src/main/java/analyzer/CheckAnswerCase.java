@@ -325,7 +325,7 @@ public class CheckAnswerCase {
 					
 					if (!teacher_ans.getMap().containsKey(new_s1)) {
 						ApiHolder.getInstance().logger.println("checkTokens :::: meaning fixed: " + student.getText().getContent() + " >> " + ent.getEntailedWords().get(0));
-						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, Writer.COMPUTER).build().build(), teacher_ans);
+						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, Writer.COMPUTER).build(), teacher_ans);
 						ApiHolder.getInstance().logger.println("----starting new check-----");
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");

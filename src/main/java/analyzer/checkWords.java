@@ -2,9 +2,6 @@ package analyzer;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import apiHolder.ApiHolder;
-import objects.Writer;
-
 public class checkWords {
 	
 	static HashSet<StringM> wrong = new HashSet<StringM>();

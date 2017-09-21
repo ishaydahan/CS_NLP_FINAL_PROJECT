@@ -13,18 +13,7 @@ import java.util.concurrent.Future;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.textrazor.AnalysisException;
-import com.textrazor.NetworkException;
-import com.textrazor.TextRazor;
-import com.textrazor.annotations.AnalyzedText;
-import com.textrazor.annotations.Custom;
-import com.textrazor.annotations.Entity;
-import com.textrazor.annotations.ScoredCategory;
-import com.textrazor.annotations.Sentence;
-import com.textrazor.annotations.Topic;
-import com.textrazor.annotations.Word;
-import com.textrazor.annotations.Word.Sense;
-import com.textrazor.annotations.Word.Suggestion;
+
 
 import analyzer.AnswerAnalyzer;
 import apiHolder.ApiHolder;
