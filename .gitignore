@@ -5,3 +5,4 @@ doc
 .classpath
 bin
 logs
+!maven/bin
