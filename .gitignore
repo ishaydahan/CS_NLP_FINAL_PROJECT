@@ -1,8 +1,0 @@
-target
-.settings
-doc
-.project
-.classpath
-bin
-logs
-!maven
