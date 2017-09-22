@@ -74,8 +74,10 @@ public class ApiHolder {
 	
 			logger = new PrintStream(new FileOutputStream("logs/analyze_log.txt"));
 			
-//			k
-			
+			PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+			System.setOut(out);
+			System.setErr(out);
+
 			langClient = LanguageServiceClient.create();
 			
 			razor[0] = new TextRazor("eb5d5e6284d0ed04a6b7beec96d2805a9bc0f4396cb3fe0c219e5374");//bacoola
