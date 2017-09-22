@@ -1,15 +1,15 @@
-package com.nlp.app;
+package com.nlp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.nlp.common.Tools;
+import com.nlp.common.ApiHolder;
 
 @SpringBootApplication
-public class Application {
+public class NlpApplication {
 
 	public static void main(String[] args) {
-		Tools.getInstance();
-		SpringApplication.run(Application.class, args);
+		ApiHolder.getInstance();
+		SpringApplication.run(NlpApplication.class, args);
 	}
 }

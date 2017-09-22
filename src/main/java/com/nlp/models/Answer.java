@@ -15,7 +15,7 @@ import com.google.cloud.language.v1.EncodingType;
 import com.google.cloud.language.v1.Token;
 
 import com.google.cloud.language.v1.Document.Type;
-import com.nlp.common.Tools;
+import com.nlp.common.ApiHolder;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
@@ -184,16 +184,16 @@ public class Answer {
 			com.google.cloud.language.v1.Document doc = com.google.cloud.language.v1.Document.newBuilder()
 		            .setContent(content).setType(Type.PLAIN_TEXT).build();
 
-			Tools.getInstance().logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content + " $$ google api");
-			Analyzed_ans = Tools.getInstance().langClient.analyzeSyntax(doc, EncodingType.UTF8);
+			ApiHolder.getInstance().logger.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$ " + content + " $$ google api");
+			Analyzed_ans = ApiHolder.getInstance().langClient.analyzeSyntax(doc, EncodingType.UTF8);
 		}
 		
 		if (answerWords==-1) {
 			answerWords++;
 			for(Token t : Analyzed_ans.getTokensList()) {
-				if (!Arrays.asList(Tools.getInstance().del).contains(t.getPartOfSpeech().getTag())) {
-						Tools.getInstance().logger.println("ANALYZER :::: Teacher parts: " + t.getText().getContent());
-						Tools.getInstance().logger.println("ANALYZER :::: Teacher parts: " + t.getPartOfSpeech().getTag());
+				if (!Arrays.asList(ApiHolder.getInstance().del).contains(t.getPartOfSpeech().getTag())) {
+						ApiHolder.getInstance().logger.println("ANALYZER :::: Teacher parts: " + t.getText().getContent());
+						ApiHolder.getInstance().logger.println("ANALYZER :::: Teacher parts: " + t.getPartOfSpeech().getTag());
 						answerWords++;
 				}
 			}

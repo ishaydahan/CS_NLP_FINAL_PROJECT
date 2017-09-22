@@ -2,7 +2,7 @@ package com.nlp.common;
 
 import com.nlp.models.Answer;
 
-public class AnswerFactory {
+public class Factory {
 
 	public Answer createAnswer(String content, int grade, String writer) {
 		if (writer.equals("TEACHER")) {

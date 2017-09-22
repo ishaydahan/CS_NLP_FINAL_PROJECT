@@ -22,7 +22,7 @@ import com.textrazor.annotations.Entailment;
 	
 /**
  * @author ishay
- * the {@link Tools} class holds all the APIs in static class.
+ * the {@link ApiHolder} class holds all the APIs in static class.
  * we assume that there is only 0 or 1 instance of this class.
  * this class holds:
  * 1. {@link LanguageServiceClient} google syntax analyzer client.
@@ -32,10 +32,10 @@ import com.textrazor.annotations.Entailment;
  * 5. {@link JLanguageTool} for spelling corrections
  * 6. {@link PrintStream} logger
  */
-public class Tools {
+public class ApiHolder {
 	
 	//Singleton field
-	private final static Tools INSTANCE = new Tools();
+	private final static ApiHolder INSTANCE = new ApiHolder();
 	
 	//Constants
 	public int LEVENSHTEIN = 3;//constant for levenshtein calc
@@ -65,11 +65,11 @@ public class Tools {
 	public PrintStream logger = null;
 	
 	//Factory design pattern
-	public AnswerFactory factory = new AnswerFactory();
+	public Factory factory = new Factory();
 	
 
 	// Private constructor suppresses generation of a (public) default constructor
-	private Tools() {
+	private ApiHolder() {
 		try {
 	
 			logger = new PrintStream(new FileOutputStream("logs/analyze_log.txt"));
@@ -90,7 +90,7 @@ public class Tools {
 		}
 	}
 	
-	public static Tools getInstance() {
+	public static ApiHolder getInstance() {
 		return INSTANCE;
 	}
 

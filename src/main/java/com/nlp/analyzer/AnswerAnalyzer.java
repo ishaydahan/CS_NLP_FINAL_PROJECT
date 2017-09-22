@@ -2,7 +2,7 @@ package com.nlp.analyzer;
 
 import java.util.List;
 
-import com.nlp.common.Tools;
+import com.nlp.common.ApiHolder;
 import com.nlp.models.Answer;
 
 /**
@@ -36,10 +36,10 @@ public class AnswerAnalyzer {
 		//here we check for exact mach with LevenshteinDistance.
 		//we can change the parameters to different LevenshteinDistance!=0
 		for (Answer teachers_ans: verified) {
-			if (LevenshteinDistance.computeLevenshteinDistance(teachers_ans.getContent(), students_ans.getContent())<Tools.getInstance().LEVENSHTEIN) {
-				Tools.getInstance().logger.println("### LEVENSHTEIN SUCSESS!");
-				Tools.getInstance().logger.println("### teacher: " + teachers_ans);
-				Tools.getInstance().logger.println("### student: " + students_ans);
+			if (LevenshteinDistance.computeLevenshteinDistance(teachers_ans.getContent(), students_ans.getContent())<ApiHolder.getInstance().LEVENSHTEIN) {
+				ApiHolder.getInstance().logger.println("### LEVENSHTEIN SUCSESS!");
+				ApiHolder.getInstance().logger.println("### teacher: " + teachers_ans);
+				ApiHolder.getInstance().logger.println("### student: " + students_ans);
 				return teachers_ans.getGrade();
 			}
 		}
@@ -61,15 +61,15 @@ public class AnswerAnalyzer {
 		}
 				
 		//here we activate the syntax analyzer for every verified answer and takes the maximum grade.
-		Integer maxGrade=Tools.getInstance().MINGRADE;		
+		Integer maxGrade=ApiHolder.getInstance().MINGRADE;		
 		for (Answer teachers_ans: syntaxable) {
 			CheckAnswerCase master = new CheckAnswerCase(students_ans, teachers_ans);
 			maxGrade= Math.max(maxGrade, master.getGrade());
-			if (maxGrade.equals(Tools.getInstance().MAXGRADE)) break;
+			if (maxGrade.equals(ApiHolder.getInstance().MAXGRADE)) break;
 		}
-		Tools.getInstance().logger.println("### SYNTAX ANALYZER RESULT:");
-		Tools.getInstance().logger.println("### student: " + students_ans);
-		Tools.getInstance().logger.println("### grade: " + maxGrade);
+		ApiHolder.getInstance().logger.println("### SYNTAX ANALYZER RESULT:");
+		ApiHolder.getInstance().logger.println("### student: " + students_ans);
+		ApiHolder.getInstance().logger.println("### grade: " + maxGrade);
 		return maxGrade;		
 	}
 	

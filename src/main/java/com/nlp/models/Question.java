@@ -7,8 +7,7 @@ import java.util.List;
 
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import analyzer.StringM;
+import com.nlp.analyzer.StringM;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;

@@ -3,7 +3,7 @@ package com.nlp.controllers;
 import javax.validation.Valid;
 
 import com.nlp.analyzer.AnswerAnalyzer;
-import com.nlp.common.Tools;
+import com.nlp.common.ApiHolder;
 import com.nlp.models.Answer;
 import com.nlp.models.Question;
 import com.nlp.models.Test;
@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
-public class SpringController {
+public class TestController {
 
     @Autowired
     TestRepository testRepository;
@@ -210,7 +210,7 @@ public class SpringController {
             return null;
         }
         
-        Answer ans = Tools.getInstance().factory.createAnswer(answer.getContent(), answer.getGrade(), answer.getWriter());
+        Answer ans = ApiHolder.getInstance().factory.createAnswer(answer.getContent(), answer.getGrade(), answer.getWriter());
         ans.setQid(qid);
     	answerRepository.save(ans);
     	
