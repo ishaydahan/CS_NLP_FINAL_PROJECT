@@ -77,8 +77,8 @@ public class AnswerAnalyzer {
 //	 * @param TODO
 //	 * @return
 //	 */
-	public Integer MachineLearningAnalyze() {	
-						
+//	public Integer MachineLearningAnalyze() {	
+//						
 //		Integer maxGrade=ApiHolder.getInstance().MINGRADE;		
 //		for (Answer teachers_ans: learnable) {
 //			
@@ -90,6 +90,6 @@ public class AnswerAnalyzer {
 //		ApiHolder.getInstance().logger.println("### student: " + students_ans);
 //		ApiHolder.getInstance().logger.println("### grade: " + maxGrade);
 //		return maxGrade;		
-	}
+//	}
 
 }
