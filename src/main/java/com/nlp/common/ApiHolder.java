@@ -75,10 +75,15 @@ public class ApiHolder {
 			logger = new PrintStream(new FileOutputStream("logs/analyze_log.txt"));
 			
 <<<<<<< HEAD
+<<<<<<< HEAD
 //			PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
 //			System.setOut(out);
 //			System.setErr(out);
 
+=======
+//			k
+			
+>>>>>>> parent of 23921c5... print
 =======
 //			k
 			
