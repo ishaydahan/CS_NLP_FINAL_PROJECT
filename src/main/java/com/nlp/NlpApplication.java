@@ -12,7 +12,7 @@ public class NlpApplication {
 		SpringApplication.run(NlpApplication.class, args);
 		ApiHolder.getInstance();
 
-		Tests tests = new Tests();
-		tests.test1();
+//		Tests tests = new Tests();
+//		tests.test1();
 	}
 }

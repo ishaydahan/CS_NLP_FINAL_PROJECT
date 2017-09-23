@@ -225,13 +225,13 @@ public class Question {
 public Boolean checkWord(String string) {
 	Iterator<StringM> itr_good = good.iterator();
 	Iterator<StringM> itr_wrong = wrong.iterator();
-	String[] arr = string.split(" ");    
+	String[] arr = string.split(" ");   
 	 for ( String ss : arr) {
 		 	itr_good = good.iterator();
 			while(itr_good.hasNext()){ 
 				int a = LevenshteinDistance.computeLevenshteinDistance(ss, itr_good.next().underlyingString);
 				if (a <= 3) {
-					return null;
+					return true;
 				}
 			}
 	  }
@@ -244,6 +244,6 @@ public Boolean checkWord(String string) {
 			}
 		}
 	}
-	return null;	
+	return true;	
 }
 }

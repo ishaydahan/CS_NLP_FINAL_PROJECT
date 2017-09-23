@@ -1,85 +1,17 @@
-$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people wish to help $$ google api
-ANALYZER :::: Teacher parts: people
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ asasas fdsf $$ google api
+ANALYZER :::: Teacher parts: fdsf
 ANALYZER :::: Teacher parts: NOUN
-ANALYZER :::: Teacher parts: wish
-ANALYZER :::: Teacher parts: VERB
-ANALYZER :::: Teacher parts: to
-ANALYZER :::: Teacher parts: PRT
-ANALYZER :::: Teacher parts: help
-ANALYZER :::: Teacher parts: VERB
-$$$$$$$$$$$$$$$$$$$$$$$$$$$ they hate to help $$ google api
-ANALYZER :::: Teacher parts: they
-ANALYZER :::: Teacher parts: PRON
-ANALYZER :::: Teacher parts: hate
-ANALYZER :::: Teacher parts: VERB
-ANALYZER :::: Teacher parts: to
-ANALYZER :::: Teacher parts: PRT
-ANALYZER :::: Teacher parts: help
-ANALYZER :::: Teacher parts: VERB
-getGrade :::: TEACHER :Answer: because people wish to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: null
-getGrade :::: STUDENT :Answer: they hate to help, Wrriten by: STUDENT, Grade: -2, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: null
-ANALYZER :::: COMPARING STUDENT TO TEACHER
-equalSentences :::: we have insignificant word: because
-equalSentences :::: checking people >> COMPARE TO >> they
-compare :::: special case1 V people + they
-equalNodes :::: equal tokens: people + they
-[they - people]
-equalNodes :::: there are fathers: wish + hate
-equalNodes :::: trick loop var: hate +to tricked>>: to
-equalNodes :::: trick loop var: hate +to tricked>>: help
-equalNodes :::: trick try var: hate +to tricked>>: help
-equalNodes :::: not equal tokens: wish + help
-equalNodes :::: not equal tokens: wish + hate
-equalSentences1 :::: One path check, NOT equal: people they
-equalSentences :::: checking people >> COMPARE TO >> hate
-equalNodes :::: trick loop var: hate +to tricked>>: to
-equalNodes :::: trick loop var: hate +to tricked>>: help
-equalNodes :::: trick try var: hate +to tricked>>: help
-equalNodes :::: not equal tokens: people + help
-equalNodes :::: not equal tokens: people + hate
-equalSentences1 :::: One path check, NOT equal: people hate
-equalSentences :::: checking people >> COMPARE TO >> to
-equalNodes :::: trick loop var: to +to tricked>>: help
-equalNodes :::: not equal tokens: people + to
-equalSentences1 :::: One path check, NOT equal: people to
-equalSentences :::: checking people >> COMPARE TO >> help
-equalNodes :::: not equal tokens: people + help
-equalSentences1 :::: One path check, NOT equal: people help
-equalSentences1 :::: finished path check WITH FOUND=FALSE! for constant word: people
-equalSentences1 :::: finishedGrade: 0
-equalSentences1 :::: grade: 0
-ANALYZER :::: COMPARING TEACHER TO STUDENT
-equalSentences :::: we have insignificant word: because
-equalSentences :::: checking people >> COMPARE TO >> they
-compare :::: special case1 V people + they
-equalNodes :::: equal tokens: people + they
-[they - people]
-equalNodes :::: there are fathers: wish + hate
-equalNodes :::: trick loop var: wish +to tricked>>: to
-equalNodes :::: trick loop var: wish +to tricked>>: help
-equalNodes :::: trick try var: wish +to tricked>>: help
-equalNodes :::: not equal tokens: help + hate
-equalNodes :::: not equal tokens: wish + hate
-equalSentences1 :::: One path check, NOT equal: people they
-equalSentences :::: checking wish >> COMPARE TO >> they
-equalNodes :::: trick loop var: wish +to tricked>>: to
-equalNodes :::: trick loop var: wish +to tricked>>: help
-equalNodes :::: trick try var: wish +to tricked>>: help
-equalNodes :::: not equal tokens: help + they
-equalNodes :::: not equal tokens: wish + they
-equalSentences1 :::: One path check, NOT equal: wish they
-equalSentences :::: checking to >> COMPARE TO >> they
-equalNodes :::: trick loop var: to +to tricked>>: help
-equalNodes :::: not equal tokens: to + they
-equalSentences1 :::: One path check, NOT equal: to they
-equalSentences :::: checking help >> COMPARE TO >> they
-equalNodes :::: not equal tokens: help + they
-equalSentences1 :::: One path check, NOT equal: help they
-equalSentences1 :::: finished path check WITH FOUND=FALSE! for constant word: they
-equalSentences1 :::: finishedGrade: 0
-equalSentences1 :::: grade: 0
-finished grading: they hate to help
-grade: 0
+getGrade :::: TEACHER :Answer: sadsd, Wrriten by: TEACHER, Grade: 100, Significant Words: 0, Teacher verified: true, syntaxable: true, aid: 59c6d267a9decb1a9497f0ff
+getGrade :::: STUDENT :Answer: asasas fdsf, Wrriten by: STUDENT, Grade: -2, Significant Words: 1, Teacher verified: false, syntaxable: false, aid: 59c6d305a9decb43086f0e9a
+getGrade :::: TEACHER :Answer: dsds, Wrriten by: STUDENT, Grade: 0, Significant Words: 0, Teacher verified: false, syntaxable: true, aid: 59c6d260a9decb1a9497f0fe
+getGrade :::: STUDENT :Answer: asasas fdsf, Wrriten by: STUDENT, Grade: -2, Significant Words: 1, Teacher verified: false, syntaxable: false, aid: 59c6d305a9decb43086f0e9a
 ### SYNTAX ANALYZER RESULT:
-### student: Answer: they hate to help, Wrriten by: STUDENT, Grade: -2, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: null
+### student: Answer: asasas fdsf, Wrriten by: STUDENT, Grade: -2, Significant Words: 1, Teacher verified: false, syntaxable: false, aid: 59c6d305a9decb43086f0e9a
+### grade: 0
+getGrade :::: TEACHER :Answer: sadsd, Wrriten by: TEACHER, Grade: 100, Significant Words: 0, Teacher verified: true, syntaxable: true, aid: 59c6d267a9decb1a9497f0ff
+getGrade :::: STUDENT :Answer: dsds, Wrriten by: STUDENT, Grade: 0, Significant Words: 0, Teacher verified: false, syntaxable: true, aid: 59c6d260a9decb1a9497f0fe
+getGrade :::: TEACHER :Answer: dsds, Wrriten by: STUDENT, Grade: 0, Significant Words: 0, Teacher verified: false, syntaxable: true, aid: 59c6d260a9decb1a9497f0fe
+getGrade :::: STUDENT :Answer: dsds, Wrriten by: STUDENT, Grade: 0, Significant Words: 0, Teacher verified: false, syntaxable: true, aid: 59c6d260a9decb1a9497f0fe
+### SYNTAX ANALYZER RESULT:
+### student: Answer: dsds, Wrriten by: STUDENT, Grade: 0, Significant Words: 0, Teacher verified: false, syntaxable: true, aid: 59c6d260a9decb1a9497f0fe
 ### grade: 0
