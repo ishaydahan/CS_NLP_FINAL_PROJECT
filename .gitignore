@@ -1,5 +1,7 @@
-target/
-IMG/
-.mvn/
-.settings/
-bin/
+target
+.settings
+doc
+.project
+.classpath
+bin
+logs
