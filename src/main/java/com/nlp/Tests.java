@@ -14,41 +14,41 @@ public class Tests {
 		ArrayList<Answer> goodToCheck = new ArrayList<Answer>();
 		ArrayList<Answer> badToCheck = new ArrayList<Answer>();
 
-		ver.add(ApiHolder.getInstance().factory.createAnswer("because people want to help" ,100, "TEACHER").build());
-		ver.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help people" ,100, "TEACHER").build());
+		ver.add(ApiHolder.getInstance().factory.createAnswer("because people wish to help" ,100, "TEACHER").build());
+//		ver.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help people" ,100, "TEACHER").build());
 
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people want to help", 0, "STUDENT"));// exact match
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people wish to help", 0, "STUDENT"));// close meaning1
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people desire to help", 0, "STUDENT"));// close meaning2
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people want to halp", 0, "STUDENT"));// spelling
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people wants to help", 0, "STUDENT"));// grammar
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people want to help", 0, "STUDENT"));//without because
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("they want to help", 0, "STUDENT"));//people > they
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want to help", 0, "STUDENT"));//with "the"
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("thats because people want to help people", 0, "STUDENT"));// extra information
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("want to help", 0, "STUDENT"));//90
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("to help", 0, "STUDENT"));//80
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("to help people", 0, "STUDENT"));//60
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("People choose to volunteer because they want to help.", 0, "STUDENT"));//because in the middle
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("they choose to volunteer to help people.", 0, "STUDENT"));
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help", 0, "STUDENT"));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people choose to volunteer to help people.", 0, "STUDENT"));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people hate to help", 0, "STUDENT"));// close meaning2
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they love to volunteer", 0, "STUDENT"));//tricky one
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want to fly", 0, "STUDENT"));//bad verb
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want money", 0, "STUDENT"));//no verb
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the apes want to help", 0, "STUDENT"));//bad subject
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because he want to help", 0, "STUDENT"));//bad subject+grammer
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because he wants to help", 0, "STUDENT"));//bad subject
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people have to help", 0, "STUDENT"));//bad verb
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("people want help", 0, "STUDENT"));//bad meaning
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they are bored", 0, "STUDENT"));
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they are working for their own free will", 0, "STUDENT"));
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("the people need money", 0, "STUDENT"));
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they dont have money", 0, "STUDENT"));
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("People choose to volunteer because they want money.", 0, "STUDENT"));
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people need to help", 0, "STUDENT"));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("they hate to help", 0, "STUDENT"));// exact match
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people wish to help", 0, "STUDENT"));// close meaning1
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people desire to help", 0, "STUDENT"));// close meaning2
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people want to halp", 0, "STUDENT"));// spelling
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people wants to help", 0, "STUDENT"));// grammar
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people want to help", 0, "STUDENT"));//without because
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("they want to help", 0, "STUDENT"));//people > they
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want to help", 0, "STUDENT"));//with "the"
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("thats because people want to help people", 0, "STUDENT"));// extra information
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("want to help", 0, "STUDENT"));//90
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("to help", 0, "STUDENT"));//80
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("to help people", 0, "STUDENT"));//60
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("People choose to volunteer because they want to help.", 0, "STUDENT"));//because in the middle
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("they choose to volunteer to help people.", 0, "STUDENT"));
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help", 0, "STUDENT"));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people choose to volunteer to help people.", 0, "STUDENT"));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//		
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people hate to help", 0, "STUDENT"));// close meaning2
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they love to volunteer", 0, "STUDENT"));//tricky one
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want to fly", 0, "STUDENT"));//bad verb
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want money", 0, "STUDENT"));//no verb
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the apes want to help", 0, "STUDENT"));//bad subject
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because he want to help", 0, "STUDENT"));//bad subject+grammer
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because he wants to help", 0, "STUDENT"));//bad subject
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people have to help", 0, "STUDENT"));//bad verb
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("people want help", 0, "STUDENT"));//bad meaning
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they are bored", 0, "STUDENT"));
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they are working for their own free will", 0, "STUDENT"));
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("the people need money", 0, "STUDENT"));
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they dont have money", 0, "STUDENT"));
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("People choose to volunteer because they want money.", 0, "STUDENT"));
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people need to help", 0, "STUDENT"));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 		double passed = 0;
 		double tests = 0;
