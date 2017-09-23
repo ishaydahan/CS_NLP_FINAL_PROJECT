@@ -1,6 +1,7 @@
 package com.nlp.analyzer;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,10 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.cloud.language.v1.DependencyEdge.Label;
 import com.google.cloud.language.v1.PartOfSpeech.Case;
 import com.google.cloud.language.v1.PartOfSpeech.Number;
+import com.google.cloud.language.v1.Token;
 import com.nlp.common.ApiHolder;
 import com.nlp.models.Answer;
-import com.google.cloud.language.v1.Token;
-import com.textrazor.annotations.Entailment;
 
 /**
  * @author ishay
@@ -61,14 +61,18 @@ public class CheckAnswerCase {
 		}
 		
 		//put the student answer to ensure we will check it one time only!
-		teacher_ans.getMap().put(student_ans.getContent(), 0);
+		HashMap<String, Integer> m = teacher_ans.getMap();
+		m.put(student_ans.getContent(), 0);
+		teacher_ans.setMap(m);
 		
 		//start calculating comparing student to teacher
 		int firstGrade = this.equalSentences(teacher_ans, student_ans, false);
 		
 		//try to get max grade with teacher path only.
 		if (firstGrade==teacher_ans.getGrade()) {
-			teacher_ans.getMap().put(student_ans.getContent(), firstGrade);
+			HashMap<String, Integer> m1 = teacher_ans.getMap();
+			m1.put(student_ans.getContent(), firstGrade);
+			teacher_ans.setMap(m1);
 			ApiHolder.getInstance().logger.println("finished grading: " + student_ans.getContent());
 			ApiHolder.getInstance().logger.println("grade: " + firstGrade);
 			return firstGrade;
@@ -78,7 +82,9 @@ public class CheckAnswerCase {
 		int grade = Math.max(firstGrade, secondGrade);
 		ApiHolder.getInstance().logger.println("finished grading: " + student_ans.getContent());
 		ApiHolder.getInstance().logger.println("grade: " + grade);
-		teacher_ans.getMap().put(student_ans.getContent(), grade);
+		HashMap<String, Integer> m1 = teacher_ans.getMap();
+		m1.put(student_ans.getContent(), firstGrade);
+		teacher_ans.setMap(m1);
 		return grade;
 	}
 	
@@ -294,37 +300,73 @@ public class CheckAnswerCase {
 			for(String sgg : ApiHolder.getInstance().getSpelling(student.getText().getContent())) {
 				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
 				if (teacher.getText().getContent().equals(sgg) || LevenshteinDistance.computeLevenshteinDistance(teacher.getText().getContent(), sgg)<ApiHolder.getInstance().LEVENSHTEIN) {
-//					System.out.println(teacher.getText().getContent() + "  " + student.getText().getContent());
 
 					String[] new_s = student_ans.getContent().split(" ");
 					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = sgg;
 					String new_s1 = StringUtils.join(new_s, " ");
 
-					//this map helps to avoid infinite loop.
+//					this map helps to avoid infinite loop.
 					if (!teacher_ans.getMap().containsKey(new_s1)) {
 						ApiHolder.getInstance().logger.println("checkTokens :::: spelling fixed: " + student.getText().getContent() + " >> " + sgg);
 						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, "COMPUTER").build(), teacher_ans);
 						ApiHolder.getInstance().logger.println("----starting new check-----");
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");
-					}else finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
+					}else {
+						ApiHolder.getInstance().logger.println("using map: " + student_ans.getContent());
+						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(student_ans.getContent()));
+						finishedGrade = teacher_ans.getMap().get(new_s1);// we already computed this sentence
+					}
 				}
 			}
-			for(Entailment ent : ApiHolder.getInstance().getEntailmentList(student_ans.getContent())) {
-				if (ent.getMatchedWords().get(0).getToken().equals(student.getText().getContent()) && teacher.getText().getContent().equals(ent.getEntailedWords().get(0)) && ent.getContextScore()>ApiHolder.getInstance().MEANING){	
+			
+			for(String sgg : ApiHolder.getInstance().getSyn(student.getText().getContent())) {
+				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
+				if (teacher.getText().getContent().equals(sgg) || LevenshteinDistance.computeLevenshteinDistance(teacher.getText().getContent(), sgg)<ApiHolder.getInstance().LEVENSHTEIN) {
+
 					String[] new_s = student_ans.getContent().split(" ");
-					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = ent.getEntailedWords().get(0);
+					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = sgg;
 					String new_s1 = StringUtils.join(new_s, " ");
-					
+
+//					this map helps to avoid infinite loop.
 					if (!teacher_ans.getMap().containsKey(new_s1)) {
-						ApiHolder.getInstance().logger.println("checkTokens :::: meaning fixed: " + student.getText().getContent() + " >> " + ent.getEntailedWords().get(0));
+						ApiHolder.getInstance().logger.println("checkTokens :::: synonym fixed: " + student.getText().getContent() + " >> " + sgg);
 						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, "COMPUTER").build(), teacher_ans);
 						ApiHolder.getInstance().logger.println("----starting new check-----");
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");
-					}else finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;
+					}else {
+						ApiHolder.getInstance().logger.println("using map: " + student_ans.getContent());
+						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(student_ans.getContent()));
+						finishedGrade = teacher_ans.getMap().get(new_s1);// we already computed this sentence
+					}
 				}
 			}
+
+			for(String sgg : ApiHolder.getInstance().getUnSyn(student.getText().getContent())) {
+				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
+				if (teacher.getText().getContent().equals(sgg) || LevenshteinDistance.computeLevenshteinDistance(teacher.getText().getContent(), sgg)<ApiHolder.getInstance().LEVENSHTEIN) {
+					ApiHolder.getInstance().logger.println("checkTokens :::: opposite found: " + student.getText().getContent() + " >> " + sgg);
+					return false;
+				}
+			}
+
+//			for(Entailment ent : ApiHolder.getInstance().getEntailmentList(student_ans.getContent())) {
+//				if (ent.getMatchedWords().get(0).getToken().equals(student.getText().getContent()) && teacher.getText().getContent().equals(ent.getEntailedWords().get(0)) && ent.getContextScore()>ApiHolder.getInstance().MEANING){	
+//					String[] new_s = student_ans.getContent().split(" ");
+//					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = ent.getEntailedWords().get(0);
+//					String new_s1 = StringUtils.join(new_s, " ");
+//					
+//					if (!teacher_ans.getMap().containsKey(new_s1)) {
+//						ApiHolder.getInstance().logger.println("checkTokens :::: meaning fixed: " + student.getText().getContent() + " >> " + ent.getEntailedWords().get(0));
+//						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, "COMPUTER").build(), teacher_ans);
+//						ApiHolder.getInstance().logger.println("----starting new check-----");
+//						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
+//						ApiHolder.getInstance().logger.println("----finished new check-----");
+//					}else finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;
+//				}
+//			}
+			
 		}
 		return false;
 	}	

@@ -20,10 +20,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mongodb.MongoClient;
-import com.textrazor.AnalysisException;
-import com.textrazor.NetworkException;
 import com.textrazor.TextRazor;
-import com.textrazor.annotations.Entailment;
 
 	
 /**
@@ -56,7 +53,9 @@ public class ApiHolder {
 	public JLanguageTool lang = new JLanguageTool(new BritishEnglish());
 	
 	//Entailments
-	public HashMap<String, List<Entailment>> entailmentList = new HashMap<String, List<Entailment>>();
+	public HashMap<String, List<String>> entailmentList = new HashMap<String, List<String>>();
+	public HashMap<String, List<String>> unentailmentList = new HashMap<String, List<String>>();
+
 	public TextRazor t;
 	public int i =0;
 	public TextRazor[] razor = new TextRazor[4];
@@ -139,68 +138,70 @@ public class ApiHolder {
 	 * @return list of contextual meanings
 	 * we keep all Entailment in hashmap to save time
 	 */
-	public List<Entailment> getEntailmentList(String s) {
+//	public List<Entailment> getEntailmentList(String s) {
+//		if (entailmentList.containsKey(s)) {
+//			return entailmentList.get(s);
+//		}
+//		List<Entailment> lst = new ArrayList<Entailment>();
+//
+//		try {
+//			t = razor[i%4];
+//			lst = t.analyze(s).getResponse().getEntailments();
+//		} catch (Exception e) {
+//			switchrazor();
+//			try {
+//				lst = t.analyze(s).getResponse().getEntailments();
+//			} catch (NetworkException | AnalysisException e1) {
+//
+//			}
+//		}
+//		entailmentList.put(s, lst);
+//		return lst;
+//	}
+	
+	public List<String> getSyn(String s) {
 		if (entailmentList.containsKey(s)) {
 			return entailmentList.get(s);
 		}
-		List<Entailment> lst = new ArrayList<Entailment>();
 
-		try {
-			t = razor[i%4];
-			lst = t.analyze(s).getResponse().getEntailments();
-		} catch (Exception e) {
-			switchrazor();
-			try {
-				lst = t.analyze(s).getResponse().getEntailments();
-			} catch (NetworkException | AnalysisException e1) {
-
-			}
-		}
-		entailmentList.put(s, lst);
-		return lst;
-	}
-	
-	public List<String> getSyn(String s) {
-		
 		try {
 			HttpResponse<JsonNode> response = Unirest.get("https://wordsapiv1.p.mashape.com/words/"+s+"/synonyms")
 					.header("X-Mashape-Key", "GpWksHEwG3msh2Gv8DGQAojVWiZ7p1vUQm4jsnp0VDuSUhBkL2")
 					.header("Accept", "application/json")
 					.asJson();
-			@SuppressWarnings("unchecked")
-			 JSONArray syn = response.getBody().getObject().getJSONArray("synonyms");
+			JSONArray syn = response.getBody().getObject().getJSONArray("synonyms");
 			List<String> arr = new ArrayList<String>();
 			for(int i=0;i < syn.length();i++){
 				arr.add(syn.getString(i));
 			}
+			entailmentList.put(s, arr);
 			return arr;
 		} catch (UnirestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
+
 		}
+		return new ArrayList<String>();
 	}
 
 	public List<String> getUnSyn(String s) {
-		
+		if (unentailmentList.containsKey(s)) {
+			return unentailmentList.get(s);
+		}
+
 		try {
 			HttpResponse<JsonNode> response = Unirest.get("https://wordsapiv1.p.mashape.com/words/"+s+"/antonyms")
 					.header("X-Mashape-Key", "GpWksHEwG3msh2Gv8DGQAojVWiZ7p1vUQm4jsnp0VDuSUhBkL2")
 					.header("Accept", "application/json")
 					.asJson();
-			@SuppressWarnings("unchecked")
-			 JSONArray syn = response.getBody().getObject().getJSONArray("antonyms");
+			JSONArray syn = response.getBody().getObject().getJSONArray("antonyms");
 			List<String> arr = new ArrayList<String>();
 			for(int i=0;i < syn.length();i++){
 				arr.add(syn.getString(i));
 			}
+			unentailmentList.put(s, arr);
 			return arr;
 		} catch (UnirestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-	}
 
-	
+		}
+		return new ArrayList<String>();
+	}	
 }

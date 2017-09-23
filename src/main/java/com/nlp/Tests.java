@@ -9,6 +9,7 @@ import com.nlp.models.Answer;
 public class Tests {
 
 	public void test1() {		
+		
 		ArrayList<Answer> ver = new ArrayList<Answer>();
 		ArrayList<Answer> goodToCheck = new ArrayList<Answer>();
 		ArrayList<Answer> badToCheck = new ArrayList<Answer>();
@@ -17,8 +18,8 @@ public class Tests {
 		ver.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help people" ,100, "TEACHER").build());
 
 		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people want to help", 0, "STUDENT"));// exact match
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people love to help", 0, "STUDENT"));// close meaning1
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people choose to help", 0, "STUDENT"));// close meaning2
+		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people wish to help", 0, "STUDENT"));// close meaning1
+		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people desire to help", 0, "STUDENT"));// close meaning2
 		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people want to halp", 0, "STUDENT"));// spelling
 		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people wants to help", 0, "STUDENT"));// grammar
 		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people want to help", 0, "STUDENT"));//without because
@@ -33,6 +34,7 @@ public class Tests {
 		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help", 0, "STUDENT"));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people choose to volunteer to help people.", 0, "STUDENT"));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		
+		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people hate to help", 0, "STUDENT"));// close meaning2
 		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they love to volunteer", 0, "STUDENT"));//tricky one
 		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want to fly", 0, "STUDENT"));//bad verb
 		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want money", 0, "STUDENT"));//no verb
