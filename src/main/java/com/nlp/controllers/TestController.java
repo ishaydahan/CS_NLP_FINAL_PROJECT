@@ -209,7 +209,11 @@ public class TestController {
         if(questionData == null) {
             return null;
         }
-        
+        boolean learn = false;
+        if (answer.getGrade()>=80) learn = true;
+        	
+        if (answer.getWriter().equals("TEACHER")) getQuestionById(tid, qid).getBody().check(answer.getContent(), learn);
+
         Answer ans = ApiHolder.getInstance().factory.createAnswer(answer.getContent(), answer.getGrade(), answer.getWriter());
         ans.setQid(qid);
     	answerRepository.save(ans);
@@ -288,13 +292,13 @@ public class TestController {
 				  .withIgnorePaths("createdAt");
 
         questionRepository.findAll(Example.of(q, matcher), sortByCreatedAtDesc).forEach(que->{
-        	checkQuestion(que.getId());
+        	checkQuestion(que.getId(), que.getTid());
         });
 		return null;
     }
 
     @GetMapping("/tests/{tid}/questions/{qid}/check")
-    public Object checkQuestion(@PathVariable("qid") String qid) {
+    public Object checkQuestion(@PathVariable("tid") String tid, @PathVariable("qid") String qid) {
     	Question questionData = questionRepository.findOne(qid);
         if(questionData == null) {
             return null;
@@ -392,8 +396,12 @@ public class TestController {
 				
 			}else if ((grade = analyzer.SyntaxAnalyze(syntaxable))>-2) {//there is no -1 option in last check. must return grade.
 				
-				student_ans.setGrade(grade);
-	
+				if (!getQuestionById(tid, qid).getBody().checkWord(student_ans.getContent()) && grade!=100) {
+					student_ans.setGrade(0);
+				}else {
+					student_ans.setGrade(grade);
+				}
+				
 			}else {
 				//error
 				return null;

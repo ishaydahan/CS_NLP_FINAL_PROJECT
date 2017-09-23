@@ -72,29 +72,5 @@ public class AnswerAnalyzer {
 		ApiHolder.getInstance().logger.println("### grade: " + maxGrade);
 		return maxGrade;		
 	}
-	
-//	/**
-//	 * @param TODO
-//	 * @return
-//	 */
-//	public Integer MachineLearningAnalyze(List<Answer> learnable) {
-//		//TODO
-//		
-//		if (learnable.isEmpty()) {
-//			System.out.println("There are no teacher's learnable answers at database at all");
-//			return -2;
-//		}
-//				
-//		Integer maxGrade=ApiHolder.getInstance().MINGRADE;		
-//		for (Answer teachers_ans: learnable) {
-//			DataLearner master = new DataLearner();
-//			maxGrade= Math.max(maxGrade, master.getGrade());
-//			if (maxGrade.equals(ApiHolder.getInstance().MAXGRADE)) break;
-//		}
-//		ApiHolder.getInstance().logger.println("### Machine Learning RESULT:");
-//		ApiHolder.getInstance().logger.println("### student: " + students_ans);
-//		ApiHolder.getInstance().logger.println("### grade: " + maxGrade);
-//		return maxGrade;		
-//	}
 
 }

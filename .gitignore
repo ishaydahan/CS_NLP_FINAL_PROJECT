@@ -1,7 +1,9 @@
+.mvn
 target
 .settings
-doc
 .project
 .classpath
 bin
-logs
+mvnw
+mvnw.cmd
+output.txt

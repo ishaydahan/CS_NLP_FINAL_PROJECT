@@ -1,10 +1,15 @@
 package consoleApi;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import com.wordsapi.www.client.ApiException;
-import com.wordsapi.www.wordsapi.api.WordsApi;
-import com.wordsapi.www.wordsapi.model.DetailsResponse;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import analyzer.AnswerAnalyzer;
 import apiHolder.ApiHolder;
@@ -40,22 +45,27 @@ public class ConsoleProgram {
 //	public static String pass;
 //	public static Scanner scanner = new Scanner(System.in);     
 
-	public static void main(String[] args) {
+	public static List<String> main(String[] args) {
 		ApiHolder.getInstance();
-
-		String accessToken = "GpWksHEwG3msh2Gv8DGQAojVWiZ7p1vUQm4jsnp0VDuSUhBkL2";
-		String word = "lovely";
-		String detail = "synonyms";
-
+		
 		try {
-		    WordsApi wordsApi = new WordsApi();
-		    DetailsResponse response = wordsApi.details(accessToken, word, detail);
-		    System.out.println(response);
-		} catch (ApiException e) {
-		    System.out.printf("ApiException caught: %s\n", e.getMessage());
+			HttpResponse<JsonNode> response = Unirest.get("https://wordsapiv1.p.mashape.com/words/want/synonyms")
+					.header("X-Mashape-Key", "GpWksHEwG3msh2Gv8DGQAojVWiZ7p1vUQm4jsnp0VDuSUhBkL2")
+					.header("Accept", "application/json")
+					.asJson();
+			@SuppressWarnings("unchecked")
+			 JSONArray syn = response.getBody().getObject().getJSONArray("synonyms");
+			List<String> arr = new ArrayList<String>();
+			for(int i=0;i < syn.length();i++){
+				arr.add(syn.getString(i));
+			}
+			return arr;
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
 
-		
 //		test1();
 //		test2();
 //		test3();

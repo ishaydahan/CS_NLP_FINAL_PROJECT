@@ -7,12 +7,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+
+import org.json.JSONArray;
 import org.languagetool.JLanguageTool;
 import org.languagetool.language.BritishEnglish;
 import org.languagetool.rules.RuleMatch;
 
 import com.google.cloud.language.v1.LanguageServiceClient;
 import com.google.cloud.language.v1.PartOfSpeech.Tag;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mongodb.MongoClient;
 import com.textrazor.AnalysisException;
 import com.textrazor.NetworkException;
@@ -73,21 +79,10 @@ public class ApiHolder {
 		try {
 	
 			logger = new PrintStream(new FileOutputStream("logs/analyze_log.txt"));
-			
-<<<<<<< HEAD
-<<<<<<< HEAD
 //			PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
 //			System.setOut(out);
 //			System.setErr(out);
 
-=======
-//			k
-			
->>>>>>> parent of 23921c5... print
-=======
-//			k
-			
->>>>>>> parent of 23921c5... print
 			langClient = LanguageServiceClient.create();
 			
 			razor[0] = new TextRazor("eb5d5e6284d0ed04a6b7beec96d2805a9bc0f4396cb3fe0c219e5374");//bacoola
@@ -165,5 +160,47 @@ public class ApiHolder {
 		return lst;
 	}
 	
+	public List<String> getSyn(String s) {
+		
+		try {
+			HttpResponse<JsonNode> response = Unirest.get("https://wordsapiv1.p.mashape.com/words/"+s+"/synonyms")
+					.header("X-Mashape-Key", "GpWksHEwG3msh2Gv8DGQAojVWiZ7p1vUQm4jsnp0VDuSUhBkL2")
+					.header("Accept", "application/json")
+					.asJson();
+			@SuppressWarnings("unchecked")
+			 JSONArray syn = response.getBody().getObject().getJSONArray("synonyms");
+			List<String> arr = new ArrayList<String>();
+			for(int i=0;i < syn.length();i++){
+				arr.add(syn.getString(i));
+			}
+			return arr;
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<String> getUnSyn(String s) {
+		
+		try {
+			HttpResponse<JsonNode> response = Unirest.get("https://wordsapiv1.p.mashape.com/words/"+s+"/antonyms")
+					.header("X-Mashape-Key", "GpWksHEwG3msh2Gv8DGQAojVWiZ7p1vUQm4jsnp0VDuSUhBkL2")
+					.header("Accept", "application/json")
+					.asJson();
+			@SuppressWarnings("unchecked")
+			 JSONArray syn = response.getBody().getObject().getJSONArray("antonyms");
+			List<String> arr = new ArrayList<String>();
+			for(int i=0;i < syn.length();i++){
+				arr.add(syn.getString(i));
+			}
+			return arr;
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	
 }
