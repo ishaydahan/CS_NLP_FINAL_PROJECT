@@ -1,5 +1,4 @@
 .mvn
-target
 .settings
 .project
 .classpath
