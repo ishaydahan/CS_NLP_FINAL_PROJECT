@@ -9,7 +9,10 @@ import com.nlp.common.ApiHolder;
 public class NlpApplication {
 
 	public static void main(String[] args) {
-		ApiHolder.getInstance();
 		SpringApplication.run(NlpApplication.class, args);
+		ApiHolder.getInstance();
+
+		Tests tests = new Tests();
+		tests.test1();
 	}
 }

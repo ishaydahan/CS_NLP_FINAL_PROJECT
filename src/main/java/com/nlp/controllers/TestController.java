@@ -182,7 +182,7 @@ public class TestController {
             return null;
         }
 
-        Sort sortByCreatedAtDesc = new Sort(Sort.Direction.DESC, "createdAt");
+        Sort sortByCreatedAtDesc = new Sort(Sort.Direction.DESC, "writer");
         Answer a = new Answer();
         a.setQid(qid);
         

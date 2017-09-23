@@ -1,64 +1,67 @@
 package consoleApi;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-
+import com.wordsapi.www.client.ApiException;
+import com.wordsapi.www.wordsapi.api.WordsApi;
+import com.wordsapi.www.wordsapi.model.DetailsResponse;
 
 import analyzer.AnswerAnalyzer;
 import apiHolder.ApiHolder;
 import objects.Answer;
-import objects.Person;
 import objects.Writer;
 
-class Connector implements Callable<Boolean> {
-    public Boolean call() throws Exception {
-        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
-        ApiHolder.getInstance().client = new MongoClient(uri);
-        ApiHolder.getInstance().db = ApiHolder.getInstance().client.getDatabase(uri.getDatabase());
-        ApiHolder.getInstance().collection = ApiHolder.getInstance().db.getCollection("tests"); 
-        ApiHolder.getInstance().users = ApiHolder.getInstance().db.getCollection("users"); 
-        return true;
-    }
-}
-   
-class login implements Callable<Boolean> {
-    public Boolean call() throws Exception {
-		System.out.print("Enter Username:");
-		ConsoleProgram.user = ConsoleProgram.scanner.nextLine();
-		
-		System.out.print("Enter Password:");
-		ConsoleProgram.pass = ConsoleProgram.scanner.nextLine();
-
-		return true;
-    }
-}
-
+//class Connector implements Callable<Boolean> {
+//    public Boolean call() throws Exception {
+//        MongoClientURI uri  = new MongoClientURI("mongodb://ishaydah:nlpuser@ds161012.mlab.com:61012/csproject"); 
+//        ApiHolder.getInstance().client = new MongoClient(uri);
+//        ApiHolder.getInstance().db = ApiHolder.getInstance().client.getDatabase(uri.getDatabase());
+//        ApiHolder.getInstance().collection = ApiHolder.getInstance().db.getCollection("tests"); 
+//        ApiHolder.getInstance().users = ApiHolder.getInstance().db.getCollection("users"); 
+//        return true;
+//    }
+//}
+//   
+//class login implements Callable<Boolean> {
+//    public Boolean call() throws Exception {
+//		System.out.print("Enter Username:");
+//		ConsoleProgram.user = ConsoleProgram.scanner.nextLine();
+//		
+//		System.out.print("Enter Password:");
+//		ConsoleProgram.pass = ConsoleProgram.scanner.nextLine();
+//
+//		return true;
+//    }
+//}
+//
 public class ConsoleProgram {
 	
-	public static String user;
-	public static String pass;
-	public static Scanner scanner = new Scanner(System.in);     
+//	public static String user;
+//	public static String pass;
+//	public static Scanner scanner = new Scanner(System.in);     
 
 	public static void main(String[] args) {
 		ApiHolder.getInstance();
 
+		String accessToken = "GpWksHEwG3msh2Gv8DGQAojVWiZ7p1vUQm4jsnp0VDuSUhBkL2";
+		String word = "lovely";
+		String detail = "synonyms";
+
+		try {
+		    WordsApi wordsApi = new WordsApi();
+		    DetailsResponse response = wordsApi.details(accessToken, word, detail);
+		    System.out.println(response);
+		} catch (ApiException e) {
+		    System.out.printf("ApiException caught: %s\n", e.getMessage());
+		}
+
+		
 //		test1();
 //		test2();
 //		test3();
 //		test4();
 //		test5();
-		test6();
+//		test6();
 //		test7();
 
 //
@@ -101,39 +104,39 @@ public class ConsoleProgram {
 		ArrayList<Answer> badToCheck = new ArrayList<Answer>();
 
 		ver.add(ApiHolder.getInstance().factory.createAnswer("because people want to help" ,100, Writer.TEACHER).build());
-		ver.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help people" ,100, Writer.TEACHER).build());
+//		ver.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help people" ,100, Writer.TEACHER).build());
 
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people want to help", 0, Writer.STUDENT));// exact match
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people love to help", 0, Writer.STUDENT));// close meaning1
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people choose to help", 0, Writer.STUDENT));// close meaning2
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people want to halp", 0, Writer.STUDENT));// spelling
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people wants to help", 0, Writer.STUDENT));// grammar
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people want to help", 0, Writer.STUDENT));//without because
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("they want to help", 0, Writer.STUDENT));//people > they
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want to help", 0, Writer.STUDENT));//with "the"
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("thats because people want to help people", 0, Writer.STUDENT));// extra information
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("want to help", 0, Writer.STUDENT));//90
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("to help", 0, Writer.STUDENT));//80
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("to help people", 0, Writer.STUDENT));//60
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("People choose to volunteer because they want to help.", 0, Writer.STUDENT));//because in the middle
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("they choose to volunteer to help people.", 0, Writer.STUDENT));
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people choose to volunteer to help people.", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they love to volunteer", 0, Writer.STUDENT));//tricky one
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want to fly", 0, Writer.STUDENT));//bad verb
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want money", 0, Writer.STUDENT));//no verb
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the apes want to help", 0, Writer.STUDENT));//bad subject
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because he want to help", 0, Writer.STUDENT));//bad subject+grammer
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because he wants to help", 0, Writer.STUDENT));//bad subject
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people have to help", 0, Writer.STUDENT));//bad verb
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("people want help", 0, Writer.STUDENT));//bad meaning
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they are bored", 0, Writer.STUDENT));
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they are working for their own free will", 0, Writer.STUDENT));
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("the people need money", 0, Writer.STUDENT));
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they dont have money", 0, Writer.STUDENT));
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("People choose to volunteer because they want money.", 0, Writer.STUDENT));
-		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people need to help", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people hate to help", 0, Writer.STUDENT));// exact match
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people love to help", 0, Writer.STUDENT));// close meaning1
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people choose to help", 0, Writer.STUDENT));// close meaning2
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people want to halp", 0, Writer.STUDENT));// spelling
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people wants to help", 0, Writer.STUDENT));// grammar
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people want to help", 0, Writer.STUDENT));//without because
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("they want to help", 0, Writer.STUDENT));//people > they
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want to help", 0, Writer.STUDENT));//with "the"
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("thats because people want to help people", 0, Writer.STUDENT));// extra information
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("want to help", 0, Writer.STUDENT));//90
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("to help", 0, Writer.STUDENT));//80
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("to help people", 0, Writer.STUDENT));//60
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("People choose to volunteer because they want to help.", 0, Writer.STUDENT));//because in the middle
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("they choose to volunteer to help people.", 0, Writer.STUDENT));
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people volunteer to help", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//		goodToCheck.add(ApiHolder.getInstance().factory.createAnswer("people choose to volunteer to help people.", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//		
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they love to volunteer", 0, Writer.STUDENT));//tricky one
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want to fly", 0, Writer.STUDENT));//bad verb
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people want money", 0, Writer.STUDENT));//no verb
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the apes want to help", 0, Writer.STUDENT));//bad subject
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because he want to help", 0, Writer.STUDENT));//bad subject+grammer
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because he wants to help", 0, Writer.STUDENT));//bad subject
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because the people have to help", 0, Writer.STUDENT));//bad verb
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("people want help", 0, Writer.STUDENT));//bad meaning
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they are bored", 0, Writer.STUDENT));
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they are working for their own free will", 0, Writer.STUDENT));
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("the people need money", 0, Writer.STUDENT));
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("they dont have money", 0, Writer.STUDENT));
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("People choose to volunteer because they want money.", 0, Writer.STUDENT));
+//		badToCheck.add(ApiHolder.getInstance().factory.createAnswer("because people need to help", 0, Writer.STUDENT));///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 		double passed = 0;
 		double tests = 0;

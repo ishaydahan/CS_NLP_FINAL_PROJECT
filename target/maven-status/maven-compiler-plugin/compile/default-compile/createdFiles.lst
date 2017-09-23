@@ -1,4 +1,5 @@
 com\nlp\repositories\TestRepository.class
+com\nlp\Tests.class
 com\nlp\analyzer\StringM.class
 com\nlp\common\ApiHolder.class
 com\nlp\repositories\AnswerRepository.class

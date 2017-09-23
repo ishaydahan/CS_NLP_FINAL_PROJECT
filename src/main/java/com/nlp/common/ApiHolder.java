@@ -74,9 +74,9 @@ public class ApiHolder {
 	
 			logger = new PrintStream(new FileOutputStream("logs/analyze_log.txt"));
 			
-			PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
-			System.setOut(out);
-			System.setErr(out);
+//			PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+//			System.setOut(out);
+//			System.setErr(out);
 
 			langClient = LanguageServiceClient.create();
 			
