@@ -389,7 +389,7 @@ public class TestController {
 		//check
 		for (Answer student_ans: studentAns) {
 			
-			student_ans.checkAnswer(verified, syntaxable);
+			student_ans.checkAnswer(verified, verified);
 			
 			//set syntaxable value
 	    	if(student_ans.getAnswerWords()>=minsyntaxable) student_ans.setSyntaxable(true);
