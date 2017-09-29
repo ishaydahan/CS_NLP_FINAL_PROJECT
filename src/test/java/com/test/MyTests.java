@@ -155,8 +155,18 @@ public class MyTests {
     	mainTestCode("because people need to help", 95);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
+    @Test
+    public void test19() {
+    	verified.add(ApiHolder.getInstance().factory.createAnswer("because people need to help" ,0, "TEACHER").build());
+    	mainTestCode("they need to help", 0);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
 
-    
+    @Test
+    public void test20() {
+    	verified.add(ApiHolder.getInstance().factory.createAnswer("because people need to help" ,0, "TEACHER").build());
+    	mainTestCode("need to help", 0);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
+
 //    
 //    	@Test
 //		public void test2() {		

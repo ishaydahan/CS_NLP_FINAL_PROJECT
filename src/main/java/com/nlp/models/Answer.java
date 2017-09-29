@@ -39,6 +39,7 @@ public class Answer {
 	private Integer answerWords;//num of significant words.
 	private Boolean verified;//there is enough data to learn from this answer
 	private Boolean syntaxable;//there is enough data to learn from this answer
+	private Boolean syntaxMatchFound;//there is enough data to learn from this answer
 
     private Date createdAt = new Date();
 
@@ -215,12 +216,20 @@ public class Answer {
 			
 			this.setGrade(grade);
 			
-			if ((grade = analyzer.WordsAnalyze(verified))==ApiHolder.getInstance().MINGRADE && this.getGrade()!=ApiHolder.getInstance().MAXGRADE) {
+			if ((grade = analyzer.WordsAnalyze(verified))==ApiHolder.getInstance().MINGRADE && !this.getSyntaxMatchFound()) {
 				
 				this.setGrade(grade);
 				
 			}
 		}
+	}
+
+	public Boolean getSyntaxMatchFound() {
+		return syntaxMatchFound;
+	}
+
+	public void setSyntaxMatchFound(Boolean syntaxMatchFound) {
+		this.syntaxMatchFound = syntaxMatchFound;
 	}
 
 }

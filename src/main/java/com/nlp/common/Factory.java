@@ -13,6 +13,7 @@ public class Factory {
 			ans.setAnswerWords(-1);
 			ans.setSyntaxable(true);
 			ans.setVerified(true);
+			ans.setSyntaxMatchFound(true);
 			return ans;
 		}else if (writer.equals("COMPUTER")) {
 			Answer ans = new Answer();
@@ -22,6 +23,7 @@ public class Factory {
 			ans.setAnswerWords(-1);
 			ans.setSyntaxable(false);
 			ans.setVerified(false);
+			ans.setSyntaxMatchFound(false);
 			return ans;
 		}else if (writer.equals("STUDENT")) {
 			Answer ans = new Answer();
@@ -31,6 +33,7 @@ public class Factory {
 			ans.setAnswerWords(-1);
 			ans.setSyntaxable(false);
 			ans.setVerified(false);
+			ans.setSyntaxMatchFound(false);
 			return ans;
 		} else {
 			return null;

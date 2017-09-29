@@ -152,7 +152,6 @@ public class CheckAnswerCase {
 		ApiHolder.getInstance().logger.println("equalSentences1 :::: teacher_ans.getAnswerWords(): " + teacher_ans.getAnswerWords());
 		ApiHolder.getInstance().logger.println("equalSentences1 :::: equalSet.size(): " + equalSet.size());
 		
-//		int finalGrade = Math.max(finishedGrade, teacher_ans.getGrade()-(Math.abs(teacher_ans.getAnswerWords()-equalSet.size())*ApiHolder.getInstance().REDUCE));
 		int finalGrade = (int) Math.max(finishedGrade, ((double)equalSet.size()/teacher_ans.getAnswerWords())*teacher_ans.getGrade().intValue());
 		finalGrade = Math.min(finalGrade, ApiHolder.getInstance().MAXGRADE);
 		if (student_ans.getWriter().equals("COMPUTER")) finalGrade =  finalGrade-ApiHolder.getInstance().COMP;

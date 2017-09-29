@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.nlp.common.ApiHolder;
 import com.nlp.models.Answer;
@@ -67,20 +69,28 @@ public class AnswerAnalyzer {
 		}
 				
 		//here we activate the syntax analyzer for every verified answer and takes the maximum grade.
-		List<Integer> grades= new ArrayList<>();	
+		List<Integer> exactMatchgrades= new ArrayList<>();	
+		List<Integer> zeroMatchgrades= new ArrayList<>();	
+		List<Integer> partialMatchgrades= new ArrayList<>();	
+
 		for (Answer teachers_ans: syntaxable) {
-			grades.add(new CheckAnswerCase(students_ans, teachers_ans).getGrade());
-		}
+			int grade = new CheckAnswerCase(students_ans, teachers_ans).getGrade();
+			
+			if (grade==teachers_ans.getGrade()) exactMatchgrades.add(grade);
+			else if (grade==ApiHolder.getInstance().MINGRADE) zeroMatchgrades.add(grade); 
+			else partialMatchgrades.add(grade); 
+		}		
+		if (exactMatchgrades.stream().count()>0) students_ans.setSyntaxMatchFound(true);
 		
-		Integer finalGrade = grades.stream().filter(x->x==ApiHolder.getInstance().MAXGRADE).findFirst().orElse(null);
+		Integer finalGrade = exactMatchgrades.stream().max(Integer::compare).orElse(null);
 		
 		finalGrade = finalGrade!=null
 				? finalGrade
-				: grades.stream().filter(x->x==ApiHolder.getInstance().MINGRADE).findFirst().orElse(null);
+				: partialMatchgrades.stream().max(Integer::compare).orElse(null);
 		
 		finalGrade = finalGrade!=null
 				? finalGrade
-				: grades.stream().sorted(Integer::compare).sorted(Comparator.reverseOrder()).findFirst().orElse(null);
+				: ApiHolder.getInstance().MINGRADE;
 
 		ApiHolder.getInstance().logger.println("### SYNTAX ANALYZER RESULT:");
 		ApiHolder.getInstance().logger.println("### student: " + students_ans);
