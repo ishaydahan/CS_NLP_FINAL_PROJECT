@@ -1,15 +1,8 @@
 package com.nlp.controllers;
 
-import javax.validation.Valid;
+import java.util.List;
 
-import com.nlp.analyzer.AnswerAnalyzer;
-import com.nlp.common.ApiHolder;
-import com.nlp.models.Answer;
-import com.nlp.models.Question;
-import com.nlp.models.Test;
-import com.nlp.repositories.AnswerRepository;
-import com.nlp.repositories.QuestionRepository;
-import com.nlp.repositories.TestRepository;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -17,10 +10,23 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.nlp.common.ApiHolder;
+import com.nlp.models.Answer;
+import com.nlp.models.Question;
+import com.nlp.models.Test;
+import com.nlp.repositories.AnswerRepository;
+import com.nlp.repositories.QuestionRepository;
+import com.nlp.repositories.TestRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -210,10 +216,6 @@ public class TestController {
             return null;
         }
         
-        boolean learn = false;
-        if (answer.getGrade()>=50) learn = true;	
-        if (answer.getWriter().equals("TEACHER")) getQuestionById(tid, qid).getBody().check(answer.getContent(), learn);
-
         Answer ans = ApiHolder.getInstance().factory.createAnswer(answer.getContent(), answer.getGrade(), answer.getWriter());
         ans.setQid(qid);
     	answerRepository.save(ans);
@@ -254,7 +256,7 @@ public class TestController {
         answerdata.setContent(answer.getContent());
         answerdata.setGrade(answer.getGrade());
         answerdata.setVerified(answer.getVerified());
-
+        
         Answer updatedAnswer = answerRepository.save(answerdata);
         return new ResponseEntity<>(updatedAnswer, HttpStatus.OK);
     }
@@ -386,33 +388,15 @@ public class TestController {
 		
 		//check
 		for (Answer student_ans: studentAns) {
-			//first build the answer
-			AnswerAnalyzer analyzer = new AnswerAnalyzer(student_ans.build());
 			
-			int grade;
-			if ((grade = analyzer.levenshteinAnalyze(verified))>-1) {
-				
-				student_ans.setGrade(grade);
-				
-			}else if ((grade = analyzer.SyntaxAnalyze(syntaxable))>-2) {//there is no -1 option in last check. must return grade.
-				
-				if (!getQuestionById(tid, qid).getBody().checkWord(student_ans.getContent()) && grade!=100) {
-					student_ans.setGrade(0);
-				}else {
-					student_ans.setGrade(grade);
-				}
-				
-			}else {
-				//error
-				return null;
-			}
+			student_ans.checkAnswer(verified, syntaxable);
 			
 			//set syntaxable value
 	    	if(student_ans.getAnswerWords()>=minsyntaxable) student_ans.setSyntaxable(true);
 	    	else student_ans.setSyntaxable(false);
 	    	
-			System.out.println(student_ans);
-			
+			System.out.println(this);
+
 	        answerRepository.save(student_ans);
 		}
 		verified.forEach((ans)->{answerRepository.save(ans);});

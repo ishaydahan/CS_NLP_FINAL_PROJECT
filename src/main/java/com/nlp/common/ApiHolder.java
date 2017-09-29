@@ -18,7 +18,6 @@ import com.google.cloud.language.v1.PartOfSpeech.Tag;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mongodb.MongoClient;
 import com.textrazor.TextRazor;
 
@@ -78,6 +77,7 @@ public class ApiHolder {
 		try {
 	
 			logger = new PrintStream(new FileOutputStream("logs/analyze_log.txt"));
+			
 //			PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
 //			System.setOut(out);
 //			System.setErr(out);
@@ -176,7 +176,7 @@ public class ApiHolder {
 			}
 			entailmentList.put(s, arr);
 			return arr;
-		} catch (UnirestException e) {
+		} catch (Exception e) {
 
 		}
 		return new ArrayList<String>();
@@ -199,7 +199,7 @@ public class ApiHolder {
 			}
 			unentailmentList.put(s, arr);
 			return arr;
-		} catch (UnirestException e) {
+		} catch (Exception e) {
 
 		}
 		return new ArrayList<String>();

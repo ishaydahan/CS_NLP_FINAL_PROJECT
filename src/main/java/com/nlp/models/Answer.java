@@ -3,23 +3,23 @@ package com.nlp.models;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import com.google.cloud.language.v1.AnalyzeSyntaxResponse;
-import com.google.cloud.language.v1.EncodingType;
-import com.google.cloud.language.v1.Token;
-
-import com.google.cloud.language.v1.Document.Type;
-import com.nlp.common.ApiHolder;
-
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.cloud.language.v1.AnalyzeSyntaxResponse;
+import com.google.cloud.language.v1.Document.Type;
+import com.google.cloud.language.v1.EncodingType;
+import com.google.cloud.language.v1.Token;
+import com.nlp.analyzer.AnswerAnalyzer;
+import com.nlp.common.ApiHolder;
 
 @Document(collection="answers2")
 @JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
@@ -39,8 +39,9 @@ public class Answer {
 	private Integer answerWords;//num of significant words.
 	private Boolean verified;//there is enough data to learn from this answer
 	private Boolean syntaxable;//there is enough data to learn from this answer
+
     private Date createdAt = new Date();
-    
+
 	private HashMap<String, Integer> map = new HashMap<String, Integer>();//map to get better runtime. student->grade, relates to this answer
     private AnalyzeSyntaxResponse Analyzed_ans = null;//google analyzed syntax
 
@@ -200,4 +201,26 @@ public class Answer {
 		}
 		return this;
 	}
+	
+	public void checkAnswer(List<Answer> verified, List<Answer> syntaxable) {
+		//first build the answer
+		AnswerAnalyzer analyzer = new AnswerAnalyzer(this.build());
+		
+		int grade;
+		if ((grade = analyzer.levenshteinAnalyze(verified))>-1) {
+			
+			this.setGrade(grade);
+			
+		}else if ((grade = analyzer.SyntaxAnalyze(syntaxable))>-2) {//there is no -1 option in last check. must return grade.
+			
+			this.setGrade(grade);
+			
+			if ((grade = analyzer.WordsAnalyze(verified))==ApiHolder.getInstance().MINGRADE && this.getGrade()!=ApiHolder.getInstance().MAXGRADE) {
+				
+				this.setGrade(grade);
+				
+			}
+		}
+	}
+
 }

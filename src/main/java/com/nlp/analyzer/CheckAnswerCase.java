@@ -32,6 +32,7 @@ public class CheckAnswerCase {
 	private Answer student_ans;
 	private int finishedGrade = 0;//max grade
 	
+	private HashSet <Token> lemmaUsing = new HashSet <Token>();
 	private HashSet <Token> set = new HashSet <Token>();//set to remember already visited nodes
 	private HashSet <EqualTokens> equalSet = new HashSet <EqualTokens>();//set to remember equalnodes
 
@@ -154,8 +155,10 @@ public class CheckAnswerCase {
 //		int finalGrade = Math.max(finishedGrade, teacher_ans.getGrade()-(Math.abs(teacher_ans.getAnswerWords()-equalSet.size())*ApiHolder.getInstance().REDUCE));
 		int finalGrade = (int) Math.max(finishedGrade, ((double)equalSet.size()/teacher_ans.getAnswerWords())*teacher_ans.getGrade().intValue());
 		finalGrade = Math.min(finalGrade, ApiHolder.getInstance().MAXGRADE);
-		if (student_ans.getWriter().equals("COMPUTER")) return finalGrade-ApiHolder.getInstance().COMP;
-		else return finalGrade;
+		if (student_ans.getWriter().equals("COMPUTER")) finalGrade =  finalGrade-ApiHolder.getInstance().COMP;
+		finalGrade = finalGrade-ApiHolder.getInstance().REDUCE*lemmaUsing.size();
+		
+		return finalGrade;
 	}
 	
 	/**
@@ -294,8 +297,11 @@ public class CheckAnswerCase {
 	 * in the future - use promises.
 	 */
 	private boolean checkTokens(Token teacher, Token student) {
-		if (teacher.getText().getContent().equals(student.getText().getContent()) || teacher.getLemma().equals(student.getLemma())) return true;
-		else {
+		if (teacher.getText().getContent().equals(student.getText().getContent())) return true;
+		else if (teacher.getLemma().equals(student.getLemma())){
+			lemmaUsing.add(student);
+			return true;
+		}else {
 
 			for(String sgg : ApiHolder.getInstance().getSpelling(student.getText().getContent())) {
 				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
