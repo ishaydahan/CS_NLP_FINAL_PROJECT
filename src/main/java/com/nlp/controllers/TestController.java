@@ -294,13 +294,14 @@ public class TestController {
 				  .withIgnorePaths("createdAt");
 
         questionRepository.findAll(Example.of(q, matcher), sortByCreatedAtDesc).forEach(que->{
-        	checkQuestion(que.getId(), que.getTid());
+        	checkQuestion(que.getTid(), que.getId());
         });
 		return null;
     }
 
     @GetMapping("/tests/{tid}/questions/{qid}/check")
     public Object checkQuestion(@PathVariable("tid") String tid, @PathVariable("qid") String qid) {
+
     	Question questionData = questionRepository.findOne(qid);
         if(questionData == null) {
             return null;
@@ -388,7 +389,6 @@ public class TestController {
 		
 		//check
 		for (Answer student_ans: studentAns) {
-			
 			//TODO: fix to syntaxable
 			student_ans.checkAnswer(verified, verified);
 			
