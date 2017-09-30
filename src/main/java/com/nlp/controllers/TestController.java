@@ -188,7 +188,7 @@ public class TestController {
             return null;
         }
 
-        Sort sortByCreatedAtDesc = new Sort(Sort.Direction.DESC, "writer");
+        Sort sortByCreatedAtDesc = new Sort(Sort.Direction.DESC, "writer").and(new Sort(Sort.Direction.DESC, "grade"));
         Answer a = new Answer();
         a.setQid(qid);
         
