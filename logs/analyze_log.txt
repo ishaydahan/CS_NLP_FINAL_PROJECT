@@ -16,6 +16,24 @@ ANALYZER :::: Teacher parts: to
 ANALYZER :::: Teacher parts: PRT
 ANALYZER :::: Teacher parts: help
 ANALYZER :::: Teacher parts: VERB
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people need to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: need
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
 $$$$$$$$$$$$$$$$$$$$$$$$$$$ need to help $$ google api
 ANALYZER :::: Teacher parts: need
 ANALYZER :::: Teacher parts: VERB
@@ -23,8 +41,8 @@ ANALYZER :::: Teacher parts: to
 ANALYZER :::: Teacher parts: PRT
 ANALYZER :::: Teacher parts: help
 ANALYZER :::: Teacher parts: VERB
-getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: null
-getGrade :::: STUDENT :Answer: need to help, Wrriten by: STUDENT, Grade: -2, Significant Words: 3, Teacher verified: false, syntaxable: false, aid: null
+getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: 59cf555d71e06004e8b546f8
+getGrade :::: STUDENT :Answer: need to help, Wrriten by: STUDENT, Grade: -2, Significant Words: 3, Teacher verified: false, syntaxable: false, aid: 59cf556e71e06004e8b546fa
 ANALYZER :::: COMPARING STUDENT TO TEACHER
 equalSentences :::: we have insignificant word: because
 equalSentences :::: checking people >> COMPARE TO >> need
@@ -62,7 +80,7 @@ ANALYZER :::: Teacher parts: PRT
 ANALYZER :::: Teacher parts: help
 ANALYZER :::: Teacher parts: VERB
 ----starting new check-----
-getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: null
+getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: 59cf555d71e06004e8b546f8
 getGrade :::: STUDENT :Answer: want to help, Wrriten by: COMPUTER, Grade: -2, Significant Words: 3, Teacher verified: false, syntaxable: false, aid: null
 ANALYZER :::: COMPARING STUDENT TO TEACHER
 equalSentences :::: we have insignificant word: because
@@ -113,19 +131,19 @@ compare :::: passed checkTokens V to + to
 compare :::: passed checkParts V to + to
 compare :::: passed checkRelationToParent V to + to
 equalNodes :::: equal tokens: to + to
-[want - want, to - to]
+[to - to, want - want]
 equalNodes :::: there are fathers: help + help
 compare :::: passed checkTokens V help + help
 compare :::: passed checkParts V help + help
 compare :::: passed checkRelationToParent V help + help
 equalNodes :::: equal tokens: help + help
-[want - want, to - to, help - help]
+[to - to, help - help, want - want]
 equalNodes :::: there are fathers: want + want
 compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[want - want, to - to, help - help]
+[to - to, help - help, want - want]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: to to
 equalSentences :::: we have insignificant word: because
@@ -144,17 +162,17 @@ compare :::: passed checkTokens V help + help
 compare :::: passed checkParts V help + help
 compare :::: passed checkRelationToParent V help + help
 equalNodes :::: equal tokens: help + help
-[want - want, to - to, help - help]
+[to - to, help - help, want - want]
 equalNodes :::: there are fathers: want + want
 compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[want - want, to - to, help - help]
+[to - to, help - help, want - want]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: help help
 equalSentences1 :::: finished path check WITH FOUND=TRUE: want to help because people want to help
-equalSentences1 :::: equalset = : [want - want, to - to, help - help]
+equalSentences1 :::: equalset = : [to - to, help - help, want - want]
 equalSentences1 :::: finishedGrade: 0
 equalSentences1 :::: teacher_ans.getAnswerWords(): 4
 equalSentences1 :::: equalSet.size(): 3
@@ -179,8 +197,8 @@ equalSentences1 :::: finishedGrade: 70
 equalSentences1 :::: grade: 70
 finished grading: need to help
 grade: 70
-getGrade :::: TEACHER :Answer: because people need to help, Wrriten by: TEACHER, Grade: 0, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: null
-getGrade :::: STUDENT :Answer: need to help, Wrriten by: STUDENT, Grade: -2, Significant Words: 3, Teacher verified: false, syntaxable: false, aid: null
+getGrade :::: TEACHER :Answer: because people need to help, Wrriten by: TEACHER, Grade: 20, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: 59cf556671e06004e8b546f9
+getGrade :::: STUDENT :Answer: need to help, Wrriten by: STUDENT, Grade: -2, Significant Words: 3, Teacher verified: false, syntaxable: false, aid: 59cf556e71e06004e8b546fa
 ANALYZER :::: COMPARING STUDENT TO TEACHER
 equalSentences :::: we have insignificant word: because
 equalSentences :::: checking people >> COMPARE TO >> need
@@ -200,11 +218,86 @@ equalSentences1 :::: One path check, NOT equal: people help
 equalSentences1 :::: finished path check WITH FOUND=FALSE! for constant word: people
 equalSentences1 :::: finishedGrade: 0
 equalSentences1 :::: grade: 0
+ANALYZER :::: COMPARING TEACHER TO STUDENT
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> need
+equalNodes :::: trick loop var: people +to tricked>>: need
+equalNodes :::: trick loop var: people +to tricked>>: to
+equalNodes :::: trick loop var: people +to tricked>>: help
+equalNodes :::: not equal tokens: people + need
+equalSentences1 :::: One path check, NOT equal: people need
+equalSentences :::: checking need >> COMPARE TO >> need
+compare :::: passed checkTokens V need + need
+compare :::: passed checkParts V need + need
+compare :::: passed checkRelationToParent V need + need
+equalNodes :::: equal tokens: need + need
+[need - need]
+equalNodes :::: no father... returning true. bye
+equalSentences1 :::: finished path check, equal: need need
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> to
+equalNodes :::: trick loop var: people +to tricked>>: need
+equalNodes :::: trick loop var: people +to tricked>>: to
+equalNodes :::: trick loop var: people +to tricked>>: help
+equalNodes :::: not equal tokens: people + to
+equalSentences1 :::: One path check, NOT equal: people to
+equalSentences :::: checking need >> COMPARE TO >> to
+equalSentences1 :::: One path check, Set contains already: need
+equalSentences :::: checking to >> COMPARE TO >> to
+compare :::: passed checkTokens V to + to
+compare :::: passed checkParts V to + to
+compare :::: passed checkRelationToParent V to + to
+equalNodes :::: equal tokens: to + to
+[to - to, need - need]
+equalNodes :::: there are fathers: help + help
+compare :::: passed checkTokens V help + help
+compare :::: passed checkParts V help + help
+compare :::: passed checkRelationToParent V help + help
+equalNodes :::: equal tokens: help + help
+[to - to, help - help, need - need]
+equalNodes :::: there are fathers: need + need
+compare :::: passed checkTokens V need + need
+compare :::: passed checkParts V need + need
+compare :::: passed checkRelationToParent V need + need
+equalNodes :::: equal tokens: need + need
+[to - to, help - help, need - need]
+equalNodes :::: no father... returning true. bye
+equalSentences1 :::: finished path check, equal: to to
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> help
+equalNodes :::: trick loop var: people +to tricked>>: need
+equalNodes :::: trick loop var: people +to tricked>>: to
+equalNodes :::: trick loop var: people +to tricked>>: help
+equalNodes :::: not equal tokens: people + help
+equalSentences1 :::: One path check, NOT equal: people help
+equalSentences :::: checking need >> COMPARE TO >> help
+equalSentences1 :::: One path check, Set contains already: need
+equalSentences :::: checking to >> COMPARE TO >> help
+equalSentences1 :::: One path check, Set contains already: to
+equalSentences :::: checking help >> COMPARE TO >> help
+compare :::: passed checkTokens V help + help
+compare :::: passed checkParts V help + help
+compare :::: passed checkRelationToParent V help + help
+equalNodes :::: equal tokens: help + help
+[to - to, help - help, need - need]
+equalNodes :::: there are fathers: need + need
+compare :::: passed checkTokens V need + need
+compare :::: passed checkParts V need + need
+compare :::: passed checkRelationToParent V need + need
+equalNodes :::: equal tokens: need + need
+[to - to, help - help, need - need]
+equalNodes :::: no father... returning true. bye
+equalSentences1 :::: finished path check, equal: help help
+equalSentences1 :::: finished path check WITH FOUND=TRUE: need to help because people need to help
+equalSentences1 :::: equalset = : [to - to, help - help, need - need]
+equalSentences1 :::: finishedGrade: 0
+equalSentences1 :::: teacher_ans.getAnswerWords(): 4
+equalSentences1 :::: equalSet.size(): 3
 finished grading: need to help
-grade: 0
+grade: 75
 ### SYNTAX ANALYZER RESULT:
-### student: Answer: need to help, Wrriten by: STUDENT, Grade: -2, Significant Words: 3, Teacher verified: false, syntaxable: false, aid: null
-### grade: 0
+### student: Answer: need to help, Wrriten by: STUDENT, Grade: -2, Significant Words: 3, Teacher verified: false, syntaxable: false, aid: 59cf556e71e06004e8b546fa
+### grade: 15
 ### WORDS ANALYZER RESULT:
-### student: Answer: need to help, Wrriten by: STUDENT, Grade: 0, Significant Words: 3, Teacher verified: false, syntaxable: false, aid: null
-### grade: 0
+### student: Answer: need to help, Wrriten by: STUDENT, Grade: 15, Significant Words: 3, Teacher verified: false, syntaxable: false, aid: 59cf556e71e06004e8b546fa
+### grade: 15

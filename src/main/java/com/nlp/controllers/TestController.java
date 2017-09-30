@@ -389,13 +389,14 @@ public class TestController {
 		//check
 		for (Answer student_ans: studentAns) {
 			
+			//TODO: fix to syntaxable
 			student_ans.checkAnswer(verified, verified);
 			
 			//set syntaxable value
 	    	if(student_ans.getAnswerWords()>=minsyntaxable) student_ans.setSyntaxable(true);
 	    	else student_ans.setSyntaxable(false);
 	    	
-			System.out.println(this);
+			System.out.println(student_ans);
 
 	        answerRepository.save(student_ans);
 		}

@@ -70,7 +70,7 @@ public class CheckAnswerCase {
 		int firstGrade = this.equalSentences(teacher_ans, student_ans, false);
 		
 		//try to get max grade with teacher path only.
-		if (firstGrade==teacher_ans.getGrade()) {
+		if (firstGrade==ApiHolder.getInstance().MAXGRADE) {
 			HashMap<String, Integer> m1 = teacher_ans.getMap();
 			m1.put(student_ans.getContent(), firstGrade);
 			teacher_ans.setMap(m1);
@@ -152,7 +152,7 @@ public class CheckAnswerCase {
 		ApiHolder.getInstance().logger.println("equalSentences1 :::: teacher_ans.getAnswerWords(): " + teacher_ans.getAnswerWords());
 		ApiHolder.getInstance().logger.println("equalSentences1 :::: equalSet.size(): " + equalSet.size());
 		
-		int finalGrade = (int) Math.max(finishedGrade, ((double)equalSet.size()/teacher_ans.getAnswerWords())*teacher_ans.getGrade().intValue());
+		int finalGrade = (int) Math.max(finishedGrade, ((double)equalSet.size()/teacher_ans.getAnswerWords()*ApiHolder.getInstance().MAXGRADE));
 		finalGrade = Math.min(finalGrade, ApiHolder.getInstance().MAXGRADE);
 		if (student_ans.getWriter().equals("COMPUTER")) finalGrade =  finalGrade-ApiHolder.getInstance().COMP;
 		finalGrade = finalGrade-ApiHolder.getInstance().REDUCE*lemmaUsing.size();

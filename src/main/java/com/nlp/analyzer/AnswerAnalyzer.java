@@ -3,8 +3,10 @@ package com.nlp.analyzer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -70,15 +72,16 @@ public class AnswerAnalyzer {
 				
 		//here we activate the syntax analyzer for every verified answer and takes the maximum grade.
 		List<Integer> exactMatchgrades= new ArrayList<>();	
-		List<Integer> zeroMatchgrades= new ArrayList<>();	
 		List<Integer> partialMatchgrades= new ArrayList<>();	
-
+		Map<Integer, Integer> partialMap = new HashMap<>();
+		
 		for (Answer teachers_ans: syntaxable) {
 			int grade = new CheckAnswerCase(students_ans, teachers_ans).getGrade();
-			
-			if (grade==teachers_ans.getGrade()) exactMatchgrades.add(grade);
-			else if (grade==ApiHolder.getInstance().MINGRADE) zeroMatchgrades.add(grade); 
-			else partialMatchgrades.add(grade); 
+			if (grade==ApiHolder.getInstance().MAXGRADE) exactMatchgrades.add(teachers_ans.getGrade());
+			else if (grade!=ApiHolder.getInstance().MINGRADE) {
+				partialMatchgrades.add(grade); 
+				partialMap.put(grade, teachers_ans.getGrade());
+			}
 		}		
 		if (exactMatchgrades.stream().count()>0) students_ans.setSyntaxMatchFound(true);
 		
@@ -89,7 +92,7 @@ public class AnswerAnalyzer {
 				: partialMatchgrades.stream().max(Integer::compare).orElse(null);
 		
 		finalGrade = finalGrade!=null
-				? finalGrade
+				? (int)(((double)finalGrade/ApiHolder.getInstance().MAXGRADE)*partialMap.get(finalGrade))
 				: ApiHolder.getInstance().MINGRADE;
 
 		ApiHolder.getInstance().logger.println("### SYNTAX ANALYZER RESULT:");
