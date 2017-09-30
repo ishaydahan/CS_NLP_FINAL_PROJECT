@@ -141,10 +141,12 @@ public class Answer {
     public void setMap(HashMap<String, Integer> map) {
 		this.map = map;
 	}
+    
     @JsonIgnore
     public AnalyzeSyntaxResponse getAnalyzed_ans() {
 		return Analyzed_ans;
 	}
+    
     @JsonIgnore
     public void setAnalyzed_ans(AnalyzeSyntaxResponse analyzed_ans) {
 		Analyzed_ans = analyzed_ans;

@@ -358,6 +358,7 @@ public class TestController {
         a = new Answer();
         a.setQid(qid);
         a.setWriter("STUDENT");
+        a.setVerified(false);
         
         matcher = ExampleMatcher.matching()     
         		  .withIgnorePaths("id")
@@ -365,7 +366,6 @@ public class TestController {
 				  .withIgnorePaths("writerId")
 				  .withIgnorePaths("grade")
 				  .withIgnorePaths("answerWords")
-				  .withIgnorePaths("verified")
 				  .withIgnorePaths("syntaxable")
 				  .withIgnorePaths("createdAt");
 
