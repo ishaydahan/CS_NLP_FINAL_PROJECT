@@ -87,18 +87,23 @@ public class AnswerAnalyzer {
 		
 		Integer finalGrade = exactMatchgrades.stream().max(Integer::compare).orElse(null);
 		
-		finalGrade = finalGrade!=null
-				? finalGrade
-				: partialMatchgrades.stream().max(Integer::compare).orElse(null);
-		
-		finalGrade = finalGrade!=null
-				? (int)(((double)finalGrade/ApiHolder.getInstance().MAXGRADE)*partialMap.get(finalGrade))
-				: ApiHolder.getInstance().MINGRADE;
-
-		ApiHolder.getInstance().logger.println("### SYNTAX ANALYZER RESULT:");
-		ApiHolder.getInstance().logger.println("### student: " + students_ans);
-		ApiHolder.getInstance().logger.println("### grade: " + finalGrade);
-		return finalGrade;		
+		if (finalGrade!=null) {
+			ApiHolder.getInstance().logger.println("### SYNTAX ANALYZER RESULT:");
+			ApiHolder.getInstance().logger.println("### student: " + students_ans);
+			ApiHolder.getInstance().logger.println("### grade: " + finalGrade);
+			return finalGrade;		
+		}else {
+			finalGrade = partialMatchgrades.stream().max(Integer::compare).orElse(null);		
+			
+			finalGrade = finalGrade!=null
+					? (int)(((double)finalGrade/ApiHolder.getInstance().MAXGRADE)*partialMap.get(finalGrade))
+					: ApiHolder.getInstance().MINGRADE;
+	
+			ApiHolder.getInstance().logger.println("### SYNTAX ANALYZER RESULT:");
+			ApiHolder.getInstance().logger.println("### student: " + students_ans);
+			ApiHolder.getInstance().logger.println("### grade: " + finalGrade);
+			return finalGrade;	
+		}
 	}
 	
 	public Integer WordsAnalyze(List<Answer> verified) {

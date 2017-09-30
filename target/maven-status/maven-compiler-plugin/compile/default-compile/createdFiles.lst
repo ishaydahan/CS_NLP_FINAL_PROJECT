@@ -4,6 +4,7 @@ com\nlp\common\ApiHolder.class
 com\nlp\repositories\AnswerRepository.class
 com\nlp\models\Test.class
 com\nlp\models\Question.class
+com\nlp\NlpApplication.class
 com\nlp\analyzer\LevenshteinDistance.class
 com\nlp\common\Factory.class
 com\nlp\repositories\QuestionRepository.class
@@ -12,5 +13,4 @@ com\nlp\analyzer\CheckAnswerCase.class
 com\nlp\models\Answer.class
 com\nlp\analyzer\DataLearner.class
 com\nlp\analyzer\EqualTokens.class
-com\nlp\app\NlpApplication.class
 com\nlp\controllers\TestController.class
