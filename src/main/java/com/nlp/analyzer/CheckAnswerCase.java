@@ -305,17 +305,18 @@ public class CheckAnswerCase {
 					String new_s1 = StringUtils.join(new_s, " ");
 
 //					this map helps to avoid infinite loop.
-					if (!teacher_ans.getMap().containsKey(new_s1) || teacher_ans.getMap().get(new_s1)<0) {
+					if (!teacher_ans.getMap().containsKey(new_s1)) {
 						ApiHolder.getInstance().logger.println("checkTokens :::: spelling fixed: " + student.getText().getContent() + " >> " + sgg);
 						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, "COMPUTER").build(), teacher_ans);
 						ApiHolder.getInstance().logger.println("----starting new check-----");
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");
-					}else {
-						ApiHolder.getInstance().logger.println("using map: " + new_s1);
-						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
-						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
 					}
+//					else {
+//						ApiHolder.getInstance().logger.println("using map: " + new_s1);
+//						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
+//						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
+//					}
 				}
 			}
 			
@@ -328,17 +329,18 @@ public class CheckAnswerCase {
 					String new_s1 = StringUtils.join(new_s, " ");
 
 //					this map helps to avoid infinite loop.
-					if (!teacher_ans.getMap().containsKey(new_s1)|| teacher_ans.getMap().get(new_s1)<0) {
+					if (!teacher_ans.getMap().containsKey(new_s1)) {
 						ApiHolder.getInstance().logger.println("checkTokens :::: synonym fixed: " + student.getText().getContent() + " >> " + sgg);
 						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, "COMPUTER").build(), teacher_ans);
 						ApiHolder.getInstance().logger.println("----starting new check-----");
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");
-					}else {
-						ApiHolder.getInstance().logger.println("using map: " + new_s1);
-						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
-						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
 					}
+//					else {
+//						ApiHolder.getInstance().logger.println("using map: " + new_s1);
+//						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
+//						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
+//					}
 				}
 			}
 
