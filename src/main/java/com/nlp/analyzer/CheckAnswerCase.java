@@ -290,7 +290,7 @@ public class CheckAnswerCase {
 	 * in the future - use promises.
 	 */
 	private boolean checkTokens(Token teacher, Token student) {
-		if (teacher.getText().getContent().equals(student.getText().getContent())) return true;
+		if (teacher.getText().getContent().toLowerCase().equals(student.getText().getContent().toLowerCase())) return true;
 		else if (teacher.getLemma().equals(student.getLemma())){
 			lemmaUsing.add(student);
 			return true;

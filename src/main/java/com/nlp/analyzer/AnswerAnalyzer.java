@@ -2,13 +2,10 @@ package com.nlp.analyzer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import com.nlp.common.ApiHolder;
 import com.nlp.models.Answer;
@@ -44,7 +41,7 @@ public class AnswerAnalyzer {
 		//here we check for exact mach with LevenshteinDistance.
 		//we can change the parameters to different LevenshteinDistance!=0
 		for (Answer teachers_ans: verified) {
-			int dist = LevenshteinDistance.computeLevenshteinDistance(teachers_ans.getContent(), students_ans.getContent());
+			int dist = LevenshteinDistance.computeLevenshteinDistance(teachers_ans.getContent().toLowerCase(), students_ans.getContent().toLowerCase());
 			if (dist<ApiHolder.getInstance().LEVENSHTEIN) {
 				ApiHolder.getInstance().logger.println("### LEVENSHTEIN SUCSESS!");
 				ApiHolder.getInstance().logger.println("### teacher: " + teachers_ans);
