@@ -120,20 +120,20 @@ public class AnswerAnalyzer {
 		
 		verified.stream().filter(x->x.getGrade()>=50).forEach(x->{
 			Arrays.asList(x.getContent().split(" ")).stream().forEach(y->{
-				good.add(y);
+				good.add(y.toLowerCase());
 			});
 		});
 
 		verified.stream().filter(x->x.getGrade()==0).forEach(x->{
 			Arrays.asList(x.getContent().split(" ")).stream().forEach(y->{
 				
-				if (!good.contains(y)) {
-					bad.add(y);
+				if (!good.contains(y.toLowerCase())) {
+					bad.add(y.toLowerCase());
 				}
 			});
 		});
 
-		if (Arrays.asList(students_ans.getContent().split(" ")).stream().filter(x->bad.contains(x)).findFirst().orElse(null) ==null ) 	maxGrade=students_ans.getGrade();
+		if (Arrays.asList(students_ans.getContent().split(" ")).stream().filter(x->bad.contains(x.toLowerCase())).findFirst().orElse(null) ==null ) 	maxGrade=students_ans.getGrade();
 
 		ApiHolder.getInstance().logger.println("### WORDS ANALYZER RESULT:");
 		ApiHolder.getInstance().logger.println("### student: " + students_ans);
