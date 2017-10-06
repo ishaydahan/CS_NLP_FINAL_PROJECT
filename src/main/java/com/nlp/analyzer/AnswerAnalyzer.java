@@ -78,9 +78,9 @@ public class AnswerAnalyzer {
 			else if (grade!=ApiHolder.getInstance().MINGRADE) {
 				partialMatchgrades.add(grade); 
 				partialMap.put(grade, teachers_ans.getGrade());
-				System.out.println(teachers_ans.getContent() + " " + students_ans.getContent() + " " + grade);
+				System.out.println(teachers_ans.getContent().toLowerCase() + " " + students_ans.getContent().toLowerCase() + " " + grade);
 				HashMap<String, Integer> m1 = teachers_ans.getMap();
-				m1.put(students_ans.getContent(), grade);
+				m1.put(students_ans.getContent().toLowerCase(), grade);
 				teachers_ans.setMap(m1);
 			}
 		}		
@@ -119,13 +119,13 @@ public class AnswerAnalyzer {
 	    HashSet<String> bad = new HashSet<String>();
 		
 		verified.stream().filter(x->x.getGrade()>=50).forEach(x->{
-			Arrays.asList(x.getContent().split(" ")).stream().forEach(y->{
+			Arrays.asList(x.getContent().toLowerCase().split(" ")).stream().forEach(y->{
 				good.add(y.toLowerCase());
 			});
 		});
 
 		verified.stream().filter(x->x.getGrade()==0).forEach(x->{
-			Arrays.asList(x.getContent().split(" ")).stream().forEach(y->{
+			Arrays.asList(x.getContent().toLowerCase().split(" ")).stream().forEach(y->{
 				
 				if (!good.contains(y.toLowerCase())) {
 					bad.add(y.toLowerCase());
@@ -133,7 +133,7 @@ public class AnswerAnalyzer {
 			});
 		});
 
-		if (Arrays.asList(students_ans.getContent().split(" ")).stream().filter(x->bad.contains(x.toLowerCase())).findFirst().orElse(null) ==null ) 	maxGrade=students_ans.getGrade();
+		if (Arrays.asList(students_ans.getContent().toLowerCase().split(" ")).stream().filter(x->bad.contains(x.toLowerCase())).findFirst().orElse(null) ==null ) 	maxGrade=students_ans.getGrade();
 
 		ApiHolder.getInstance().logger.println("### WORDS ANALYZER RESULT:");
 		ApiHolder.getInstance().logger.println("### student: " + students_ans);

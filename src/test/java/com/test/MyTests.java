@@ -110,7 +110,7 @@ public class MyTests {
     @Test
     public void test11() {
     	//partial answer
-    	mainTestCode("to help", 50);
+    	mainTestCode("To help", 50);
     }
 	
     @Test
@@ -152,7 +152,7 @@ public class MyTests {
     @Test
     public void test18() {
     	//very close meaning verb but mistake
-    	mainTestCode("because people need to help", 95);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    	mainTestCode("they wish to halp", 90);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     @Test

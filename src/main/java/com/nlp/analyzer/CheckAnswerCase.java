@@ -55,15 +55,15 @@ public class CheckAnswerCase {
 		if (teacher_ans.getAnswerWords()==0) return 0;
 		if (student_ans.getAnswerWords()==0) return 0;
 
-		if (teacher_ans.getMap().containsKey(student_ans.getContent()) && teacher_ans.getMap().get(student_ans.getContent())>0) {
-			ApiHolder.getInstance().logger.println("using map: " + student_ans.getContent());
-			ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(student_ans.getContent()));
-			return teacher_ans.getMap().get(student_ans.getContent());
+		if (teacher_ans.getMap().containsKey(student_ans.getContent().toLowerCase()) && teacher_ans.getMap().get(student_ans.getContent().toLowerCase())>0) {
+			ApiHolder.getInstance().logger.println("using map: " + student_ans.getContent().toLowerCase());
+			ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(student_ans.getContent().toLowerCase()));
+			return teacher_ans.getMap().get(student_ans.getContent().toLowerCase());
 		}
 		
 		//put the student answer to ensure we will check it one time only!
 		HashMap<String, Integer> m = teacher_ans.getMap();
-		m.put(student_ans.getContent(), -1);
+		m.put(student_ans.getContent().toLowerCase(), -1);
 		teacher_ans.setMap(m);
 		
 		//start calculating comparing student to teacher
@@ -71,14 +71,14 @@ public class CheckAnswerCase {
 		
 		//try to get max grade with teacher path only.
 		if (firstGrade==ApiHolder.getInstance().MAXGRADE) {
-			ApiHolder.getInstance().logger.println("finished grading: " + student_ans.getContent());
+			ApiHolder.getInstance().logger.println("finished grading: " + student_ans.getContent().toLowerCase());
 			ApiHolder.getInstance().logger.println("grade: " + firstGrade);
 			return firstGrade;
 		}
 		
 		int secondGrade = this.equalSentences(student_ans, teacher_ans, true);
 		int grade = Math.max(firstGrade, secondGrade);
-		ApiHolder.getInstance().logger.println("finished grading: " + student_ans.getContent());
+		ApiHolder.getInstance().logger.println("finished grading: " + student_ans.getContent().toLowerCase());
 		ApiHolder.getInstance().logger.println("grade: " + grade);
 		return grade;
 	}
@@ -100,14 +100,14 @@ public class CheckAnswerCase {
 		for(Token consta : constant.getAnalyzed_ans().getTokensList()) {
 
 			if (Arrays.asList(ApiHolder.getInstance().del).contains(consta.getPartOfSpeech().getTag())) {
-				ApiHolder.getInstance().logger.println("equalSentences :::: we have insignificant word: " + consta.getText().getContent());
+				ApiHolder.getInstance().logger.println("equalSentences :::: we have insignificant word: " + consta.getText().getContent().toLowerCase());
 				continue;
 			}
 			
 			for(Token comp : compareTo.getAnalyzed_ans().getTokensList()) {
 				
 				if (Arrays.asList(ApiHolder.getInstance().del).contains(comp.getPartOfSpeech().getTag())) {
-					ApiHolder.getInstance().logger.println("equalSentences :::: we have insignificant word: " + comp.getText().getContent());
+					ApiHolder.getInstance().logger.println("equalSentences :::: we have insignificant word: " + comp.getText().getContent().toLowerCase());
 					continue;
 				}
 				
@@ -116,31 +116,32 @@ public class CheckAnswerCase {
 				if(OppMode) teacher = comp; else teacher = consta;
 				if(OppMode) student = consta; else student = comp;
 				
-				ApiHolder.getInstance().logger.println("equalSentences :::: checking " + teacher.getText().getContent() + " >> COMPARE TO >> " + student.getText().getContent());
+				ApiHolder.getInstance().logger.println("equalSentences :::: checking " + teacher.getText().getContent().toLowerCase() + " >> COMPARE TO >> " + student.getText().getContent().toLowerCase());
 				
 				if (!set.contains(comp)) {
 					if (equalNodes(constant, compareTo, teacher, student, OppMode)) {
 						set.add(comp);
 						found=true;
-						ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check, equal: " + teacher.getText().getContent() + " " + student.getText().getContent());
+						ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check, equal: " + teacher.getText().getContent().toLowerCase() + " " + student.getText().getContent().toLowerCase());
 						break;
 					}else {
-						ApiHolder.getInstance().logger.println("equalSentences1 :::: One path check, NOT equal: " + teacher.getText().getContent() + " " + student.getText().getContent());
+						ApiHolder.getInstance().logger.println("equalSentences1 :::: One path check, NOT equal: " + teacher.getText().getContent().toLowerCase() + " " + student.getText().getContent().toLowerCase());
 					}
 				}else {
-					ApiHolder.getInstance().logger.println("equalSentences1 :::: One path check, Set contains already: " + comp.getText().getContent());
+					ApiHolder.getInstance().logger.println("equalSentences1 :::: One path check, Set contains already: " + comp.getText().getContent().toLowerCase());
 				}
 			}
 			if (!found) {
-				ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check WITH FOUND=FALSE! for constant word: " + consta.getText().getContent());
+				ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check WITH FOUND=FALSE! for constant word: " + consta.getText().getContent().toLowerCase());
 				ApiHolder.getInstance().logger.println("equalSentences1 :::: finishedGrade: " + finishedGrade);
 				ApiHolder.getInstance().logger.println("equalSentences1 :::: grade: " + Math.max(finishedGrade, ApiHolder.getInstance().MINGRADE));
+				if (student_ans.getWriter().equals("COMPUTER")) finishedGrade =  finishedGrade-ApiHolder.getInstance().COMP;
 				return Math.max(finishedGrade, ApiHolder.getInstance().MINGRADE);
 			}
 			found=false;
 		}
 		//the grade is maxGrade-mistakes*10(can be changed)
-		ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check WITH FOUND=TRUE: " + constant.getContent() + " " + compareTo.getContent());
+		ApiHolder.getInstance().logger.println("equalSentences1 :::: finished path check WITH FOUND=TRUE: " + constant.getContent().toLowerCase() + " " + compareTo.getContent().toLowerCase());
 		ApiHolder.getInstance().logger.println("equalSentences1 :::: equalset = : " + equalSet);
 		ApiHolder.getInstance().logger.println("equalSentences1 :::: finishedGrade: " + finishedGrade);
 		ApiHolder.getInstance().logger.println("equalSentences1 :::: teacher_ans.getAnswerWords(): " + teacher_ans.getAnswerWords());
@@ -166,12 +167,12 @@ public class CheckAnswerCase {
 	 */
 	private boolean equalNodes (Answer constant, Answer compareTo, Token teacher, Token student, boolean OppMode) {
 		if (Arrays.asList(ApiHolder.getInstance().del).contains(teacher.getPartOfSpeech().getTag()) || Arrays.asList(ApiHolder.getInstance().del).contains(student.getPartOfSpeech().getTag())) {
-			ApiHolder.getInstance().logger.println("equalNodes :::: not intresting: " + teacher.getText().getContent() + " + " + student.getText().getContent()); 
+			ApiHolder.getInstance().logger.println("equalNodes :::: not intresting: " + teacher.getText().getContent().toLowerCase() + " + " + student.getText().getContent().toLowerCase()); 
 			return true;
 		}
 
 		if (compare(teacher, student)) {
-			ApiHolder.getInstance().logger.println("equalNodes :::: equal tokens: " + teacher.getText().getContent() + " + " + student.getText().getContent()); 
+			ApiHolder.getInstance().logger.println("equalNodes :::: equal tokens: " + teacher.getText().getContent().toLowerCase() + " + " + student.getText().getContent().toLowerCase()); 
 			equalSet.add(new EqualTokens(teacher, student));
 			ApiHolder.getInstance().logger.println(equalSet);
 			Token t_father = teacher_ans.getAnalyzed_ans().getTokens(teacher.getDependencyEdge().getHeadTokenIndex());
@@ -182,7 +183,7 @@ public class CheckAnswerCase {
 				ApiHolder.getInstance().logger.println("equalNodes :::: no father... returning true. bye"); 
 				return true;
 			}else{
-				ApiHolder.getInstance().logger.println("equalNodes :::: there are fathers: " + t_father.getText().getContent() + " + " + s_father.getText().getContent()); 
+				ApiHolder.getInstance().logger.println("equalNodes :::: there are fathers: " + t_father.getText().getContent().toLowerCase() + " + " + s_father.getText().getContent().toLowerCase()); 
 				return equalNodes(constant, compareTo, t_father, s_father, OppMode);
 			}
 		}else {
@@ -196,9 +197,9 @@ public class CheckAnswerCase {
 			for(Token trick : compareTo.getAnalyzed_ans().getTokensList()) {
 				i++;
 				if (i-2<index1) continue;
-				ApiHolder.getInstance().logger.println("equalNodes :::: trick loop var: " + var.getText().getContent() + " +to tricked>>: " + trick.getText().getContent()); 
+				ApiHolder.getInstance().logger.println("equalNodes :::: trick loop var: " + var.getText().getContent().toLowerCase() + " +to tricked>>: " + trick.getText().getContent().toLowerCase()); 
 				if(trick.getDependencyEdge().getHeadTokenIndex()==index1 && trick.getDependencyEdge().getLabel()!=Label.ROOT) {
-					ApiHolder.getInstance().logger.println("equalNodes :::: trick try var: " + var.getText().getContent() + " +to tricked>>: " + trick.getText().getContent()); 
+					ApiHolder.getInstance().logger.println("equalNodes :::: trick try var: " + var.getText().getContent().toLowerCase() + " +to tricked>>: " + trick.getText().getContent().toLowerCase()); 
 					if (OppMode) {
 						if (equalNodes(constant, compareTo, trick, student, OppMode)) return true;
 					}else{
@@ -207,7 +208,7 @@ public class CheckAnswerCase {
 				}
 			}
 			
-			ApiHolder.getInstance().logger.println("equalNodes :::: not equal tokens: " + teacher.getText().getContent() + " + " + student.getText().getContent()); 
+			ApiHolder.getInstance().logger.println("equalNodes :::: not equal tokens: " + teacher.getText().getContent().toLowerCase() + " + " + student.getText().getContent().toLowerCase()); 
 			return false;
 		}
 	}
@@ -220,16 +221,16 @@ public class CheckAnswerCase {
 	 */
 	private boolean compare (Token teacher, Token student)  {
 		if (checkTokens(teacher,student)) {
-			ApiHolder.getInstance().logger.println("compare :::: passed checkTokens V "+ teacher.getText().getContent() + " + " + student.getText().getContent()); 
+			ApiHolder.getInstance().logger.println("compare :::: passed checkTokens V "+ teacher.getText().getContent().toLowerCase() + " + " + student.getText().getContent().toLowerCase()); 
 				if (checkParts(teacher,student)) {
-					ApiHolder.getInstance().logger.println("compare :::: passed checkParts V "+ teacher.getText().getContent() + " + " + student.getText().getContent()); 
+					ApiHolder.getInstance().logger.println("compare :::: passed checkParts V "+ teacher.getText().getContent().toLowerCase() + " + " + student.getText().getContent().toLowerCase()); 
 					if (checkRelationToParent(teacher,student)) {
-						ApiHolder.getInstance().logger.println("compare :::: passed checkRelationToParent V "+ teacher.getText().getContent() + " + " + student.getText().getContent()); 
+						ApiHolder.getInstance().logger.println("compare :::: passed checkRelationToParent V "+ teacher.getText().getContent().toLowerCase() + " + " + student.getText().getContent().toLowerCase()); 
 						return true;
 					}
 				}
 		}else if (specialCases1(teacher, student)) {
-			ApiHolder.getInstance().logger.println("compare :::: special case1 V "+ teacher.getText().getContent() + " + " + student.getText().getContent()); 
+			ApiHolder.getInstance().logger.println("compare :::: special case1 V "+ teacher.getText().getContent().toLowerCase() + " + " + student.getText().getContent().toLowerCase()); 
 			return true;
 		}
 		else return false;
@@ -296,17 +297,17 @@ public class CheckAnswerCase {
 			return true;
 		}else {
 
-			for(String sgg : ApiHolder.getInstance().getSpelling(student.getText().getContent())) {
+			for(String sgg : ApiHolder.getInstance().getSpelling(student.getText().getContent().toLowerCase())) {
 				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
-				if (teacher.getText().getContent().equals(sgg) || LevenshteinDistance.computeLevenshteinDistance(teacher.getText().getContent(), sgg)<ApiHolder.getInstance().LEVENSHTEIN) {
+				if (teacher.getText().getContent().toLowerCase().equals(sgg)) {
 
-					String[] new_s = student_ans.getContent().split(" ");
+					String[] new_s = student_ans.getContent().toLowerCase().split(" ");
 					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = sgg;
 					String new_s1 = StringUtils.join(new_s, " ");
 
 //					this map helps to avoid infinite loop.
 					if (!teacher_ans.getMap().containsKey(new_s1)) {
-						ApiHolder.getInstance().logger.println("checkTokens :::: spelling fixed: " + student.getText().getContent() + " >> " + sgg);
+						ApiHolder.getInstance().logger.println("checkTokens :::: spelling fixed: " + student.getText().getContent().toLowerCase() + " >> " + sgg);
 						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, "COMPUTER").build(), teacher_ans);
 						ApiHolder.getInstance().logger.println("----starting new check-----");
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
@@ -320,17 +321,17 @@ public class CheckAnswerCase {
 				}
 			}
 			
-			for(String sgg : ApiHolder.getInstance().getSyn(student.getText().getContent())) {
+			for(String sgg : ApiHolder.getInstance().getSyn(student.getText().getContent().toLowerCase())) {
 				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
-				if (teacher.getText().getContent().equals(sgg) || LevenshteinDistance.computeLevenshteinDistance(teacher.getText().getContent(), sgg)<ApiHolder.getInstance().LEVENSHTEIN) {
+				if (teacher.getText().getContent().toLowerCase().equals(sgg)) {
 
-					String[] new_s = student_ans.getContent().split(" ");
+					String[] new_s = student_ans.getContent().toLowerCase().split(" ");
 					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = sgg;
 					String new_s1 = StringUtils.join(new_s, " ");
 
 //					this map helps to avoid infinite loop.
 					if (!teacher_ans.getMap().containsKey(new_s1)) {
-						ApiHolder.getInstance().logger.println("checkTokens :::: synonym fixed: " + student.getText().getContent() + " >> " + sgg);
+						ApiHolder.getInstance().logger.println("checkTokens :::: synonym fixed: " + student.getText().getContent().toLowerCase() + " >> " + sgg);
 						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, "COMPUTER").build(), teacher_ans);
 						ApiHolder.getInstance().logger.println("----starting new check-----");
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
@@ -344,22 +345,22 @@ public class CheckAnswerCase {
 				}
 			}
 
-			for(String sgg : ApiHolder.getInstance().getUnSyn(student.getText().getContent())) {
+			for(String sgg : ApiHolder.getInstance().getUnSyn(student.getText().getContent().toLowerCase())) {
 				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
-				if (teacher.getText().getContent().equals(sgg) || LevenshteinDistance.computeLevenshteinDistance(teacher.getText().getContent(), sgg)<ApiHolder.getInstance().LEVENSHTEIN) {
-					ApiHolder.getInstance().logger.println("checkTokens :::: opposite found: " + student.getText().getContent() + " >> " + sgg);
+				if (teacher.getText().getContent().toLowerCase().equals(sgg)) {
+					ApiHolder.getInstance().logger.println("checkTokens :::: opposite found: " + student.getText().getContent().toLowerCase() + " >> " + sgg);
 					return false;
 				}
 			}
 
-//			for(Entailment ent : ApiHolder.getInstance().getEntailmentList(student_ans.getContent())) {
-//				if (ent.getMatchedWords().get(0).getToken().equals(student.getText().getContent()) && teacher.getText().getContent().equals(ent.getEntailedWords().get(0)) && ent.getContextScore()>ApiHolder.getInstance().MEANING){	
-//					String[] new_s = student_ans.getContent().split(" ");
+//			for(Entailment ent : ApiHolder.getInstance().getEntailmentList(student_ans.getContent().toLowerCase())) {
+//				if (ent.getMatchedWords().get(0).getToken().equals(student.getText().getContent().toLowerCase()) && teacher.getText().getContent().toLowerCase().equals(ent.getEntailedWords().get(0)) && ent.getContextScore()>ApiHolder.getInstance().MEANING){	
+//					String[] new_s = student_ans.getContent().toLowerCase().split(" ");
 //					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = ent.getEntailedWords().get(0);
 //					String new_s1 = StringUtils.join(new_s, " ");
 //					
 //					if (!teacher_ans.getMap().containsKey(new_s1)) {
-//						ApiHolder.getInstance().logger.println("checkTokens :::: meaning fixed: " + student.getText().getContent() + " >> " + ent.getEntailedWords().get(0));
+//						ApiHolder.getInstance().logger.println("checkTokens :::: meaning fixed: " + student.getText().getContent().toLowerCase() + " >> " + ent.getEntailedWords().get(0));
 //						CheckAnswerCase newCheck = new CheckAnswerCase(ApiHolder.getInstance().factory.createAnswer(new_s1, 0, "COMPUTER").build(), teacher_ans);
 //						ApiHolder.getInstance().logger.println("----starting new check-----");
 //						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
