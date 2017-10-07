@@ -1,96 +1,151 @@
-$$$$$$$$$$$$$$$$$$$$$$$$$$$ they want to help $$ google api
-ANALYZER :::: Teacher parts: they
-ANALYZER :::: Teacher parts: PRON
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
 ANALYZER :::: Teacher parts: want
 ANALYZER :::: Teacher parts: VERB
 ANALYZER :::: Teacher parts: to
 ANALYZER :::: Teacher parts: PRT
 ANALYZER :::: Teacher parts: help
 ANALYZER :::: Teacher parts: VERB
-$$$$$$$$$$$$$$$$$$$$$$$$$$$ they are wanting to help $$ google api
-ANALYZER :::: Teacher parts: they
-ANALYZER :::: Teacher parts: PRON
-ANALYZER :::: Teacher parts: are
-ANALYZER :::: Teacher parts: VERB
-ANALYZER :::: Teacher parts: wanting
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because peipole want to halp $$ google api
+ANALYZER :::: Teacher parts: peipole
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
 ANALYZER :::: Teacher parts: VERB
 ANALYZER :::: Teacher parts: to
 ANALYZER :::: Teacher parts: PRT
-ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: halp
 ANALYZER :::: Teacher parts: VERB
-getGrade :::: TEACHER :Answer: they want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: null
-getGrade :::: STUDENT :Answer: they are wanting to help, Wrriten by: STUDENT, Grade: -2, Significant Words: 5, Teacher verified: false, syntaxable: false, aid: null
+getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: null
+getGrade :::: STUDENT :Answer: because peipole want to halp, Wrriten by: STUDENT, Grade: -2, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: null
 ANALYZER :::: COMPARING STUDENT TO TEACHER
-equalSentences :::: checking they >> COMPARE TO >> they
-compare :::: passed checkTokens V they + they
-compare :::: passed checkParts V they + they
-compare :::: passed checkRelationToParent V they + they
-equalNodes :::: equal tokens: they + they
-[they - they]
-equalNodes :::: there are fathers: want + wanting
-compare :::: passed checkTokens V want + wanting
-compare :::: passed checkParts V want + wanting
-compare :::: passed checkRelationToParent V want + wanting
-equalNodes :::: equal tokens: want + wanting
-[wanting - want, they - they]
+equalSentences :::: we have insignificant word: because
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> peipole
+checkTokens :::: spelling fixed: peipole >> people
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to halp $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: halp
+ANALYZER :::: Teacher parts: VERB
+----starting new check-----
+getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: null
+getGrade :::: STUDENT :Answer: because people want to halp, Wrriten by: COMPUTER, Grade: -2, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: null
+ANALYZER :::: COMPARING STUDENT TO TEACHER
+equalSentences :::: we have insignificant word: because
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> people
+compare :::: passed checkTokens V people + people
+compare :::: passed checkParts V people + people
+compare :::: passed checkRelationToParent V people + people
+equalNodes :::: equal tokens: people + people
+[people - people]
+equalNodes :::: there are fathers: want + want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[people - people, want - want]
 equalNodes :::: no father... returning true. bye
-equalSentences1 :::: finished path check, equal: they they
-equalSentences :::: checking want >> COMPARE TO >> they
-equalSentences1 :::: One path check, Set contains already: they
-equalSentences :::: checking want >> COMPARE TO >> are
-equalNodes :::: trick loop var: are +to tricked>>: wanting
-equalNodes :::: trick loop var: are +to tricked>>: to
-equalNodes :::: trick loop var: are +to tricked>>: help
-equalNodes :::: not equal tokens: want + are
-equalSentences1 :::: One path check, NOT equal: want are
-equalSentences :::: checking want >> COMPARE TO >> wanting
-compare :::: passed checkTokens V want + wanting
-compare :::: passed checkParts V want + wanting
-compare :::: passed checkRelationToParent V want + wanting
-equalNodes :::: equal tokens: want + wanting
-[wanting - want, they - they]
+equalSentences1 :::: finished path check, equal: people people
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking want >> COMPARE TO >> people
+equalSentences1 :::: One path check, Set contains already: people
+equalSentences :::: checking want >> COMPARE TO >> want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[people - people, want - want]
 equalNodes :::: no father... returning true. bye
-equalSentences1 :::: finished path check, equal: want wanting
-equalSentences :::: checking to >> COMPARE TO >> they
-equalSentences1 :::: One path check, Set contains already: they
-equalSentences :::: checking to >> COMPARE TO >> are
-equalNodes :::: trick loop var: are +to tricked>>: wanting
-equalNodes :::: trick loop var: are +to tricked>>: to
-equalNodes :::: trick loop var: are +to tricked>>: help
-equalNodes :::: not equal tokens: to + are
-equalSentences1 :::: One path check, NOT equal: to are
-equalSentences :::: checking to >> COMPARE TO >> wanting
-equalSentences1 :::: One path check, Set contains already: wanting
+equalSentences1 :::: finished path check, equal: want want
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking to >> COMPARE TO >> people
+equalSentences1 :::: One path check, Set contains already: people
+equalSentences :::: checking to >> COMPARE TO >> want
+equalSentences1 :::: One path check, Set contains already: want
 equalSentences :::: checking to >> COMPARE TO >> to
 compare :::: passed checkTokens V to + to
 compare :::: passed checkParts V to + to
 compare :::: passed checkRelationToParent V to + to
 equalNodes :::: equal tokens: to + to
-[wanting - want, to - to, they - they]
+[to - to, people - people, want - want]
+equalNodes :::: there are fathers: help + halp
+checkTokens :::: spelling fixed: halp >> help
+$$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
+ANALYZER :::: Teacher parts: people
+ANALYZER :::: Teacher parts: NOUN
+ANALYZER :::: Teacher parts: want
+ANALYZER :::: Teacher parts: VERB
+ANALYZER :::: Teacher parts: to
+ANALYZER :::: Teacher parts: PRT
+ANALYZER :::: Teacher parts: help
+ANALYZER :::: Teacher parts: VERB
+----starting new check-----
+getGrade :::: TEACHER :Answer: because people want to help, Wrriten by: TEACHER, Grade: 100, Significant Words: 4, Teacher verified: true, syntaxable: true, aid: null
+getGrade :::: STUDENT :Answer: because people want to help, Wrriten by: COMPUTER, Grade: -2, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: null
+ANALYZER :::: COMPARING STUDENT TO TEACHER
+equalSentences :::: we have insignificant word: because
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> people
+compare :::: passed checkTokens V people + people
+compare :::: passed checkParts V people + people
+compare :::: passed checkRelationToParent V people + people
+equalNodes :::: equal tokens: people + people
+[people - people]
+equalNodes :::: there are fathers: want + want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[people - people, want - want]
+equalNodes :::: no father... returning true. bye
+equalSentences1 :::: finished path check, equal: people people
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking want >> COMPARE TO >> people
+equalSentences1 :::: One path check, Set contains already: people
+equalSentences :::: checking want >> COMPARE TO >> want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[people - people, want - want]
+equalNodes :::: no father... returning true. bye
+equalSentences1 :::: finished path check, equal: want want
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking to >> COMPARE TO >> people
+equalSentences1 :::: One path check, Set contains already: people
+equalSentences :::: checking to >> COMPARE TO >> want
+equalSentences1 :::: One path check, Set contains already: want
+equalSentences :::: checking to >> COMPARE TO >> to
+compare :::: passed checkTokens V to + to
+compare :::: passed checkParts V to + to
+compare :::: passed checkRelationToParent V to + to
+equalNodes :::: equal tokens: to + to
+[to - to, people - people, want - want]
 equalNodes :::: there are fathers: help + help
 compare :::: passed checkTokens V help + help
 compare :::: passed checkParts V help + help
 compare :::: passed checkRelationToParent V help + help
 equalNodes :::: equal tokens: help + help
-[wanting - want, to - to, help - help, they - they]
-equalNodes :::: there are fathers: want + wanting
-compare :::: passed checkTokens V want + wanting
-compare :::: passed checkParts V want + wanting
-compare :::: passed checkRelationToParent V want + wanting
-equalNodes :::: equal tokens: want + wanting
-[wanting - want, to - to, help - help, they - they]
+[to - to, people - people, help - help, want - want]
+equalNodes :::: there are fathers: want + want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[to - to, people - people, help - help, want - want]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: to to
-equalSentences :::: checking help >> COMPARE TO >> they
-equalSentences1 :::: One path check, Set contains already: they
-equalSentences :::: checking help >> COMPARE TO >> are
-equalNodes :::: trick loop var: are +to tricked>>: wanting
-equalNodes :::: trick loop var: are +to tricked>>: to
-equalNodes :::: trick loop var: are +to tricked>>: help
-equalNodes :::: not equal tokens: help + are
-equalSentences1 :::: One path check, NOT equal: help are
-equalSentences :::: checking help >> COMPARE TO >> wanting
-equalSentences1 :::: One path check, Set contains already: wanting
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking help >> COMPARE TO >> people
+equalSentences1 :::: One path check, Set contains already: people
+equalSentences :::: checking help >> COMPARE TO >> want
+equalSentences1 :::: One path check, Set contains already: want
 equalSentences :::: checking help >> COMPARE TO >> to
 equalSentences1 :::: One path check, Set contains already: to
 equalSentences :::: checking help >> COMPARE TO >> help
@@ -98,59 +153,214 @@ compare :::: passed checkTokens V help + help
 compare :::: passed checkParts V help + help
 compare :::: passed checkRelationToParent V help + help
 equalNodes :::: equal tokens: help + help
-[wanting - want, to - to, help - help, they - they]
-equalNodes :::: there are fathers: want + wanting
-compare :::: passed checkTokens V want + wanting
-compare :::: passed checkParts V want + wanting
-compare :::: passed checkRelationToParent V want + wanting
-equalNodes :::: equal tokens: want + wanting
-[wanting - want, to - to, help - help, they - they]
+[to - to, people - people, help - help, want - want]
+equalNodes :::: there are fathers: want + want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[to - to, people - people, help - help, want - want]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: help help
-equalSentences1 :::: finished path check WITH FOUND=TRUE: they want to help they are wanting to help
-equalSentences1 :::: equalset = : [wanting - want, to - to, help - help, they - they]
+equalSentences1 :::: finished path check WITH FOUND=TRUE: because people want to help because people want to help
+equalSentences1 :::: equalset = : [to - to, people - people, help - help, want - want]
 equalSentences1 :::: finishedGrade: 0
 equalSentences1 :::: teacher_ans.getAnswerWords(): 4
 equalSentences1 :::: equalSet.size(): 4
 ANALYZER :::: COMPARING TEACHER TO STUDENT
-equalSentences :::: checking they >> COMPARE TO >> they
-compare :::: passed checkTokens V they + they
-compare :::: passed checkParts V they + they
-compare :::: passed checkRelationToParent V they + they
-equalNodes :::: equal tokens: they + they
-[they - they]
-equalNodes :::: there are fathers: want + wanting
-compare :::: passed checkTokens V want + wanting
-compare :::: passed checkParts V want + wanting
-compare :::: passed checkRelationToParent V want + wanting
-equalNodes :::: equal tokens: want + wanting
-[wanting - want, they - they]
+equalSentences :::: we have insignificant word: because
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> people
+compare :::: passed checkTokens V people + people
+compare :::: passed checkParts V people + people
+compare :::: passed checkRelationToParent V people + people
+equalNodes :::: equal tokens: people + people
+[people - people]
+equalNodes :::: there are fathers: want + want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[people - people, want - want]
 equalNodes :::: no father... returning true. bye
-equalSentences1 :::: finished path check, equal: they they
-equalSentences :::: checking they >> COMPARE TO >> are
-equalSentences1 :::: One path check, Set contains already: they
-equalSentences :::: checking want >> COMPARE TO >> are
+equalSentences1 :::: finished path check, equal: people people
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> want
+equalSentences1 :::: One path check, Set contains already: people
+equalSentences :::: checking want >> COMPARE TO >> want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[people - people, want - want]
+equalNodes :::: no father... returning true. bye
+equalSentences1 :::: finished path check, equal: want want
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> to
+equalSentences1 :::: One path check, Set contains already: people
+equalSentences :::: checking want >> COMPARE TO >> to
+equalSentences1 :::: One path check, Set contains already: want
+equalSentences :::: checking to >> COMPARE TO >> to
+compare :::: passed checkTokens V to + to
+compare :::: passed checkParts V to + to
+compare :::: passed checkRelationToParent V to + to
+equalNodes :::: equal tokens: to + to
+[to - to, people - people, want - want]
+equalNodes :::: there are fathers: help + help
+compare :::: passed checkTokens V help + help
+compare :::: passed checkParts V help + help
+compare :::: passed checkRelationToParent V help + help
+equalNodes :::: equal tokens: help + help
+[to - to, people - people, help - help, want - want]
+equalNodes :::: there are fathers: want + want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[to - to, people - people, help - help, want - want]
+equalNodes :::: no father... returning true. bye
+equalSentences1 :::: finished path check, equal: to to
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> help
+equalSentences1 :::: One path check, Set contains already: people
+equalSentences :::: checking want >> COMPARE TO >> help
+equalSentences1 :::: One path check, Set contains already: want
+equalSentences :::: checking to >> COMPARE TO >> help
+equalSentences1 :::: One path check, Set contains already: to
+equalSentences :::: checking help >> COMPARE TO >> help
+compare :::: passed checkTokens V help + help
+compare :::: passed checkParts V help + help
+compare :::: passed checkRelationToParent V help + help
+equalNodes :::: equal tokens: help + help
+[to - to, people - people, help - help, want - want]
+equalNodes :::: there are fathers: want + want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[to - to, people - people, help - help, want - want]
+equalNodes :::: no father... returning true. bye
+equalSentences1 :::: finished path check, equal: help help
+equalSentences1 :::: finished path check WITH FOUND=TRUE: because people want to help because people want to help
+equalSentences1 :::: equalset = : [to - to, people - people, help - help, want - want]
+equalSentences1 :::: finishedGrade: 0
+equalSentences1 :::: teacher_ans.getAnswerWords(): 4
+equalSentences1 :::: equalSet.size(): 4
+finished grading: because people want to help
+grade: 95
+----finished new check-----
+equalNodes :::: not equal tokens: help + halp
+equalSentences1 :::: One path check, NOT equal: to to
+equalSentences :::: checking to >> COMPARE TO >> halp
+equalNodes :::: not equal tokens: to + halp
+equalSentences1 :::: One path check, NOT equal: to halp
+equalSentences1 :::: finished path check WITH FOUND=FALSE! for constant word: to
+equalSentences1 :::: finishedGrade: 95
+equalSentences1 :::: grade: 95
+ANALYZER :::: COMPARING TEACHER TO STUDENT
+equalSentences :::: we have insignificant word: because
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> people
+compare :::: passed checkTokens V people + people
+compare :::: passed checkParts V people + people
+compare :::: passed checkRelationToParent V people + people
+equalNodes :::: equal tokens: people + people
+[people - people]
+equalNodes :::: there are fathers: want + want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[people - people, want - want]
+equalNodes :::: no father... returning true. bye
+equalSentences1 :::: finished path check, equal: people people
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> want
+equalSentences1 :::: One path check, Set contains already: people
+equalSentences :::: checking want >> COMPARE TO >> want
+compare :::: passed checkTokens V want + want
+compare :::: passed checkParts V want + want
+compare :::: passed checkRelationToParent V want + want
+equalNodes :::: equal tokens: want + want
+[people - people, want - want]
+equalNodes :::: no father... returning true. bye
+equalSentences1 :::: finished path check, equal: want want
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> to
+equalSentences1 :::: One path check, Set contains already: people
+equalSentences :::: checking want >> COMPARE TO >> to
+equalSentences1 :::: One path check, Set contains already: want
+equalSentences :::: checking to >> COMPARE TO >> to
+compare :::: passed checkTokens V to + to
+compare :::: passed checkParts V to + to
+compare :::: passed checkRelationToParent V to + to
+equalNodes :::: equal tokens: to + to
+[to - to, people - people, want - want]
+equalNodes :::: there are fathers: help + halp
+equalNodes :::: not equal tokens: help + halp
+equalSentences1 :::: One path check, NOT equal: to to
+equalSentences :::: checking help >> COMPARE TO >> to
+equalNodes :::: not equal tokens: help + to
+equalSentences1 :::: One path check, NOT equal: help to
+equalSentences1 :::: finished path check WITH FOUND=FALSE! for constant word: to
+equalSentences1 :::: finishedGrade: 90
+equalSentences1 :::: grade: 90
+finished grading: because people want to halp
+grade: 90
+----finished new check-----
+equalNodes :::: trick loop var: peipole +to tricked>>: want
+equalNodes :::: trick loop var: peipole +to tricked>>: to
+equalNodes :::: trick loop var: peipole +to tricked>>: halp
+equalNodes :::: not equal tokens: people + peipole
+equalSentences1 :::: One path check, NOT equal: people peipole
+equalSentences :::: checking people >> COMPARE TO >> want
+equalNodes :::: trick loop var: want +to tricked>>: to
+equalNodes :::: trick loop var: want +to tricked>>: halp
+equalNodes :::: trick try var: want +to tricked>>: halp
+equalNodes :::: not equal tokens: people + halp
+equalNodes :::: not equal tokens: people + want
+equalSentences1 :::: One path check, NOT equal: people want
+equalSentences :::: checking people >> COMPARE TO >> to
+equalNodes :::: trick loop var: to +to tricked>>: halp
+equalNodes :::: not equal tokens: people + to
+equalSentences1 :::: One path check, NOT equal: people to
+equalSentences :::: checking people >> COMPARE TO >> halp
+equalNodes :::: not equal tokens: people + halp
+equalSentences1 :::: One path check, NOT equal: people halp
+equalSentences1 :::: finished path check WITH FOUND=FALSE! for constant word: people
+equalSentences1 :::: finishedGrade: 90
+equalSentences1 :::: grade: 90
+ANALYZER :::: COMPARING TEACHER TO STUDENT
+equalSentences :::: we have insignificant word: because
+equalSentences :::: we have insignificant word: because
+equalSentences :::: checking people >> COMPARE TO >> peipole
+equalNodes :::: trick loop var: people +to tricked>>: want
+equalNodes :::: trick loop var: people +to tricked>>: to
+equalNodes :::: trick loop var: people +to tricked>>: help
+equalNodes :::: not equal tokens: people + peipole
+equalSentences1 :::: One path check, NOT equal: people peipole
+equalSentences :::: checking want >> COMPARE TO >> peipole
 equalNodes :::: trick loop var: want +to tricked>>: to
 equalNodes :::: trick loop var: want +to tricked>>: help
 equalNodes :::: trick try var: want +to tricked>>: help
-equalNodes :::: not equal tokens: help + are
-equalNodes :::: not equal tokens: want + are
-equalSentences1 :::: One path check, NOT equal: want are
-equalSentences :::: checking to >> COMPARE TO >> are
+equalNodes :::: not equal tokens: help + peipole
+equalNodes :::: not equal tokens: want + peipole
+equalSentences1 :::: One path check, NOT equal: want peipole
+equalSentences :::: checking to >> COMPARE TO >> peipole
 equalNodes :::: trick loop var: to +to tricked>>: help
-equalNodes :::: not equal tokens: to + are
-equalSentences1 :::: One path check, NOT equal: to are
-equalSentences :::: checking help >> COMPARE TO >> are
-equalNodes :::: not equal tokens: help + are
-equalSentences1 :::: One path check, NOT equal: help are
-equalSentences1 :::: finished path check WITH FOUND=FALSE! for constant word: are
-equalSentences1 :::: finishedGrade: 0
-equalSentences1 :::: grade: 0
-finished grading: they are wanting to help
-grade: 95
+equalNodes :::: not equal tokens: to + peipole
+equalSentences1 :::: One path check, NOT equal: to peipole
+equalSentences :::: checking help >> COMPARE TO >> peipole
+equalNodes :::: not equal tokens: help + peipole
+equalSentences1 :::: One path check, NOT equal: help peipole
+equalSentences1 :::: finished path check WITH FOUND=FALSE! for constant word: peipole
+equalSentences1 :::: finishedGrade: 90
+equalSentences1 :::: grade: 90
+finished grading: because peipole want to halp
+grade: 90
 ### SYNTAX ANALYZER RESULT:
-### student: Answer: they are wanting to help, Wrriten by: STUDENT, Grade: -2, Significant Words: 5, Teacher verified: false, syntaxable: false, aid: null
-### grade: 95
+### student: Answer: because peipole want to halp, Wrriten by: STUDENT, Grade: -2, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: null
+### grade: 90
 ### WORDS ANALYZER RESULT:
-### student: Answer: they are wanting to help, Wrriten by: STUDENT, Grade: 95, Significant Words: 5, Teacher verified: false, syntaxable: false, aid: null
-### grade: 95
+### student: Answer: because peipole want to halp, Wrriten by: STUDENT, Grade: 90, Significant Words: 4, Teacher verified: false, syntaxable: false, aid: null
+### grade: 90

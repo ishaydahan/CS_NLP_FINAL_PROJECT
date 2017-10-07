@@ -295,14 +295,23 @@ public class CheckAnswerCase {
 		else if (teacher.getLemma().equals(student.getLemma())){
 			lemmaUsing.add(student);
 			return true;
+			
 		}else {
+
+			for(String sgg : ApiHolder.getInstance().getUnSyn(student.getText().getContent().toLowerCase())) {
+				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
+				if (teacher.getText().getContent().toLowerCase().equals(sgg.toLowerCase())) {
+					ApiHolder.getInstance().logger.println("checkTokens :::: opposite found: " + student.getText().getContent().toLowerCase() + " >> " + sgg);
+					return false;
+				}
+			}
 
 			for(String sgg : ApiHolder.getInstance().getSpelling(student.getText().getContent().toLowerCase())) {
 				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
-				if (teacher.getText().getContent().toLowerCase().equals(sgg)) {
+				if (teacher.getText().getContent().toLowerCase().equals(sgg.toLowerCase())) {
 
 					String[] new_s = student_ans.getContent().toLowerCase().split(" ");
-					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = sgg;
+					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = sgg.toLowerCase();
 					String new_s1 = StringUtils.join(new_s, " ");
 
 //					this map helps to avoid infinite loop.
@@ -323,10 +332,10 @@ public class CheckAnswerCase {
 			
 			for(String sgg : ApiHolder.getInstance().getSyn(student.getText().getContent().toLowerCase())) {
 				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
-				if (teacher.getText().getContent().toLowerCase().equals(sgg)) {
+				if (teacher.getText().getContent().toLowerCase().equals(sgg.toLowerCase())) {
 
 					String[] new_s = student_ans.getContent().toLowerCase().split(" ");
-					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = sgg;
+					new_s[student_ans.getAnalyzed_ans().getTokensList().indexOf(student)] = sgg.toLowerCase();
 					String new_s1 = StringUtils.join(new_s, " ");
 
 //					this map helps to avoid infinite loop.
@@ -342,14 +351,6 @@ public class CheckAnswerCase {
 //						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
 //						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
 //					}
-				}
-			}
-
-			for(String sgg : ApiHolder.getInstance().getUnSyn(student.getText().getContent().toLowerCase())) {
-				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
-				if (teacher.getText().getContent().toLowerCase().equals(sgg)) {
-					ApiHolder.getInstance().logger.println("checkTokens :::: opposite found: " + student.getText().getContent().toLowerCase() + " >> " + sgg);
-					return false;
 				}
 			}
 

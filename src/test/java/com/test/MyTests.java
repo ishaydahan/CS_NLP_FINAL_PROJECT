@@ -44,7 +44,7 @@ public class MyTests {
 
     @Before
     public void setUp() {
-    	verified.add(ApiHolder.getInstance().factory.createAnswer("they want to help" ,100, "TEACHER").build());
+    	verified.add(ApiHolder.getInstance().factory.createAnswer("because people want to help" ,100, "TEACHER").build());
     }
 	
     @Test
@@ -68,7 +68,7 @@ public class MyTests {
     @Test
     public void test4() {
     	//spelling mistake
-    	mainTestCode("because peipole want to help", 95);
+    	mainTestCode("because peipole want to halp", 95);
     }
 	
     @Test
