@@ -124,7 +124,7 @@ public class AnswerAnalyzer {
 			});
 		});
 
-		verified.stream().filter(x->x.getGrade()==0).forEach(x->{
+		verified.stream().filter(x->x.getGrade()<50).forEach(x->{
 			Arrays.asList(x.getContent().toLowerCase().split(" ")).stream().forEach(y->{
 				
 				if (!good.contains(y.toLowerCase())) {
