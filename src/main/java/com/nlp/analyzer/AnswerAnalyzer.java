@@ -46,8 +46,17 @@ public class AnswerAnalyzer {
 				ApiHolder.getInstance().logger.println("### LEVENSHTEIN SUCSESS!");
 				ApiHolder.getInstance().logger.println("### teacher: " + teachers_ans);
 				ApiHolder.getInstance().logger.println("### student: " + students_ans);
-				if (dist==0) return teachers_ans.getGrade();
-				return teachers_ans.getGrade()-ApiHolder.getInstance().REDUCE;
+				if (dist==0) {
+					HashMap<String, Integer> m1 = teachers_ans.getMap();
+					m1.put(students_ans.getContent().toLowerCase(), teachers_ans.getGrade());
+					teachers_ans.setMap(m1);
+					return teachers_ans.getGrade();
+				}else {
+					HashMap<String, Integer> m1 = teachers_ans.getMap();
+					m1.put(students_ans.getContent().toLowerCase(), teachers_ans.getGrade()-ApiHolder.getInstance().REDUCE);
+					teachers_ans.setMap(m1);
+					return teachers_ans.getGrade()-ApiHolder.getInstance().REDUCE;
+				}
 			}
 		}
 		return -1;//no match		

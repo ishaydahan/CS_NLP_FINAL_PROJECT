@@ -319,7 +319,8 @@ public class TestController {
 				  .withIgnorePaths("grade")
 				  .withIgnorePaths("answerWords")
 				  .withIgnorePaths("syntaxable")
-				  .withIgnorePaths("createdAt");
+				  .withIgnorePaths("createdAt")
+		  		  .withIgnorePaths("syntaxMatchFound");
 
         List<Answer> verified =  answerRepository.findAll(Example.of(a, matcher));
 
@@ -335,7 +336,8 @@ public class TestController {
 				  .withIgnorePaths("grade")
 				  .withIgnorePaths("answerWords")
 				  .withIgnorePaths("syntaxable")
-				  .withIgnorePaths("createdAt");
+				  .withIgnorePaths("createdAt")
+        		  .withIgnorePaths("syntaxMatchFound");
 
         List<Answer> unVerified =  answerRepository.findAll(Example.of(a, matcher));
 
@@ -405,7 +407,6 @@ public class TestController {
 		
 		//check
 		for (Answer student_ans: unVerified) {
-			//TODO: fix to syntaxable
 			student_ans.checkAnswer(verified, verified);
 			
 //			//set syntaxable value
