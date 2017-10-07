@@ -325,7 +325,7 @@ public class TestController {
 
         a = new Answer();
         a.setQid(qid);
-        a.setSyntaxable(true);
+        a.setVerified(false);
         
         matcher = ExampleMatcher.matching()     
         		  .withIgnorePaths("id")
@@ -334,74 +334,90 @@ public class TestController {
 				  .withIgnorePaths("writerId")
 				  .withIgnorePaths("grade")
 				  .withIgnorePaths("answerWords")
-				  .withIgnorePaths("verified")
-				  .withIgnorePaths("createdAt");
-
-        List<Answer> syntaxable =  answerRepository.findAll(Example.of(a, matcher));
-        
-        a = new Answer();
-        a.setQid(qid);
-        a.setWriter("TEACHER");
-        
-        matcher = ExampleMatcher.matching()     
-        		  .withIgnorePaths("id")
-				  .withIgnorePaths("content")
-				  .withIgnorePaths("writerId")
-				  .withIgnorePaths("grade")
-				  .withIgnorePaths("answerWords")
-				  .withIgnorePaths("verified")
 				  .withIgnorePaths("syntaxable")
 				  .withIgnorePaths("createdAt");
 
-        List<Answer> teacherAns =  answerRepository.findAll(Example.of(a, matcher));
-        
-        a = new Answer();
-        a.setQid(qid);
-        a.setWriter("STUDENT");
-        a.setVerified(false);
-        
-        matcher = ExampleMatcher.matching()     
-        		  .withIgnorePaths("id")
-				  .withIgnorePaths("content")
-				  .withIgnorePaths("writerId")
-				  .withIgnorePaths("grade")
-				  .withIgnorePaths("answerWords")
-				  .withIgnorePaths("syntaxable")
-				  .withIgnorePaths("createdAt");
+        List<Answer> unVerified =  answerRepository.findAll(Example.of(a, matcher));
 
-        List<Answer> studentAns =  answerRepository.findAll(Example.of(a, matcher));
+//        a = new Answer();
+//        a.setQid(qid);
+//        a.setSyntaxable(true);
+//        
+//        matcher = ExampleMatcher.matching()     
+//        		  .withIgnorePaths("id")
+//				  .withIgnorePaths("content")
+//				  .withIgnorePaths("writer")
+//				  .withIgnorePaths("writerId")
+//				  .withIgnorePaths("grade")
+//				  .withIgnorePaths("answerWords")
+//				  .withIgnorePaths("verified")
+//				  .withIgnorePaths("createdAt");
+//
+//        List<Answer> syntaxable =  answerRepository.findAll(Example.of(a, matcher));
+//        
+//        a = new Answer();
+//        a.setQid(qid);
+//        a.setWriter("TEACHER");
+//        
+//        matcher = ExampleMatcher.matching()     
+//        		  .withIgnorePaths("id")
+//				  .withIgnorePaths("content")
+//				  .withIgnorePaths("writerId")
+//				  .withIgnorePaths("grade")
+//				  .withIgnorePaths("answerWords")
+//				  .withIgnorePaths("verified")
+//				  .withIgnorePaths("syntaxable")
+//				  .withIgnorePaths("createdAt");
+//
+//        List<Answer> teacherAns =  answerRepository.findAll(Example.of(a, matcher));
+//        
+//        a = new Answer();
+//        a.setQid(qid);
+//        a.setWriter("STUDENT");
+//        a.setVerified(false);
+//        
+//        matcher = ExampleMatcher.matching()     
+//        		  .withIgnorePaths("id")
+//				  .withIgnorePaths("content")
+//				  .withIgnorePaths("writerId")
+//				  .withIgnorePaths("grade")
+//				  .withIgnorePaths("answerWords")
+//				  .withIgnorePaths("syntaxable")
+//				  .withIgnorePaths("createdAt");
+//
+//        List<Answer> studentAns =  answerRepository.findAll(Example.of(a, matcher));
         
         
 		//sort the list first from high to low to get the maximum grade in min time
 		verified.sort((x,y) -> y.getGrade()-x.getGrade());
 		//build each verified question.
 		verified.forEach((ans)->{ans.build();});
-		//sort the list first from high to low to get the maximum grade in min time
-		syntaxable.sort((x,y) -> y.getGrade()-x.getGrade());
-		//build each verified question.
-		syntaxable.forEach((ans)->{ans.build();});	
+//		//sort the list first from high to low to get the maximum grade in min time
+//		syntaxable.sort((x,y) -> y.getGrade()-x.getGrade());
+//		//build each verified question.
+//		syntaxable.forEach((ans)->{ans.build();});	
 	
-		//determine min value for syntaxable
-		int minsyntaxable = Integer.MAX_VALUE;
-		for (Answer ans : teacherAns) {
-			if (ans.getWriter().equals("TEACHER"))  minsyntaxable = Math.min(minsyntaxable, ans.getAnswerWords());
-		}
+//		//determine min value for syntaxable
+//		int minsyntaxable = Integer.MAX_VALUE;
+//		for (Answer ans : teacherAns) {
+//			if (ans.getWriter().equals("TEACHER"))  minsyntaxable = Math.min(minsyntaxable, ans.getAnswerWords());
+//		}
 		
 		//check
-		for (Answer student_ans: studentAns) {
+		for (Answer student_ans: unVerified) {
 			//TODO: fix to syntaxable
 			student_ans.checkAnswer(verified, verified);
 			
-			//set syntaxable value
-	    	if(student_ans.getAnswerWords()>=minsyntaxable) student_ans.setSyntaxable(true);
-	    	else student_ans.setSyntaxable(false);
+//			//set syntaxable value
+//	    	if(student_ans.getAnswerWords()>=minsyntaxable) student_ans.setSyntaxable(true);
+//	    	else student_ans.setSyntaxable(false);
 	    	
 			System.out.println(student_ans);
 
 	        answerRepository.save(student_ans);
 		}
 		verified.forEach((ans)->{answerRepository.save(ans);});
-		syntaxable.forEach((ans)->{answerRepository.save(ans);});	
+//		syntaxable.forEach((ans)->{answerRepository.save(ans);});	
 
 		return null;
     }

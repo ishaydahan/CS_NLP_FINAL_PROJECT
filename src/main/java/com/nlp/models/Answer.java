@@ -214,7 +214,7 @@ public class Answer {
 			
 			this.setGrade(grade);
 			
-		}else if ((grade = analyzer.SyntaxAnalyze(syntaxable))>-2) {//there is no -1 option in last check. must return grade.
+		}else if ((grade = analyzer.SyntaxAnalyze(verified))>-2) {//there is no -1 option in last check. must return grade.
 			
 			this.setGrade(grade);
 			

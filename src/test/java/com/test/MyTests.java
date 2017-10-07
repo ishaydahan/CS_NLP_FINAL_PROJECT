@@ -45,13 +45,22 @@ public class MyTests {
     @Before
     public void setUp() {
     	verified.add(ApiHolder.getInstance().factory.createAnswer("because people want to help" ,100, "TEACHER").build());
+    	verified.add(ApiHolder.getInstance().factory.createAnswer("because people need to help" ,0, "TEACHER").build());
+
     }
 	
-    @Test
-    public void test1() {
-    	//exact match
-    	mainTestCode("because people want to help", 100);
-    }
+  @Test
+  public void test1() {
+  	//exact match
+  	mainTestCode("because people need to help", 100);
+  }
+
+    
+//    @Test
+//    public void test1() {
+//    	//exact match
+//    	mainTestCode("they are want to help", 100);
+//    }
 
     @Test
     public void test2() {
