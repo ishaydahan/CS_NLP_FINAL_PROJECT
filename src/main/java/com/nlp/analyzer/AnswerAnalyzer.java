@@ -48,12 +48,12 @@ public class AnswerAnalyzer {
 				ApiHolder.getInstance().logger.println("### student: " + students_ans);
 				if (dist==0) {
 					HashMap<String, Integer> m1 = teachers_ans.getMap();
-					m1.put(students_ans.getContent().toLowerCase(), teachers_ans.getGrade());
+					m1.put(students_ans.getContent().toLowerCase(), 100);
 					teachers_ans.setMap(m1);
 					return teachers_ans.getGrade();
 				}else {
 					HashMap<String, Integer> m1 = teachers_ans.getMap();
-					m1.put(students_ans.getContent().toLowerCase(), teachers_ans.getGrade()-ApiHolder.getInstance().REDUCE);
+					m1.put(students_ans.getContent().toLowerCase(), 100-ApiHolder.getInstance().REDUCE);
 					teachers_ans.setMap(m1);
 					return teachers_ans.getGrade()-ApiHolder.getInstance().REDUCE;
 				}
@@ -83,10 +83,6 @@ public class AnswerAnalyzer {
 		
 		for (Answer teachers_ans: syntaxable) {
 			int grade = new CheckAnswerCase(students_ans, teachers_ans).getGrade();
-			HashMap<String, Integer> m1 = teachers_ans.getMap();
-			m1.put(students_ans.getContent().toLowerCase(), grade);
-			teachers_ans.setMap(m1);
-
 			if (grade==ApiHolder.getInstance().MAXGRADE) exactMatchgrades.add(teachers_ans.getGrade());
 			else if (grade!=ApiHolder.getInstance().MINGRADE) {
 				partialMatchgrades.add(grade); 

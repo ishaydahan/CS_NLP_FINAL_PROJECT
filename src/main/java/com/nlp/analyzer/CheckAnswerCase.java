@@ -73,6 +73,11 @@ public class CheckAnswerCase {
 		if (firstGrade==ApiHolder.getInstance().MAXGRADE) {
 			ApiHolder.getInstance().logger.println("finished grading: " + student_ans.getContent().toLowerCase());
 			ApiHolder.getInstance().logger.println("grade: " + firstGrade);
+			
+			HashMap<String, Integer> m1 = teacher_ans.getMap();
+			m1.put(student_ans.getContent().toLowerCase(), firstGrade);
+			teacher_ans.setMap(m1);
+
 			return firstGrade;
 		}
 		
@@ -80,6 +85,11 @@ public class CheckAnswerCase {
 		int grade = Math.max(firstGrade, secondGrade);
 		ApiHolder.getInstance().logger.println("finished grading: " + student_ans.getContent().toLowerCase());
 		ApiHolder.getInstance().logger.println("grade: " + grade);
+		
+		HashMap<String, Integer> m1 = teacher_ans.getMap();
+		m1.put(student_ans.getContent().toLowerCase(), grade);
+		teacher_ans.setMap(m1);
+
 		return grade;
 	}
 	
@@ -307,6 +317,11 @@ public class CheckAnswerCase {
 			}
 
 			for(String sgg : ApiHolder.getInstance().getSpelling(student.getText().getContent().toLowerCase())) {
+//				System.out.println(sgg);
+//				System.out.println(teacher.getText().getContent());
+//				System.out.println(teacher.getText().getContent().toLowerCase().equals(sgg.toLowerCase()));
+//				System.out.println();
+
 				if(sgg.toLowerCase().equals(student.getText().getContent().toLowerCase())) continue;
 				if (teacher.getText().getContent().toLowerCase().equals(sgg.toLowerCase())) {
 
@@ -322,11 +337,11 @@ public class CheckAnswerCase {
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");
 					}
-//					else {
-//						ApiHolder.getInstance().logger.println("using map: " + new_s1);
-//						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
-//						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
-//					}
+					else {
+						ApiHolder.getInstance().logger.println("using map: " + new_s1);
+						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
+						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
+					}
 				}
 			}
 			
@@ -346,11 +361,11 @@ public class CheckAnswerCase {
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");
 					}
-//					else {
-//						ApiHolder.getInstance().logger.println("using map: " + new_s1);
-//						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
-//						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
-//					}
+					else {
+						ApiHolder.getInstance().logger.println("using map: " + new_s1);
+						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
+						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
+					}
 				}
 			}
 
