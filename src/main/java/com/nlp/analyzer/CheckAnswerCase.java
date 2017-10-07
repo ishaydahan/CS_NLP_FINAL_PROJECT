@@ -337,7 +337,7 @@ public class CheckAnswerCase {
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");
 					}
-					else {
+					else if (teacher_ans.getMap().get(new_s1)>-1) {
 						ApiHolder.getInstance().logger.println("using map: " + new_s1);
 						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
 						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
@@ -361,7 +361,7 @@ public class CheckAnswerCase {
 						finishedGrade = Math.max(finishedGrade, newCheck.getGrade());
 						ApiHolder.getInstance().logger.println("----finished new check-----");
 					}
-					else {
+					else if (teacher_ans.getMap().get(new_s1)>-1) {
 						ApiHolder.getInstance().logger.println("using map: " + new_s1);
 						ApiHolder.getInstance().logger.println("grade: " + teacher_ans.getMap().get(new_s1));
 						finishedGrade = teacher_ans.getMap().get(new_s1)-ApiHolder.getInstance().COMP;// we already computed this sentence
