@@ -49,7 +49,7 @@ compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[people - people, want - want]
+[want - want, people - people]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: people people
 equalSentences :::: we have insignificant word: because
@@ -60,7 +60,7 @@ compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[people - people, want - want]
+[want - want, people - people]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: want want
 equalSentences :::: we have insignificant word: because
@@ -73,7 +73,7 @@ compare :::: passed checkTokens V to + to
 compare :::: passed checkParts V to + to
 compare :::: passed checkRelationToParent V to + to
 equalNodes :::: equal tokens: to + to
-[to - to, people - people, want - want]
+[want - want, people - people, to - to]
 equalNodes :::: there are fathers: help + halp
 checkTokens :::: spelling fixed: halp >> help
 $$$$$$$$$$$$$$$$$$$$$$$$$$$ because people want to help $$ google api
@@ -102,7 +102,7 @@ compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[people - people, want - want]
+[want - want, people - people]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: people people
 equalSentences :::: we have insignificant word: because
@@ -113,7 +113,7 @@ compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[people - people, want - want]
+[want - want, people - people]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: want want
 equalSentences :::: we have insignificant word: because
@@ -126,19 +126,19 @@ compare :::: passed checkTokens V to + to
 compare :::: passed checkParts V to + to
 compare :::: passed checkRelationToParent V to + to
 equalNodes :::: equal tokens: to + to
-[to - to, people - people, want - want]
+[want - want, people - people, to - to]
 equalNodes :::: there are fathers: help + help
 compare :::: passed checkTokens V help + help
 compare :::: passed checkParts V help + help
 compare :::: passed checkRelationToParent V help + help
 equalNodes :::: equal tokens: help + help
-[to - to, people - people, help - help, want - want]
+[help - help, want - want, people - people, to - to]
 equalNodes :::: there are fathers: want + want
 compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[to - to, people - people, help - help, want - want]
+[help - help, want - want, people - people, to - to]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: to to
 equalSentences :::: we have insignificant word: because
@@ -153,17 +153,17 @@ compare :::: passed checkTokens V help + help
 compare :::: passed checkParts V help + help
 compare :::: passed checkRelationToParent V help + help
 equalNodes :::: equal tokens: help + help
-[to - to, people - people, help - help, want - want]
+[help - help, want - want, people - people, to - to]
 equalNodes :::: there are fathers: want + want
 compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[to - to, people - people, help - help, want - want]
+[help - help, want - want, people - people, to - to]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: help help
 equalSentences1 :::: finished path check WITH FOUND=TRUE: because people want to help because people want to help
-equalSentences1 :::: equalset = : [to - to, people - people, help - help, want - want]
+equalSentences1 :::: equalset = : [help - help, want - want, people - people, to - to]
 equalSentences1 :::: finishedGrade: 0
 equalSentences1 :::: teacher_ans.getAnswerWords(): 4
 equalSentences1 :::: equalSet.size(): 4
@@ -181,7 +181,7 @@ compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[people - people, want - want]
+[want - want, people - people]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: people people
 equalSentences :::: we have insignificant word: because
@@ -192,7 +192,7 @@ compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[people - people, want - want]
+[want - want, people - people]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: want want
 equalSentences :::: we have insignificant word: because
@@ -205,19 +205,19 @@ compare :::: passed checkTokens V to + to
 compare :::: passed checkParts V to + to
 compare :::: passed checkRelationToParent V to + to
 equalNodes :::: equal tokens: to + to
-[to - to, people - people, want - want]
+[want - want, people - people, to - to]
 equalNodes :::: there are fathers: help + help
 compare :::: passed checkTokens V help + help
 compare :::: passed checkParts V help + help
 compare :::: passed checkRelationToParent V help + help
 equalNodes :::: equal tokens: help + help
-[to - to, people - people, help - help, want - want]
+[help - help, want - want, people - people, to - to]
 equalNodes :::: there are fathers: want + want
 compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[to - to, people - people, help - help, want - want]
+[help - help, want - want, people - people, to - to]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: to to
 equalSentences :::: we have insignificant word: because
@@ -232,17 +232,17 @@ compare :::: passed checkTokens V help + help
 compare :::: passed checkParts V help + help
 compare :::: passed checkRelationToParent V help + help
 equalNodes :::: equal tokens: help + help
-[to - to, people - people, help - help, want - want]
+[help - help, want - want, people - people, to - to]
 equalNodes :::: there are fathers: want + want
 compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[to - to, people - people, help - help, want - want]
+[help - help, want - want, people - people, to - to]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: help help
 equalSentences1 :::: finished path check WITH FOUND=TRUE: because people want to help because people want to help
-equalSentences1 :::: equalset = : [to - to, people - people, help - help, want - want]
+equalSentences1 :::: equalset = : [help - help, want - want, people - people, to - to]
 equalSentences1 :::: finishedGrade: 0
 equalSentences1 :::: teacher_ans.getAnswerWords(): 4
 equalSentences1 :::: equalSet.size(): 4
@@ -271,7 +271,7 @@ compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[people - people, want - want]
+[want - want, people - people]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: people people
 equalSentences :::: we have insignificant word: because
@@ -282,7 +282,7 @@ compare :::: passed checkTokens V want + want
 compare :::: passed checkParts V want + want
 compare :::: passed checkRelationToParent V want + want
 equalNodes :::: equal tokens: want + want
-[people - people, want - want]
+[want - want, people - people]
 equalNodes :::: no father... returning true. bye
 equalSentences1 :::: finished path check, equal: want want
 equalSentences :::: we have insignificant word: because
@@ -295,7 +295,7 @@ compare :::: passed checkTokens V to + to
 compare :::: passed checkParts V to + to
 compare :::: passed checkRelationToParent V to + to
 equalNodes :::: equal tokens: to + to
-[to - to, people - people, want - want]
+[want - want, people - people, to - to]
 equalNodes :::: there are fathers: help + halp
 equalNodes :::: not equal tokens: help + halp
 equalSentences1 :::: One path check, NOT equal: to to

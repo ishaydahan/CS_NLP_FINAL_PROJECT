@@ -86,7 +86,7 @@ public class MyTests {
     @Test
     public void test7() {
     	//people > they
-    	mainTestCode("they want to help", 100);
+    	mainTestCode("they want to help other people", 100);
     }
 	
     @Test

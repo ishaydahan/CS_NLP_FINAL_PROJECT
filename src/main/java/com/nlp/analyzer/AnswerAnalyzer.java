@@ -74,14 +74,14 @@ public class AnswerAnalyzer {
 		
 		for (Answer teachers_ans: syntaxable) {
 			int grade = new CheckAnswerCase(students_ans, teachers_ans).getGrade();
+			HashMap<String, Integer> m1 = teachers_ans.getMap();
+			m1.put(students_ans.getContent().toLowerCase(), grade);
+			teachers_ans.setMap(m1);
+
 			if (grade==ApiHolder.getInstance().MAXGRADE) exactMatchgrades.add(teachers_ans.getGrade());
 			else if (grade!=ApiHolder.getInstance().MINGRADE) {
 				partialMatchgrades.add(grade); 
 				partialMap.put(grade, teachers_ans.getGrade());
-				System.out.println(teachers_ans.getContent().toLowerCase() + " " + students_ans.getContent().toLowerCase() + " " + grade);
-				HashMap<String, Integer> m1 = teachers_ans.getMap();
-				m1.put(students_ans.getContent().toLowerCase(), grade);
-				teachers_ans.setMap(m1);
 			}
 		}		
 		if (exactMatchgrades.stream().count()>0) students_ans.setSyntaxMatchFound(true);
