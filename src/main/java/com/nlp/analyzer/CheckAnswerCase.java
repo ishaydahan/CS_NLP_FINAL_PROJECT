@@ -198,25 +198,25 @@ public class CheckAnswerCase {
 			}
 		}else {
 			
-			Token var;
-			if(OppMode) var = teacher; else var = student;
-
-			//this is a little trick to pass extra information that inserted inside sentence and has relation to significant words.
-			int index1 = compareTo.getAnalyzed_ans().getTokensList().indexOf(var);
-			int i=0;
-			for(Token trick : compareTo.getAnalyzed_ans().getTokensList()) {
-				i++;
-				if (i-2<index1) continue;
-				ApiHolder.getInstance().logger.println("equalNodes :::: trick loop var: " + var.getText().getContent().toLowerCase() + " +to tricked>>: " + trick.getText().getContent().toLowerCase()); 
-				if(trick.getDependencyEdge().getHeadTokenIndex()==index1 && trick.getDependencyEdge().getLabel()!=Label.ROOT) {
-					ApiHolder.getInstance().logger.println("equalNodes :::: trick try var: " + var.getText().getContent().toLowerCase() + " +to tricked>>: " + trick.getText().getContent().toLowerCase()); 
-					if (OppMode) {
-						if (equalNodes(constant, compareTo, trick, student, OppMode)) return true;
-					}else{
-						if (equalNodes(constant, compareTo, teacher, trick, OppMode)) return true;
-					}
-				}
-			}
+//			Token var;
+//			if(OppMode) var = teacher; else var = student;
+//
+//			//this is a little trick to pass extra information that inserted inside sentence and has relation to significant words.
+//			int index1 = compareTo.getAnalyzed_ans().getTokensList().indexOf(var);
+//			int i=0;
+//			for(Token trick : compareTo.getAnalyzed_ans().getTokensList()) {
+//				i++;
+//				if (i-2<index1) continue;
+//				ApiHolder.getInstance().logger.println("equalNodes :::: trick loop var: " + var.getText().getContent().toLowerCase() + " +to tricked>>: " + trick.getText().getContent().toLowerCase()); 
+//				if(trick.getDependencyEdge().getHeadTokenIndex()==index1 && trick.getDependencyEdge().getLabel()!=Label.ROOT) {
+//					ApiHolder.getInstance().logger.println("equalNodes :::: trick try var: " + var.getText().getContent().toLowerCase() + " +to tricked>>: " + trick.getText().getContent().toLowerCase()); 
+//					if (OppMode) {
+//						if (equalNodes(constant, compareTo, trick, student, OppMode)) return true;
+//					}else{
+//						if (equalNodes(constant, compareTo, teacher, trick, OppMode)) return true;
+//					}
+//				}
+//			}
 			
 			ApiHolder.getInstance().logger.println("equalNodes :::: not equal tokens: " + teacher.getText().getContent().toLowerCase() + " + " + student.getText().getContent().toLowerCase()); 
 			return false;
